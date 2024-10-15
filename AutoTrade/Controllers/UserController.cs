@@ -1,6 +1,9 @@
 using AutoTrade.Model;
 using AutoTrade.Services;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
+using Microsoft.EntityFrameworkCore.Storage;
+using Request;
 
 namespace AutoTrader.Controllers;
 [ApiController]
@@ -15,9 +18,21 @@ public class UserController : ControllerBase
     }
 
     [HttpGet]
-    public List<User> GetUsers()
+    public List<AutoTrade.Model.User> GetUsers()
     {
         return _service.Get();
+    }
+
+    [HttpPost]
+    public AutoTrade.Model.User Insert(UserInsertRequest request)
+    {
+        return _service.Insert(request);
+    }
+
+    [HttpPut("{id}")]
+    public AutoTrade.Model.User Update(int id, UserUpdateRequest request)
+    {
+        return _service.Update(id, request);
     }
 
 }
