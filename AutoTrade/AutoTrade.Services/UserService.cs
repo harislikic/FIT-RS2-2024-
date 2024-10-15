@@ -1,20 +1,33 @@
 using AutoTrade.Model;
+using AutoTrade.Services.Database;
 
 namespace AutoTrade.Services
 {
     public class UserService : IUserService
     {
 
-        public List<User> List = new List<User>(){
-            new User(){
-                Id = 1,
-                UserName = "Haris123"
-            }
-        };
+        public AutoTradeContext Context { get; set; }
 
-        public List<User> Get()
+        public UserService(AutoTradeContext context)
         {
-           return List;
+            Context = context;
+        }
+
+        public List<Model.User> Get()
+        {
+            var list = Context.Users.ToList();
+            var result = new List<Model.User>();
+
+            list.ForEach(item =>
+            {
+                result.Add(new Model.User()
+                {
+                    Id = item.Id,
+                    UserName = item.UserName
+                });
+            });
+
+            return result;
         }
 
     }
