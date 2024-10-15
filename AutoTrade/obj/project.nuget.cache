@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "4VKYJPi4gvk=",
+  "dgSpecHash": "y2irjmLXRyk=",
   "success": true,
   "projectFilePath": "/Users/harislikic/Desktop/FIT-RS2-2024-/AutoTrade/AutoTrade.csproj",
   "expectedPackageFiles": [
@@ -48,6 +48,7 @@
     "/Users/harislikic/.nuget/packages/microsoft.win32.registry/5.0.0/microsoft.win32.registry.5.0.0.nupkg.sha512",
     "/Users/harislikic/.nuget/packages/microsoft.win32.systemevents/5.0.0/microsoft.win32.systemevents.5.0.0.nupkg.sha512",
     "/Users/harislikic/.nuget/packages/mono.texttemplating/2.2.1/mono.texttemplating.2.2.1.nupkg.sha512",
+    "/Users/harislikic/.nuget/packages/sixlabors.imagesharp/3.1.5/sixlabors.imagesharp.3.1.5.nupkg.sha512",
     "/Users/harislikic/.nuget/packages/swashbuckle.aspnetcore/6.5.0/swashbuckle.aspnetcore.6.5.0.nupkg.sha512",
     "/Users/harislikic/.nuget/packages/swashbuckle.aspnetcore.swagger/6.5.0/swashbuckle.aspnetcore.swagger.6.5.0.nupkg.sha512",
     "/Users/harislikic/.nuget/packages/swashbuckle.aspnetcore.swaggergen/6.5.0/swashbuckle.aspnetcore.swaggergen.6.5.0.nupkg.sha512",

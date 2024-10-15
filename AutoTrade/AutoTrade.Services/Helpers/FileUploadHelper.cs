@@ -1,3 +1,8 @@
+using System.IO;
+using SixLabors.ImageSharp;
+using SixLabors.ImageSharp.Processing;
+using SixLabors.ImageSharp.Formats;
+
 public static class FileUploadHelper
 {
     public static string UploadProfilePicture(IFormFile profilePicture)
@@ -24,9 +29,23 @@ public static class FileUploadHelper
         }
 
         var filePath = Path.Combine(uploadsFolder, fileName);
-        using (var stream = new FileStream(filePath, FileMode.Create))
+
+        using (var image = Image.Load(profilePicture.OpenReadStream()))
         {
-            profilePicture.CopyTo(stream);
+
+            image.Mutate(x => x.Resize(new ResizeOptions
+            {
+                Size = new Size(1200, 1200),
+                Mode = ResizeMode.Max
+            }));
+
+
+            var encoder = new SixLabors.ImageSharp.Formats.Jpeg.JpegEncoder()
+            {
+                Quality = 95
+            };
+
+            image.Save(filePath, encoder);
         }
 
         return Path.Combine("/uploads", fileName);

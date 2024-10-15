@@ -82,3 +82,4 @@
 /Users/harislikic/Desktop/FIT-RS2-2024-/AutoTrade/obj/Debug/net7.0/AutoTrade.pdb
 /Users/harislikic/Desktop/FIT-RS2-2024-/AutoTrade/obj/Debug/net7.0/AutoTrade.genruntimeconfig.cache
 /Users/harislikic/Desktop/FIT-RS2-2024-/AutoTrade/obj/Debug/net7.0/ref/AutoTrade.dll
+/Users/harislikic/Desktop/FIT-RS2-2024-/AutoTrade/bin/Debug/net7.0/SixLabors.ImageSharp.dll
