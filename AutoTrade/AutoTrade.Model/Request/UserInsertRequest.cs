@@ -14,7 +14,7 @@ namespace Request
         public bool IsAdmin { get; set; } = false;
         public DateTime DateOfBirth { get; set; }
 
-        public byte[]? ProfilePicture { get; set; }
+        public IFormFile? ProfilePicture { get; set; }
 
     }
 }

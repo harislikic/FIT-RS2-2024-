@@ -12,6 +12,6 @@ public partial class User
     public string? Gender { get; set; }
     public bool IsAdmin { get; set; }
     public DateTime DateOfBirth { get; set; }
-    public byte[]? ProfilePicture { get; set; }
+    public string? ProfilePicture { get; set; }
 
 }

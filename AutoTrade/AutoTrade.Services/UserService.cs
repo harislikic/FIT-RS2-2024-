@@ -2,6 +2,7 @@ using AutoTrade.Model;
 using AutoTrade.Services.Database;
 using AutoTrader.Services.Helpers;
 using MapsterMapper;
+using Microsoft.AspNetCore.Mvc;
 using Request;
 
 namespace AutoTrade.Services
@@ -40,6 +41,8 @@ namespace AutoTrade.Services
 
             entity.PasswordSalt = PasswordHelper.GenerateSalt();
             entity.PasswordHash = PasswordHelper.GenerateHash(entity.PasswordSalt, request.Password);
+
+            entity.ProfilePicture = FileUploadHelper.UploadProfilePicture(request.ProfilePicture);
 
             Context.Add(entity);
             Context.SaveChanges();

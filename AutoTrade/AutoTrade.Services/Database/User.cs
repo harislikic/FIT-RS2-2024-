@@ -14,7 +14,6 @@ public partial class User
     public string? PasswordSalt { get; set; }
     public bool IsAdmin { get; set; } = false;
     public DateTime DateOfBirth { get; set; }
-
-     public byte[]? ProfilePicture { get; set; }
+    public string? ProfilePicture { get; set; }
 
 }

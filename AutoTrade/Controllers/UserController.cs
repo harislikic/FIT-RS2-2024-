@@ -24,7 +24,7 @@ public class UserController : ControllerBase
     }
 
     [HttpPost]
-    public AutoTrade.Model.User Insert(UserInsertRequest request)
+    public AutoTrade.Model.User Insert([FromForm] UserInsertRequest request)
     {
         return _service.Insert(request);
     }
