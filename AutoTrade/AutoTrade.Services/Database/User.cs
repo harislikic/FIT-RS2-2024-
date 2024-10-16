@@ -1,5 +1,4 @@
-
-namespace AutoTrade.Services;
+namespace AutoTrade.Services.Database;
 public partial class User
 {
     public int Id { get; set; }
@@ -15,5 +14,8 @@ public partial class User
     public bool IsAdmin { get; set; } = false;
     public DateTime DateOfBirth { get; set; }
     public string? ProfilePicture { get; set; }
+
+    public int CityId { get; set; }
+    public City City { get; set; }
 
 }

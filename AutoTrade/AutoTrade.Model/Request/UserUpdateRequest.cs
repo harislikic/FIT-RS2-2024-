@@ -11,8 +11,7 @@ namespace Request
         public string? PasswordConfirmation { get; set; }
         public bool IsAdmin { get; set; }
         public DateTime DateOfBirth { get; set; }
-
         public IFormFile? ProfilePicture { get; set; }
-
+        public int CityId { get; set; }
     }
 }
