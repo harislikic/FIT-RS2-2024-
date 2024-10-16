@@ -3,7 +3,10 @@ using AutoTrade.Services.Database;
 using AutoTrader.Services.Helpers;
 using MapsterMapper;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.VisualBasic;
 using Request;
+using SerachObject;
 
 namespace AutoTrade.Services
 {
@@ -20,10 +23,34 @@ namespace AutoTrade.Services
             Mapper = mapper;
         }
 
-        public virtual List<Model.User> Get()
+        public virtual List<Model.User> Get(UserSearchObject serachObject)
         {
             List<Model.User> result = new List<Model.User>();
-            var list = Context.Users.ToList();
+
+            var query = Context.Users.AsQueryable();
+            if (!string.IsNullOrWhiteSpace(serachObject?.FirstNameGTE))
+            {
+                query = query.Where(x => x.FirstName.StartsWith(serachObject.FirstNameGTE));
+            }
+
+            if (!string.IsNullOrWhiteSpace(serachObject?.LastNameeGTE))
+            {
+                query = query.Where(x => x.LastName.StartsWith(serachObject.LastNameeGTE));
+            }
+
+            if (!string.IsNullOrWhiteSpace(serachObject?.Email))
+            {
+                query = query.Where(x => x.Email == serachObject.Email);
+            }
+
+            if (!string.IsNullOrWhiteSpace(serachObject?.UserName))
+            {
+                query = query.Where(x => x.UserName == serachObject.UserName);
+            }
+
+            query.Include(x => x.City).ThenInclude(c => c.Canton).ToList();
+
+            var list = query.ToList();
 
             result = Mapper.Map(list, result);
             return result;
@@ -36,7 +63,7 @@ namespace AutoTrade.Services
                 throw new ArgumentException("Password and Password confirmation must be same");
             }
 
-            User entity = new User();
+            Database.User entity = new Database.User();
             Mapper.Map(request, entity);
 
             entity.PasswordSalt = PasswordHelper.GenerateSalt();

@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using Microsoft.EntityFrameworkCore.Storage;
 using Request;
+using SerachObject;
 
 namespace AutoTrader.Controllers;
 [ApiController]
@@ -18,9 +19,9 @@ public class UserController : ControllerBase
     }
 
     [HttpGet]
-    public List<AutoTrade.Model.User> GetUsers()
+    public List<AutoTrade.Model.User> GetUsers([FromQuery] UserSearchObject serachObject)
     {
-        return _service.Get();
+        return _service.Get(serachObject);
     }
 
     [HttpPost]
