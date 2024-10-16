@@ -9,31 +9,31 @@ using SerachObject;
 namespace AutoTrader.Controllers;
 [ApiController]
 [Route("[controller]")]
-public class UserController : ControllerBase
+public class UserController : BaseController<User, UserSearchObject>
 {
 
-    protected IUserService _service;
-    public UserController(IUserService service)
+    // protected IUserService _service;
+    public UserController(IUserService service) : base(service)
     {
-        _service = service;
+
     }
 
-    [HttpGet]
-    public List<AutoTrade.Model.User> GetUsers([FromQuery] UserSearchObject serachObject)
-    {
-        return _service.Get(serachObject);
-    }
+    // [HttpGet]
+    // public PagedResult<AutoTrade.Model.User> GetUsers([FromQuery] UserSearchObject serachObject)
+    // {
+    //     return _service.Get(serachObject);
+    // }
 
-    [HttpPost]
-    public AutoTrade.Model.User Insert([FromForm] UserInsertRequest request)
-    {
-        return _service.Insert(request);
-    }
+    // [HttpPost]
+    // public AutoTrade.Model.User Insert([FromForm] UserInsertRequest request)
+    // {
+    //     return _service.Insert(request);
+    // }
 
-    [HttpPut("{id}")]
-    public AutoTrade.Model.User Update(int id, UserUpdateRequest request)
-    {
-        return _service.Update(id, request);
-    }
+    // [HttpPut("{id}")]
+    // public AutoTrade.Model.User Update(int id, UserUpdateRequest request)
+    // {
+    //     return _service.Update(id, request);
+    // }
 
 }

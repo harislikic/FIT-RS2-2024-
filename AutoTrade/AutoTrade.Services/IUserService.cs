@@ -1,14 +1,15 @@
+using AutoTrade.Model;
 using Request;
 using SerachObject;
 
 namespace AutoTrade.Services
 {
-    public interface IUserService
+    public interface IUserService : IService<User, UserSearchObject>
     {
-        List<Model.User> Get(UserSearchObject serachObject);
+        // PagedResult<Model.User> Get(UserSearchObject serachObject);
 
-        Model.User Insert(UserInsertRequest request);
+        // Model.User Insert(UserInsertRequest request);
 
-        Model.User Update(int id, UserUpdateRequest request);
+        // Model.User Update(int id, UserUpdateRequest request);
     }
 }

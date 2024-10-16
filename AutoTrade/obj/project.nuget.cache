@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "y2irjmLXRyk=",
+  "dgSpecHash": "Zr1eqQd8giE=",
   "success": true,
   "projectFilePath": "/Users/harislikic/Desktop/FIT-RS2-2024-/AutoTrade/AutoTrade.csproj",
   "expectedPackageFiles": [
@@ -62,6 +62,7 @@
     "/Users/harislikic/.nuget/packages/system.globalization/4.3.0/system.globalization.4.3.0.nupkg.sha512",
     "/Users/harislikic/.nuget/packages/system.identitymodel.tokens.jwt/6.21.0/system.identitymodel.tokens.jwt.6.21.0.nupkg.sha512",
     "/Users/harislikic/.nuget/packages/system.io/4.3.0/system.io.4.3.0.nupkg.sha512",
+    "/Users/harislikic/.nuget/packages/system.linq.dynamic.core/1.4.6/system.linq.dynamic.core.1.4.6.nupkg.sha512",
     "/Users/harislikic/.nuget/packages/system.memory/4.5.4/system.memory.4.5.4.nupkg.sha512",
     "/Users/harislikic/.nuget/packages/system.memory.data/1.0.2/system.memory.data.1.0.2.nupkg.sha512",
     "/Users/harislikic/.nuget/packages/system.numerics.vectors/4.5.0/system.numerics.vectors.4.5.0.nupkg.sha512",

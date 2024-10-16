@@ -1,6 +1,4 @@
-﻿using AutoTrade.Services.Database;
-
-namespace AutoTrade.Model;
+﻿namespace AutoTrade.Model;
 
 public partial class User
 {

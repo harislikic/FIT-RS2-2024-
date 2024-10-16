@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("AutoTrade")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+b600c6088c7e1fb07f2739d065610d171f73a68f")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+9524e5f9d6b3e493fa154df3b85982f511569c5f")]
 [assembly: System.Reflection.AssemblyProductAttribute("AutoTrade")]
 [assembly: System.Reflection.AssemblyTitleAttribute("AutoTrade")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
