@@ -7,7 +7,7 @@ using SearchObject;
 
 namespace AutoTrade.Services
 {
-    public class BaseService<TModel, TSearch, TDbEntity> : IService<TModel, TSearch> where TSearch : BaseSerachObject where TDbEntity : class where TModel : class
+    public abstract class BaseService<TModel, TSearch, TDbEntity> : IService<TModel, TSearch> where TSearch : BaseSerachObject where TDbEntity : class where TModel : class
     {
         public AutoTradeContext Context { get; set; }
 
@@ -49,15 +49,6 @@ namespace AutoTrade.Services
 
         }
 
-        public virtual IQueryable<TDbEntity> AddInclude(IQueryable<TDbEntity> query, TSearch? search = null)
-        {
-            return query;
-        }
-        public virtual IQueryable<TDbEntity> AddFilter(TSearch search, IQueryable<TDbEntity> query)
-        {
-            return query;
-        }
-
         public TModel GetById(int id)
         {
             var query = Context.Set<TDbEntity>().AsQueryable();
@@ -73,6 +64,15 @@ namespace AutoTrade.Services
             {
                 return null;
             }
+        }
+
+        public virtual IQueryable<TDbEntity> AddInclude(IQueryable<TDbEntity> query, TSearch? search = null)
+        {
+            return query;
+        }
+        public virtual IQueryable<TDbEntity> AddFilter(TSearch search, IQueryable<TDbEntity> query)
+        {
+            return query;
         }
 
     }

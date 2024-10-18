@@ -9,12 +9,8 @@ using SerachObject;
 
 namespace AutoTrade.Services
 {
-    public class UserService : BaseService<Model.User, UserSearchObject, Database.User>, IUserService
+    public class UserService : BaseCRUDService<Model.User, UserSearchObject, Database.User, UserInsertRequest, UserUpdateRequest>, IUserService
     {
-
-        // public AutoTradeContext Context { get; set; }
-
-        // public IMapper Mapper { get; set; }
 
         public UserService(AutoTradeContext context, IMapper mapper) : base(context, mapper)
         {
@@ -22,121 +18,74 @@ namespace AutoTrade.Services
         }
 
 
-        public override IQueryable<Database.User> AddFilter(UserSearchObject serach, IQueryable<Database.User> query)
+        public override IQueryable<Database.User> AddFilter(UserSearchObject search, IQueryable<Database.User> query)
         {
-            var filteredQuery = base.AddFilter(serach, query);
 
-            if (!string.IsNullOrWhiteSpace(serach?.UserName))
+            if (!string.IsNullOrWhiteSpace(search?.FirstNameGTE))
             {
-                filteredQuery = filteredQuery.Where(x => x.FirstName.Contains(serach.FirstNameGTE));
+                query = query.Where(x => x.FirstName.Contains(search.FirstNameGTE));
             }
 
-            if (!string.IsNullOrWhiteSpace(serach?.LastNameeGTE))
+            if (!string.IsNullOrWhiteSpace(search?.LastNameeGTE))
             {
-                query = query.Where(x => x.LastName.StartsWith(serach.LastNameeGTE));
+                query = query.Where(x => x.LastName.StartsWith(search.LastNameeGTE));
             }
 
-            return filteredQuery;
+            if (!string.IsNullOrWhiteSpace(search?.UserName))
+            {
+                query = query.Where(x => x.UserName.StartsWith(search.UserName));
+            }
+
+            if (!string.IsNullOrWhiteSpace(search.OrderBy))
+            {
+                query = query.OrderBy(search.OrderBy);
+            }
+
+            return base.AddFilter(search, query);
 
         }
 
-        public override IQueryable<Database.User> AddInclude(IQueryable<Database.User> query, UserSearchObject search = null)
+        public override IQueryable<Database.User> AddInclude(IQueryable<Database.User> query, UserSearchObject? search = null)
         {
             return query.Include(u => u.City).ThenInclude(c => c.Canton);
         }
 
-        // public virtual Model.PagedResult<Model.User> Get(UserSearchObject serachObject)
-        // {
-        //     List<Model.User> result = new List<Model.User>();
+        public override void BeforeInsert(UserInsertRequest request, Database.User entity)
+        {
+            if (request.Password != request.PasswordConfirmation)
+            {
+                throw new ArgumentException("Password and Password confirmation must be equal");
+            }
 
-        //     var query = Context.Users.AsQueryable();
-        //     if (!string.IsNullOrWhiteSpace(serachObject?.FirstNameGTE))
-        //     {
-        //         query = query.Where(x => x.FirstName.StartsWith(serachObject.FirstNameGTE));
-        //     }
+            entity.PasswordSalt = PasswordHelper.GenerateSalt();
+            entity.PasswordHash = PasswordHelper.GenerateHash(entity.PasswordSalt, request.Password);
 
-        //     if (!string.IsNullOrWhiteSpace(serachObject?.LastNameeGTE))
-        //     {
-        //         query = query.Where(x => x.LastName.StartsWith(serachObject.LastNameeGTE));
-        //     }
+            entity.ProfilePicture = FileUploadHelper.UploadProfilePicture(request.ProfilePicture);
 
-        //     if (!string.IsNullOrWhiteSpace(serachObject?.Email))
-        //     {
-        //         query = query.Where(x => x.Email == serachObject.Email);
-        //     }
+            base.BeforeInsert(request, entity);
+        }
 
-        //     if (!string.IsNullOrWhiteSpace(serachObject?.UserName))
-        //     {
-        //         query = query.Where(x => x.UserName == serachObject.UserName);
-        //     }
+        public override void BeforeUpdate(UserUpdateRequest request, Database.User entity)
+        {
 
-        //     int count = query.Count();
+            if (request.Password != null)
+            {
+                if (request.Password != request.PasswordConfirmation)
+                {
+                    throw new ArgumentException("Password and Password confirmation must be same");
+                }
+                entity.PasswordSalt = PasswordHelper.GenerateSalt();
+                entity.PasswordHash = PasswordHelper.GenerateHash(entity.PasswordSalt, request.Password);
+            }
 
-        //     if (!string.IsNullOrWhiteSpace(serachObject.OrderBy))
-        //     {
-        //         query = query.OrderBy(serachObject.OrderBy);
-        //     }
-
-        //     if (serachObject?.Page.HasValue == true && serachObject?.PageSize.HasValue == true)
-        //     {
-        //         query = query.Skip(serachObject.Page.Value * serachObject.PageSize.Value)
-        //         .Take(serachObject.PageSize.Value);
-        //     }
-        //     query = query.Include(x => x.City).ThenInclude(c => c.Canton);
-
-        //     var list = query.ToList();
-
-        //     var resultList = Mapper.Map(list, result);
-
-        //     Model.PagedResult<Model.User> response = new Model.PagedResult<Model.User>();
-        //     response.ResultList = resultList;
-        //     response.Count = count;
-
-        //     return response;
-        // }
-
-        // public Model.User Insert(UserInsertRequest request)
-        // {
-        //     if (request.Password != request.PasswordConfirmation)
-        //     {
-        //         throw new ArgumentException("Password and Password confirmation must be equal");
-        //     }
-
-        //     Database.User entity = new Database.User();
-        //     Mapper.Map(request, entity);
-
-        //     entity.PasswordSalt = PasswordHelper.GenerateSalt();
-        //     entity.PasswordHash = PasswordHelper.GenerateHash(entity.PasswordSalt, request.Password);
-
-        //     entity.CityId = request.CityId;
-        //     entity.ProfilePicture = FileUploadHelper.UploadProfilePicture(request.ProfilePicture);
-
-        //     Context.Add(entity);
-        //     Context.SaveChanges();
+            if (request.ProfilePicture != null)
+            {
+                entity.ProfilePicture = FileUploadHelper.UploadProfilePicture(request.ProfilePicture);
+            }
 
 
+            base.BeforeUpdate(request, entity);
+        }
 
-        //     return Mapper.Map<Model.User>(entity);
-        // }
-
-        // public Model.User Update(int id, UserUpdateRequest request)
-        // {
-        //     var entity = Context.Users.Find(id);
-
-        //     Mapper.Map(request, entity);
-
-        //     if (request.Password != null)
-        //     {
-        //         if (request.Password != request.PasswordConfirmation)
-        //         {
-        //             throw new ArgumentException("Password and Password confirmation must be same");
-        //         }
-        //         entity.PasswordSalt = PasswordHelper.GenerateSalt();
-        //         entity.PasswordHash = PasswordHelper.GenerateHash(entity.PasswordSalt, request.Password);
-        //     }
-
-        //     Context.SaveChanges();
-        //     return Mapper.Map<Model.User>(entity);
-        // }
     }
 }

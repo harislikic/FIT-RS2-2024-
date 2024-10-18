@@ -9,8 +9,8 @@ namespace Request
         public string? Gender { get; set; }
         public string? Password { get; set; }
         public string? PasswordConfirmation { get; set; }
-        public bool IsAdmin { get; set; }
-        public DateTime DateOfBirth { get; set; }
+
+        public DateTime? DateOfBirth { get; set; }
         public IFormFile? ProfilePicture { get; set; }
         public int CityId { get; set; }
     }

@@ -16,13 +16,11 @@ public class BaseController<TModel, TSerach> : ControllerBase where TSerach : Ba
         _service = service;
     }
 
-
     [HttpGet]
     public PagedResult<TModel> GetList([FromQuery] TSerach serachObject)
     {
         return _service.GetPaged(serachObject);
     }
-
 
     [HttpGet("{id}")]
     public TModel GetById(int id)
