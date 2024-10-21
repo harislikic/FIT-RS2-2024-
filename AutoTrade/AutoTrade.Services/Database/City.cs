@@ -1,3 +1,5 @@
+using Database;
+
 namespace AutoTrade.Services.Database
 {
     public partial class City

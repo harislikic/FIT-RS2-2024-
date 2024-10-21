@@ -1,3 +1,5 @@
+using Database;
+
 namespace AutoTrade.Services.Database;
 public partial class User
 {
@@ -17,5 +19,7 @@ public partial class User
 
     public int CityId { get; set; }
     public City City { get; set; }
+
+    public ICollection<Reservation> Reservations { get; set; }
 
 }
