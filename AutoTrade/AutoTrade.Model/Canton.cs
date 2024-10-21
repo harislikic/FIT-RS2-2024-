@@ -1,5 +1,3 @@
-using AutoTrade.Services.Database;
-
 namespace AutoTrade.Model
 {
     public partial class Canton

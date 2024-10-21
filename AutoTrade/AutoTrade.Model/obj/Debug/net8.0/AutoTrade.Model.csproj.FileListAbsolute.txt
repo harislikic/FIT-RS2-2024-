@@ -1,0 +1,11 @@
+/Users/harislikic/Desktop/FIT-RS2-2024-/AutoTrade/AutoTrade.Model/bin/Debug/net8.0/AutoTrade.Model.deps.json
+/Users/harislikic/Desktop/FIT-RS2-2024-/AutoTrade/AutoTrade.Model/bin/Debug/net8.0/AutoTrade.Model.dll
+/Users/harislikic/Desktop/FIT-RS2-2024-/AutoTrade/AutoTrade.Model/bin/Debug/net8.0/AutoTrade.Model.pdb
+/Users/harislikic/Desktop/FIT-RS2-2024-/AutoTrade/AutoTrade.Model/obj/Debug/net8.0/AutoTrade.Model.csproj.AssemblyReference.cache
+/Users/harislikic/Desktop/FIT-RS2-2024-/AutoTrade/AutoTrade.Model/obj/Debug/net8.0/AutoTrade.Model.GeneratedMSBuildEditorConfig.editorconfig
+/Users/harislikic/Desktop/FIT-RS2-2024-/AutoTrade/AutoTrade.Model/obj/Debug/net8.0/AutoTrade.Model.csproj.CoreCompileInputs.cache
+/Users/harislikic/Desktop/FIT-RS2-2024-/AutoTrade/AutoTrade.Model/obj/Debug/net8.0/AutoTrade.Model.sourcelink.json
+/Users/harislikic/Desktop/FIT-RS2-2024-/AutoTrade/AutoTrade.Model/obj/Debug/net8.0/AutoTrade.Model.dll
+/Users/harislikic/Desktop/FIT-RS2-2024-/AutoTrade/AutoTrade.Model/obj/Debug/net8.0/refint/AutoTrade.Model.dll
+/Users/harislikic/Desktop/FIT-RS2-2024-/AutoTrade/AutoTrade.Model/obj/Debug/net8.0/AutoTrade.Model.pdb
+/Users/harislikic/Desktop/FIT-RS2-2024-/AutoTrade/AutoTrade.Model/obj/Debug/net8.0/ref/AutoTrade.Model.dll

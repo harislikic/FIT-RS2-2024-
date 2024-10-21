@@ -1,4 +1,3 @@
-using System.Linq.Dynamic.Core;
 using AutoTrade.Model;
 using AutoTrade.Services.Database;
 using MapsterMapper;

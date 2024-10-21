@@ -1,4 +1,4 @@
-using System.Linq.Dynamic.Core;
+
 using AutoTrade.Model;
 using AutoTrade.Services.Database;
 using AutoTrader.Services.Helpers;
@@ -6,6 +6,7 @@ using MapsterMapper;
 using Microsoft.EntityFrameworkCore;
 using Request;
 using SerachObject;
+using System.Linq.Dynamic.Core;
 
 namespace AutoTrade.Services
 {
