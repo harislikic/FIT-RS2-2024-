@@ -52,5 +52,7 @@ namespace Database
 
         public int? TransmissionTypeId { get; set; }
         public TransmissionType TransmissionType { get; set; }
+
+           public ICollection<Favorite> Favorites { get; set; } = new List<Favorite>();
     }
 }

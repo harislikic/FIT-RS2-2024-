@@ -20,6 +20,10 @@ public partial class User
     public int CityId { get; set; }
     public City City { get; set; }
 
-    public ICollection<Reservation> Reservations { get; set; }
+    public ICollection<Reservation> Reservations { get; set; } = new List<Reservation>();
+
+    public ICollection<Favorite> Favorites { get; set; } = new List<Favorite>();
+    public ICollection<AutomobileAd> AutomobileAds { get; set; } = new List<AutomobileAd>();
+
 
 }
