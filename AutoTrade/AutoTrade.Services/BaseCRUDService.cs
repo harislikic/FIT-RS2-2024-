@@ -45,5 +45,22 @@ namespace AutoTrade.Services
 
         }
 
+        public TModel Delete(int id)
+        {
+            var set = Context.Set<TDbEntity>();
+            var entity = set.Find(id);
+
+            if (entity == null)
+            {
+                throw new Exception("Entity not found with provided id");
+            }
+
+            Context.Remove(entity);
+            Context.SaveChanges();
+
+            return Mapper.Map<TModel>(entity);
+
+        }
+
     }
 }
