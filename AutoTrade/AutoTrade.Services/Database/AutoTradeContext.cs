@@ -1,6 +1,7 @@
 using AutoTrade.Model;
 using Database;
 using Microsoft.EntityFrameworkCore;
+using CarBrand = Database.CarBrand;
 
 namespace AutoTrade.Services.Database
 {
