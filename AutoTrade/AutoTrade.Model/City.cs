@@ -4,6 +4,6 @@ namespace AutoTrade.Model
     {
         public int Id { get; set; }
         public string Title { get; set; }
-        public Canton Canton { get; set; }
+
     }
 }

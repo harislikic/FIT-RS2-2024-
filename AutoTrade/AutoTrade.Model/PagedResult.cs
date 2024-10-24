@@ -4,6 +4,6 @@ namespace AutoTrade.Model
     {
         public int? Count { get; set; }
 
-        public IList<T> ResultList { get; set; }
+        public IList<T> Data { get; set; }
     }
 }

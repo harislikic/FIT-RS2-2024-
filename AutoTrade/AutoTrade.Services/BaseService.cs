@@ -41,7 +41,7 @@ namespace AutoTrade.Services
 
             Model.PagedResult<TModel> pagedResult = new Model.PagedResult<TModel>();
 
-            pagedResult.ResultList = result;
+            pagedResult.Data = result;
             pagedResult.Count = count;
 
             return pagedResult;
