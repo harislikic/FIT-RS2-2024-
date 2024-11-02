@@ -8,6 +8,7 @@ using Comment = Database.Comment;
 using Favorite = Database.Favorite;
 using FuelType = Database.FuelType;
 using Reservation = Database.Reservation;
+using TransmissionType = Database.TransmissionType;
 
 namespace AutoTrade.Services.Database
 {

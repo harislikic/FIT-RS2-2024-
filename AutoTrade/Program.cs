@@ -19,6 +19,7 @@ builder.Services.AddTransient<ICommentService, CommentService>();
 builder.Services.AddTransient<IFavoriteService, FavoriteService>();
 builder.Services.AddTransient<IFuelTypeService, FuelTypeService>();
 builder.Services.AddTransient<IReservationService, ReservationService>();
+builder.Services.AddTransient<ITransmissionTypeService, TransmissionTypeService>();
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
