@@ -11,6 +11,8 @@ using Reservation = Database.Reservation;
 using TransmissionType = Database.TransmissionType;
 using VehicleCondition = Database.VehicleCondition;
 using AdditionalEquipment = Database.AdditionalEquipment;
+using AutomobileAdAdditionalEquipment = Database.AutomobileAdAdditionalEquipment;
+using AutomobileAd = Database.AutomobileAd;
 
 namespace AutoTrade.Services.Database
 {
