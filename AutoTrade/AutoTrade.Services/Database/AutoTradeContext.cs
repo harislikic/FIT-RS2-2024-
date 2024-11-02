@@ -10,8 +10,6 @@ using FuelType = Database.FuelType;
 using Reservation = Database.Reservation;
 using TransmissionType = Database.TransmissionType;
 using VehicleCondition = Database.VehicleCondition;
-using AdditionalEquipment = Database.AdditionalEquipment;
-using AutomobileAdAdditionalEquipment = Database.AutomobileAdAdditionalEquipment;
 using AutomobileAd = Database.AutomobileAd;
 
 namespace AutoTrade.Services.Database
@@ -50,9 +48,6 @@ namespace AutoTrade.Services.Database
 
         public DbSet<VehicleCondition> VehicleConditions { get; set; }
 
-        public DbSet<AdditionalEquipment> AdditionalEquipments { get; set; }
-
-        public DbSet<AutomobileAdAdditionalEquipment> AutomobileAdAdditionalEquipments { get; set; }
         public DbSet<Favorite> Favorites { get; set; }
 
 
@@ -106,23 +101,7 @@ namespace AutoTrade.Services.Database
                 .WithMany(a => a.Comments)
                 .HasForeignKey(c => c.AutomobileAdId)
                 .OnDelete(DeleteBehavior.Cascade); // Automatically delete comments when an automobile ad is deleted
-
-            // Define the composite key for AutomobileAdAdditionalEquipment
-            modelBuilder.Entity<AutomobileAdAdditionalEquipment>()
-                .HasKey(ae => new { ae.AutomobileAdId, ae.AdditionalEquipmentId });
-
-            // Relationship between AutomobileAd and AutomobileAdAdditionalEquipment
-            modelBuilder.Entity<AutomobileAdAdditionalEquipment>()
-                .HasOne(ae => ae.AutomobileAd)
-                .WithMany(a => a.AutomobileAdAdditionalEquipments)
-                .HasForeignKey(ae => ae.AutomobileAdId);
-
-            modelBuilder.Entity<AutomobileAdAdditionalEquipment>()
-                .HasOne(ae => ae.AdditionalEquipment)
-                .WithMany()
-                .HasForeignKey(ae => ae.AdditionalEquipmentId);
         }
-
 
 
     }

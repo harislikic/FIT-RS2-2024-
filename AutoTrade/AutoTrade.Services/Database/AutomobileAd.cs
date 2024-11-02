@@ -29,8 +29,6 @@ namespace Database
         public int UserId { get; set; }
         public User User { get; set; }
 
-        public ICollection<AutomobileAdAdditionalEquipment> AutomobileAdAdditionalEquipments { get; set; }
-
         public int? CarBrandId { get; set; }
 
         public CarBrand CarBrand { get; set; }

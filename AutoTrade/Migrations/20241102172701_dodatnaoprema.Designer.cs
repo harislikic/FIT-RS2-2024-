@@ -4,6 +4,7 @@ using AutoTrade.Services.Database;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace AutoTrade.Migrations
 {
     [DbContext(typeof(AutoTradeContext))]
-    partial class AutoTradeContextModelSnapshot : ModelSnapshot
+    [Migration("20241102172701_dodatnaoprema")]
+    partial class dodatnaoprema
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -115,6 +118,23 @@ namespace AutoTrade.Migrations
                     b.ToTable("Users");
                 });
 
+            modelBuilder.Entity("Database.AdditionalEquipment", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("AdditionalEquipments");
+                });
+
             modelBuilder.Entity("Database.AutomobileAd", b =>
                 {
                     b.Property<int>("Id")
@@ -203,6 +223,26 @@ namespace AutoTrade.Migrations
                     b.HasIndex("VehicleConditionId");
 
                     b.ToTable("AutomobileAds");
+                });
+
+            modelBuilder.Entity("Database.AutomobileAdAdditionalEquipment", b =>
+                {
+                    b.Property<int>("AutomobileAdId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("AdditionalEquipmentId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("AdditionalEquipmentId1")
+                        .HasColumnType("int");
+
+                    b.HasKey("AutomobileAdId", "AdditionalEquipmentId");
+
+                    b.HasIndex("AdditionalEquipmentId");
+
+                    b.HasIndex("AdditionalEquipmentId1");
+
+                    b.ToTable("AutomobileAdAdditionalEquipments");
                 });
 
             modelBuilder.Entity("Database.CarBrand", b =>
@@ -460,6 +500,29 @@ namespace AutoTrade.Migrations
                     b.Navigation("User");
                 });
 
+            modelBuilder.Entity("Database.AutomobileAdAdditionalEquipment", b =>
+                {
+                    b.HasOne("Database.AdditionalEquipment", "AdditionalEquipment")
+                        .WithMany()
+                        .HasForeignKey("AdditionalEquipmentId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Database.AdditionalEquipment", null)
+                        .WithMany("AutomobileAdAdditionalEquipments")
+                        .HasForeignKey("AdditionalEquipmentId1");
+
+                    b.HasOne("Database.AutomobileAd", "AutomobileAd")
+                        .WithMany("AutomobileAdAdditionalEquipments")
+                        .HasForeignKey("AutomobileAdId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("AdditionalEquipment");
+
+                    b.Navigation("AutomobileAd");
+                });
+
             modelBuilder.Entity("Database.Comment", b =>
                 {
                     b.HasOne("Database.AutomobileAd", "AutomobileAd")
@@ -529,8 +592,15 @@ namespace AutoTrade.Migrations
                     b.Navigation("Reservations");
                 });
 
+            modelBuilder.Entity("Database.AdditionalEquipment", b =>
+                {
+                    b.Navigation("AutomobileAdAdditionalEquipments");
+                });
+
             modelBuilder.Entity("Database.AutomobileAd", b =>
                 {
+                    b.Navigation("AutomobileAdAdditionalEquipments");
+
                     b.Navigation("Comments");
 
                     b.Navigation("Favorites");

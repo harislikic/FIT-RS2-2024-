@@ -28,6 +28,12 @@ namespace AutoTrade.Services
 
         }
 
+
+        public virtual void AfterInsert(TInsert request, TDbEntity entity)
+        {
+
+        }
+
         public TModel Update(int id, TUpdate request)
         {
             var set = Context.Set<TDbEntity>();

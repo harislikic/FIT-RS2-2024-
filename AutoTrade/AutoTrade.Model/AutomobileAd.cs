@@ -21,8 +21,6 @@ namespace AutoTrade.Model
         public int UserId { get; set; }
         public User User { get; set; }
 
-        public ICollection<AutomobileAdAdditionalEquipment> AutomobileAdAdditionalEquipments { get; set; } = new List<AutomobileAdAdditionalEquipment>();
-
         public int? CarBrandId { get; set; }
         public CarBrand CarBrand { get; set; }
 
