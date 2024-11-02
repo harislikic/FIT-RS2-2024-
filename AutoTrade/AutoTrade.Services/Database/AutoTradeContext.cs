@@ -5,6 +5,7 @@ using CarBrand = AutoTrade.Model.CarBrand;
 using CarCategory = Database.CarCategory;
 using CarModel = Database.CarModel;
 using Comment = Database.Comment;
+using Favorite = Database.Favorite;
 
 namespace AutoTrade.Services.Database
 {
