@@ -4,6 +4,7 @@ using AutoTrade.Services.Database;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace AutoTrade.Migrations
 {
     [DbContext(typeof(AutoTradeContext))]
-    partial class AutoTradeContextModelSnapshot : ModelSnapshot
+    [Migration("20241102190407_AddAutomobileAdImages")]
+    partial class AddAutomobileAdImages
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -213,8 +216,7 @@ namespace AutoTrade.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int?>("AutomobileAdId")
-                        .IsRequired()
+                    b.Property<int>("AutomobileAdId")
                         .HasColumnType("int");
 
                     b.Property<string>("ImageUrl")

@@ -11,6 +11,7 @@ using Reservation = Database.Reservation;
 using TransmissionType = Database.TransmissionType;
 using VehicleCondition = Database.VehicleCondition;
 using AutomobileAd = Database.AutomobileAd;
+using AutomobileAdImage = Database.AutomobileAdImage;
 
 namespace AutoTrade.Services.Database
 {
@@ -49,6 +50,8 @@ namespace AutoTrade.Services.Database
         public DbSet<VehicleCondition> VehicleConditions { get; set; }
 
         public DbSet<Favorite> Favorites { get; set; }
+
+        public DbSet<AutomobileAdImage> AutomobileAdImages { get; set; }
 
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
@@ -101,6 +104,12 @@ namespace AutoTrade.Services.Database
                 .WithMany(a => a.Comments)
                 .HasForeignKey(c => c.AutomobileAdId)
                 .OnDelete(DeleteBehavior.Cascade); // Automatically delete comments when an automobile ad is deleted
+
+
+            modelBuilder.Entity<AutomobileAdImage>()
+    .HasOne(ai => ai.AutomobileAd)
+    .WithMany(ad => ad.Images) 
+    .HasForeignKey(ai => ai.AutomobileAdId);
         }
 
 

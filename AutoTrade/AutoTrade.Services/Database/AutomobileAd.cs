@@ -52,5 +52,7 @@ namespace Database
         public TransmissionType TransmissionType { get; set; }
 
         public ICollection<Favorite> Favorites { get; set; } = new List<Favorite>();
+
+        public ICollection<AutomobileAdImage> Images { get; set; } = new List<AutomobileAdImage>();
     }
 }

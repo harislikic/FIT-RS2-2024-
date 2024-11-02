@@ -31,9 +31,44 @@ namespace AutoTrade.Services
         public override void BeforeInsert(AutomobileAdInsertRequst request, AutomobileAd entity)
         {
             entity.DateOFadd = DateTime.Now;
+            entity.Images = null; 
 
             base.BeforeInsert(request, entity);
         }
+
+
+        public override void AfterInsert(AutomobileAdInsertRequst request, AutomobileAd entity)
+        {
+            if (request.Images != null && request.Images.Count > 0)
+            {
+                foreach (var file in request.Images)
+                {
+                    if (file.Length > 0)
+                    {
+                        var imageUrl = FileUploadHelper.UploadProfilePicture(file);
+
+                        if (string.IsNullOrEmpty(imageUrl))
+                        {
+                            imageUrl = "default_image_url";
+                        }
+
+                        var imageEntity = new AutomobileAdImage
+                        {
+                            AutomobileAdId = entity.Id,
+                            ImageUrl = imageUrl
+                        };
+
+                        Context.AutomobileAdImages.Add(imageEntity);
+                    }
+                }
+
+
+                Context.SaveChanges();
+            }
+
+            base.AfterInsert(request, entity);
+        }
+
 
 
         public override IQueryable<AutomobileAd> AddFilter(AutomobileAdSearchObject search, IQueryable<AutomobileAd> query)

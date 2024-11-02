@@ -10,6 +10,7 @@ namespace Controllers
     [Route("[controller]")]
     public class AutomobileAdController : BaseCRUDController<AutomobileAd, AutomobileAdSearchObject, AutomobileAdInsertRequst, AutomobileUpdateRequest>
     {
+
         public AutomobileAdController(IAutomobileAdService service) : base(service)
         {
         }

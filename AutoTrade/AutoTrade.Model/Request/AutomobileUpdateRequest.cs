@@ -19,5 +19,7 @@ namespace Request
         public int? CarModelId { get; set; }
         public int? FuelTypeId { get; set; }
         public int? TransmissionTypeId { get; set; }
+
+        public List<IFormFile>? Images { get; set; }
     }
 }

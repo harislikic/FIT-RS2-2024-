@@ -19,6 +19,8 @@ namespace AutoTrade.Services
             Context.Add(entity);
             Context.SaveChanges();
 
+            AfterInsert(request, entity);
+
             return Mapper.Map<TModel>(entity);
         }
 
