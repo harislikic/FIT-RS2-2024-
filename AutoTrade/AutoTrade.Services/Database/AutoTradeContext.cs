@@ -1,13 +1,15 @@
 using AutoTrade.Model;
 using Database;
 using Microsoft.EntityFrameworkCore;
-using CarBrand = Database.CarBrand;
+using CarBrand = AutoTrade.Model.CarBrand;
 using CarCategory = Database.CarCategory;
+using CarModel = Database.CarModel;
 
 namespace AutoTrade.Services.Database
 {
     public partial class AutoTradeContext : DbContext
     {
+
 
         public AutoTradeContext() : base() { }
 
