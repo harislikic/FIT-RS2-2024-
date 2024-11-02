@@ -1,3 +1,5 @@
+using Database;
+
 namespace AutoTrade.Model
 {
     public partial class Comment
@@ -7,7 +9,8 @@ namespace AutoTrade.Model
         public DateTime CreatedAt { get; set; }
         public DateTime? UpdatedAt { get; set; }
         public int UserId { get; set; }
-        public int? AutomobileAdId { get; set; }
+        public User User { get; set; }
+        public int AutomobileAdId { get; set; }
 
     }
 }
