@@ -35,16 +35,16 @@ namespace Database
 
         public CarBrand CarBrand { get; set; }
 
-        public int CarCategoryId { get; set; }
+        public int? CarCategoryId { get; set; }
         public CarCategory CarCategory { get; set; }
 
-        public int CarModelId { get; set; }
+        public int? CarModelId { get; set; }
 
         public CarModel CarModel { get; set; }
 
         public ICollection<Comment>? Comments { get; set; } = new List<Comment>();
 
-        public int FuelTypeId { get; set; }
+        public int? FuelTypeId { get; set; }
 
         public FuelType FuelType { get; set; }
 
