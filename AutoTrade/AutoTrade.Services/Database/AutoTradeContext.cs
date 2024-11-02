@@ -1,12 +1,13 @@
 using AutoTrade.Model;
 using Database;
 using Microsoft.EntityFrameworkCore;
-using CarBrand = AutoTrade.Model.CarBrand;
+using CarBrand = Database.CarBrand;
 using CarCategory = Database.CarCategory;
 using CarModel = Database.CarModel;
 using Comment = Database.Comment;
 using Favorite = Database.Favorite;
 using FuelType = Database.FuelType;
+using Reservation = Database.Reservation;
 
 namespace AutoTrade.Services.Database
 {
