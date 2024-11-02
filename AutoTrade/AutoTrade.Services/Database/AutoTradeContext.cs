@@ -4,6 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using CarBrand = AutoTrade.Model.CarBrand;
 using CarCategory = Database.CarCategory;
 using CarModel = Database.CarModel;
+using Comment = Database.Comment;
 
 namespace AutoTrade.Services.Database
 {
