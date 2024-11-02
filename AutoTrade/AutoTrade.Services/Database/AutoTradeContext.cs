@@ -6,6 +6,7 @@ using CarCategory = Database.CarCategory;
 using CarModel = Database.CarModel;
 using Comment = Database.Comment;
 using Favorite = Database.Favorite;
+using FuelType = Database.FuelType;
 
 namespace AutoTrade.Services.Database
 {
