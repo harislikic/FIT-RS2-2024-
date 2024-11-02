@@ -21,6 +21,7 @@ builder.Services.AddTransient<IFuelTypeService, FuelTypeService>();
 builder.Services.AddTransient<IReservationService, ReservationService>();
 builder.Services.AddTransient<ITransmissionTypeService, TransmissionTypeService>();
 builder.Services.AddTransient<IVehicleConditionService, VehicleConditionService>();
+builder.Services.AddTransient<IAdditionalEquipmentService, AdditionalEquipmentService>();
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle

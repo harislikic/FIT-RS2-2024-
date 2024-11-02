@@ -10,6 +10,7 @@ using FuelType = Database.FuelType;
 using Reservation = Database.Reservation;
 using TransmissionType = Database.TransmissionType;
 using VehicleCondition = Database.VehicleCondition;
+using AdditionalEquipment = Database.AdditionalEquipment;
 
 namespace AutoTrade.Services.Database
 {
