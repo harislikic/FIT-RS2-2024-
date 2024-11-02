@@ -24,12 +24,12 @@ namespace Database
 
         public DateTime? Last_Big_Service { get; set; }
 
+
         public double Milage { get; set; }
         public int UserId { get; set; }
         public User User { get; set; }
 
-        public int? AdditionalEquipmentId { get; set; }
-        public AdditionalEquipment AdditionalEquipment { get; set; }
+        public ICollection<AutomobileAdAdditionalEquipment> AutomobileAdAdditionalEquipments { get; set; }
 
         public int? CarBrandId { get; set; }
 

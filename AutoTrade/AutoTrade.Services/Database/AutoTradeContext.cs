@@ -49,6 +49,7 @@ namespace AutoTrade.Services.Database
 
         public DbSet<AdditionalEquipment> AdditionalEquipments { get; set; }
 
+        public DbSet<AutomobileAdAdditionalEquipment> AutomobileAdAdditionalEquipments { get; set; }
         public DbSet<Favorite> Favorites { get; set; }
 
 
@@ -89,8 +90,37 @@ namespace AutoTrade.Services.Database
                 .HasForeignKey(a => a.UserId)
                 .OnDelete(DeleteBehavior.Restrict); // Prevent cascade deletion
 
-            // Check any other relationships that could potentially cause cycles
+            // Relationship between AutomobileAd and Reservation
+            modelBuilder.Entity<Reservation>()
+                .HasOne(r => r.AutomobileAd)
+                .WithMany(a => a.Reservations)
+                .HasForeignKey(r => r.AutomobileAdId)
+                .OnDelete(DeleteBehavior.Cascade); // Automatically delete reservations when an automobile ad is deleted
+
+            // Relationship between AutomobileAd and Comment
+            modelBuilder.Entity<Comment>()
+                .HasOne(c => c.AutomobileAd)
+                .WithMany(a => a.Comments)
+                .HasForeignKey(c => c.AutomobileAdId)
+                .OnDelete(DeleteBehavior.Cascade); // Automatically delete comments when an automobile ad is deleted
+
+            // Define the composite key for AutomobileAdAdditionalEquipment
+            modelBuilder.Entity<AutomobileAdAdditionalEquipment>()
+                .HasKey(ae => new { ae.AutomobileAdId, ae.AdditionalEquipmentId });
+
+            // Relationship between AutomobileAd and AutomobileAdAdditionalEquipment
+            modelBuilder.Entity<AutomobileAdAdditionalEquipment>()
+                .HasOne(ae => ae.AutomobileAd)
+                .WithMany(a => a.AutomobileAdAdditionalEquipments)
+                .HasForeignKey(ae => ae.AutomobileAdId);
+
+            modelBuilder.Entity<AutomobileAdAdditionalEquipment>()
+                .HasOne(ae => ae.AdditionalEquipment)
+                .WithMany()
+                .HasForeignKey(ae => ae.AdditionalEquipmentId);
         }
+
+
 
     }
 }
