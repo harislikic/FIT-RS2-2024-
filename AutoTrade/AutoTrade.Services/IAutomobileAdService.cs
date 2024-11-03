@@ -4,7 +4,8 @@ using SearchObject;
 
 namespace AutoTrade.Services
 {
-    public interface IAutomobileAdService : ICRUDService<Model.AutomobileAd,AutomobileAdSearchObject,AutomobileAdInsertRequst,AutomobileUpdateRequest>
+    public interface IAutomobileAdService : ICRUDService<Model.AutomobileAd, AutomobileAdSearchObject, AutomobileAdInsertRequst, AutomobileUpdateRequest>
     {
+        Model.AutomobileAd MarkAsDone(int id);
     }
 }

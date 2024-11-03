@@ -25,14 +25,15 @@ namespace AutoTrade.Services
      .Include(ad => ad.CarBrand)
      .Include(ad => ad.CarCategory)
      .Include(ad => ad.CarModel)
-     .Include(ad => ad.Comments);
+     .Include(ad => ad.Comments)
+     .Include(x => x.Images);
         }
 
         public override void BeforeInsert(AutomobileAdInsertRequst request, AutomobileAd entity)
         {
             entity.DateOFadd = DateTime.Now;
             entity.Status = "Active";
-            entity.Images = null; 
+            entity.Images = null;
 
             base.BeforeInsert(request, entity);
         }
@@ -151,6 +152,21 @@ namespace AutoTrade.Services
             }
 
             return base.AddFilter(search, query);
+        }
+
+
+        public Model.AutomobileAd MarkAsDone(int id)
+        {
+            var ad = _context.AutomobileAds.Find(id);
+            if (ad == null)
+            {
+                throw new Exception("Automobile ad not found");
+            }
+
+            ad.Status = "Done";
+            _context.SaveChanges();
+
+            return Mapper.Map<Model.AutomobileAd>(ad);
         }
 
     }
