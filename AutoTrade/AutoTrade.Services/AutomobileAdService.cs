@@ -31,6 +31,7 @@ namespace AutoTrade.Services
         public override void BeforeInsert(AutomobileAdInsertRequst request, AutomobileAd entity)
         {
             entity.DateOFadd = DateTime.Now;
+            entity.Status = "Active";
             entity.Images = null; 
 
             base.BeforeInsert(request, entity);
