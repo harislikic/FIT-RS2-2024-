@@ -88,5 +88,23 @@ namespace AutoTrade.Services
             base.BeforeUpdate(request, entity);
         }
 
+        public Model.User Login(string username, string password)
+        {
+            var entity = Context.Users.FirstOrDefault(x => x.UserName == username);
+            if (entity == null)
+            {
+                return null;
+            }
+
+            var hash = PasswordHelper.GenerateHash(entity.PasswordSalt, password);
+
+            if (hash != entity.PasswordHash)
+            {
+                return null;
+            }
+
+            return this.Mapper.Map<Model.User>(entity);
+        }
+
     }
 }
