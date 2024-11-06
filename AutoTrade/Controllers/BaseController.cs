@@ -8,7 +8,7 @@ using SearchObject;
 namespace AutoTrader.Controllers;
 [ApiController]
 [Route("[controller]")]
-[Authorize]
+//[Authorize]
 public class BaseController<TModel, TSerach> : ControllerBase where TSerach : BaseSerachObject
 {
 

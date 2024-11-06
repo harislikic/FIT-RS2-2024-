@@ -93,14 +93,14 @@ namespace AutoTrade.Services
             var entity = Context.Users.FirstOrDefault(x => x.UserName == username);
             if (entity == null)
             {
-                return null;
+                throw new UnauthorizedAccessException("User not found.");
             }
 
             var hash = PasswordHelper.GenerateHash(entity.PasswordSalt, password);
 
             if (hash != entity.PasswordHash)
             {
-                return null;
+                throw new UnauthorizedAccessException("Invalid password.");
             }
 
             return this.Mapper.Map<Model.User>(entity);

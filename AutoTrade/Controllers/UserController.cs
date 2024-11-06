@@ -1,7 +1,9 @@
 using AutoTrade.Model;
 using AutoTrade.Services;
 using Controllers;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using Request;
 using SerachObject;
 
@@ -14,13 +16,20 @@ public class UserController : BaseCRUDController<User, UserSearchObject, UserIns
     protected IUserService _service;
     public UserController(IUserService service) : base(service)
     {
-            _service = service;
+        _service = service;
     }
 
     [HttpPost]
+    [AllowAnonymous]
     public override User Insert([FromForm] UserInsertRequest request)
     {
         return _service.Insert(request);
+    }
+
+    [HttpPost("login")]
+    public User Login(string username, string password)
+    {
+        return (_service as IUserService).Login(username,password);
     }
 
 }

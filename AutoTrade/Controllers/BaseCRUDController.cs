@@ -1,6 +1,7 @@
 using AutoTrade.Services;
 using AutoTrader.Controllers;
 using Database;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using SearchObject;
 
@@ -16,18 +17,21 @@ namespace Controllers
         }
 
         [HttpPost]
+        [Authorize]
         public virtual TModel Insert(TInsert request)
         {
             return _service.Insert(request);
         }
 
         [HttpPut("{id}")]
+        [Authorize]
         public virtual TModel Update(int id, TUpdate request)
         {
             return _service.Update(id, request);
         }
 
         [HttpDelete("{id}")]
+        [Authorize]
         public virtual TModel Delete(int id)
         {
             return _service.Delete(id);
