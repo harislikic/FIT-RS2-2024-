@@ -10,6 +10,17 @@ using Microsoft.OpenApi.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
+// Add CORS services
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowAllOrigins", policy =>
+    {
+        policy.AllowAnyOrigin()  // Allows any origin to access the resources
+              .AllowAnyHeader()  // Allows any headers
+              .AllowAnyMethod(); // Allows any HTTP methods (GET, POST, etc.)
+    });
+});
+
 // Add services to the container.
 
 builder.Services.AddTransient<IUserService, UserService>();
@@ -74,6 +85,9 @@ app.UseStaticFiles(new StaticFileOptions
 });
 
 app.UseHttpsRedirection();
+
+//cors
+app.UseCors("AllowAllOrigins");
 
 app.UseAuthorization();
 
