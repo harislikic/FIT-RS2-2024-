@@ -37,14 +37,16 @@ namespace AutoTrade.Services
             entity.Status = "Active";
             entity.Images = null;
 
-            var bus = RabbitHutch.CreateBus("host=localhost");
-            bus.PubSub.Publish(entity);
-
-
-            //Methof for emails without rabbitMQ
-            // var emailService = new EmailService(_context);
-            // emailService.SendProductNotificationEmail(entity);
-
+            try
+            {
+                var bus = RabbitHutch.CreateBus("host=localhost");
+                bus.PubSub.Publish(entity);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("RabbitMQ is not available. Error: " + ex.Message);
+            }
+            
             base.BeforeInsert(request, entity);
         }
 
