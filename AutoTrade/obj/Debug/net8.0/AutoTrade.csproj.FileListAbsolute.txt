@@ -86,3 +86,9 @@
 /Users/harislikic/Desktop/FIT-RS2-2024-/AutoTrade/bin/Debug/net8.0/AutoTrade.Model/obj/Debug/net8.0/AutoTrade.Model.sourcelink.json
 /Users/harislikic/Desktop/FIT-RS2-2024-/AutoTrade/bin/Debug/net8.0/AutoTrade.Services/bin/Debug/net8.0/AutoTrade.Services.deps.json
 /Users/harislikic/Desktop/FIT-RS2-2024-/AutoTrade/bin/Debug/net8.0/AutoTrade.Services/obj/Debug/net8.0/AutoTrade.Services.sourcelink.json
+/Users/harislikic/Desktop/FIT-RS2-2024-/AutoTrade/bin/Debug/net8.0/BouncyCastle.Cryptography.dll
+/Users/harislikic/Desktop/FIT-RS2-2024-/AutoTrade/bin/Debug/net8.0/EasyNetQ.dll
+/Users/harislikic/Desktop/FIT-RS2-2024-/AutoTrade/bin/Debug/net8.0/MailKit.dll
+/Users/harislikic/Desktop/FIT-RS2-2024-/AutoTrade/bin/Debug/net8.0/MimeKit.dll
+/Users/harislikic/Desktop/FIT-RS2-2024-/AutoTrade/bin/Debug/net8.0/RabbitMQ.Client.dll
+/Users/harislikic/Desktop/FIT-RS2-2024-/AutoTrade/bin/Debug/net8.0/Newtonsoft.Json.dll

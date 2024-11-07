@@ -1,5 +1,7 @@
 using AutoTrade.Services.Database;
 using Database;
+using EasyNetQ;
+using Helpers;
 using MapsterMapper;
 using Microsoft.EntityFrameworkCore;
 using Request;
@@ -35,6 +37,14 @@ namespace AutoTrade.Services
             entity.Status = "Active";
             entity.Images = null;
 
+            var bus = RabbitHutch.CreateBus("host=localhost");
+            bus.PubSub.Publish(entity);
+
+
+            //Methof for emails without rabbitMQ
+            // var emailService = new EmailService(_context);
+            // emailService.SendProductNotificationEmail(entity);
+
             base.BeforeInsert(request, entity);
         }
 
@@ -68,9 +78,9 @@ namespace AutoTrade.Services
                 Context.SaveChanges();
             }
 
+
             base.AfterInsert(request, entity);
         }
-
 
 
         public override IQueryable<AutomobileAd> AddFilter(AutomobileAdSearchObject search, IQueryable<AutomobileAd> query)

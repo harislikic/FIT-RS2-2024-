@@ -6,6 +6,10 @@ using Microsoft.Extensions.FileProviders;
 using Microsoft.AspNetCore.Authentication;
 using AutoTrade;
 using Microsoft.OpenApi.Models;
+using Helpers;
+using Messages;
+using EasyNetQ;
+using Database;
 
 
 var builder = WebApplication.CreateBuilder(args);
@@ -21,7 +25,17 @@ builder.Services.AddCors(options =>
     });
 });
 
+
 // Add services to the container.
+
+
+
+builder.Services.AddScoped<EmailService>();  // EmailService
+builder.Services.AddScoped<RabbitMqListener>();   // RabbitMqListener
+
+builder.Services.AddSingleton<IBus>(provider =>
+    RabbitHutch.CreateBus("host=localhost"));
+
 
 builder.Services.AddTransient<IUserService, UserService>();
 builder.Services.AddTransient<ICantonService, CantonService>();
@@ -92,5 +106,15 @@ app.UseCors("AllowAllOrigins");
 app.UseAuthorization();
 
 app.MapControllers();
+
+
+// RabitMQ scope
+using (var scope = app.Services.CreateScope())
+{
+    var listener = scope.ServiceProvider.GetRequiredService<RabbitMqListener>();
+    listener.StartListening();  // Start listening for RabbitMQ messages
+}
+
+
 
 app.Run();
