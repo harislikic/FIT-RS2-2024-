@@ -46,7 +46,7 @@ namespace AutoTrade.Services
             {
                 Console.WriteLine("RabbitMQ is not available. Error: " + ex.Message);
             }
-            
+
             base.BeforeInsert(request, entity);
         }
 

@@ -1,3 +1,5 @@
+using Microsoft.AspNetCore.Http;
+
 namespace Request
 {
     public class AutomobileUpdateRequest

@@ -1,5 +1,3 @@
-using Database;
-
 namespace AutoTrade.Model
 {
     public partial class Comment
