@@ -50,6 +50,7 @@ builder.Services.AddTransient<IReservationService, ReservationService>();
 builder.Services.AddTransient<ITransmissionTypeService, TransmissionTypeService>();
 builder.Services.AddTransient<IVehicleConditionService, VehicleConditionService>();
 builder.Services.AddTransient<IAutomobileAdService, AutomobileAdService>();
+builder.Services.AddTransient<IEquipmentService, EquipmentService>();
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
@@ -109,11 +110,11 @@ app.MapControllers();
 
 
 // RabitMQ scope
-using (var scope = app.Services.CreateScope())
-{
-    var listener = scope.ServiceProvider.GetRequiredService<RabbitMqListener>();
-    listener.StartListening();  // Start listening for RabbitMQ messages
-}
+// using (var scope = app.Services.CreateScope())
+// {
+//     var listener = scope.ServiceProvider.GetRequiredService<RabbitMqListener>();
+//     listener.StartListening();  // Start listening for RabbitMQ messages
+// }
 
 
 

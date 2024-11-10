@@ -1,6 +1,7 @@
 using AutoTrade.Services.Database;
 using Database;
 using MapsterMapper;
+using Request;
 using SearchObject;
 
 namespace AutoTrade.Services
@@ -21,8 +22,21 @@ namespace AutoTrade.Services
 
             AfterInsert(request, entity);
 
+            if (request is AutomobileAdInsertRequst)
+            {
+                MapEquipment(request, entity);
+            }
+
+
             return Mapper.Map<TModel>(entity);
         }
+
+        public virtual void MapEquipment(TInsert request, TDbEntity entity)
+        {
+
+        }
+
+
 
 
         public virtual void BeforeInsert(TInsert request, TDbEntity entity)
@@ -43,10 +57,22 @@ namespace AutoTrade.Services
 
             Mapper.Map(request, entity);
             BeforeUpdate(request, entity);
+
             Context.SaveChanges();
+
+            if (request is AutomobileUpdateRequest)
+            {
+                MapUpdatedEquipment(request, entity);
+            }
 
             return Mapper.Map<TModel>(entity);
         }
+
+        public virtual void MapUpdatedEquipment(TUpdate request, TDbEntity entity)
+        {
+
+        }
+
 
         public virtual void BeforeUpdate(TUpdate request, TDbEntity entity)
         {

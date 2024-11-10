@@ -20,7 +20,12 @@ namespace Request
         public int? CarModelId { get; set; }
         public int? FuelTypeId { get; set; }
         public int? TransmissionTypeId { get; set; }
-
         public List<IFormFile>? Images { get; set; }
+        public List<int> EquipmentIds { get; set; } = new List<int>();
+        public int? EnginePower { get; set; }
+        public int? NumberOfDoors { get; set; }
+        public int? CubicCapacity { get; set; }
+        public int? HorsePower { get; set; }
+        public string? Color { get; set; }
     }
 }

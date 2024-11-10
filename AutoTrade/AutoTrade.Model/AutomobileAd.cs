@@ -43,5 +43,13 @@ namespace AutoTrade.Model
         public ICollection<Favorite> Favorites { get; set; } = new List<Favorite>();
 
         public ICollection<AutomobileAdImage>? Images { get; set; } = new List<AutomobileAdImage>();
+
+        public ICollection<AutomobileAdEquipment>? AutomobileAdEquipments { get; set; } = new List<AutomobileAdEquipment>();
+
+        public int? EnginePower { get; set; }
+        public int? NumberOfDoors { get; set; }
+        public int? CubicCapacity { get; set; }
+        public int? HorsePower { get; set; }
+        public string? Color { get; set; }
     }
 }

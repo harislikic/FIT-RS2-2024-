@@ -12,6 +12,8 @@ using TransmissionType = Database.TransmissionType;
 using VehicleCondition = Database.VehicleCondition;
 using AutomobileAd = Database.AutomobileAd;
 using AutomobileAdImage = Database.AutomobileAdImage;
+using Equipment = Database.Equipment;
+using AutomobileAdEquipment = Database.AutomobileAdEquipment;
 
 namespace AutoTrade.Services.Database
 {
@@ -52,6 +54,10 @@ namespace AutoTrade.Services.Database
         public DbSet<Favorite> Favorites { get; set; }
 
         public DbSet<AutomobileAdImage> AutomobileAdImages { get; set; }
+
+        public DbSet<Equipment> Equipments { get; set; }
+
+        public DbSet<AutomobileAdEquipment> AutomobileAdEquipments { get; set; }
 
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
@@ -107,9 +113,27 @@ namespace AutoTrade.Services.Database
 
 
             modelBuilder.Entity<AutomobileAdImage>()
-    .HasOne(ai => ai.AutomobileAd)
-    .WithMany(ad => ad.Images) 
-    .HasForeignKey(ai => ai.AutomobileAdId);
+                .HasOne(ai => ai.AutomobileAd)
+                .WithMany(ad => ad.Images)
+                .HasForeignKey(ai => ai.AutomobileAdId);
+
+            modelBuilder.Entity<AutomobileAdEquipment>()
+                .HasKey(ae => new { ae.AutomobileAdId, ae.EquipmentId });
+
+            modelBuilder.Entity<AutomobileAdEquipment>()
+                .HasOne(ae => ae.AutomobileAd)
+                .WithMany(a => a.AutomobileAdEquipments)
+                .HasForeignKey(ae => ae.AutomobileAdId);
+
+            modelBuilder.Entity<AutomobileAdEquipment>()
+                .HasOne(ae => ae.Equipment)
+                .WithMany(e => e.AutomobileAdEquipments)
+                .HasForeignKey(ae => ae.EquipmentId);
+
+            modelBuilder.Entity<AutomobileAd>()
+                .HasMany(ad => ad.AutomobileAdEquipments)
+                .WithOne(ae => ae.AutomobileAd)
+                .OnDelete(DeleteBehavior.Restrict);
         }
 
 

@@ -23,12 +23,14 @@ namespace AutoTrade.Services
         public override IQueryable<AutomobileAd> AddInclude(IQueryable<AutomobileAd> query, AutomobileAdSearchObject? search = null)
         {
             return query
-     .Include(ad => ad.User)
-     .Include(ad => ad.CarBrand)
-     .Include(ad => ad.CarCategory)
-     .Include(ad => ad.CarModel)
-     .Include(ad => ad.Comments)
-     .Include(x => x.Images);
+         .Include(ad => ad.User)
+         .Include(ad => ad.CarBrand)
+         .Include(ad => ad.CarCategory)
+         .Include(ad => ad.CarModel)
+         .Include(ad => ad.Comments)
+         .Include(x => x.Images)
+         .Include(x => x.AutomobileAdEquipments)
+         .ThenInclude(x => x.Equipment);
         }
 
         public override void BeforeInsert(AutomobileAdInsertRequst request, AutomobileAd entity)
@@ -179,6 +181,54 @@ namespace AutoTrade.Services
             _context.SaveChanges();
 
             return Mapper.Map<Model.AutomobileAd>(ad);
+        }
+
+        public override void MapEquipment(AutomobileAdInsertRequst request, AutomobileAd entity)
+        {
+            if (request.EquipmentIds.Any())
+            {
+                foreach (var equipmentId in request.EquipmentIds)
+                {
+                    var automobileAdEquipment = new AutomobileAdEquipment
+                    {
+                        AutomobileAdId = entity.Id,
+                        EquipmentId = equipmentId
+                    };
+                    Context.Add(automobileAdEquipment);
+                }
+                Context.SaveChanges();
+            }
+            base.MapEquipment(request, entity);
+        }
+
+        public override void MapUpdatedEquipment(AutomobileUpdateRequest request, AutomobileAd entity)
+        {
+
+            var existingEquipment = Context.Set<AutomobileAdEquipment>()
+                                  .Where(e => e.AutomobileAdId == entity.Id)
+                                  .ToList();
+
+            foreach (var equipment in existingEquipment)
+            {
+                Context.Remove(equipment);
+            }
+
+
+            if (request.EquipmentIds.Any())
+            {
+                foreach (var equipmentId in request.EquipmentIds)
+                {
+                    var automobileAdEquipment = new AutomobileAdEquipment
+                    {
+                        AutomobileAdId = entity.Id,
+                        EquipmentId = equipmentId
+                    };
+                    Context.Add(automobileAdEquipment);
+                }
+            }
+            Context.SaveChanges();
+
+            base.MapUpdatedEquipment(request, entity);
         }
 
     }

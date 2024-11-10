@@ -55,6 +55,7 @@ namespace AutoTrade.Services
 
             var entity = query.FirstOrDefault(e => EF.Property<int>(e, "Id") == id);
 
+
             if (entity != null)
             {
                 return Mapper.Map<TModel>(entity);
