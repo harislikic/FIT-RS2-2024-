@@ -51,5 +51,7 @@ namespace AutoTrade.Model
         public int? CubicCapacity { get; set; }
         public int? HorsePower { get; set; }
         public string? Color { get; set; }
+        public int? VehicleCondtionId { get; set; }
+        public VehicleCondition VehicleCondition { get; set; }
     }
 }

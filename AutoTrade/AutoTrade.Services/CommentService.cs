@@ -13,7 +13,7 @@ namespace AutoTrade.Services
         {
         }
 
-        public override IQueryable<Comment> AddInclude(IQueryable<Comment> query, BaseSerachObject? search = null)
+        public override IQueryable<Comment> AddInclude(IQueryable<Comment> query, BaseSerachObject? search = null, bool includeDetails = false)
         {
 
             return query.Include(x => x.User).ThenInclude(c => c.AutomobileAds);

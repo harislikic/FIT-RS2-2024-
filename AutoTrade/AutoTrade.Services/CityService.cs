@@ -12,7 +12,7 @@ namespace AutoTrade.Services
         {
         }
 
-        public override IQueryable<City> AddInclude(IQueryable<City> query, BaseSerachObject? search = null)
+        public override IQueryable<City> AddInclude(IQueryable<City> query, BaseSerachObject? search = null, bool includeDetails = false)
         {
             return query.Include(x => x.Canton);
         }

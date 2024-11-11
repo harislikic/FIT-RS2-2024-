@@ -53,7 +53,7 @@ namespace AutoTrade.Services
         public TModel GetById(int id)
         {
             var query = Context.Set<TDbEntity>().AsQueryable();
-            query = AddInclude(query);
+            query = AddInclude(query,null, true);
 
             var entity = query.FirstOrDefault(e => EF.Property<int>(e, "Id") == id);
 
@@ -78,7 +78,7 @@ namespace AutoTrade.Services
             }
         }
 
-        public virtual IQueryable<TDbEntity> AddInclude(IQueryable<TDbEntity> query, TSearch? search = null)
+        public virtual IQueryable<TDbEntity> AddInclude(IQueryable<TDbEntity> query, TSearch? search = null, bool includeDetails = false)
         {
             return query;
         }

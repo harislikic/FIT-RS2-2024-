@@ -13,7 +13,7 @@ namespace AutoTrade.Services
         {
         }
 
-        public override IQueryable<Favorite> AddInclude(IQueryable<Favorite> query, BaseSerachObject? search = null)
+        public override IQueryable<Favorite> AddInclude(IQueryable<Favorite> query, BaseSerachObject? search = null, bool includeDetails = false)
         {
             return query.Include(x => x.User).ThenInclude(a => a.AutomobileAds);
         }

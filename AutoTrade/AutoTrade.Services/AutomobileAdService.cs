@@ -20,17 +20,28 @@ namespace AutoTrade.Services
         }
 
 
-        public override IQueryable<AutomobileAd> AddInclude(IQueryable<AutomobileAd> query, AutomobileAdSearchObject? search = null)
+        public override IQueryable<AutomobileAd> AddInclude(IQueryable<AutomobileAd> query, AutomobileAdSearchObject? search = null, bool includeDetails = false)
         {
-            return query
+            query = query
          .Include(ad => ad.User)
          .Include(ad => ad.CarBrand)
          .Include(ad => ad.CarCategory)
          .Include(ad => ad.CarModel)
-         .Include(ad => ad.Comments)
          .Include(x => x.Images)
+         .Include(x => x.FuelType)
+         .Include(x => x.VehicleCondition)
+         .Include(x => x.TransmissionType)
          .Include(x => x.AutomobileAdEquipments)
          .ThenInclude(x => x.Equipment);
+
+            if (includeDetails)
+            {
+                query = query
+             .Include(ad => ad.Comments)
+             .Include(ad => ad.Reservations);
+            }
+
+            return query;
         }
 
         public override void BeforeInsert(AutomobileAdInsertRequst request, AutomobileAd entity)

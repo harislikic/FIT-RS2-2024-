@@ -13,7 +13,7 @@ namespace AutoTrade.Services
         {
         }
 
-        public override IQueryable<Reservation> AddInclude(IQueryable<Reservation> query, BaseSerachObject? search = null)
+        public override IQueryable<Reservation> AddInclude(IQueryable<Reservation> query, BaseSerachObject? search = null, bool includeDetails = false)
         {
             return query.Include(x => x.User).ThenInclude(u => u.AutomobileAds);
         }
