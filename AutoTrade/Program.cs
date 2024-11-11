@@ -10,6 +10,7 @@ using Helpers;
 using Messages;
 using EasyNetQ;
 using Database;
+using System.Text.Json.Serialization;
 
 
 var builder = WebApplication.CreateBuilder(args);
@@ -36,6 +37,12 @@ builder.Services.AddScoped<RabbitMqListener>();   // RabbitMqListener
 builder.Services.AddSingleton<IBus>(provider =>
     RabbitHutch.CreateBus("host=localhost"));
 
+// Dio koji rjesava kad ima poveznica u tabelama za dupliranje objekata IgnoreCycles
+builder.Services.AddControllers().AddJsonOptions(options =>
+{
+    options.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles;
+    options.JsonSerializerOptions.WriteIndented = true;
+});
 
 builder.Services.AddTransient<IUserService, UserService>();
 builder.Services.AddTransient<ICantonService, CantonService>();

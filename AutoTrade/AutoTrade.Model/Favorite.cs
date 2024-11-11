@@ -6,6 +6,7 @@ namespace AutoTrade.Model
         public int? UserId { get; set; }
         public User User { get; set; }
         public int? AutomobileAdId { get; set; }
+        public AutomobileAd AutomobileAd { get; set; }
 
     }
 }
