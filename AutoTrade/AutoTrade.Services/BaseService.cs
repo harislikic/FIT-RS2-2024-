@@ -1,8 +1,10 @@
 using AutoTrade.Model;
 using AutoTrade.Services.Database;
+using Database;
 using MapsterMapper;
 using Microsoft.EntityFrameworkCore;
 using SearchObject;
+using AutomobileAd = Database.AutomobileAd;
 
 namespace AutoTrade.Services
 {
@@ -55,14 +57,24 @@ namespace AutoTrade.Services
 
             var entity = query.FirstOrDefault(e => EF.Property<int>(e, "Id") == id);
 
-
             if (entity != null)
             {
+                IncrementViewCountIfAutomobileAd(entity);
+                Context.SaveChanges();
                 return Mapper.Map<TModel>(entity);
             }
             else
             {
                 return null;
+            }
+        }
+
+        protected void IncrementViewCountIfAutomobileAd(TDbEntity entity)
+        {
+            if (entity is AutomobileAd automobileAd)
+            {
+                automobileAd.ViewsCount++;
+                Context.SaveChanges();
             }
         }
 
@@ -74,6 +86,8 @@ namespace AutoTrade.Services
         {
             return query;
         }
+
+
 
     }
 }
