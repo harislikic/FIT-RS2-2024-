@@ -7,6 +7,7 @@ namespace AutoTrade.Model
         public DateTime ReservationDate { get; set; }
         public User? User { get; set; }
         public AutomobileAd? AutomobileAd { get; set; }
+        public string Status { get; set; }
 
     }
 }

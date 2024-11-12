@@ -29,7 +29,7 @@ namespace Controllers
             pageSize = pageSize <= 0 || pageSize > 100 ? 25 : pageSize;
 
             var reservations = await _context.Reservations
-                .Where(r => r.AutomobileAdId == automobileAdId)
+                .Where(r => r.AutomobileAdId == automobileAdId && r.Status == "Approved")
                 .Skip((page - 1) * pageSize)
                 .Take(pageSize)
                 .Select(r => new
@@ -43,7 +43,8 @@ namespace Controllers
                         r.User.UserName,
                         r.User.ProfilePicture
                     }
-                     ,r.AutomobileAdId,
+                     ,
+                    r.AutomobileAdId,
                 })
                 .ToListAsync();
 
@@ -52,6 +53,85 @@ namespace Controllers
                 count = await _context.Reservations.CountAsync(r => r.AutomobileAdId == automobileAdId),
                 data = reservations
             });
+        }
+
+
+        [HttpGet("user/{userId}/reservations")]
+        public async Task<ActionResult> GetUserReservations(int userId, int page = 1, int pageSize = 25)
+        {
+            page = page <= 0 ? 1 : page;
+            pageSize = pageSize <= 0 || pageSize > 100 ? 25 : pageSize;
+
+            var reservations = await _context.Reservations
+                .Where(r => r.AutomobileAd.UserId == userId)
+                .Skip((page - 1) * pageSize)
+                .Take(pageSize)
+                .Select(r => new
+                {
+                    r.Id,
+                    r.ReservationDate,
+                    r.Status,
+                    r.UserId,
+                    User = new
+                    {
+                        r.User.Id,
+                        r.User.UserName,
+                        r.User.ProfilePicture
+                    },
+                    r.AutomobileAdId,
+                    r.AutomobileAd.Title
+                })
+                .ToListAsync();
+
+            return Ok(new
+            {
+                count = await _context.Reservations.CountAsync(r => r.AutomobileAd.UserId == userId),
+                data = reservations
+            });
+        }
+
+
+        [HttpPost("approve/{reservationId}")]
+        public async Task<ActionResult> ApproveReservation(int reservationId)
+        {
+            var reservation = await _context.Reservations
+                .FirstOrDefaultAsync(r => r.Id == reservationId);
+
+            if (reservation == null)
+            {
+                return NotFound("Reservation not found.");
+            }
+
+            if (reservation.Status == "Pending")
+            {
+                reservation.Status = "Approved";
+                await _context.SaveChangesAsync();
+                return Ok(new { message = "Reservation approved." });
+            }
+
+            return BadRequest("Reservation is not in pending status and cannot be approved.");
+        }
+
+
+        [HttpPost("reject/{reservationId}")]
+        public async Task<ActionResult> RejectReservation(int reservationId)
+        {
+            var reservation = await _context.Reservations
+                .FirstOrDefaultAsync(r => r.Id == reservationId);
+
+            if (reservation == null)
+            {
+                return NotFound("Reservation not found.");
+            }
+
+            if (reservation.Status == "Pending")
+            {
+                reservation.Status = "Rejected";
+                await _context.SaveChangesAsync();
+                return Ok(new { message = "Reservation rejected." });
+            }
+
+            return BadRequest("Reservation is not in pending status and cannot be rejected.");
         }
 
 

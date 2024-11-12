@@ -12,5 +12,7 @@ namespace Database
 
         public int? AutomobileAdId { get; set; }
         public AutomobileAd AutomobileAd { get; set; }
+
+        public string Status { get; set; }
     }
 }

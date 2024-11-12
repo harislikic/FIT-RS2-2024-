@@ -17,5 +17,11 @@ namespace AutoTrade.Services
         {
             return query.Include(x => x.User).Include(u => u.AutomobileAd);
         }
+
+        public override void BeforeInsert(ReservationUpsertRequest request, Reservation entity)
+        {
+            entity.Status = "Pending";
+            base.BeforeInsert(request, entity);
+        }
     }
 }
