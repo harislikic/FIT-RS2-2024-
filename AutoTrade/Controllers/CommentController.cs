@@ -31,6 +31,7 @@ namespace Controllers
                     CommentId = c.Id,
                     Content = c.Content,
                     CreatedAt = c.CreatedAt,
+                    UpdateAt = c.UpdatedAt,
                     User = new
                     {
                         Id = c.User.Id,
