@@ -35,7 +35,7 @@ namespace AutoTrade.Model
         public int? FuelTypeId { get; set; }
         public FuelType FuelType { get; set; }
 
-        public ICollection<Reservation> Reservations { get; set; } = new List<Reservation>();
+      //  public ICollection<Reservation> Reservations { get; set; } = new List<Reservation>();
 
         public int? TransmissionTypeId { get; set; }
         public TransmissionType TransmissionType { get; set; }
