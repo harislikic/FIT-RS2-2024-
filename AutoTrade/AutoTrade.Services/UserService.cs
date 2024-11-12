@@ -53,6 +53,14 @@ namespace AutoTrade.Services
 
         public override void BeforeInsert(UserInsertRequest request, Database.User entity)
         {
+
+
+            bool userExists = Context.Users.Any(u => u.UserName == request.UserName || u.Email == request.Email);
+            if (userExists)
+            {
+                throw new ArgumentException("A user with the same username or email already exists.");
+            }
+
             if (request.Password != request.PasswordConfirmation)
             {
                 throw new ArgumentException("Password and Password confirmation must be equal");
