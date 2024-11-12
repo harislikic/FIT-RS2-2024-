@@ -1,6 +1,7 @@
 using AutoTrade.Model;
 using AutoTrade.Services;
 using AutoTrade.Services.Database;
+using Helpers;
 using Mapster;
 using MapsterMapper;
 using Microsoft.AspNetCore.Mvc;
@@ -17,9 +18,11 @@ namespace Controllers
     {
 
         private readonly AutoTradeContext _context;
-        public ReservationController(IReservationService service, AutoTradeContext context) : base(service)
+        private readonly ReservationApprovalEmail _reservationApprovalEmail;
+        public ReservationController(IReservationService service, AutoTradeContext context, ReservationApprovalEmail reservationApprovalEmail) : base(service)
         {
             _context = context;
+            _reservationApprovalEmail = reservationApprovalEmail;
         }
 
         [HttpGet("automobile/{automobileAdId}")]
@@ -106,7 +109,10 @@ namespace Controllers
             {
                 reservation.Status = "Approved";
                 await _context.SaveChangesAsync();
-                return Ok(new { message = "Reservation approved." });
+                await _reservationApprovalEmail.SendReservationApprovalEmail(reservationId);
+
+                return Ok(new { message = "Reservation approved and email sent." });
+
             }
 
             return BadRequest("Reservation is not in pending status and cannot be approved.");

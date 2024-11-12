@@ -33,6 +33,7 @@ builder.Services.AddCors(options =>
 
 builder.Services.AddScoped<EmailService>();  // EmailService
 builder.Services.AddScoped<RabbitMqListener>();   // RabbitMqListener
+builder.Services.AddTransient<ReservationApprovalEmail>();
 
 builder.Services.AddSingleton<IBus>(provider =>
     RabbitHutch.CreateBus("host=localhost"));
