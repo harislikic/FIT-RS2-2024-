@@ -179,6 +179,19 @@ namespace AutoTrade.Services
                 query = query.OrderBy(search.OrderBy);
             }
 
+            // Sorting logic
+            if (!string.IsNullOrWhiteSpace(search.OrderBy))
+            {
+                bool isAscending = search.OrderDirection?.ToLower() == "asc";
+
+                query = search.OrderBy.ToLower() switch
+                {
+                    "title" => isAscending ? query.OrderBy(ad => ad.Title) : query.OrderByDescending(ad => ad.Title),
+                    "price" => isAscending ? query.OrderBy(ad => ad.Price) : query.OrderByDescending(ad => ad.Price),
+                    _ => query
+                };
+            }
+
             return base.AddFilter(search, query);
         }
 

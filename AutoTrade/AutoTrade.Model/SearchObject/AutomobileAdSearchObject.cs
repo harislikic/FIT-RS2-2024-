@@ -15,6 +15,7 @@ namespace SearchObject
         public int? FuelTypeId { get; set; }
         public int? TransmissionTypeId { get; set; }
         public string? OrderBy { get; set; }
+        public string? OrderDirection { get; set; }
 
     }
 }
