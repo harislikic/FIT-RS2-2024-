@@ -107,12 +107,15 @@ namespace AutoTrade.Services
             }
 
 
-            if (search.MinPrice.HasValue)
+            if (search.MinPrice.HasValue && search.MaxPrice.HasValue)
+            {
+                query = query.Where(ad => ad.Price >= search.MinPrice.Value && ad.Price <= search.MaxPrice.Value);
+            }
+            else if (search.MinPrice.HasValue)
             {
                 query = query.Where(ad => ad.Price >= search.MinPrice.Value);
             }
-
-            if (search.MaxPrice.HasValue)
+            else if (search.MaxPrice.HasValue)
             {
                 query = query.Where(ad => ad.Price <= search.MaxPrice.Value);
             }
