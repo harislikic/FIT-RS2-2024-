@@ -4,6 +4,7 @@ using AutoTrade.Services.Database;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace AutoTrade.Migrations
 {
     [DbContext(typeof(AutoTradeContext))]
-    partial class AutoTradeContextModelSnapshot : ModelSnapshot
+    [Migration("20241114214529_AddHighlightFieldsToAutomobileAd")]
+    partial class AddHighlightFieldsToAutomobileAd
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -160,7 +163,7 @@ namespace AutoTrade.Migrations
                     b.Property<int?>("HorsePower")
                         .HasColumnType("int");
 
-                    b.Property<bool?>("IsHighlighted")
+                    b.Property<bool>("IsHighlighted")
                         .HasColumnType("bit");
 
                     b.Property<DateTime?>("Last_Big_Service")

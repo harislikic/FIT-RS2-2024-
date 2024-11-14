@@ -101,6 +101,8 @@ namespace AutoTrade.Services
         public override IQueryable<AutomobileAd> AddFilter(AutomobileAdSearchObject search, IQueryable<AutomobileAd> query)
         {
 
+            query = query.OrderByDescending(ad => ad.HighlightExpiryDate.HasValue && ad.HighlightExpiryDate > DateTime.Now);
+
             if (!string.IsNullOrWhiteSpace(search?.Title))
             {
                 query = query.Where(ad => ad.Title.Contains(search.Title));
@@ -178,6 +180,7 @@ namespace AutoTrade.Services
             {
                 query = query.OrderBy(search.OrderBy);
             }
+
 
             // Sorting logic
             if (!string.IsNullOrWhiteSpace(search.OrderBy))

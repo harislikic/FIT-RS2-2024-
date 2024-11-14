@@ -64,5 +64,7 @@ namespace Database
         public string? Color { get; set; }
         public int? VehicleConditionId { get; set; }
         public VehicleCondition VehicleCondition { get; set; }
+        public bool? IsHighlighted { get; set; }
+        public DateTime? HighlightExpiryDate { get; set; }
     }
 }
