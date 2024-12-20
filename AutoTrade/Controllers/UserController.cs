@@ -27,9 +27,9 @@ public class UserController : BaseCRUDController<User, UserSearchObject, UserIns
     }
 
     [HttpPost("login")]
-    public User Login(string username, string password)
+    public User Login(LoginRequest request)
     {
-        return (_service as IUserService).Login(username,password);
+        return (_service as IUserService).Login(request);
     }
 
 }

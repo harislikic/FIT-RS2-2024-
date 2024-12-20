@@ -96,20 +96,24 @@ namespace AutoTrade.Services
             base.BeforeUpdate(request, entity);
         }
 
-        public Model.User Login(string username, string password)
+        public Model.User Login(LoginRequest request)
         {
-            var entity = Context.Users.FirstOrDefault(x => x.UserName == username);
+            var entity = Context.Users.FirstOrDefault(x => x.UserName == request.Username);
             if (entity == null)
             {
                 throw new UnauthorizedAccessException("User not found.");
             }
 
-            var hash = PasswordHelper.GenerateHash(entity.PasswordSalt, password);
+            var hash = PasswordHelper.GenerateHash(entity.PasswordSalt, request.Password);
 
             if (hash != entity.PasswordHash)
             {
                 throw new UnauthorizedAccessException("Invalid password.");
             }
+
+            var basicAuth = "Basic " + Convert.ToBase64String(
+                System.Text.Encoding.UTF8.GetBytes($"{request.Username}:{request.Password}")
+            );
 
             return this.Mapper.Map<Model.User>(entity);
         }

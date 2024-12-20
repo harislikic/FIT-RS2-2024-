@@ -31,7 +31,13 @@ namespace AutoTrade
             var username = credentials[0];
             var password = credentials[1];
 
-            var user = _userService.Login(username, password);
+            var loginRequest = new LoginRequest
+            {
+                Username = username,
+                Password = password
+            };
+            
+            var user = _userService.Login(loginRequest);
 
             if (user == null)
             {
