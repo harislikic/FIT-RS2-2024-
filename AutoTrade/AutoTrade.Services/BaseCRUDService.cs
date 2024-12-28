@@ -1,6 +1,7 @@
 using AutoTrade.Services.Database;
 using Database;
 using MapsterMapper;
+using Microsoft.EntityFrameworkCore;
 using Request;
 using SearchObject;
 

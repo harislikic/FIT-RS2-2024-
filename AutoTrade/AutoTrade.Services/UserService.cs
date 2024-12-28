@@ -54,6 +54,16 @@ namespace AutoTrade.Services
         public override void BeforeInsert(UserInsertRequest request, Database.User entity)
         {
 
+            entity.City = Context.Cities
+                .Include(c => c.Canton)
+                .FirstOrDefault(c => c.Id == entity.CityId);
+
+            if (entity.City == null)
+            {
+                throw new Exception("City not found for the given CityId.");
+            }
+
+
 
             bool userExists = Context.Users.Any(u => u.UserName == request.UserName || u.Email == request.Email);
             if (userExists)
@@ -98,7 +108,11 @@ namespace AutoTrade.Services
 
         public Model.User Login(LoginRequest request)
         {
-            var entity = Context.Users.FirstOrDefault(x => x.UserName == request.Username);
+            var entity = Context.Users
+            .Include(u => u.City)
+            .ThenInclude(c => c.Canton)
+            .FirstOrDefault(x => x.UserName == request.Username);
+
             if (entity == null)
             {
                 throw new UnauthorizedAccessException("User not found.");
