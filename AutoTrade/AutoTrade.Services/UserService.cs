@@ -87,6 +87,12 @@ namespace AutoTrade.Services
         public override void BeforeUpdate(UserUpdateRequest request, Database.User entity)
         {
 
+
+            entity.City = Context.Cities
+                          .Include(c => c.Canton)
+                          .FirstOrDefault(c => c.Id == entity.CityId);
+
+
             if (request.Password != null)
             {
                 if (request.Password != request.PasswordConfirmation)

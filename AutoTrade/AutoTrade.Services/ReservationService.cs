@@ -15,7 +15,11 @@ namespace AutoTrade.Services
 
         public override IQueryable<Reservation> AddInclude(IQueryable<Reservation> query, BaseSerachObject? search = null, bool includeDetails = false)
         {
-            return query.Include(x => x.User).Include(u => u.AutomobileAd);
+            return query.Include(x => x.User)
+            .ThenInclude(x => x.City)
+            .ThenInclude(x => x.Canton)
+            .Include(x => x.User)
+            .ThenInclude(x => x.AutomobileAds);
         }
 
         public override void BeforeInsert(ReservationUpsertRequest request, Reservation entity)

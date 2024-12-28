@@ -14,6 +14,6 @@ namespace Request
 
         public DateTime? DateOfBirth { get; set; }
         public IFormFile? ProfilePicture { get; set; }
-        public int CityId { get; set; }
+        public int? CityId { get; set; }
     }
 }

@@ -23,7 +23,7 @@ namespace AutoTrade.Services
         public override IQueryable<AutomobileAd> AddInclude(IQueryable<AutomobileAd> query, AutomobileAdSearchObject? search = null, bool includeDetails = false)
         {
             query = query
-         .Include(ad => ad.User)
+         .Include(ad => ad.User).ThenInclude(x => x.City).ThenInclude(x => x.Canton)
          .Include(ad => ad.CarBrand)
          .Include(ad => ad.CarCategory)
          .Include(ad => ad.CarModel)
@@ -178,6 +178,11 @@ namespace AutoTrade.Services
             if (search.TransmissionTypeId.HasValue)
             {
                 query = query.Where(ad => ad.TransmissionTypeId == search.TransmissionTypeId.Value);
+            }
+
+              if (search.CityId.HasValue)
+            {
+                query = query.Where(ad => ad.User.CityId == search.CityId.Value);
             }
 
 
