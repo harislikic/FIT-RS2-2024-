@@ -59,6 +59,8 @@ namespace AutoTrade.Services.Database
 
         public DbSet<AutomobileAdEquipment> AutomobileAdEquipments { get; set; }
 
+        public DbSet<PaymentTransaction> PaymentTransactions { get; set; }
+
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -134,6 +136,12 @@ namespace AutoTrade.Services.Database
                 .HasMany(ad => ad.AutomobileAdEquipments)
                 .WithOne(ae => ae.AutomobileAd)
                 .OnDelete(DeleteBehavior.Restrict);
+
+            modelBuilder.Entity<AutomobileAd>()
+                .HasOne(ad => ad.PaymentTransaction) 
+                .WithOne(transaction => transaction.AutomobileAd)
+                .HasForeignKey<AutomobileAd>(ad => ad.PaymentTransactionId)
+                .OnDelete(DeleteBehavior.SetNull);
         }
 
 

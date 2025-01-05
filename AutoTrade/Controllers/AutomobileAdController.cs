@@ -1,6 +1,7 @@
 using AutoTrade.Model;
 using AutoTrade.Services;
 using AutoTrade.Services.Database;
+using Database;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Request;
@@ -10,7 +11,7 @@ namespace Controllers
 {
     [ApiController]
     [Route("[controller]")]
-    public class AutomobileAdController : BaseCRUDController<AutomobileAd, AutomobileAdSearchObject, AutomobileAdInsertRequst, AutomobileUpdateRequest>
+    public class AutomobileAdController : BaseCRUDController<AutoTrade.Model.AutomobileAd, AutomobileAdSearchObject, AutomobileAdInsertRequst, AutomobileUpdateRequest>
     {
         private readonly IAutomobileAdService _automobileAdService;
 
@@ -43,11 +44,37 @@ namespace Controllers
             var entity = await _context.AutomobileAds.FindAsync(id);
             if (entity == null) return NotFound();
 
-            entity.IsHighlighted = true;
-            entity.HighlightExpiryDate = DateTime.Now.AddDays(request.HighlightDays);
 
+
+            if (entity.HighlightExpiryDate.HasValue && entity.HighlightExpiryDate.Value > DateTime.Now)
+            {
+                entity.HighlightExpiryDate = entity.HighlightExpiryDate.Value.AddDays(request.HighlightDays);
+            }
+            else
+            {
+                entity.HighlightExpiryDate = DateTime.Now.AddDays(request.HighlightDays);
+            }
+            entity.IsHighlighted = true;
+
+            var transaction = new PaymentTransaction
+            {
+                Amount = request.Amount.Value,
+                Currency = "USD",
+                Status = "success", // Status će biti ažuriran nakon Stripe webhook-a
+                CreatedAt = DateTime.UtcNow,
+                UpdatedAt = DateTime.UtcNow,
+                AutomobileAdId = id
+            };
+            _context.PaymentTransactions.Add(transaction);
             await _context.SaveChangesAsync();
-            return Ok(new { success = true });
+
+
+            return Ok(new
+            {
+                success = true,
+
+                transactionId = transaction.Id
+            });
         }
 
         [HttpGet("user-ads/{userId}")]

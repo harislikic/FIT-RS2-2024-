@@ -66,5 +66,7 @@ namespace Database
         public VehicleCondition VehicleCondition { get; set; }
         public bool? IsHighlighted { get; set; }
         public DateTime? HighlightExpiryDate { get; set; }
+        public int? PaymentTransactionId { get; set; }
+        public PaymentTransaction? PaymentTransaction { get; set; }
     }
 }
