@@ -58,9 +58,10 @@ namespace Controllers
 
             var transaction = new PaymentTransaction
             {
+                PaymentId = request.PaymentId,
                 Amount = request.Amount.Value,
                 Currency = "USD",
-                Status = "success", // Status će biti ažuriran nakon Stripe webhook-a
+                Status = "success",
                 CreatedAt = DateTime.UtcNow,
                 UpdatedAt = DateTime.UtcNow,
                 AutomobileAdId = id
