@@ -11,7 +11,7 @@ namespace Request
         public int YearOfManufacture { get; set; }
         public bool Registered { get; set; }
         public DateTime? RegistrationExpirationDate { get; set; }
-        public DateTime? FeaturedExpiryDate { get; set; }
+        //public DateTime? FeaturedExpiryDate { get; set; }
         public DateTime? Last_Small_Service { get; set; }
         public DateTime? Last_Big_Service { get; set; }
         public int UserId { get; set; }
