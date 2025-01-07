@@ -91,7 +91,7 @@ namespace Controllers
                     .CountAsync();
 
                 var userAds = await _context.AutomobileAds
-                    .Where(ad => ad.UserId == userId)
+                    .Where(ad => ad.UserId == userId).Include(x => x.User)
                     .Include(ad => ad.Images)
                     .Skip((page - 1) * pageSize)
                     .Take(pageSize)

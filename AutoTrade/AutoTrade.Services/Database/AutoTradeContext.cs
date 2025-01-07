@@ -78,6 +78,9 @@ namespace AutoTrade.Services.Database
             modelBuilder.Entity<Favorite>()
                 .HasKey(f => f.Id);
 
+            modelBuilder.Entity<AutomobileAdEquipment>()
+            .HasKey(ae => new { ae.AutomobileAdId, ae.EquipmentId });
+
             // Relationship between User and Favorite
             modelBuilder.Entity<Favorite>()
                 .HasOne(f => f.User)
@@ -114,6 +117,12 @@ namespace AutoTrade.Services.Database
                 .OnDelete(DeleteBehavior.Cascade); // Automatically delete comments when an automobile ad is deleted
 
 
+            modelBuilder.Entity<AutomobileAdEquipment>()
+                .HasOne(ae => ae.AutomobileAd)
+                .WithMany(a => a.AutomobileAdEquipments)
+                .HasForeignKey(ae => ae.AutomobileAdId)
+                .OnDelete(DeleteBehavior.Cascade);
+
             modelBuilder.Entity<AutomobileAdImage>()
                 .HasOne(ai => ai.AutomobileAd)
                 .WithMany(ad => ad.Images)
@@ -132,13 +141,10 @@ namespace AutoTrade.Services.Database
                 .WithMany(e => e.AutomobileAdEquipments)
                 .HasForeignKey(ae => ae.EquipmentId);
 
-            modelBuilder.Entity<AutomobileAd>()
-                .HasMany(ad => ad.AutomobileAdEquipments)
-                .WithOne(ae => ae.AutomobileAd)
-                .OnDelete(DeleteBehavior.Restrict);
+
 
             modelBuilder.Entity<AutomobileAd>()
-                .HasOne(ad => ad.PaymentTransaction) 
+                .HasOne(ad => ad.PaymentTransaction)
                 .WithOne(transaction => transaction.AutomobileAd)
                 .HasForeignKey<AutomobileAd>(ad => ad.PaymentTransactionId)
                 .OnDelete(DeleteBehavior.SetNull);
