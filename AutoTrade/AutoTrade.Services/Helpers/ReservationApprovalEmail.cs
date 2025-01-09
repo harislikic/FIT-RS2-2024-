@@ -36,10 +36,12 @@ namespace Helpers
                         Text = $"Your reservation has been approved!\n\n" +
                                $"Reservation Details:\n" +
                                $"Car: {reservation.AutomobileAd.Title}\n" +
+                               $"User first name: {reservation.AutomobileAd.User.FirstName}\n" +
+                               $"Car location: {reservation.AutomobileAd.User.City.Title}\n" +
                                $"PhoneNumber: {reservation.AutomobileAd.User.PhoneNumber}\n" +
                                $"Reservation Date: {reservation.ReservationDate}\n" +
                                $"Reservation Status: {reservation.Status}\n\n" +
-                               $"You can now proceed with the next steps. Thank you for using AutoTrade!"
+                               $"You can now proceed with the next steps. Thank you for using Vroom app!"
                     };
 
                     using (var client = new MailKit.Net.Smtp.SmtpClient())

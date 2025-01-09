@@ -4,9 +4,13 @@ using EasyNetQ;
 using Helpers;
 using MapsterMapper;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.ML;
+using Microsoft.ML.Data;
 using Request;
 using SearchObject;
 using System.Linq.Dynamic.Core;
+using Microsoft.ML.Trainers;
+using Microsoft.Extensions.Options;
 
 namespace AutoTrade.Services
 {
@@ -30,7 +34,7 @@ namespace AutoTrade.Services
          .Include(x => x.Images)
          .Include(x => x.FuelType)
          .Include(x => x.VehicleCondition)
-         .Include(x => x.TransmissionType)
+         .Include(x => x.TransmissionType).Include(x => x.Reservations)
          .Include(x => x.AutomobileAdEquipments)
          .ThenInclude(x => x.Equipment);
 
@@ -180,7 +184,7 @@ namespace AutoTrade.Services
                 query = query.Where(ad => ad.TransmissionTypeId == search.TransmissionTypeId.Value);
             }
 
-              if (search.CityId.HasValue)
+            if (search.CityId.HasValue)
             {
                 query = query.Where(ad => ad.User.CityId == search.CityId.Value);
             }
@@ -271,5 +275,109 @@ namespace AutoTrade.Services
             base.MapUpdatedEquipment(request, entity);
         }
 
+
+        static MLContext mlContext = new MLContext();
+        static object isLocked = new object();
+
+        static ITransformer model = null;
+
+        public List<Model.AutomobileAd> Recommend(int userId)
+        {
+
+            lock (isLocked)
+            {
+                if (model == null)
+                {
+                    var favoriteData = Context.Favorites.ToList();
+                    var data = new List<ProductEntry>();
+
+                    foreach (var favorite in favoriteData)
+                    {
+                        data.Add(new ProductEntry
+                        {
+                            UserId = (uint)favorite.UserId,
+                            AutomobileAdId = (uint)favorite.AutomobileAdId,
+                            Label = 1
+                        });
+                    }
+
+
+                    if (!data.Any())
+                    {
+                        throw new Exception("No  data for favorites to train model.");
+                    }
+
+
+                    var trainData = mlContext.Data.LoadFromEnumerable(data);
+
+
+                    var options = new MatrixFactorizationTrainer.Options
+                    {
+                        MatrixColumnIndexColumnName = nameof(ProductEntry.UserId),
+                        MatrixRowIndexColumnName = nameof(ProductEntry.AutomobileAdId),
+                        LabelColumnName = nameof(ProductEntry.Label),
+                        NumberOfIterations = 100,
+                        Alpha = 0.01,
+                        Lambda = 0.025
+                    };
+
+
+                    var est = mlContext.Recommendation().Trainers.MatrixFactorization(options);
+
+                    model = est.Fit(trainData);
+                }
+            }
+
+
+            var userFavorites = Context.Favorites
+                .Where(f => f.UserId == userId)
+                .Select(f => f.AutomobileAdId)
+                .ToList();
+
+            var automobiles = Context.AutomobileAds
+                .Where(ad => !userFavorites.Contains(ad.Id)).Include(x => x.Images)
+                .ToList();
+
+            var predictionResult = new List<(AutomobileAd, float)>();
+
+
+            foreach (var automobile in automobiles)
+            {
+                var predictionEngine = mlContext.Model.CreatePredictionEngine<ProductEntry, Copurchase_prediction>(model);
+                var prediction = predictionEngine.Predict(
+                    new ProductEntry
+                    {
+                        UserId = (uint)userId,
+                        AutomobileAdId = (uint)automobile.Id
+                    });
+
+                predictionResult.Add((automobile, prediction.Score));
+            }
+
+
+            var finalResult = predictionResult
+                .OrderByDescending(x => x.Item2)
+                .Select(x => x.Item1)
+                .Take(4)
+                .ToList();
+
+            return Mapper.Map<List<Model.AutomobileAd>>(finalResult);
+
+        }
+
+        public class Copurchase_prediction
+        {
+            public float Score { get; set; }
+        }
+
+        public class ProductEntry
+        {
+            [KeyType(count: 262111)]
+            public uint UserId { get; set; }
+            [KeyType(count: 262111)]
+            public uint AutomobileAdId { get; set; }
+            public float Label { get; set; }
+        }
+        
     }
 }

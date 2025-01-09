@@ -2,6 +2,7 @@ using AutoTrade.Model;
 using AutoTrade.Services;
 using AutoTrade.Services.Database;
 using Database;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Request;
@@ -112,6 +113,13 @@ namespace Controllers
             {
                 return StatusCode(500, ex.Message);
             }
+        }
+
+        [AllowAnonymous]
+        [HttpGet("{id}/recommend")]
+        public List<AutoTrade.Model.AutomobileAd> Recommend(int id)
+        {
+            return (_service as IAutomobileAdService).Recommend(id);
         }
 
     }

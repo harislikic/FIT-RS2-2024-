@@ -18,8 +18,8 @@ namespace AutoTrade.Services
             return query.Include(x => x.User)
             .ThenInclude(x => x.City)
             .ThenInclude(x => x.Canton)
-            .Include(x => x.User)
-            .ThenInclude(x => x.AutomobileAds);
+            .Include(x => x.User);
+            // .ThenInclude(x => x.AutomobileAds);
         }
 
         public override void BeforeInsert(ReservationUpsertRequest request, Reservation entity)

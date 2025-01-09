@@ -77,6 +77,14 @@
               "target": "Package",
               "version": "[7.0.0, )"
             },
+            "Microsoft.ML": {
+              "target": "Package",
+              "version": "[4.0.0, )"
+            },
+            "Microsoft.ML.Recommender": {
+              "target": "Package",
+              "version": "[0.22.0, )"
+            },
             "MimeKit": {
               "target": "Package",
               "version": "[4.8.0, )"
