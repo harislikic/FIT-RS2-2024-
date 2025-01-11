@@ -34,7 +34,7 @@ namespace AutoTrade.Services
          .Include(x => x.Images)
          .Include(x => x.FuelType)
          .Include(x => x.VehicleCondition)
-         .Include(x => x.TransmissionType).Include(x => x.Reservations)
+         .Include(x => x.TransmissionType)
          .Include(x => x.AutomobileAdEquipments)
          .ThenInclude(x => x.Equipment);
 
