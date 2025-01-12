@@ -53,7 +53,9 @@ namespace AutoTrade.Services
         public TModel GetById(int id)
         {
             var query = Context.Set<TDbEntity>().AsQueryable();
-            query = AddInclude(query,null, true);
+            bool isAutomobileAd = typeof(TDbEntity) == typeof(AutomobileAd);
+
+            query = AddInclude(query, null, true, isAutomobileAd);
 
             var entity = query.FirstOrDefault(e => EF.Property<int>(e, "Id") == id);
 
@@ -78,7 +80,7 @@ namespace AutoTrade.Services
             }
         }
 
-        public virtual IQueryable<TDbEntity> AddInclude(IQueryable<TDbEntity> query, TSearch? search = null, bool includeDetails = false)
+        public virtual IQueryable<TDbEntity> AddInclude(IQueryable<TDbEntity> query, TSearch? search = null, bool includeDetails = false, bool includeDoneAds = false)
         {
             return query;
         }

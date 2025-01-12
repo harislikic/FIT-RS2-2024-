@@ -24,8 +24,14 @@ namespace AutoTrade.Services
         }
 
 
-        public override IQueryable<AutomobileAd> AddInclude(IQueryable<AutomobileAd> query, AutomobileAdSearchObject? search = null, bool includeDetails = false)
+        public override IQueryable<AutomobileAd> AddInclude(IQueryable<AutomobileAd> query, AutomobileAdSearchObject? search = null, bool includeDetails = false, bool includeDoneAds = false)
         {
+
+            if (!includeDoneAds)
+            {
+                query = query.Where(ad => ad.Status != "Done");
+            }
+
             query = query
          .Include(ad => ad.User).ThenInclude(x => x.City).ThenInclude(x => x.Canton)
          .Include(ad => ad.CarBrand)
@@ -378,6 +384,6 @@ namespace AutoTrade.Services
             public uint AutomobileAdId { get; set; }
             public float Label { get; set; }
         }
-        
+
     }
 }

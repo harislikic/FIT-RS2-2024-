@@ -80,19 +80,37 @@ namespace Controllers
         }
 
         [HttpGet("user-ads/{userId}")]
-        public async Task<IActionResult> GetAdsByUser(int userId, int page = 1, int pageSize = 25)
+        public async Task<IActionResult> GetAdsByUser(
+       int userId,
+        [FromQuery] MyAutomobilesRequest request,
+       int page = 1,
+       int pageSize = 25
+         )
         {
             try
             {
                 if (page <= 0) page = 1;
                 if (pageSize <= 0 || pageSize > 100) pageSize = 25;
 
-                var totalCount = await _context.AutomobileAds
+                var query = _context.AutomobileAds
                     .Where(ad => ad.UserId == userId)
-                    .CountAsync();
+                    .AsQueryable();
 
-                var userAds = await _context.AutomobileAds
-                    .Where(ad => ad.UserId == userId).Include(x => x.User)
+                if (!string.IsNullOrWhiteSpace(request.status))
+                {
+                    query = query.Where(ad => ad.Status.Contains(request.status));
+                }
+
+
+                if (request.IsHighlighted.HasValue) 
+                {
+                    query = query.Where(ad => ad.IsHighlighted == request.IsHighlighted.Value);
+                }
+
+                var totalCount = await query.CountAsync();
+
+                var userAds = await query
+                    .Include(ad => ad.User)
                     .Include(ad => ad.Images)
                     .Skip((page - 1) * pageSize)
                     .Take(pageSize)
@@ -114,6 +132,7 @@ namespace Controllers
                 return StatusCode(500, ex.Message);
             }
         }
+
 
         [AllowAnonymous]
         [HttpGet("{id}/recommend")]

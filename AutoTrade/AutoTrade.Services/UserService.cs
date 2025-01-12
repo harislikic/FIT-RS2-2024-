@@ -46,7 +46,7 @@ namespace AutoTrade.Services
 
         }
 
-        public override IQueryable<Database.User> AddInclude(IQueryable<Database.User> query, UserSearchObject? search = null, bool includeDetails = false)
+        public override IQueryable<Database.User> AddInclude(IQueryable<Database.User> query, UserSearchObject? search = null, bool includeDetails = false, bool includeDoneAds = false)
         {
             return query.Include(u => u.City).ThenInclude(c => c.Canton);
         }
