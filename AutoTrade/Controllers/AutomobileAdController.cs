@@ -116,8 +116,9 @@ namespace Controllers
 
                 if (request.IsHighlighted.HasValue)
                 {
-                    query = query.Where(ad => ad.IsHighlighted == request.IsHighlighted.Value);
+                    query = query.Where(ad => ad.IsHighlighted == request.IsHighlighted.Value && ad.Status != "Done");
                 }
+
 
 
                 var totalCount = await query.CountAsync();
