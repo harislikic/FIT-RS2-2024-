@@ -81,57 +81,77 @@ namespace Controllers
 
         [HttpGet("user-ads/{userId}")]
         public async Task<IActionResult> GetAdsByUser(
-       int userId,
-        [FromQuery] MyAutomobilesRequest request,
-       int page = 1,
-       int pageSize = 25
-         )
+      int userId,
+      [FromQuery] MyAutomobilesRequest request,
+      int page = 0,
+      int pageSize = 25
+   )
         {
             try
             {
-                if (page <= 0) page = 1;
+
+                if (page < 0) page = 0;
                 if (pageSize <= 0 || pageSize > 100) pageSize = 25;
 
+
                 var query = _context.AutomobileAds
-                    .Where(ad => ad.UserId == userId)
+                    .Where(ad => ad.UserId == userId).Include(x => x.Images)
                     .AsQueryable();
+
 
                 if (!string.IsNullOrWhiteSpace(request.status))
                 {
-                    query = query.Where(ad => ad.Status.Contains(request.status));
+                    if (request.status == "Active")
+                    {
+                        query = query.Where(ad => ad.Status == "Active" || (ad.IsHighlighted ?? false));
+                    }
+
+                    else
+                    {
+                        query = query.Where(ad => ad.Status.Contains(request.status));
+                    }
                 }
 
 
-                if (request.IsHighlighted.HasValue) 
+
+                if (request.IsHighlighted.HasValue)
                 {
                     query = query.Where(ad => ad.IsHighlighted == request.IsHighlighted.Value);
                 }
 
+
                 var totalCount = await query.CountAsync();
 
-                var userAds = await query
-                    .Include(ad => ad.User)
-                    .Include(ad => ad.Images)
-                    .Skip((page - 1) * pageSize)
+
+                var paginatedAds = await query
+                    .Skip((page) * pageSize)
                     .Take(pageSize)
                     .ToListAsync();
 
-                if (userAds == null || !userAds.Any())
+                // Provera za prazne podatke
+                if (!paginatedAds.Any())
                 {
-                    return NotFound($"No ads found for user with ID {userId}");
+                    return Ok(new
+                    {
+                        count = totalCount,
+                        data = Array.Empty<object>()
+                    });
                 }
 
+                // Vraćanje rezultata
                 return Ok(new
                 {
                     count = totalCount,
-                    data = userAds
+                    data = paginatedAds
                 });
             }
             catch (Exception ex)
             {
+                // Vraćanje greške sa statusom 500
                 return StatusCode(500, ex.Message);
             }
         }
+
 
 
         [AllowAnonymous]
