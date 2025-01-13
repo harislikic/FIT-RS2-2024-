@@ -32,13 +32,14 @@ namespace Controllers
             pageSize = pageSize <= 0 || pageSize > 100 ? 25 : pageSize;
 
             var reservations = await _context.Reservations
-                .Where(r => r.AutomobileAdId == automobileAdId && r.Status == "Approved")
+                .Where(r => r.AutomobileAdId == automobileAdId)
                 .Skip((page - 1) * pageSize)
                 .Take(pageSize)
                 .Select(r => new
                 {
                     r.Id,
                     r.ReservationDate,
+                    r.Status,
                     r.UserId,
                     User = new
                     {
