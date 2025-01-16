@@ -289,63 +289,111 @@ namespace AutoTrade.Services
 
         public List<Model.AutomobileAd> Recommend(int userId)
         {
+            const string modelPath = "recommendation_model.zip";
 
             lock (isLocked)
             {
                 if (model == null)
                 {
-                    var favoriteData = Context.Favorites.ToList();
-                    var data = new List<ProductEntry>();
-
-                    foreach (var favorite in favoriteData)
+                    if (File.Exists(modelPath))
                     {
-                        data.Add(new ProductEntry
+
+                        using var fileStream = File.OpenRead(modelPath);
+                        model = mlContext.Model.Load(fileStream, out _);
+                    }
+                    else
+                    {
+
+                        var favoriteData = Context.Favorites.ToList();
+                        var reservationData = Context.Reservations.ToList();
+                        var automobilesData = Context.AutomobileAds.Include(x => x.FuelType).ToList();
+
+                        var data = new List<ProductEntry>();
+
+                        foreach (var favorite in favoriteData)
                         {
-                            UserId = (uint)favorite.UserId,
-                            AutomobileAdId = (uint)favorite.AutomobileAdId,
-                            Label = 1
-                        });
+                            data.Add(new ProductEntry
+                            {
+                                UserId = (uint)favorite.UserId,
+                                AutomobileAdId = (uint)favorite.AutomobileAdId,
+                                Label = 1
+                            });
+                        }
+
+                        foreach (var reservation in reservationData)
+                        {
+                            data.Add(new ProductEntry
+                            {
+                                UserId = (uint)reservation.UserId,
+                                AutomobileAdId = (uint)reservation.AutomobileAdId,
+                                Label = 2
+
+                            });
+                        }
+
+
+                        foreach (var automobile in automobilesData)
+                        {
+                            data.Add(new ProductEntry
+                            {
+                                UserId = (uint)userId,
+                                AutomobileAdId = (uint)automobile.Id,
+                                Label = 0,
+                                Price = (float)automobile.Price,
+                                YearOfManufacture = automobile.YearOfManufacture,
+                                Milage = (float)automobile.Milage,
+                                FuelType = automobile.FuelType?.Name ?? "Unknown",
+                                ViewsCount = automobile.ViewsCount,
+                                IsHighlighted = automobile.IsHighlighted ?? false
+                            });
+                        }
+
+                        if (!data.Any())
+                        {
+                            throw new Exception("No data for favorites or reservations to train the model.");
+                        }
+
+                        var trainData = mlContext.Data.LoadFromEnumerable(data);
+
+                        var options = new MatrixFactorizationTrainer.Options
+                        {
+                            MatrixColumnIndexColumnName = nameof(ProductEntry.UserId),
+                            MatrixRowIndexColumnName = nameof(ProductEntry.AutomobileAdId),
+                            LabelColumnName = nameof(ProductEntry.Label),
+                            NumberOfIterations = 100,
+                            Alpha = 0.01,
+                            Lambda = 0.025
+                        };
+
+                        var est = mlContext.Recommendation().Trainers.MatrixFactorization(options);
+
+                        model = est.Fit(trainData);
+
+                        using var fileStream = File.Create(modelPath);
+                        mlContext.Model.Save(model, trainData.Schema, fileStream);
                     }
-
-
-                    if (!data.Any())
-                    {
-                        throw new Exception("No  data for favorites to train model.");
-                    }
-
-
-                    var trainData = mlContext.Data.LoadFromEnumerable(data);
-
-
-                    var options = new MatrixFactorizationTrainer.Options
-                    {
-                        MatrixColumnIndexColumnName = nameof(ProductEntry.UserId),
-                        MatrixRowIndexColumnName = nameof(ProductEntry.AutomobileAdId),
-                        LabelColumnName = nameof(ProductEntry.Label),
-                        NumberOfIterations = 100,
-                        Alpha = 0.01,
-                        Lambda = 0.025
-                    };
-
-
-                    var est = mlContext.Recommendation().Trainers.MatrixFactorization(options);
-
-                    model = est.Fit(trainData);
                 }
             }
-
 
             var userFavorites = Context.Favorites
                 .Where(f => f.UserId == userId)
                 .Select(f => f.AutomobileAdId)
                 .ToList();
 
+            var userReservations = Context.Reservations
+                .Where(r => r.UserId == userId)
+                .Select(r => r.AutomobileAdId)
+                .ToList();
+
+            var excludedIds = userFavorites.Concat(userReservations).Distinct();
+
             var automobiles = Context.AutomobileAds
-                .Where(ad => !userFavorites.Contains(ad.Id)).Include(x => x.Images)
+                .Where(ad => !excludedIds.Contains(ad.Id))
+                  .AsNoTracking()
+                .Include(x => x.Images)
                 .ToList();
 
             var predictionResult = new List<(AutomobileAd, float)>();
-
 
             foreach (var automobile in automobiles)
             {
@@ -354,18 +402,23 @@ namespace AutoTrade.Services
                     new ProductEntry
                     {
                         UserId = (uint)userId,
-                        AutomobileAdId = (uint)automobile.Id
+                        AutomobileAdId = (uint)automobile.Id,
+                        Price = (float)automobile.Price,
+                        YearOfManufacture = automobile.YearOfManufacture,
+                        Milage = (float)automobile.Milage,
+                        FuelType = automobile.FuelType?.Name ?? "Unknown",
+                        ViewsCount = automobile.ViewsCount,
+                        IsHighlighted = automobile.IsHighlighted ?? false
                     });
 
                 predictionResult.Add((automobile, prediction.Score));
             }
 
-
             var finalResult = predictionResult
-                .OrderByDescending(x => x.Item2)
-                .Select(x => x.Item1)
-                .Take(4)
-                .ToList();
+              .OrderByDescending(x => x.Item2)
+              .Select(x => x.Item1)
+              .Take(4)
+              .ToList();
 
             return Mapper.Map<List<Model.AutomobileAd>>(finalResult);
 
@@ -383,6 +436,12 @@ namespace AutoTrade.Services
             [KeyType(count: 262111)]
             public uint AutomobileAdId { get; set; }
             public float Label { get; set; }
+            public float Price { get; set; }
+            public int YearOfManufacture { get; set; }
+            public float Milage { get; set; }
+            public string FuelType { get; set; }
+            public int ViewsCount { get; set; }
+            public bool IsHighlighted { get; set; }
         }
 
     }
