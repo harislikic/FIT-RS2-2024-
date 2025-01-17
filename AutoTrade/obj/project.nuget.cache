@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "2VpQ4PjnioA=",
+  "dgSpecHash": "dvpV30SVUl0=",
   "success": true,
   "projectFilePath": "/Users/harislikic/Desktop/FIT-RS2-2024-/AutoTrade/AutoTrade.csproj",
   "expectedPackageFiles": [
@@ -13,9 +13,10 @@
     "/Users/harislikic/.nuget/packages/mapster/7.4.0/mapster.7.4.0.nupkg.sha512",
     "/Users/harislikic/.nuget/packages/mapster.core/1.2.1/mapster.core.1.2.1.nupkg.sha512",
     "/Users/harislikic/.nuget/packages/mapster.dependencyinjection/1.0.1/mapster.dependencyinjection.1.0.1.nupkg.sha512",
+    "/Users/harislikic/.nuget/packages/microsoft.aspnetcore.jsonpatch/9.0.1/microsoft.aspnetcore.jsonpatch.9.0.1.nupkg.sha512",
     "/Users/harislikic/.nuget/packages/microsoft.aspnetcore.openapi/7.0.20/microsoft.aspnetcore.openapi.7.0.20.nupkg.sha512",
     "/Users/harislikic/.nuget/packages/microsoft.bcl.asyncinterfaces/1.1.1/microsoft.bcl.asyncinterfaces.1.1.1.nupkg.sha512",
-    "/Users/harislikic/.nuget/packages/microsoft.csharp/4.5.0/microsoft.csharp.4.5.0.nupkg.sha512",
+    "/Users/harislikic/.nuget/packages/microsoft.csharp/4.7.0/microsoft.csharp.4.7.0.nupkg.sha512",
     "/Users/harislikic/.nuget/packages/microsoft.data.sqlclient/5.0.1/microsoft.data.sqlclient.5.0.1.nupkg.sha512",
     "/Users/harislikic/.nuget/packages/microsoft.data.sqlclient.sni.runtime/5.0.1/microsoft.data.sqlclient.sni.runtime.5.0.1.nupkg.sha512",
     "/Users/harislikic/.nuget/packages/microsoft.entityframeworkcore/7.0.0/microsoft.entityframeworkcore.7.0.0.nupkg.sha512",

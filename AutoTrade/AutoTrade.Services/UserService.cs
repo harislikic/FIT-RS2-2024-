@@ -138,5 +138,29 @@ namespace AutoTrade.Services
             return this.Mapper.Map<Model.User>(entity);
         }
 
+        public Model.User Update(int id, Model.User user)
+        {
+
+            var entity = Context.Users.FirstOrDefault(u => u.Id == id);
+            if (entity == null)
+            {
+                throw new KeyNotFoundException("User not found.");
+            }
+
+            entity.FirstName = user.FirstName;
+            entity.LastName = user.LastName;
+            entity.PhoneNumber = user.PhoneNumber;
+            entity.Adress = user.Adress;
+            entity.Gender = user.Gender;
+            entity.DateOfBirth = user.DateOfBirth;
+            entity.CityId = user.CityId;
+            entity.ProfilePicture = user.ProfilePicture;
+
+            Context.Users.Update(entity);
+            Context.SaveChanges();
+
+            return Mapper.Map<Model.User>(entity);
+        }
+
     }
 }

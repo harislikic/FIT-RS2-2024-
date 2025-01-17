@@ -12,6 +12,7 @@
           "MailKit": "4.8.0",
           "Mapster": "7.4.0",
           "Mapster.DependencyInjection": "1.0.1",
+          "Microsoft.AspNetCore.JsonPatch": "9.0.1",
           "Microsoft.AspNetCore.OpenApi": "7.0.20",
           "Microsoft.EntityFrameworkCore": "7.0.0",
           "Microsoft.EntityFrameworkCore.SqlServer": "7.0.0",
@@ -132,6 +133,18 @@
           }
         }
       },
+      "Microsoft.AspNetCore.JsonPatch/9.0.1": {
+        "dependencies": {
+          "Microsoft.CSharp": "4.7.0",
+          "Newtonsoft.Json": "13.0.3"
+        },
+        "runtime": {
+          "lib/netstandard2.0/Microsoft.AspNetCore.JsonPatch.dll": {
+            "assemblyVersion": "9.0.1.0",
+            "fileVersion": "9.0.124.61009"
+          }
+        }
+      },
       "Microsoft.AspNetCore.OpenApi/7.0.20": {
         "dependencies": {
           "Microsoft.OpenApi": "1.4.3"
@@ -151,7 +164,7 @@
           }
         }
       },
-      "Microsoft.CSharp/4.5.0": {},
+      "Microsoft.CSharp/4.7.0": {},
       "Microsoft.Data.SqlClient/5.0.1": {
         "dependencies": {
           "Azure.Identity": "1.6.0",
@@ -417,7 +430,7 @@
       },
       "Microsoft.IdentityModel.Tokens/6.21.0": {
         "dependencies": {
-          "Microsoft.CSharp": "4.5.0",
+          "Microsoft.CSharp": "4.7.0",
           "Microsoft.IdentityModel.Logging": "6.21.0",
           "System.Security.Cryptography.Cng": "5.0.0"
         },
@@ -1087,6 +1100,13 @@
       "path": "mapster.dependencyinjection/1.0.1",
       "hashPath": "mapster.dependencyinjection.1.0.1.nupkg.sha512"
     },
+    "Microsoft.AspNetCore.JsonPatch/9.0.1": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-B3QcYNZLLWMjzKxpuE+WCb1tOiHH5a6ew3ghGwtIDjjsGfAlqUgrMPocGphX4lKf0n0iovhz8FsKGJtUtENp6A==",
+      "path": "microsoft.aspnetcore.jsonpatch/9.0.1",
+      "hashPath": "microsoft.aspnetcore.jsonpatch.9.0.1.nupkg.sha512"
+    },
     "Microsoft.AspNetCore.OpenApi/7.0.20": {
       "type": "package",
       "serviceable": true,
@@ -1101,12 +1121,12 @@
       "path": "microsoft.bcl.asyncinterfaces/1.1.1",
       "hashPath": "microsoft.bcl.asyncinterfaces.1.1.1.nupkg.sha512"
     },
-    "Microsoft.CSharp/4.5.0": {
+    "Microsoft.CSharp/4.7.0": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-kaj6Wb4qoMuH3HySFJhxwQfe8R/sJsNJnANrvv8WdFPMoNbKY5htfNscv+LHCu5ipz+49m2e+WQXpLXr9XYemQ==",
-      "path": "microsoft.csharp/4.5.0",
-      "hashPath": "microsoft.csharp.4.5.0.nupkg.sha512"
+      "sha512": "sha512-pTj+D3uJWyN3My70i2Hqo+OXixq3Os2D1nJ2x92FFo6sk8fYS1m1WLNTs0Dc1uPaViH0YvEEwvzddQ7y4rhXmA==",
+      "path": "microsoft.csharp/4.7.0",
+      "hashPath": "microsoft.csharp.4.7.0.nupkg.sha512"
     },
     "Microsoft.Data.SqlClient/5.0.1": {
       "type": "package",
