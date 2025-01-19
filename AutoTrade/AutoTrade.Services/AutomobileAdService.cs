@@ -444,5 +444,85 @@ namespace AutoTrade.Services
             public bool IsHighlighted { get; set; }
         }
 
+
+
+        public Model.AutomobileAd Update(int id, Model.AutomobileAd automobile)
+        {
+            var entity = Context.AutomobileAds.FirstOrDefault(a => a.Id == id);
+            if (entity == null)
+            {
+                throw new KeyNotFoundException("Automobile not found.");
+            }
+            entity.Title = automobile.Title;
+            entity.Description = automobile.Description;
+            entity.Price = automobile.Price;
+            entity.Milage = automobile.Milage;
+            entity.YearOfManufacture = automobile.YearOfManufacture;
+            entity.Registered = automobile.Registered;
+            entity.RegistrationExpirationDate = automobile.RegistrationExpirationDate;
+            entity.Last_Small_Service = automobile.Last_Small_Service;
+            entity.Last_Big_Service = automobile.Last_Big_Service;
+            entity.CarBrandId = automobile.CarBrandId;
+            entity.CarCategoryId = automobile.CarCategoryId;
+            entity.CarModelId = automobile.CarModelId;
+            entity.FuelTypeId = automobile.FuelTypeId;
+            entity.TransmissionTypeId = automobile.TransmissionTypeId;
+            entity.EnginePower = automobile.EnginePower;
+            entity.NumberOfDoors = automobile.NumberOfDoors;
+            entity.CubicCapacity = automobile.CubicCapacity;
+            entity.HorsePower = automobile.HorsePower;
+            entity.Color = automobile.Color;
+            entity.VehicleConditionId = automobile.VehicleCondtionId;
+
+
+
+            if (automobile.AutomobileAdEquipments != null && automobile.AutomobileAdEquipments.Any())
+            {
+                // Očistite postojeće stavke
+                entity.AutomobileAdEquipments.Clear();
+
+                foreach (var adEquipment in automobile.AutomobileAdEquipments)
+                {
+                    // Dodajte nove stavke u kolekciju
+                    var entityAdEquipment = new AutomobileAdEquipment
+                    {
+                        EquipmentId = adEquipment.EquipmentId, // Preuzimamo EquipmentId iz modela
+                        AutomobileAdId = entity.Id             // ID oglasa
+                    };
+
+                    // Dodajemo u kolekciju entiteta
+                    entity.AutomobileAdEquipments.Add(entityAdEquipment);
+                }
+            }
+
+            if (automobile.Images != null && automobile.Images.Any())
+            {
+                // Očistite slike koje nisu prisutne u trenutnoj kolekciji
+                entity.Images.Clear();
+
+                foreach (var image in automobile.Images)
+                {
+                    // Proverite da li slika već postoji pre dodavanja
+                    if (!entity.Images.Any(img => img.ImageUrl == image.ImageUrl))
+                    {
+                        var databaseImage = new AutomobileAdImage
+                        {
+                            ImageUrl = image.ImageUrl,
+                            AutomobileAdId = entity.Id
+                        };
+
+                        entity.Images.Add(databaseImage);
+                    }
+                }
+            }
+
+
+            Context.AutomobileAds.Update(entity);
+            Context.SaveChanges();
+
+            return Mapper.Map<Model.AutomobileAd>(entity);
+        }
+
+
     }
 }

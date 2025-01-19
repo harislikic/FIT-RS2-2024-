@@ -9,5 +9,7 @@ namespace AutoTrade.Services
         Model.AutomobileAd MarkAsDone(int id);
 
         List<Model.AutomobileAd> Recommend(int id);
+
+        Model.AutomobileAd Update(int id, Model.AutomobileAd user);
     }
 }

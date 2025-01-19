@@ -162,5 +162,126 @@ namespace Controllers
             return (_service as IAutomobileAdService).Recommend(id);
         }
 
+
+
+        [HttpPatch("{id}")]
+        public IActionResult Patch(int id, [FromForm] AutomobileUpdateRequest request)
+        {
+            // Dohvati automobil iz baze
+            var automobile = _service.GetById(id);
+            if (automobile == null)
+            {
+                return NotFound("Automobile not found.");
+            }
+
+            // Ažuriraj samo polja koja su poslana u zahtevu
+            if (!string.IsNullOrWhiteSpace(request.Title))
+                automobile.Title = request.Title;
+
+            if (!string.IsNullOrWhiteSpace(request.Description))
+                automobile.Description = request.Description;
+
+            if (request.Price.HasValue)
+                automobile.Price = (double)request.Price;
+
+            if (request.Milage > 0)
+                automobile.Milage = (double)request.Milage;
+
+            if (request.YearOfManufacture.HasValue)
+                automobile.YearOfManufacture = (int)request.YearOfManufacture;
+
+            if (request.Registered != null)
+                automobile.Registered = (bool)request.Registered;
+
+            if (request.RegistrationExpirationDate.HasValue)
+                automobile.RegistrationExpirationDate = request.RegistrationExpirationDate.Value;
+
+            if (request.Last_Small_Service.HasValue)
+                automobile.Last_Small_Service = request.Last_Small_Service.Value;
+
+            if (request.Last_Big_Service.HasValue)
+                automobile.Last_Big_Service = request.Last_Big_Service.Value;
+
+
+            if (request.CarBrandId.HasValue)
+                automobile.CarBrandId = request.CarBrandId.Value;
+
+            if (request.CarCategoryId.HasValue)
+                automobile.CarCategoryId = request.CarCategoryId.Value;
+
+            if (request.CarModelId.HasValue)
+                automobile.CarModelId = request.CarModelId.Value;
+
+            if (request.FuelTypeId.HasValue)
+                automobile.FuelTypeId = request.FuelTypeId.Value;
+
+            if (request.TransmissionTypeId.HasValue)
+                automobile.TransmissionTypeId = request.TransmissionTypeId.Value;
+
+            if (request.EnginePower.HasValue)
+                automobile.EnginePower = request.EnginePower.Value;
+
+            if (request.NumberOfDoors.HasValue)
+                automobile.NumberOfDoors = request.NumberOfDoors.Value;
+
+            if (request.CubicCapacity.HasValue)
+                automobile.CubicCapacity = request.CubicCapacity.Value;
+
+            if (request.HorsePower.HasValue)
+                automobile.HorsePower = request.HorsePower.Value;
+
+            if (!string.IsNullOrWhiteSpace(request.Color))
+                automobile.Color = request.Color;
+
+            if (request.VehicleConditionId.HasValue)
+                automobile.VehicleCondtionId = request.VehicleConditionId.Value;
+
+
+
+            foreach (var equipmentId in request.EquipmentIds)
+            {
+                var equipmentExists = _context.Equipments.Any(e => e.Id == equipmentId);
+                if (!equipmentExists)
+                {
+                    throw new ArgumentException($"Equipment with ID {equipmentId} does not exist.");
+                }
+
+                automobile.AutomobileAdEquipments.Add(new AutoTrade.Model.AutomobileAdEquipment
+                {
+                    EquipmentId = equipmentId,
+                    AutomobileAdId = automobile.Id
+                });
+            }
+
+
+            if (request.Images != null && request.Images.Any())
+            {
+                foreach (var image in request.Images)
+                {
+                    // Prenesite sliku i dobijte njen URL
+                    var imagePath = FileUploadHelper.UploadProfilePicture(image);
+
+                    // Proverite da li je URL već u kolekciji pre dodavanja
+                    if (!automobile.Images.Any(img => img.ImageUrl == imagePath))
+                    {
+                        var automobileAdImage = new AutoTrade.Model.AutomobileAdImage
+                        {
+                            ImageUrl = imagePath,
+                            AutomobileAdId = automobile.Id
+                        };
+
+                        automobile.Images.Add(automobileAdImage);
+                    }
+                }
+            }
+
+
+
+            // Ažuriraj automobil u bazi
+            _automobileAdService.Update(id, automobile);
+
+            return Ok(automobile);
+        }
+
     }
 }
