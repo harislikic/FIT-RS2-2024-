@@ -61,35 +61,49 @@ namespace Controllers
 
 
         [HttpGet("user/{userId}/reservations")]
-        public async Task<ActionResult> GetUserReservations(int userId, int page = 1, int pageSize = 25)
+        public async Task<ActionResult> GetUserReservations(int userId, string? status = null, int page = 1, int pageSize = 25)
         {
             page = page <= 0 ? 1 : page;
             pageSize = pageSize <= 0 || pageSize > 100 ? 25 : pageSize;
 
-            var reservations = await _context.Reservations
-                .Where(r => r.AutomobileAd.UserId == userId)
-                .Skip((page - 1) * pageSize)
-                .Take(pageSize)
-                .Select(r => new
-                {
-                    r.Id,
-                    r.ReservationDate,
-                    r.Status,
-                    r.UserId,
-                    User = new
-                    {
-                        r.User.Id,
-                        r.User.UserName,
-                        r.User.ProfilePicture
-                    },
-                    r.AutomobileAdId,
-                    r.AutomobileAd.Title
-                })
-                .ToListAsync();
+            var query = _context.Reservations
+                  .Include(x => x.AutomobileAd)
+                  .ThenInclude(x => x.Images)
+                  .Include(r => r.User)
+                  .Where(r => r.AutomobileAd.UserId == userId);
+
+            if (!string.IsNullOrEmpty(status))
+            {
+                query = query.Where(r => r.Status == status);
+            }
+
+            var reservations = await query
+          .Skip((page - 1) * pageSize)
+          .Take(pageSize)
+          .Select(r => new
+          {
+              r.Id,
+              r.ReservationDate,
+              r.Status,
+              r.UserId,
+              User = new
+              {
+                  r.User.Id,
+                  r.User.UserName,
+                  r.User.ProfilePicture
+              },
+              r.AutomobileAdId,
+              r.AutomobileAd.Title,
+              r.AutomobileAd.Price,
+              FirstImage = r.AutomobileAd.Images
+                  .Select(img => img.ImageUrl)
+                  .FirstOrDefault()
+          })
+          .ToListAsync();
 
             return Ok(new
             {
-                count = await _context.Reservations.CountAsync(r => r.AutomobileAd.UserId == userId),
+                count = await _context.Reservations.CountAsync(r => r.UserId == userId),
                 data = reservations
             });
         }
@@ -110,7 +124,7 @@ namespace Controllers
             {
                 reservation.Status = "Approved";
                 await _context.SaveChangesAsync();
-                await _reservationApprovalEmail.SendReservationApprovalEmail(reservationId);
+              //  await _reservationApprovalEmail.SendReservationApprovalEmail(reservationId);
 
                 return Ok(new { message = "Reservation approved and email sent." });
 
