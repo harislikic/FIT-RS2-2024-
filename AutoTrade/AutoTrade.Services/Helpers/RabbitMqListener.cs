@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using Microsoft.Extensions.DependencyInjection;
 using Helpers;
 using Database;
+using static Controllers.ReservationController;
 
 public class RabbitMqListener
 {
@@ -18,7 +19,7 @@ public class RabbitMqListener
     {
         var bus = RabbitHutch.CreateBus("host=localhost");
 
-        bus.PubSub.Subscribe<AutomobileAd>("automobileAdSubscription", async notification =>
+        bus.PubSub.Subscribe<ReservationNotification>("reservationApprovalSubscription", async notification =>
         {
             using (var scope = _serviceScopeFactory.CreateScope()) // Create a new scope
             {
@@ -26,7 +27,8 @@ public class RabbitMqListener
                 try
                 {
                     // Call the email service to send the email notification
-                    await emailService.SendProductNotificationEmail(notification);
+                    //await emailService.SendProductNotificationEmail(notification);
+                    await emailService.SendReservationApprovalEmail(notification.ReservationId);
                 }
                 catch (Exception ex)
                 {

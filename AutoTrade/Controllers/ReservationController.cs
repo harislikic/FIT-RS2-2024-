@@ -1,6 +1,7 @@
 using AutoTrade.Model;
 using AutoTrade.Services;
 using AutoTrade.Services.Database;
+using EasyNetQ;
 using Helpers;
 using Mapster;
 using MapsterMapper;
@@ -124,13 +125,26 @@ namespace Controllers
             {
                 reservation.Status = "Approved";
                 await _context.SaveChangesAsync();
-              //  await _reservationApprovalEmail.SendReservationApprovalEmail(reservationId);
+                // await _reservationApprovalEmail.SendReservationApprovalEmail(reservationId);
+
+                //rabit mq slanje maila
+
+                var bus = RabbitHutch.CreateBus("host=localhost");
+                await bus.PubSub.PublishAsync(new ReservationNotification { ReservationId = reservationId });
+
+                // var emailService = new EmailService(_context);
+                // await emailService.SendReservationApprovalEmail(reservationId);
 
                 return Ok(new { message = "Reservation approved and email sent." });
 
             }
 
             return BadRequest("Reservation is not in pending status and cannot be approved.");
+        }
+
+        public class ReservationNotification
+        {
+            public int ReservationId { get; set; }
         }
 
 

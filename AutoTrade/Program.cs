@@ -118,11 +118,11 @@ app.MapControllers();
 
 
 // RabitMQ scope
-// using (var scope = app.Services.CreateScope())
-// {
-//     var listener = scope.ServiceProvider.GetRequiredService<RabbitMqListener>();
-//     listener.StartListening();  // Start listening for RabbitMQ messages
-// }
+using (var scope = app.Services.CreateScope())
+{
+    var listener = scope.ServiceProvider.GetRequiredService<RabbitMqListener>();
+    listener.StartListening();  // Start listening for RabbitMQ messages
+}
 
 
 
