@@ -29,5 +29,28 @@ namespace Controllers
 
             return Ok(images);
         }
+
+        [HttpDelete("delete-images")]
+        public IActionResult DeleteImages([FromBody] List<int> imageIds)
+        {
+            if (imageIds == null || !imageIds.Any())
+            {
+                return BadRequest("No image IDs provided.");
+            }
+
+            var imagesToDelete = _context.AutomobileAdImages
+                .Where(image => imageIds.Contains(image.Id))
+                .ToList();
+
+            if (!imagesToDelete.Any())
+            {
+                return NotFound("No images found for the provided IDs.");
+            }
+
+            _context.AutomobileAdImages.RemoveRange(imagesToDelete);
+            _context.SaveChanges();
+
+            return Ok(new { Message = "Images deleted successfully." });
+        }
     }
 }
