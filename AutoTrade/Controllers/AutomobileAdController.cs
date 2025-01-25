@@ -201,7 +201,7 @@ namespace Controllers
 
             if (request.Last_Big_Service.HasValue)
                 automobile.Last_Big_Service = request.Last_Big_Service.Value;
-                
+
 
             if (request.CarBrandId.HasValue)
                 automobile.CarBrandId = request.CarBrandId.Value;
@@ -238,22 +238,8 @@ namespace Controllers
 
 
 
-            foreach (var equipmentId in request.EquipmentIds)
-            {
-                var equipmentExists = _context.Equipments.Any(e => e.Id == equipmentId);
-                if (!equipmentExists)
-                {
-                    throw new ArgumentException($"Equipment with ID {equipmentId} does not exist.");
-                }
-
-                automobile.AutomobileAdEquipments.Add(new AutoTrade.Model.AutomobileAdEquipment
-                {
-                    EquipmentId = equipmentId,
-                    AutomobileAdId = automobile.Id
-                });
-            }
-
-
+         
+         
             if (request.Images != null && request.Images.Any())
             {
                 foreach (var image in request.Images)

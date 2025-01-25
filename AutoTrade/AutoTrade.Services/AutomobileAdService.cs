@@ -475,26 +475,6 @@ namespace AutoTrade.Services
             entity.VehicleConditionId = automobile.VehicleCondtionId;
 
 
-
-            if (automobile.AutomobileAdEquipments != null && automobile.AutomobileAdEquipments.Any())
-            {
-                // Očistite postojeće stavke
-                entity.AutomobileAdEquipments.Clear();
-
-                foreach (var adEquipment in automobile.AutomobileAdEquipments)
-                {
-                    // Dodajte nove stavke u kolekciju
-                    var entityAdEquipment = new AutomobileAdEquipment
-                    {
-                        EquipmentId = adEquipment.EquipmentId, // Preuzimamo EquipmentId iz modela
-                        AutomobileAdId = entity.Id             // ID oglasa
-                    };
-
-                    // Dodajemo u kolekciju entiteta
-                    entity.AutomobileAdEquipments.Add(entityAdEquipment);
-                }
-            }
-
             if (automobile.Images != null && automobile.Images.Any())
             {
                 // Očistite slike koje nisu prisutne u trenutnoj kolekciji
