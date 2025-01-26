@@ -4,7 +4,6 @@ using System.Threading.Tasks;
 using Microsoft.Extensions.DependencyInjection;
 using Helpers;
 using Database;
-using static Controllers.ReservationController;
 
 public class RabbitMqListener
 {
@@ -38,4 +37,8 @@ public class RabbitMqListener
             }
         });
     }
+             public class ReservationNotification
+        {
+            public int ReservationId { get; set; }
+        }
 }
