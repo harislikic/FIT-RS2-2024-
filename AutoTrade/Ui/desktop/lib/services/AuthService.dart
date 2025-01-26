@@ -1,13 +1,10 @@
 import 'dart:convert';
-import 'package:desktop_app/screens/services/ApiConfig.dart';
-import 'package:flutter/material.dart';
+import 'package:desktop_app/services/ApiConfig.dart';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 
 class AuthService {
-  //static const String _baseUrl = 'http://localhost:5194'; // Vaša baza URL-a
-
-  /// Prijava korisnika
+  
   static Future<bool> login(String username, String password) async {
     try {
       final response = await http.post(
@@ -18,9 +15,6 @@ class AuthService {
           'password': password,
         }),
       );
-
-   debugPrint('API URL: ${ApiConfig.baseUrl}');
-debugPrint('Response: ${response.body}');
 
       if (response.statusCode == 200) {
         // Prijava uspešna
