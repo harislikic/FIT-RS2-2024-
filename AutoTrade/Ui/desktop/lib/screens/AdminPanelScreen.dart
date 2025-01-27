@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'AdAdminScreen.dart';
 
 class AdminPanelScreen extends StatelessWidget {
   const AdminPanelScreen({Key? key}) : super(key: key);
@@ -12,12 +13,10 @@ class AdminPanelScreen extends StatelessWidget {
       drawer: Drawer(
         child: ListView(
           padding: EdgeInsets.zero,
-          children: const [
+          children: [
             DrawerHeader(
-              decoration: BoxDecoration(
-                color: Colors.deepPurple,
-              ),
-              child: Text(
+              decoration: BoxDecoration(color: Colors.blueGrey[900]),
+              child: const Text(
                 'Admin Panel',
                 style: TextStyle(
                   color: Colors.white,
@@ -26,7 +25,17 @@ class AdminPanelScreen extends StatelessWidget {
                 ),
               ),
             ),
-            // Ostavljen prazan prostor za buduće sekcije
+            ListTile(
+              leading: const Icon(Icons.person_add),
+              title: const Text('Dodaj Admina'),
+              onTap: () {
+                Navigator.of(context).push(
+                  MaterialPageRoute(
+                    builder: (context) => const AddAdminScreen(),
+                  ),
+                );
+              },
+            ),
           ],
         ),
       ),

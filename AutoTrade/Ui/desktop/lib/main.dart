@@ -1,7 +1,7 @@
 import 'package:desktop_app/screens/%20LoginScreen.dart';
 
 import 'package:desktop_app/services/AuthService.dart';
-import 'package:desktop_app/screens/AdminPanelScreen.dart'; // Pretpostavljam da već imaš AdminPanelScreen
+import 'package:desktop_app/screens/AdminPanelScreen.dart';
 import 'package:flutter/material.dart';
 
 void main() {
