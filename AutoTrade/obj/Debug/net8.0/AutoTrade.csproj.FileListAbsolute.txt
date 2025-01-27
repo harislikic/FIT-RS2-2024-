@@ -128,3 +128,37 @@
 /Users/harislikic/Desktop/FIT-RS2-2024-/AutoTrade/bin/Debug/net8.0/runtimes/win-x64/native/MatrixFactorizationNative.dll
 /Users/harislikic/Desktop/FIT-RS2-2024-/AutoTrade/bin/Debug/net8.0/runtimes/win-x86/native/MatrixFactorizationNative.dll
 /Users/harislikic/Desktop/FIT-RS2-2024-/AutoTrade/bin/Debug/net8.0/Microsoft.AspNetCore.JsonPatch.dll
+/Users/harislikic/Desktop/FIT-RS2-2024-/AutoTrade/bin/Debug/net8.0/Ui/desktop/build/macos/Build/Intermediates.noindex/Pods.build/Debug/shared_preferences_foundation.build/Objects-normal/arm64/shared_preferences_foundation-OutputFileMap.json
+/Users/harislikic/Desktop/FIT-RS2-2024-/AutoTrade/bin/Debug/net8.0/Ui/desktop/build/macos/Build/Intermediates.noindex/Pods.build/Debug/shared_preferences_foundation.build/Objects-normal/arm64/shared_preferences_foundation.abi.json
+/Users/harislikic/Desktop/FIT-RS2-2024-/AutoTrade/bin/Debug/net8.0/Ui/desktop/build/macos/Build/Intermediates.noindex/Pods.build/Debug/shared_preferences_foundation.build/Objects-normal/arm64/shared_preferences_foundation_const_extract_protocols.json
+/Users/harislikic/Desktop/FIT-RS2-2024-/AutoTrade/bin/Debug/net8.0/Ui/desktop/build/macos/Build/Intermediates.noindex/Runner.build/Debug/Runner.build/Objects-normal/arm64/desktop.abi.json
+/Users/harislikic/Desktop/FIT-RS2-2024-/AutoTrade/bin/Debug/net8.0/Ui/desktop/build/macos/Build/Intermediates.noindex/Runner.build/Debug/Runner.build/Objects-normal/arm64/Runner-OutputFileMap.json
+/Users/harislikic/Desktop/FIT-RS2-2024-/AutoTrade/bin/Debug/net8.0/Ui/desktop/build/macos/Build/Intermediates.noindex/Runner.build/Debug/Runner.build/Objects-normal/arm64/Runner_const_extract_protocols.json
+/Users/harislikic/Desktop/FIT-RS2-2024-/AutoTrade/bin/Debug/net8.0/Ui/desktop/build/macos/Build/Intermediates.noindex/XCBuildData/2c0ad64e8e38f97375bb65c01535c54e.xcbuilddata/build-request.json
+/Users/harislikic/Desktop/FIT-RS2-2024-/AutoTrade/bin/Debug/net8.0/Ui/desktop/build/macos/Build/Intermediates.noindex/XCBuildData/2c0ad64e8e38f97375bb65c01535c54e.xcbuilddata/manifest.json
+/Users/harislikic/Desktop/FIT-RS2-2024-/AutoTrade/bin/Debug/net8.0/Ui/desktop/build/macos/Build/Intermediates.noindex/XCBuildData/a895fc6f44e3510bb8f0668a6f9666e7.xcbuilddata/build-request.json
+/Users/harislikic/Desktop/FIT-RS2-2024-/AutoTrade/bin/Debug/net8.0/Ui/desktop/build/macos/Build/Intermediates.noindex/XCBuildData/a895fc6f44e3510bb8f0668a6f9666e7.xcbuilddata/manifest.json
+/Users/harislikic/Desktop/FIT-RS2-2024-/AutoTrade/bin/Debug/net8.0/Ui/desktop/build/macos/Build/Intermediates.noindex/XCBuildData/b0e47484be9995cb892c20c8c5ed2283.xcbuilddata/build-request.json
+/Users/harislikic/Desktop/FIT-RS2-2024-/AutoTrade/bin/Debug/net8.0/Ui/desktop/build/macos/Build/Intermediates.noindex/XCBuildData/b0e47484be9995cb892c20c8c5ed2283.xcbuilddata/manifest.json
+/Users/harislikic/Desktop/FIT-RS2-2024-/AutoTrade/bin/Debug/net8.0/Ui/desktop/build/macos/Build/Products/Debug/App.framework/Resources/flutter_assets/AssetManifest.json
+/Users/harislikic/Desktop/FIT-RS2-2024-/AutoTrade/bin/Debug/net8.0/Ui/desktop/build/macos/Build/Products/Debug/App.framework/Resources/flutter_assets/FontManifest.json
+/Users/harislikic/Desktop/FIT-RS2-2024-/AutoTrade/bin/Debug/net8.0/Ui/desktop/build/macos/Build/Products/Debug/App.framework/Versions/A/Resources/flutter_assets/AssetManifest.json
+/Users/harislikic/Desktop/FIT-RS2-2024-/AutoTrade/bin/Debug/net8.0/Ui/desktop/build/macos/Build/Products/Debug/App.framework/Versions/A/Resources/flutter_assets/FontManifest.json
+/Users/harislikic/Desktop/FIT-RS2-2024-/AutoTrade/bin/Debug/net8.0/Ui/desktop/build/macos/Build/Products/Debug/App.framework/Versions/Current/Resources/flutter_assets/AssetManifest.json
+/Users/harislikic/Desktop/FIT-RS2-2024-/AutoTrade/bin/Debug/net8.0/Ui/desktop/build/macos/Build/Products/Debug/App.framework/Versions/Current/Resources/flutter_assets/FontManifest.json
+/Users/harislikic/Desktop/FIT-RS2-2024-/AutoTrade/bin/Debug/net8.0/Ui/desktop/build/macos/Build/Products/Debug/desktop.app/Contents/Frameworks/App.framework/Resources/flutter_assets/AssetManifest.json
+/Users/harislikic/Desktop/FIT-RS2-2024-/AutoTrade/bin/Debug/net8.0/Ui/desktop/build/macos/Build/Products/Debug/desktop.app/Contents/Frameworks/App.framework/Resources/flutter_assets/FontManifest.json
+/Users/harislikic/Desktop/FIT-RS2-2024-/AutoTrade/bin/Debug/net8.0/Ui/desktop/build/macos/Build/Products/Debug/desktop.app/Contents/Frameworks/App.framework/Versions/A/Resources/flutter_assets/AssetManifest.json
+/Users/harislikic/Desktop/FIT-RS2-2024-/AutoTrade/bin/Debug/net8.0/Ui/desktop/build/macos/Build/Products/Debug/desktop.app/Contents/Frameworks/App.framework/Versions/A/Resources/flutter_assets/FontManifest.json
+/Users/harislikic/Desktop/FIT-RS2-2024-/AutoTrade/bin/Debug/net8.0/Ui/desktop/build/macos/Build/Products/Debug/desktop.app/Contents/Frameworks/App.framework/Versions/Current/Resources/flutter_assets/AssetManifest.json
+/Users/harislikic/Desktop/FIT-RS2-2024-/AutoTrade/bin/Debug/net8.0/Ui/desktop/build/macos/Build/Products/Debug/desktop.app/Contents/Frameworks/App.framework/Versions/Current/Resources/flutter_assets/FontManifest.json
+/Users/harislikic/Desktop/FIT-RS2-2024-/AutoTrade/bin/Debug/net8.0/Ui/desktop/build/macos/Build/Products/Debug/desktop.swiftmodule/arm64-apple-macos.abi.json
+/Users/harislikic/Desktop/FIT-RS2-2024-/AutoTrade/bin/Debug/net8.0/Ui/desktop/build/macos/Build/Products/Debug/shared_preferences_foundation/shared_preferences_foundation.framework/Modules/shared_preferences_foundation.swiftmodule/arm64-apple-macos.abi.json
+/Users/harislikic/Desktop/FIT-RS2-2024-/AutoTrade/bin/Debug/net8.0/Ui/desktop/build/macos/Build/Products/Debug/shared_preferences_foundation/shared_preferences_foundation.framework/Versions/A/Modules/shared_preferences_foundation.swiftmodule/arm64-apple-macos.abi.json
+/Users/harislikic/Desktop/FIT-RS2-2024-/AutoTrade/bin/Debug/net8.0/Ui/desktop/build/macos/Build/Products/Debug/shared_preferences_foundation/shared_preferences_foundation.framework/Versions/Current/Modules/shared_preferences_foundation.swiftmodule/arm64-apple-macos.abi.json
+/Users/harislikic/Desktop/FIT-RS2-2024-/AutoTrade/bin/Debug/net8.0/Ui/desktop/ios/Runner/Assets.xcassets/AppIcon.appiconset/Contents.json
+/Users/harislikic/Desktop/FIT-RS2-2024-/AutoTrade/bin/Debug/net8.0/Ui/desktop/ios/Runner/Assets.xcassets/LaunchImage.imageset/Contents.json
+/Users/harislikic/Desktop/FIT-RS2-2024-/AutoTrade/bin/Debug/net8.0/Ui/desktop/macos/Pods/Local Podspecs/FlutterMacOS.podspec.json
+/Users/harislikic/Desktop/FIT-RS2-2024-/AutoTrade/bin/Debug/net8.0/Ui/desktop/macos/Pods/Local Podspecs/shared_preferences_foundation.podspec.json
+/Users/harislikic/Desktop/FIT-RS2-2024-/AutoTrade/bin/Debug/net8.0/Ui/desktop/macos/Runner/Assets.xcassets/AppIcon.appiconset/Contents.json
+/Users/harislikic/Desktop/FIT-RS2-2024-/AutoTrade/bin/Debug/net8.0/Ui/desktop/web/manifest.json

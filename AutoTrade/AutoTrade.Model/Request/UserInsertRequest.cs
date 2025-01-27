@@ -13,7 +13,7 @@ namespace Request
         public string? Gender { get; set; }
         public required string Password { get; set; }
         public required string PasswordConfirmation { get; set; }
-        public bool IsAdmin { get; set; } = false;
+      //  public bool IsAdmin { get; set; } = false;
         public DateTime DateOfBirth { get; set; }
 
         public IFormFile? ProfilePicture { get; set; }

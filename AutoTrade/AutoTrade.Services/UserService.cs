@@ -138,6 +138,81 @@ namespace AutoTrade.Services
             return this.Mapper.Map<Model.User>(entity);
         }
 
+
+        public Model.User LoginAdmin(LoginRequest request)
+        {
+            var entity = Context.Users
+            .Include(u => u.City)
+            .ThenInclude(c => c.Canton).Where(x => x.IsAdmin)
+            .FirstOrDefault(x => x.UserName == request.Username);
+
+            if (entity == null)
+            {
+                throw new UnauthorizedAccessException("Admin not found.");
+            }
+
+            var hash = PasswordHelper.GenerateHash(entity.PasswordSalt, request.Password);
+
+            if (hash != entity.PasswordHash)
+            {
+                throw new UnauthorizedAccessException("Invalid password.");
+            }
+
+            var basicAuth = "Basic " + Convert.ToBase64String(
+                System.Text.Encoding.UTF8.GetBytes($"{request.Username}:{request.Password}")
+            );
+
+            return this.Mapper.Map<Model.User>(entity);
+        }
+
+
+        public Model.User InsertAdmin(UserInsertRequest request)
+        {
+
+            if (request.Password != request.PasswordConfirmation)
+            {
+                throw new Exception("Passwords do not match.");
+            }
+
+
+            var entity = new Services.Database.User
+            {
+                UserName = request.UserName,
+                FirstName = request.FirstName,
+                LastName = request.LastName,
+                Email = request.Email,
+                PhoneNumber = request.PhoneNumber,
+                Adress = request.Adress,
+                Gender = request.Gender,
+                IsAdmin = true,
+                DateOfBirth = request.DateOfBirth,
+                CityId = request.CityId
+            };
+
+            PasswordHelper.SetPassword(entity, request.Password);
+
+            if (request.ProfilePicture != null && request.ProfilePicture.Length > 0)
+            {
+                entity.ProfilePicture = FileUploadHelper.UploadProfilePicture(request.ProfilePicture);
+            }
+
+            if (request.CityId > 0)
+            {
+                var city = Context.Cities.FirstOrDefault(c => c.Id == request.CityId);
+                if (city == null)
+                {
+                    throw new Exception("City not found.");
+                }
+                entity.City = city;
+            }
+
+
+            Context.Users.Add(entity);
+            Context.SaveChanges();
+
+            return Mapper.Map<Model.User>(entity);
+        }
+
         public Model.User Update(int id, Model.User user)
         {
 

@@ -1,5 +1,6 @@
 using AutoTrade.Model;
 using AutoTrade.Services;
+using AutoTrader.Services.Helpers;
 using Controllers;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.JsonPatch;
@@ -33,6 +34,35 @@ public class UserController : BaseCRUDController<User, UserSearchObject, UserIns
         return (_service as IUserService).Login(request);
     }
 
+    [HttpPost("login/admin")]
+    public User LoginAdmin(LoginRequest request)
+    {
+        return (_service as IUserService).LoginAdmin(request);
+    }
+
+
+    [HttpPost("admin")]
+    public IActionResult InsertAdmin([FromForm] UserInsertRequest request)
+    {
+        try
+        {
+            var addedUser = _service.InsertAdmin(request);
+            return Ok(new
+            {
+                message = "Admin created successfully.",
+                user = addedUser
+            });
+        }
+        catch (Exception ex)
+        {
+            return BadRequest(new
+            {
+                message = ex.Message
+            });
+        }
+    }
+
+
 
     [HttpPatch("{id}")]
     public IActionResult Patch(int id, [FromForm] UserUpdateRequest request)
@@ -65,7 +95,7 @@ public class UserController : BaseCRUDController<User, UserSearchObject, UserIns
 
         if (request.CityId.HasValue)
             user.CityId = request.CityId.Value;
-            
+
         if (request.ProfilePicture != null && request.ProfilePicture.Length > 0)
         {
             // Otpremi novu sliku
@@ -79,6 +109,8 @@ public class UserController : BaseCRUDController<User, UserSearchObject, UserIns
 
         return Ok(user);
     }
+
+
 
 
 }

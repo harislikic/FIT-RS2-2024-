@@ -9,8 +9,10 @@ namespace AutoTrade.Services
     {
         Model.User Login(LoginRequest request);
 
+        Model.User LoginAdmin(LoginRequest request);
+
         Model.User Update(int id, Model.User user);
 
-
+        Model.User InsertAdmin(UserInsertRequest request);
     }
 }

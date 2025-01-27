@@ -90,6 +90,16 @@ namespace AutoTrade.Services
                 throw new Exception("Entity not found with provided id");
             }
 
+            if (typeof(TDbEntity) == typeof(Services.Database.User))
+            {
+                var userEntity = entity as Services.Database.User;
+                if (userEntity != null)
+                {
+                    // Učitavanje povezanog `City` entiteta
+                    Context.Entry(userEntity).Reference(u => u.City).Load();
+                }
+            }
+
             Context.Remove(entity);
             Context.SaveChanges();
 

@@ -1,11 +1,12 @@
 ﻿using System;
 using System.Security.Cryptography;
 using System.Text;
+using AutoTrade.Services.Database;
 
 namespace AutoTrader.Services.Helpers
 {
-	public class PasswordHelper
-	{
+    public class PasswordHelper
+    {
         public static string GenerateSalt()
         {
             RNGCryptoServiceProvider provider = new RNGCryptoServiceProvider();
@@ -26,6 +27,25 @@ namespace AutoTrader.Services.Helpers
             HashAlgorithm algorithm = HashAlgorithm.Create("SHA1");
             byte[] inArray = algorithm.ComputeHash(dst);
             return Convert.ToBase64String(inArray);
+        }
+
+
+        public static void SetPassword(User user, string password)
+        {
+            if (string.IsNullOrWhiteSpace(password))
+            {
+                throw new ArgumentException("Password cannot be null or empty.");
+            }
+
+            // Generiše salt
+            string salt = GenerateSalt();
+
+            // Generiše heš sa salton i lozinkom
+            string hash = GenerateHash(salt, password);
+
+            // Postavlja vrednosti u korisnika
+            user.PasswordSalt = salt;
+            user.PasswordHash = hash;
         }
     }
 }

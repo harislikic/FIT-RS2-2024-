@@ -1,4 +1,5 @@
 using AutoTrade.Services;
+using Request;
 using SearchObject;
 
 namespace Database
