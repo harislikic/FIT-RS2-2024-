@@ -2,6 +2,7 @@ import 'package:desktop_app/components/shared/SnackbarHelper.dart';
 import 'package:desktop_app/services/ApiConfig.dart';
 import 'package:desktop_app/services/UserService.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
 class UsersList extends StatefulWidget {
   const UsersList({Key? key}) : super(key: key);
@@ -38,11 +39,10 @@ class _UsersListState extends State<UsersList> {
 
     try {
       final data = await UserService.getAllAdmins(
-        page: _currentPage,
-        pageSize: _pageSize,
-        query: query,
-        isAdmin: false
-      );
+          page: _currentPage,
+          pageSize: _pageSize,
+          query: query,
+          isAdmin: false);
 
       setState(() {
         _count = data['count'];
@@ -62,7 +62,8 @@ class _UsersListState extends State<UsersList> {
       context: context,
       builder: (context) => AlertDialog(
         title: const Text('Potvrda'),
-        content: const Text('Da li ste sigurni da želite obrisati ovog korisnika?'),
+        content:
+            const Text('Da li ste sigurni da želite obrisati ovog korisnika?'),
         actions: [
           TextButton(
             onPressed: () => Navigator.of(context).pop(false),
@@ -116,7 +117,8 @@ class _UsersListState extends State<UsersList> {
                       border: OutlineInputBorder(),
                       isDense: true,
                     ),
-                    onSubmitted: (_) => _fetchUsers(query: _searchController.text),
+                    onSubmitted: (_) =>
+                        _fetchUsers(query: _searchController.text),
                   ),
                 ),
                 const SizedBox(width: 8),
@@ -125,7 +127,7 @@ class _UsersListState extends State<UsersList> {
                   child: const Text('Traži'),
                 ),
                 const SizedBox(width: 16),
-                Text('Ukupan broj: $_count'),
+                Text('Broj registrovanih korisnika: $_count'),
               ],
             ),
           ),
@@ -135,6 +137,18 @@ class _UsersListState extends State<UsersList> {
                 : SingleChildScrollView(
                     scrollDirection: Axis.horizontal,
                     child: DataTable(
+                      dividerThickness: 1, // Debljina linija između redova
+                      dataRowColor: MaterialStateProperty.resolveWith<Color?>(
+                        (Set<MaterialState> states) {
+                          if (states.contains(MaterialState.selected)) {
+                            return Colors.grey
+                                .withOpacity(0.2); // Boja selektovanog reda
+                          }
+                          return Colors.white; // Podrazumevana boja reda
+                        },
+                      ),
+                      headingRowColor:
+                          MaterialStateProperty.all(Colors.blueGrey[50]),
                       columns: const [
                         DataColumn(label: Text('ID')),
                         DataColumn(label: Text('Ime')),
@@ -160,9 +174,12 @@ class _UsersListState extends State<UsersList> {
                                 DataCell(Text(user['phoneNumber'] ?? '-')),
                                 DataCell(Text(user['adress'] ?? '-')),
                                 DataCell(Text(user['city']['title'] ?? '-')),
-                                DataCell(Text(user['dateOfBirth'] != null
-                                    ? user['dateOfBirth']
-                                    : '-')),
+                                DataCell(Text(
+                                  user['dateOfBirth'] != null
+                                      ? DateFormat('dd.MM.yyyy').format(
+                                          DateTime.parse(user['dateOfBirth']))
+                                      : '-',
+                                )),
                                 DataCell(
                                   user['profilePicture'] != null
                                       ? Image.network(

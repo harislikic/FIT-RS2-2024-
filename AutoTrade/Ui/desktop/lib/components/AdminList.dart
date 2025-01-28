@@ -2,6 +2,7 @@ import 'package:desktop_app/components/shared/SnackbarHelper.dart';
 import 'package:desktop_app/services/ApiConfig.dart';
 import 'package:desktop_app/services/UserService.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
 class AdminList extends StatefulWidget {
   const AdminList({Key? key}) : super(key: key);
@@ -143,6 +144,18 @@ class _AdminListState extends State<AdminList> {
                 : SingleChildScrollView(
                     scrollDirection: Axis.horizontal,
                     child: DataTable(
+                      dividerThickness: 1, // Debljina linija između redova
+                      dataRowColor: MaterialStateProperty.resolveWith<Color?>(
+                        (Set<MaterialState> states) {
+                          if (states.contains(MaterialState.selected)) {
+                            return Colors.grey
+                                .withOpacity(0.2); // Boja selektovanog reda
+                          }
+                          return Colors.white; // Podrazumevana boja reda
+                        },
+                      ),
+                      headingRowColor:
+                          MaterialStateProperty.all(Colors.blueGrey[50]),
                       columns: const [
                         DataColumn(label: Text('ID')),
                         DataColumn(label: Text('Ime')),
@@ -158,23 +171,26 @@ class _AdminListState extends State<AdminList> {
                       ],
                       rows: _admins
                           .map(
-                            (admin) => DataRow(
+                            (user) => DataRow(
                               cells: [
-                                DataCell(Text(admin['id'].toString())),
-                                DataCell(Text(admin['firstName'] ?? '-')),
-                                DataCell(Text(admin['lastName'] ?? '-')),
-                                DataCell(Text(admin['userName'] ?? '-')),
-                                DataCell(Text(admin['email'] ?? '-')),
-                                DataCell(Text(admin['phoneNumber'] ?? '-')),
-                                DataCell(Text(admin['adress'] ?? '-')),
-                                DataCell(Text(admin['city']['title'] ?? '-')),
-                                DataCell(Text(admin['dateOfBirth'] != null
-                                    ? admin['dateOfBirth']
-                                    : '-')),
+                                DataCell(Text(user['id'].toString())),
+                                DataCell(Text(user['firstName'] ?? '-')),
+                                DataCell(Text(user['lastName'] ?? '-')),
+                                DataCell(Text(user['userName'] ?? '-')),
+                                DataCell(Text(user['email'] ?? '-')),
+                                DataCell(Text(user['phoneNumber'] ?? '-')),
+                                DataCell(Text(user['adress'] ?? '-')),
+                                DataCell(Text(user['city']['title'] ?? '-')),
+                                DataCell(Text(
+                                  user['dateOfBirth'] != null
+                                      ? DateFormat('dd.MM.yyyy').format(
+                                          DateTime.parse(user['dateOfBirth']))
+                                      : '-',
+                                )),
                                 DataCell(
-                                  admin['profilePicture'] != null
+                                  user['profilePicture'] != null
                                       ? Image.network(
-                                          '${ApiConfig.baseUrl}${admin['profilePicture']}',
+                                          '${ApiConfig.baseUrl}${user['profilePicture']}',
                                           width: 50,
                                           height: 50,
                                         )
@@ -184,7 +200,7 @@ class _AdminListState extends State<AdminList> {
                                   IconButton(
                                     icon: const Icon(Icons.delete,
                                         color: Colors.red),
-                                    onPressed: () => _deleteAdmin(admin['id']),
+                                    onPressed: () => _deleteAdmin(user['id']),
                                   ),
                                 ),
                               ],
