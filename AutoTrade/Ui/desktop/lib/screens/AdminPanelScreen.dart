@@ -1,3 +1,4 @@
+import 'package:desktop_app/components/AdminList.dart';
 import 'package:flutter/material.dart';
 import 'AdAdminScreen.dart';
 
@@ -39,12 +40,7 @@ class AdminPanelScreen extends StatelessWidget {
           ],
         ),
       ),
-      body: const Center(
-        child: Text(
-          'Dobrodošli u Admin Panel',
-          style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
-        ),
-      ),
+      body: const AdminList()
     );
   }
 }

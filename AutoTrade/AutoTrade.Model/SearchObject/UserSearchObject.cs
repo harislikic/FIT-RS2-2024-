@@ -9,6 +9,8 @@ namespace SerachObject
         public string? LastNameeGTE { get; set; }
         public string? UserName { get; set; }
         public string? OrderBy { get; set; }
+        public bool? IsAdmin { get; set; }
+
 
     }
 }

@@ -42,6 +42,13 @@ namespace AutoTrade.Services
                 query = query.OrderBy(search.OrderBy);
             }
 
+            if (search.IsAdmin.HasValue)
+            {
+                query = query.Where(x => x.IsAdmin == search.IsAdmin.Value);
+            }
+
+
+
             return base.AddFilter(search, query);
 
         }

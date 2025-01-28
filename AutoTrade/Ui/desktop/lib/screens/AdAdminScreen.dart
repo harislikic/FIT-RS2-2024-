@@ -1,4 +1,5 @@
 import 'package:desktop_app/components/GenderSelector.dart';
+import 'package:desktop_app/components/shared/SnackbarHelper.dart';
 import 'package:desktop_app/models/city.dart';
 import 'package:desktop_app/services/ApiConfig.dart';
 import 'package:desktop_app/services/CityService.dart';
@@ -152,8 +153,10 @@ class _AddAdminScreenState extends State<AddAdminScreen> {
       final response = await http.Response.fromStream(responseStream);
 
       if (response.statusCode == 200 || response.statusCode == 201) {
-        _showSnackBar(context, 'Uspešno kreiran Admin!',
+        SnackbarHelper.showSnackbar(context, 'Uspešno kreiran Admin!',
             backgroundColor: Colors.green);
+        // _showSnackBar(context, 'Uspešno kreiran Admin!',
+        //     backgroundColor: Colors.green);
 
         Navigator.pushReplacementNamed(context, '/');
       } else {
@@ -171,7 +174,9 @@ class _AddAdminScreenState extends State<AddAdminScreen> {
           errorMessage = 'Greška na serveru. Pokušajte ponovo kasnije.';
         }
 
-        _showSnackBar(context, errorMessage, backgroundColor: Colors.red);
+        SnackbarHelper.showSnackbar(context, errorMessage,
+            backgroundColor: Colors.red);
+        // _showSnackBar(context, errorMessage, backgroundColor: Colors.red);
       }
     } catch (e) {
       print('Greška: $e');
@@ -184,7 +189,10 @@ class _AddAdminScreenState extends State<AddAdminScreen> {
             'Korisnik sa istim korisničkim imenom ili emailom već postoji.';
       }
 
-      _showSnackBar(context, errorMessage, backgroundColor: Colors.red);
+      SnackbarHelper.showSnackbar(context, errorMessage,
+          backgroundColor: Colors.red);
+
+      // _showSnackBar(context, errorMessage, backgroundColor: Colors.red);
     }
   }
 
@@ -206,9 +214,9 @@ class _AddAdminScreenState extends State<AddAdminScreen> {
       appBar: AppBar(
         title: const Text(
           "Dodaj Admina",
-          style: TextStyle(color: Colors.white), 
+          style: TextStyle(color: Colors.white),
         ),
-        backgroundColor: Colors.blueGrey[900], 
+        backgroundColor: Colors.blueGrey[900],
         iconTheme: const IconThemeData(
           color: Colors.white,
         ),
