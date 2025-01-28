@@ -3,16 +3,16 @@ import 'package:desktop_app/services/ApiConfig.dart';
 import 'package:desktop_app/services/UserService.dart';
 import 'package:flutter/material.dart';
 
-class AdminList extends StatefulWidget {
-  const AdminList({Key? key}) : super(key: key);
+class UsersList extends StatefulWidget {
+  const UsersList({Key? key}) : super(key: key);
 
   @override
-  State<AdminList> createState() => _AdminListState();
+  State<UsersList> createState() => _UsersListState();
 }
 
-class _AdminListState extends State<AdminList> {
+class _UsersListState extends State<UsersList> {
   final TextEditingController _searchController = TextEditingController();
-  List<dynamic> _admins = [];
+  List<dynamic> _users = [];
   int _count = 0;
   int _currentPage = 0;
   bool _isLoading = false;
@@ -21,19 +21,18 @@ class _AdminListState extends State<AdminList> {
   @override
   void initState() {
     super.initState();
-    _fetchAdmins();
+    _fetchUsers();
   }
 
-  Future<void> _fetchAdmins({String? query}) async {
+  Future<void> _fetchUsers({String? query}) async {
     if (_isLoading) return;
 
     setState(() {
       _isLoading = true;
 
-      // Resetuj listu admina samo ako radimo novu pretragu
       if (query != null) {
-        _admins = [];
-        _currentPage = 0; // Resetuj paginaciju
+        _users = [];
+        _currentPage = 0;
       }
     });
 
@@ -42,17 +41,15 @@ class _AdminListState extends State<AdminList> {
         page: _currentPage,
         pageSize: _pageSize,
         query: query,
-        isAdmin: true,
+        isAdmin: false
       );
 
       setState(() {
         _count = data['count'];
-        _admins.addAll(data['data']);
+        _users.addAll(data['data']);
       });
     } catch (e) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('Error: $e')),
-      );
+      SnackbarHelper.showSnackbar(context, 'Error: $e');
     } finally {
       setState(() {
         _isLoading = false;
@@ -60,13 +57,12 @@ class _AdminListState extends State<AdminList> {
     }
   }
 
-  Future<void> _deleteAdmin(int adminId) async {
+  Future<void> _deleteUser(int userId) async {
     final confirm = await showDialog<bool>(
       context: context,
       builder: (context) => AlertDialog(
         title: const Text('Potvrda'),
-        content:
-            const Text('Da li ste sigurni da želite obrisati ovog admina?'),
+        content: const Text('Da li ste sigurni da želite obrisati ovog korisnika?'),
         actions: [
           TextButton(
             onPressed: () => Navigator.of(context).pop(false),
@@ -83,22 +79,19 @@ class _AdminListState extends State<AdminList> {
     if (confirm != true) return;
 
     try {
-      await UserService.deleteAdmin(adminId);
+      await UserService.deleteAdmin(userId);
 
       setState(() {
-        _admins.removeWhere((admin) => admin['id'] == adminId);
+        _users.removeWhere((user) => user['id'] == userId);
         _count--;
       });
 
-      SnackbarHelper.showSnackbar(context, 'Admin obrisan uspešno',
+      SnackbarHelper.showSnackbar(context, 'Korisnik obrisan uspešno',
           backgroundColor: Colors.green);
 
-      // Ponovno učitavanje podataka
-      _fetchAdmins(query: _searchController.text);
+      _fetchUsers(query: _searchController.text);
     } catch (e) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('Error: $e')),
-      );
+      SnackbarHelper.showSnackbar(context, 'Error: $e');
     }
   }
 
@@ -106,7 +99,7 @@ class _AdminListState extends State<AdminList> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Admin lista'),
+        title: const Text('Lista korisnika'),
       ),
       body: Column(
         children: [
@@ -115,21 +108,20 @@ class _AdminListState extends State<AdminList> {
             child: Row(
               children: [
                 SizedBox(
-                  width: 400, // Postavite željenu širinu
+                  width: 400,
                   child: TextField(
                     controller: _searchController,
                     decoration: const InputDecoration(
                       labelText: 'Pretraga',
                       border: OutlineInputBorder(),
-                      isDense: true, // Manji padding unutar polja
+                      isDense: true,
                     ),
-                    onSubmitted: (_) =>
-                        _fetchAdmins(query: _searchController.text),
+                    onSubmitted: (_) => _fetchUsers(query: _searchController.text),
                   ),
                 ),
                 const SizedBox(width: 8),
                 ElevatedButton(
-                  onPressed: () => _fetchAdmins(query: _searchController.text),
+                  onPressed: () => _fetchUsers(query: _searchController.text),
                   child: const Text('Traži'),
                 ),
                 const SizedBox(width: 16),
@@ -156,25 +148,25 @@ class _AdminListState extends State<AdminList> {
                         DataColumn(label: Text('Slika')),
                         DataColumn(label: Text('Akcija')),
                       ],
-                      rows: _admins
+                      rows: _users
                           .map(
-                            (admin) => DataRow(
+                            (user) => DataRow(
                               cells: [
-                                DataCell(Text(admin['id'].toString())),
-                                DataCell(Text(admin['firstName'] ?? '-')),
-                                DataCell(Text(admin['lastName'] ?? '-')),
-                                DataCell(Text(admin['userName'] ?? '-')),
-                                DataCell(Text(admin['email'] ?? '-')),
-                                DataCell(Text(admin['phoneNumber'] ?? '-')),
-                                DataCell(Text(admin['adress'] ?? '-')),
-                                DataCell(Text(admin['city']['title'] ?? '-')),
-                                DataCell(Text(admin['dateOfBirth'] != null
-                                    ? admin['dateOfBirth']
+                                DataCell(Text(user['id'].toString())),
+                                DataCell(Text(user['firstName'] ?? '-')),
+                                DataCell(Text(user['lastName'] ?? '-')),
+                                DataCell(Text(user['userName'] ?? '-')),
+                                DataCell(Text(user['email'] ?? '-')),
+                                DataCell(Text(user['phoneNumber'] ?? '-')),
+                                DataCell(Text(user['adress'] ?? '-')),
+                                DataCell(Text(user['city']['title'] ?? '-')),
+                                DataCell(Text(user['dateOfBirth'] != null
+                                    ? user['dateOfBirth']
                                     : '-')),
                                 DataCell(
-                                  admin['profilePicture'] != null
+                                  user['profilePicture'] != null
                                       ? Image.network(
-                                          '${ApiConfig.baseUrl}${admin['profilePicture']}',
+                                          '${ApiConfig.baseUrl}${user['profilePicture']}',
                                           width: 50,
                                           height: 50,
                                         )
@@ -184,7 +176,7 @@ class _AdminListState extends State<AdminList> {
                                   IconButton(
                                     icon: const Icon(Icons.delete,
                                         color: Colors.red),
-                                    onPressed: () => _deleteAdmin(admin['id']),
+                                    onPressed: () => _deleteUser(user['id']),
                                   ),
                                 ),
                               ],

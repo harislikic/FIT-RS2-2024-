@@ -1,4 +1,5 @@
 import 'package:desktop_app/components/AdminList.dart';
+import 'package:desktop_app/components/UsersList.dart';
 import 'package:flutter/material.dart';
 import 'AdAdminScreen.dart';
 
@@ -33,6 +34,17 @@ class AdminPanelScreen extends StatelessWidget {
                 Navigator.of(context).push(
                   MaterialPageRoute(
                     builder: (context) => const AddAdminScreen(),
+                  ),
+                );
+              },
+            ),
+              ListTile(
+              leading: const Icon(Icons.group),
+              title: const Text('Pregled Korsnika'),
+              onTap: () {
+                Navigator.of(context).push(
+                  MaterialPageRoute(
+                    builder: (context) => const UsersList(),
                   ),
                 );
               },

@@ -29,11 +29,13 @@ class UserService {
     int page = 0,
     int pageSize = 25,
     String? query,
+    bool? isAdmin,
   }) async {
     try {
       final headers = await AuthService.getAuthHeaders();
+      final String isAdminFilter = isAdmin != null ? '&IsAdmin=$isAdmin' : '';
       final uri = Uri.parse(
-        '${ApiConfig.baseUrl}/User?IsAdmin=true&Page=$page&PageSize=$pageSize${query != null ? '&FirstNameGTE=$query&UserName=$query' : ''}',
+        '${ApiConfig.baseUrl}/User?Page=$page&PageSize=$pageSize${query != null ? '&FirstNameGTE=$query&UserName=$query' : ''}$isAdminFilter',
       );
       final response = await http.get(uri, headers: headers);
 
