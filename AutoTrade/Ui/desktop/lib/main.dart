@@ -57,7 +57,7 @@ class InitialScreen extends StatelessWidget {
           });
         }
 
-        return const SizedBox(); // Povratna vrednost dok čekamo navigaciju
+        return const SizedBox();
       },
     );
   }

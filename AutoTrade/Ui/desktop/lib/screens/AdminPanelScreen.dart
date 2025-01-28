@@ -1,7 +1,8 @@
 import 'package:desktop_app/components/AdminList.dart';
 import 'package:desktop_app/components/UsersList.dart';
+import 'package:desktop_app/components/shared/TooltipIconButton.dart';
+import 'package:desktop_app/screens/AdAdminScreen.dart';
 import 'package:flutter/material.dart';
-import 'AdAdminScreen.dart';
 
 class AdminPanelScreen extends StatelessWidget {
   const AdminPanelScreen({Key? key}) : super(key: key);
@@ -18,13 +19,32 @@ class AdminPanelScreen extends StatelessWidget {
           children: [
             DrawerHeader(
               decoration: BoxDecoration(color: Colors.blueGrey[900]),
-              child: const Text(
-                'Admin Panel',
-                style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 24,
-                  fontWeight: FontWeight.bold,
-                ),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      const Text(
+                        'Admin Panel',
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 24,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                      TooltipIconButton(
+                        message: 'Zatvori',
+                        icon: Icons.close,
+                        iconColor: Colors.white,
+                        onPressed: () {
+                          Navigator.of(context).pop();
+                        },
+                      ),
+                    ],
+                  ),
+                ],
               ),
             ),
             ListTile(
@@ -38,7 +58,7 @@ class AdminPanelScreen extends StatelessWidget {
                 );
               },
             ),
-              ListTile(
+            ListTile(
               leading: const Icon(Icons.group),
               title: const Text('Pregled Korsnika'),
               onTap: () {
@@ -52,7 +72,7 @@ class AdminPanelScreen extends StatelessWidget {
           ],
         ),
       ),
-      body: const AdminList()
+      body: const AdminList(),
     );
   }
 }

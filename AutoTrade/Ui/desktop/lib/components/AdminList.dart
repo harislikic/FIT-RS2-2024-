@@ -119,11 +119,22 @@ class _AdminListState extends State<AdminList> {
                   width: 400, // Postavite željenu širinu
                   child: TextField(
                     controller: _searchController,
-                    decoration: const InputDecoration(
+                    decoration: InputDecoration(
                       labelText: 'Pretraga',
-                      border: OutlineInputBorder(),
-                      isDense: true, // Manji padding unutar polja
+                      border: const OutlineInputBorder(),
+                      isDense: true,
+                      suffixIcon: _searchController.text.isNotEmpty
+                          ? IconButton(
+                              icon: const Icon(Icons.clear),
+                              onPressed: () {
+                                _searchController.clear();
+                              },
+                            )
+                          : null,
                     ),
+                    onChanged: (value) {
+                      setState(() {}); // Osvetljava UI kada se unos menja
+                    },
                     onSubmitted: (_) =>
                         _fetchAdmins(query: _searchController.text),
                   ),

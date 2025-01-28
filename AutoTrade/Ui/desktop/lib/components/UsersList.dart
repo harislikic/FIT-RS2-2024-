@@ -112,11 +112,23 @@ class _UsersListState extends State<UsersList> {
                   width: 400,
                   child: TextField(
                     controller: _searchController,
-                    decoration: const InputDecoration(
+                    decoration: InputDecoration(
                       labelText: 'Pretraga',
-                      border: OutlineInputBorder(),
+                      border: const OutlineInputBorder(),
                       isDense: true,
+                      suffixIcon: _searchController.text.isNotEmpty
+                          ? IconButton(
+                              icon: const Icon(Icons.clear),
+                              onPressed: () {
+                                _searchController.clear();
+                                // Očisti pretragu i osveži listu
+                              },
+                            )
+                          : null,
                     ),
+                    onChanged: (value) {
+                      setState(() {}); // Osvetljava UI kada se unos menja
+                    },
                     onSubmitted: (_) =>
                         _fetchUsers(query: _searchController.text),
                   ),
