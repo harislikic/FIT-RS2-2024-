@@ -13,6 +13,7 @@ class AdminList extends StatefulWidget {
 
 class _AdminListState extends State<AdminList> {
   final TextEditingController _searchController = TextEditingController();
+  final ScrollController _scrollController = ScrollController();
   List<dynamic> _admins = [];
   int _count = 0;
   int _currentPage = 0;
@@ -23,6 +24,13 @@ class _AdminListState extends State<AdminList> {
   void initState() {
     super.initState();
     _fetchAdmins();
+    _scrollController.addListener(_onScroll);
+  }
+
+  void _onScroll() {
+    if (_scrollController.position.pixels >= _scrollController.position.maxScrollExtent - 100 && !_isLoading) {
+      _fetchAdmins();
+    }
   }
 
   Future<void> _fetchAdmins({String? query}) async {
@@ -31,10 +39,9 @@ class _AdminListState extends State<AdminList> {
     setState(() {
       _isLoading = true;
 
-      // Resetuj listu admina samo ako radimo novu pretragu
       if (query != null) {
         _admins = [];
-        _currentPage = 0; // Resetuj paginaciju
+        _currentPage = 0;
       }
     });
 
@@ -49,6 +56,7 @@ class _AdminListState extends State<AdminList> {
       setState(() {
         _count = data['count'];
         _admins.addAll(data['data']);
+        _currentPage++;
       });
     } catch (e) {
       ScaffoldMessenger.of(context).showSnackBar(
@@ -66,8 +74,7 @@ class _AdminListState extends State<AdminList> {
       context: context,
       builder: (context) => AlertDialog(
         title: const Text('Potvrda'),
-        content:
-            const Text('Da li ste sigurni da želite obrisati ovog admina?'),
+        content: const Text('Da li ste sigurni da želite obrisati ovog admina?'),
         actions: [
           TextButton(
             onPressed: () => Navigator.of(context).pop(false),
@@ -91,10 +98,8 @@ class _AdminListState extends State<AdminList> {
         _count--;
       });
 
-      SnackbarHelper.showSnackbar(context, 'Admin obrisan uspešno',
-          backgroundColor: Colors.green);
+      SnackbarHelper.showSnackbar(context, 'Admin obrisan uspešno', backgroundColor: Colors.green);
 
-      // Ponovno učitavanje podataka
       _fetchAdmins(query: _searchController.text);
     } catch (e) {
       ScaffoldMessenger.of(context).showSnackBar(
@@ -116,7 +121,7 @@ class _AdminListState extends State<AdminList> {
             child: Row(
               children: [
                 SizedBox(
-                  width: 400, // Postavite željenu širinu
+                  width: 400,
                   child: TextField(
                     controller: _searchController,
                     decoration: InputDecoration(
@@ -128,15 +133,12 @@ class _AdminListState extends State<AdminList> {
                               icon: const Icon(Icons.clear),
                               onPressed: () {
                                 _searchController.clear();
+                                _fetchAdmins();
                               },
                             )
                           : null,
                     ),
-                    onChanged: (value) {
-                      setState(() {}); // Osvetljava UI kada se unos menja
-                    },
-                    onSubmitted: (_) =>
-                        _fetchAdmins(query: _searchController.text),
+                    onSubmitted: (_) => _fetchAdmins(query: _searchController.text),
                   ),
                 ),
                 const SizedBox(width: 8),
@@ -150,77 +152,73 @@ class _AdminListState extends State<AdminList> {
             ),
           ),
           Expanded(
-            child: _isLoading
-                ? const Center(child: CircularProgressIndicator())
-                : SingleChildScrollView(
-                    scrollDirection: Axis.horizontal,
-                    child: DataTable(
-                      dividerThickness: 1, // Debljina linija između redova
-                      dataRowColor: MaterialStateProperty.resolveWith<Color?>(
-                        (Set<MaterialState> states) {
-                          if (states.contains(MaterialState.selected)) {
-                            return Colors.grey
-                                .withOpacity(0.2); // Boja selektovanog reda
-                          }
-                          return Colors.white; // Podrazumevana boja reda
-                        },
-                      ),
-                      headingRowColor:
-                          MaterialStateProperty.all(Colors.blueGrey[50]),
-                      columns: const [
-                        DataColumn(label: Text('ID')),
-                        DataColumn(label: Text('Ime')),
-                        DataColumn(label: Text('Prezime')),
-                        DataColumn(label: Text('Username')),
-                        DataColumn(label: Text('Email')),
-                        DataColumn(label: Text('Telefon')),
-                        DataColumn(label: Text('Adresa')),
-                        DataColumn(label: Text('Grad')),
-                        DataColumn(label: Text('Datum Rođenja')),
-                        DataColumn(label: Text('Slika')),
-                        DataColumn(label: Text('Akcija')),
-                      ],
-                      rows: _admins
-                          .map(
-                            (user) => DataRow(
-                              cells: [
-                                DataCell(Text(user['id'].toString())),
-                                DataCell(Text(user['firstName'] ?? '-')),
-                                DataCell(Text(user['lastName'] ?? '-')),
-                                DataCell(Text(user['userName'] ?? '-')),
-                                DataCell(Text(user['email'] ?? '-')),
-                                DataCell(Text(user['phoneNumber'] ?? '-')),
-                                DataCell(Text(user['adress'] ?? '-')),
-                                DataCell(Text(user['city']['title'] ?? '-')),
-                                DataCell(Text(
-                                  user['dateOfBirth'] != null
-                                      ? DateFormat('dd.MM.yyyy').format(
-                                          DateTime.parse(user['dateOfBirth']))
-                                      : '-',
-                                )),
-                                DataCell(
-                                  user['profilePicture'] != null
-                                      ? Image.network(
-                                          '${ApiConfig.baseUrl}${user['profilePicture']}',
-                                          width: 50,
-                                          height: 50,
-                                        )
-                                      : const Icon(Icons.person),
-                                ),
-                                DataCell(
-                                  IconButton(
-                                    icon: const Icon(Icons.delete,
-                                        color: Colors.red),
-                                    onPressed: () => _deleteAdmin(user['id']),
-                                  ),
-                                ),
-                              ],
+            child: SizedBox(
+              height: MediaQuery.of(context).size.height * 0.8,
+              child: SingleChildScrollView(
+                controller: _scrollController,
+                scrollDirection: Axis.vertical,
+                child: SingleChildScrollView(
+                  scrollDirection: Axis.horizontal,
+                  child: DataTable(
+                    dividerThickness: 1,
+                    headingRowColor: MaterialStateProperty.all(Colors.blueGrey[50]),
+                    columns: const [
+                      DataColumn(label: Text('ID')),
+                      DataColumn(label: Text('Ime')),
+                      DataColumn(label: Text('Prezime')),
+                      DataColumn(label: Text('Username')),
+                      DataColumn(label: Text('Email')),
+                      DataColumn(label: Text('Telefon')),
+                      DataColumn(label: Text('Adresa')),
+                      DataColumn(label: Text('Grad')),
+                      DataColumn(label: Text('Datum Rođenja')),
+                      DataColumn(label: Text('Slika')),
+                      DataColumn(label: Text('Akcija')),
+                    ],
+                    rows: _admins.map(
+                      (user) => DataRow(
+                        cells: [
+                          DataCell(Text(user['id'].toString())),
+                          DataCell(Text(user['firstName'] ?? '-')),
+                          DataCell(Text(user['lastName'] ?? '-')),
+                          DataCell(Text(user['userName'] ?? '-')),
+                          DataCell(Text(user['email'] ?? '-')),
+                          DataCell(Text(user['phoneNumber'] ?? '-')),
+                          DataCell(Text(user['adress'] ?? '-')),
+                          DataCell(Text(user['city']['title'] ?? '-')),
+                          DataCell(
+                            Text(user['dateOfBirth'] != null
+                                ? DateFormat('dd.MM.yyyy').format(DateTime.parse(user['dateOfBirth']))
+                                : '-'),
+                          ),
+                          DataCell(
+                            user['profilePicture'] != null
+                                ? Image.network(
+                                    '${ApiConfig.baseUrl}${user['profilePicture']}',
+                                    width: 50,
+                                    height: 50,
+                                  )
+                                : const Icon(Icons.person),
+                          ),
+                          DataCell(
+                            IconButton(
+                              icon: const Icon(Icons.delete, color: Colors.red),
+                              onPressed: () => _deleteAdmin(user['id']),
                             ),
-                          )
-                          .toList(),
-                    ),
+                          ),
+                        ],
+                      ),
+                    ).toList(),
                   ),
+                ),
+              ),
+            ),
           ),
+          if (_isLoading)
+            const Padding(
+              padding: EdgeInsets.all(8.0),
+              child: CircularProgressIndicator(),
+            ),
         ],
       ),
     );
