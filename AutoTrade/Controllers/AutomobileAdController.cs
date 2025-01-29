@@ -61,8 +61,8 @@ namespace Controllers
             {
                 PaymentId = request.PaymentId,
                 Amount = request.Amount.Value,
-                Currency = "USD",
-                Status = "success",
+                Currency = request.Currency,
+                Status = request.Status,
                 CreatedAt = DateTime.UtcNow,
                 UpdatedAt = DateTime.UtcNow,
                 AutomobileAdId = id
@@ -238,8 +238,8 @@ namespace Controllers
 
 
 
-         
-         
+
+
             if (request.Images != null && request.Images.Any())
             {
                 foreach (var image in request.Images)

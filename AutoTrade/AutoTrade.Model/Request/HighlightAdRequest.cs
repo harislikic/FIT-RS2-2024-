@@ -6,5 +6,7 @@ namespace Request
 
         public decimal? Amount { get; set; }
         public string? PaymentId { get; set; }
+        public string? Currency { get; set; }
+        public string? Status { get; set; }
     }
 }
