@@ -1,4 +1,5 @@
 import 'package:desktop_app/components/AdminList.dart';
+import 'package:desktop_app/components/PaymentAnalytics.dart';
 import 'package:desktop_app/components/UsersList.dart';
 import 'package:desktop_app/components/shared/TooltipIconButton.dart';
 import 'package:desktop_app/screens/AdAdminScreen.dart';
@@ -65,6 +66,17 @@ class AdminPanelScreen extends StatelessWidget {
                 Navigator.of(context).push(
                   MaterialPageRoute(
                     builder: (context) => const UsersList(),
+                  ),
+                );
+              },
+            ),
+            ListTile(
+              leading: const Icon(Icons.analytics_sharp),
+              title: const Text('Analitika transkacija'),
+              onTap: () {
+                Navigator.of(context).push(
+                  MaterialPageRoute(
+                    builder: (context) =>  PaymentAnalytics(),
                   ),
                 );
               },

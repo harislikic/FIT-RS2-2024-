@@ -17,19 +17,12 @@ namespace Controllers
 
         [HttpGet]
         public async Task<ActionResult<IEnumerable<object>>> GetAllTransactions(
-            [FromQuery] int? year, 
-            [FromQuery] int? month,
-            [FromQuery] int pageNumber = 1, 
-            [FromQuery] int pageSize = 25)
+            [FromQuery] int? year,
+            [FromQuery] int? month
+           )
         {
-            if (pageNumber < 1 || pageSize < 1)
-            {
-                return BadRequest("Page number and page size must be greater than 0.");
-            }
 
-            var query = _context.PaymentTransactions
-                .Include(t => t.AutomobileAd)
-                .AsQueryable();
+            var query = _context.PaymentTransactions.AsQueryable();
 
             if (year.HasValue)
             {
@@ -43,11 +36,10 @@ namespace Controllers
 
             var totalRecords = await query.CountAsync();
             var totalAmount = await query.SumAsync(t => t.Amount);
-            
+
             var transactions = await query
                 .OrderByDescending(t => t.CreatedAt)
-                .Skip((pageNumber - 1) * pageSize)
-                .Take(pageSize)
+
                 .Select(t => new
                 {
                     TransactionId = t.Id,
@@ -57,11 +49,7 @@ namespace Controllers
                     Status = t.Status,
                     CreatedAt = t.CreatedAt,
                     UpdatedAt = t.UpdatedAt,
-                    AutomobileAd = t.AutomobileAd != null ? new
-                    {
-                        t.AutomobileAd.Id,
-                        t.AutomobileAd.Title
-                    } : null
+
                 })
                 .ToListAsync();
 
@@ -69,9 +57,6 @@ namespace Controllers
             {
                 TotalRecords = totalRecords,
                 TotalAmount = totalAmount,
-                PageNumber = pageNumber,
-                PageSize = pageSize,
-                TotalPages = (int)Math.Ceiling(totalRecords / (double)pageSize),
                 Transactions = transactions
             };
 
