@@ -3,8 +3,26 @@ import 'package:desktop_app/screens/%20LoginScreen.dart';
 import 'package:desktop_app/services/AuthService.dart';
 import 'package:desktop_app/screens/AdminPanelScreen.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:flutter_stripe/flutter_stripe.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding
+      .ensureInitialized(); // Obezbeđuje da se async pokrene pre `runApp()`
+
+  try {
+    await dotenv.load(fileName: ".env");
+  } catch (e) {
+    print("⚠️ Greška pri učitavanju `.env`: $e");
+  }
+
+  String stripePublishableKey = dotenv.env['STRIPE_PUBLISHABLE_KEY'] ?? '';
+  if (stripePublishableKey.isEmpty) {
+    print("⚠️ Upozorenje: `STRIPE_PUBLISHABLE_KEY` nije pronađen!");
+  } else {
+    Stripe.publishableKey = stripePublishableKey;
+  }
+
   runApp(const MyApp());
 }
 

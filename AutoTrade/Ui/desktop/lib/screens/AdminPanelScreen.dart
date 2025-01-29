@@ -3,6 +3,7 @@ import 'package:desktop_app/components/PaymentAnalytics.dart';
 import 'package:desktop_app/components/UsersList.dart';
 import 'package:desktop_app/components/shared/TooltipIconButton.dart';
 import 'package:desktop_app/screens/AdAdminScreen.dart';
+import 'package:desktop_app/screens/StripeTransactionsScreen.dart';
 import 'package:flutter/material.dart';
 
 class AdminPanelScreen extends StatelessWidget {
@@ -72,7 +73,18 @@ class AdminPanelScreen extends StatelessWidget {
             ),
             ListTile(
               leading: const Icon(Icons.analytics_sharp),
-              title: const Text('Analitika transkacija'),
+              title: const Text('Stripe Analitika transkacija'),
+              onTap: () {
+                Navigator.of(context).push(
+                  MaterialPageRoute(
+                    builder: (context) =>  StripeTransactionsScreen(),
+                  ),
+                );
+              },
+            ),
+              ListTile(
+              leading: const Icon(Icons.analytics),
+              title: const Text('Bazza Analitika transkacija'),
               onTap: () {
                 Navigator.of(context).push(
                   MaterialPageRoute(
