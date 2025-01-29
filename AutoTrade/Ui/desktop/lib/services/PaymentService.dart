@@ -33,44 +33,25 @@ class PaymentService {
 
   final String _stripeSecretKey = dotenv.env['STRIPE_SECRET_KEY']!;
 
-  /// ✅ Metoda koja iterativno dohvaća SVE Stripe transakcije
+  /// ✅ Metoda koja dohvaća SVE Stripe transakcije bez paginacije
   Future<List<dynamic>> getStripeTransactions() async {
-    const String url = 'https://api.stripe.com/v1/charges';
-    List<dynamic> allTransactions = [];
-    String? startingAfter;
+    const String url = 'https://api.stripe.com/v1/charges?limit=300';
 
     try {
-      while (true) {
-        // Dodaj paginaciju ako postoji `starting_after`
-        final response = await http.get(
-          Uri.parse(startingAfter == null
-              ? '$url?limit=100'
-              : '$url?limit=100&starting_after=$startingAfter'),
-          headers: {
-            'Authorization': 'Bearer $_stripeSecretKey',
-            'Content-Type': 'application/x-www-form-urlencoded',
-          },
-        );
+      final response = await http.get(
+        Uri.parse(url), // Bez paginacije, preuzima sve transakcije
+        headers: {
+          'Authorization': 'Bearer $_stripeSecretKey',
+          'Content-Type': 'application/x-www-form-urlencoded',
+        },
+      );
 
-        if (response.statusCode == 200) {
-          final data = json.decode(response.body);
-
-          // Dodaj transakcije u listu
-          allTransactions.addAll(data['data']);
-
-          // Ako nema više podataka, prekidamo petlju
-          if (!data['has_more']) {
-            break;
-          }
-
-          // Postavi novi `starting_after` za sledeću stranicu
-          startingAfter = data['data'].last['id'];
-        } else {
-          throw Exception('Stripe API error: ${response.statusCode}');
-        }
+      if (response.statusCode == 200) {
+        final data = json.decode(response.body);
+        return data['data']; // Vraća listu transakcija
+      } else {
+        throw Exception('Stripe API error: ${response.statusCode}');
       }
-
-      return allTransactions;
     } catch (e) {
       throw Exception('Greška pri dohvaćanju Stripe transakcija: $e');
     }
