@@ -33,14 +33,21 @@ class UserService {
   }) async {
     try {
       final headers = await AuthService.getAuthHeaders();
-      final String isAdminFilter = isAdmin != null ? '&IsAdmin=$isAdmin' : '';
-      final uri = Uri.parse(
-        '${ApiConfig.baseUrl}/User?Page=$page&PageSize=$pageSize${query != null ? '&FirstNameGTE=$query&UserName=$query' : ''}$isAdminFilter',
-      );
+
+      final Map<String, String> queryParams = {
+        "Page": page.toString(),
+        "PageSize": pageSize.toString(),
+        if (query != null) "FullNameQuery": query,
+        if (isAdmin != null) "IsAdmin": isAdmin.toString(),
+      };
+
+      final uri = Uri.parse('${ApiConfig.baseUrl}/User')
+          .replace(queryParameters: queryParams);
+
       final response = await http.get(uri, headers: headers);
 
       if (response.statusCode == 200) {
-        return jsonDecode(response.body);
+        return jsonDecode(response.body) as Map<String, dynamic>;
       } else {
         throw Exception('Failed to fetch admins: ${response.statusCode}');
       }

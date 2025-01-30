@@ -22,14 +22,10 @@ namespace AutoTrade.Services
         public override IQueryable<Database.User> AddFilter(UserSearchObject search, IQueryable<Database.User> query)
         {
 
-            if (!string.IsNullOrWhiteSpace(search?.FirstNameGTE))
+            if (!string.IsNullOrWhiteSpace(search?.FullNameQuery))
             {
-                query = query.Where(x => x.FirstName.Contains(search.FirstNameGTE));
-            }
-
-            if (!string.IsNullOrWhiteSpace(search?.LastNameeGTE))
-            {
-                query = query.Where(x => x.LastName.StartsWith(search.LastNameeGTE));
+                string nameFilter = search.FullNameQuery.Trim();
+                query = query.Where(x => x.FirstName.Contains(search.FullNameQuery) || x.LastName.Contains(search.FullNameQuery));
             }
 
             if (!string.IsNullOrWhiteSpace(search?.UserName))

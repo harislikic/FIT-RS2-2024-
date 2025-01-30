@@ -45,6 +45,7 @@ class _UsersListState extends State<UsersList> {
     });
 
     try {
+      
       final data = await UserService.getAllAdmins(
         page: _currentPage,
         pageSize: _pageSize,
