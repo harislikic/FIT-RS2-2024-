@@ -148,6 +148,12 @@ namespace AutoTrade.Services.Database
                 .WithOne(transaction => transaction.AutomobileAd)
                 .HasForeignKey<AutomobileAd>(ad => ad.PaymentTransactionId)
                 .OnDelete(DeleteBehavior.SetNull);
+
+            #region SEED
+            modelBuilder.Entity<Canton>().HasData(DefaultCantonData.Cantons);
+            modelBuilder.Entity<City>().HasData(DefaultCityData.Cities);
+
+            #endregion
         }
 
 
