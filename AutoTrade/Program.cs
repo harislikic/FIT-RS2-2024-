@@ -117,24 +117,24 @@ app.UseAuthorization();
 app.MapControllers();
 
 
-using (var scope = app.Services.CreateScope())
-{
-    var dbContext = scope.ServiceProvider.GetRequiredService<AutoTradeContext>();
+// using (var scope = app.Services.CreateScope())
+// {
+//     var dbContext = scope.ServiceProvider.GetRequiredService<AutoTradeContext>();
 
-    // Zatim dodajemo slike ako već nisu dodate
-    if (!dbContext.AutomobileAdImages.Any())
-    {
-        dbContext.AutomobileAdImages.AddRange(DefaultAutomobileAdImagesData.AutomobileAdImages);
-        dbContext.SaveChanges();
-    }
+//     // Zatim dodajemo slike ako već nisu dodate
+//     if (!dbContext.AutomobileAdImages.Any())
+//     {
+//         dbContext.AutomobileAdImages.AddRange(DefaultAutomobileAdImagesData.AutomobileAdImages);
+//         dbContext.SaveChanges();
+//     }
 
-    // Na kraju dodajemo dodatnu opremu
-    if (!dbContext.AutomobileAdEquipments.Any())
-    {
-        dbContext.AutomobileAdEquipments.AddRange(DefaultAdditionalEquipmentData.AutomobileAdEquipment);
-        dbContext.SaveChanges();
-    }
-}
+//     // Na kraju dodajemo dodatnu opremu
+//     if (!dbContext.AutomobileAdEquipments.Any())
+//     {
+//         dbContext.AutomobileAdEquipments.AddRange(DefaultAdditionalEquipmentData.AutomobileAdEquipment);
+//         dbContext.SaveChanges();
+//     }
+// }
 
 
 // RabitMQ scope
