@@ -59,7 +59,8 @@ namespace Database
 
         public int? EnginePower { get; set; }
         public int? NumberOfDoors { get; set; }
-        public int? CubicCapacity { get; set; }
+        public double? CubicCapacity { get; set; }
+        
         // set to double cubic capacity
         public int? HorsePower { get; set; }
         public string? Color { get; set; }
