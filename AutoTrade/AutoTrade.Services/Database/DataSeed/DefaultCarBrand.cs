@@ -14,7 +14,7 @@ namespace AutoTrade.Services.Database
                 new CarBrand { Id = 4, Name = "Honda" },
                 new CarBrand { Id = 5, Name = "Nissan" },
                 new CarBrand { Id = 6, Name = "Chevrolet" },
-                new CarBrand { Id = 7, Name = "Mercedes-Benz" },
+                new CarBrand { Id = 7, Name = "Mercedes" },
                 new CarBrand { Id = 8, Name = "BMW" },
                 new CarBrand { Id = 9, Name = "Audi" },
                 new CarBrand { Id = 10, Name = "Hyundai" },

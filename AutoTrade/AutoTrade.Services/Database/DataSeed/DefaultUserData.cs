@@ -15,10 +15,10 @@ namespace AutoTrade.Services.Database
                     new User
                     {
                         Id = 1,
-                        UserName = "haris",
-                        FirstName = "haris",
-                        LastName = "likic",
-                        Email = "haris@hotmail.com",
+                        UserName = "admin",
+                        FirstName = "admin",
+                        LastName = "admin",
+                        Email = "creauts.xoxo@gmail.com",
                         PhoneNumber = "062123456",
                         Adress = "Adresa 1",
                         Gender = "M",
@@ -30,14 +30,14 @@ namespace AutoTrade.Services.Database
                     new User
                     {
                         Id = 2,
-                        UserName = "samir456",
-                        FirstName = "Samir",
-                        LastName = "Kovačević",
-                        Email = "samir@gmail.com",
+                        UserName = "haris",
+                        FirstName = "haris",
+                        LastName = "likic",
+                        Email = "haris.likic@hotmail.com",
                         PhoneNumber = "063654321",
                         Adress = "Adresa 2",
                         Gender = "M",
-                        IsAdmin = false,
+                        IsAdmin = true,
                         DateOfBirth = new DateTime(1985, 8, 25),
                         ProfilePicture = "/uploads/samirSlika.jpg",
                         CityId = 2
