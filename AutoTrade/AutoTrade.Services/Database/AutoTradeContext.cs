@@ -153,9 +153,23 @@ namespace AutoTrade.Services.Database
             // modelBuilder.Entity<Canton>().HasData(DefaultCantonData.Cantons);
             // modelBuilder.Entity<City>().HasData(DefaultCityData.Cities);
 
-             //modelBuilder.Entity<AutomobileAd>().HasData(DefaultAutomobileAdData.AutomobileAds);
-           // modelBuilder.Entity<AutomobileAd>().HasData(DefaultAutomobileAdImagesData.AutomobileAdImages);
-           
+             modelBuilder.Entity<User>().HasData(DefaultUserData.Users);
+
+            modelBuilder.Entity<CarBrand>().HasData(DefaultCarBrandData.CarBrands);
+            modelBuilder.Entity<CarCategory>().HasData(DefaultCarCategoryData.CarCategories);
+            modelBuilder.Entity<CarModel>().HasData(DefaultCarModelData.CarModels);
+            modelBuilder.Entity<FuelType>().HasData(DefaultFuelTypeData.FuelTypes);
+            modelBuilder.Entity<TransmissionType>().HasData(DefaultTransmissionTypeData.TransmissionTypes);
+            modelBuilder.Entity<VehicleCondition>().HasData(DefaultVehicleConditionData.VehicleConditions);
+            modelBuilder.Entity<Equipment>().HasData(DefaultEquipmentData.Equipments);
+
+
+            //modelBuilder.Entity<AutomobileAd>().HasData(DefaultAutomobileAdData.AutomobileAds);
+             //modelBuilder.Entity<AutomobileAdImage>().HasData(DefaultAutomobileAdImagesData.AutomobileAdImages);
+            //modelBuilder.Entity<Favorite>().HasData(DefaultFavoriteData.Favorites);
+             modelBuilder.Entity<Comment>().HasData(DefaultCommentData.Comments);
+            modelBuilder.Entity<Reservation>().HasData(DefaultReservationData.Reservations);
+         
 
             // #endregion
         }
