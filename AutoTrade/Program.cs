@@ -121,7 +121,7 @@ app.MapControllers();
 // {
 //     var dbContext = scope.ServiceProvider.GetRequiredService<AutoTradeContext>();
 
-//     // Zatim dodajemo slike ako već nisu dodate
+//     // Zatim dodajemo slike ako već nisu dodate ovo mozda ne treba
 //     if (!dbContext.AutomobileAdImages.Any())
 //     {
 //         dbContext.AutomobileAdImages.AddRange(DefaultAutomobileAdImagesData.AutomobileAdImages);

@@ -154,6 +154,7 @@ namespace AutoTrade.Services.Database
             // modelBuilder.Entity<City>().HasData(DefaultCityData.Cities);
 
              //modelBuilder.Entity<AutomobileAd>().HasData(DefaultAutomobileAdData.AutomobileAds);
+           // modelBuilder.Entity<AutomobileAd>().HasData(DefaultAutomobileAdImagesData.AutomobileAdImages);
            
 
             // #endregion
