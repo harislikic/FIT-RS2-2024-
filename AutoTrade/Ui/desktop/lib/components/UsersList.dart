@@ -13,11 +13,8 @@ class UsersList extends StatefulWidget {
 
 class _UsersListState extends State<UsersList> {
   final TextEditingController _searchController = TextEditingController();
-  final ScrollController _scrollController = ScrollController();
 
   List<dynamic> _users = [];
-
-
   int _count = 0;
 
   int _currentPage = 0;
