@@ -13,62 +13,116 @@ class AutomobileAdsList extends StatefulWidget {
 
 class _AutomobileAdsListState extends State<AutomobileAdsList> {
   final TextEditingController _searchController = TextEditingController();
-  final ScrollController _scrollController = ScrollController();
+
   List<AutomobileAd> _ads = [];
+
   int _count = 0;
+
   int _currentPage = 0;
+
+  int _serverPage = 0;
+
   bool _isLoading = false;
+
   final int _pageSize = 25;
-  String? _selectedStatus = "Active";
+
+  String _selectedStatus = "Active";
 
   @override
   void initState() {
     super.initState();
     _fetchAutomobileAds();
-    _scrollController.addListener(_onScroll);
   }
 
-  void _onScroll() {
-    if (_scrollController.position.pixels >=
-            _scrollController.position.maxScrollExtent - 100 &&
-        !_isLoading) {
-      _fetchAutomobileAds();
-    }
-  }
-
+  /// Ako [query] != null => resetuje sve (nova pretraga)
   Future<void> _fetchAutomobileAds({String? query}) async {
     if (_isLoading) return;
+    setState(() => _isLoading = true);
 
-    setState(() {
-      _isLoading = true;
-      if (query != null) {
-        _ads = [];
-        _currentPage = 0;
-      }
-    });
+    if (query != null) {
+      // Resetujemo sve ako je nova pretraga
+      _ads.clear();
+      _currentPage = 0;
+      _serverPage = 0;
+    }
 
     try {
       final response = await AutomobileAdService().fetchAutomobileAds(
-        searchTerm: query ?? '',
-        page: _currentPage,
+        searchTerm: query ?? _searchController.text,
+        page: _serverPage,
         pageSize: _pageSize,
         status: _selectedStatus,
       );
 
       setState(() {
-        _count = response['count']; // ✔️
-        _ads.addAll(response['data']);
-        _currentPage++;
+        _count = response['count'] as int;
+        final fetchedAds = response['data'] as List<AutomobileAd>;
+        _ads.addAll(fetchedAds);
+
+        _serverPage++;
       });
     } catch (e) {
       SnackbarHelper.showSnackbar(context, 'Error: $e');
     } finally {
-      setState(() {
-        _isLoading = false;
-      });
+      setState(() => _isLoading = false);
     }
   }
 
+  List<AutomobileAd> get _pageAds {
+    final startIndex = _currentPage * _pageSize;
+    int endIndex = startIndex + _pageSize;
+    if (endIndex > _ads.length) {
+      endIndex = _ads.length;
+    }
+    if (startIndex >= _ads.length) {
+      return [];
+    }
+    return _ads.sublist(startIndex, endIndex);
+  }
+
+  /// Klik "Traži"
+  void _onSearch() {
+    _fetchAutomobileAds(query: _searchController.text);
+  }
+
+  /// Menja status (Active/Pending) i resetuje
+  void _onStatusChanged(String? value) {
+    if (value == null) return;
+    setState(() {
+      _selectedStatus = value;
+    });
+    _fetchAutomobileAds(query: _searchController.text);
+  }
+
+  void _nextPage() {
+    setState(() {
+      final nextPage = _currentPage + 1;
+
+      final nextStartIndex = nextPage * _pageSize;
+
+      if (nextStartIndex >= _ads.length && _ads.length < _count) {
+        _fetchAutomobileAds();
+      }
+      _currentPage = nextPage;
+    });
+  }
+
+  void _prevPage() {
+    setState(() {
+      if (_currentPage > 0) {
+        _currentPage--;
+      }
+    });
+  }
+
+  bool get canGoPrev => _currentPage > 0;
+  bool get canGoNext {
+    final nextStart = (_currentPage + 1) * _pageSize;
+    if (nextStart >= _count) return false;
+    return true;
+  }
+
+  /// Approve
   Future<void> _approveAutomobile(int adId) async {
     final confirm = await showDialog<bool>(
       context: context,
@@ -90,7 +144,10 @@ class _AutomobileAdsListState extends State<AutomobileAdsList> {
 
     try {
       await AutomobileAdService().markAsActive(adId);
-
+      // Osvežimo sve
+      _ads.clear();
+      _serverPage = 0;
+      _currentPage = 0;
       await _fetchAutomobileAds();
 
       SnackbarHelper.showSnackbar(context, 'Oglas odobren',
@@ -123,14 +180,10 @@ class _AutomobileAdsListState extends State<AutomobileAdsList> {
 
     try {
       await AutomobileAdService().removeAutomobile(adId, {});
-
-      await _fetchAutomobileAds();
-
       setState(() {
         _ads.removeWhere((ad) => ad.id == adId);
         _count--;
       });
-
       SnackbarHelper.showSnackbar(context, 'Oglas uspešno obrisan',
           backgroundColor: Colors.green);
     } catch (e) {
@@ -140,6 +193,21 @@ class _AutomobileAdsListState extends State<AutomobileAdsList> {
 
   @override
   Widget build(BuildContext context) {
+    int startDisplay;
+    int endDisplay;
+
+    if (_count == 0) {
+      // Nema oglasa
+      startDisplay = 0;
+      endDisplay = 0;
+    } else {
+      startDisplay = _currentPage * _pageSize + 1;
+      endDisplay = startDisplay + _pageSize - 1;
+      if (endDisplay > _count) {
+        endDisplay = _count;
+      }
+    }
+
     return Scaffold(
       appBar: AppBar(title: const Text('Lista oglasa')),
       body: Column(
@@ -161,46 +229,34 @@ class _AutomobileAdsListState extends State<AutomobileAdsList> {
                               icon: const Icon(Icons.clear),
                               onPressed: () {
                                 _searchController.clear();
-                                _fetchAutomobileAds();
+                                _onSearch();
                               },
                             )
                           : null,
                     ),
-                    onSubmitted: (_) =>
-                        _fetchAutomobileAds(query: _searchController.text),
+                    onSubmitted: (_) => _onSearch(),
                   ),
                 ),
                 const SizedBox(width: 8),
                 Row(
                   children: [
-                    Radio(
+                    Radio<String>(
                       value: "Active",
                       groupValue: _selectedStatus,
-                      onChanged: (String? value) {
-                        setState(() {
-                          _selectedStatus = value;
-                        });
-                        _fetchAutomobileAds();
-                      },
+                      onChanged: _onStatusChanged,
                     ),
                     const Text("Active"),
-                    Radio(
+                    Radio<String>(
                       value: "Pending",
                       groupValue: _selectedStatus,
-                      onChanged: (String? value) {
-                        setState(() {
-                          _selectedStatus = value;
-                        });
-                        _fetchAutomobileAds();
-                      },
+                      onChanged: _onStatusChanged,
                     ),
                     const Text("Pending"),
                   ],
                 ),
                 const SizedBox(width: 8),
                 ElevatedButton(
-                  onPressed: () =>
-                      _fetchAutomobileAds(query: _searchController.text),
+                  onPressed: _onSearch,
                   child: const Text('Traži'),
                 ),
                 const SizedBox(width: 16),
@@ -209,11 +265,31 @@ class _AutomobileAdsListState extends State<AutomobileAdsList> {
             ),
           ),
           AutomobileAdsTable(
-            ads: _ads,
+            ads: _pageAds,
             onDelete: _deleteAutomobile,
             onApprove: _approveAutomobile,
-            scrollController: _scrollController,
           ),
+          const SizedBox(height: 8),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              ElevatedButton(
+                onPressed: canGoPrev ? _prevPage : null,
+                child: const Icon(Icons.arrow_back), // Ikonica za "Previous"
+              ),
+              const SizedBox(width: 16),
+              ElevatedButton(
+                onPressed: canGoNext ? _nextPage : null,
+                child: const Icon(Icons.arrow_forward), //
+              ),
+            ],
+          ),
+          const SizedBox(height: 8),
+          Text(
+            'Prikaz oglasa: $startDisplay - $endDisplay (od $_count)',
+            style: const TextStyle(fontSize: 15),
+          ),
+          const SizedBox(height: 8),
         ],
       ),
     );

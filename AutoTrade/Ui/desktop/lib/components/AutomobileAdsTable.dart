@@ -7,18 +7,16 @@ class AutomobileAdsTable extends StatelessWidget {
   final List<AutomobileAd> ads;
   final Function(int) onDelete;
   final Function(int) onApprove;
-  final ScrollController scrollController;
 
   const AutomobileAdsTable({
     Key? key,
     required this.ads,
     required this.onDelete,
     required this.onApprove,
-    required this.scrollController,
   }) : super(key: key);
 
   void _showAllImages(BuildContext context, List<String> imageUrls) {
-    showDialog(
+        showDialog(
       context: context,
       builder: (context) => Dialog(
         child: Column(
@@ -54,11 +52,8 @@ class AutomobileAdsTable extends StatelessWidget {
   Widget build(BuildContext context) {
     return Expanded(
       child: SingleChildScrollView(
-        controller: scrollController,
         scrollDirection: Axis.horizontal,
         child: DataTable(
-          dividerThickness: 1,
-          headingRowColor: MaterialStateProperty.all(Colors.blueGrey[50]),
           columns: const [
             DataColumn(label: Text('ID')),
             DataColumn(label: Text('Naslov')),
@@ -76,91 +71,76 @@ class AutomobileAdsTable extends StatelessWidget {
             DataColumn(label: Text('Slika')),
             DataColumn(label: Text('Akcija')),
           ],
-          rows: ads
-              .map(
-                (AutomobileAd ad) => DataRow(
-                  cells: [
-                    DataCell(Text(ad.id.toString())), // ID
-                    DataCell(
-                      SizedBox(
-                        width: 300,
-                        child: Text(
-                          ad.title,
-                          overflow: TextOverflow
-                              .ellipsis, 
-                          maxLines: 1, 
-                          softWrap: false,
-                        ),
+          rows: ads.map((ad) {
+            return DataRow(cells: [
+              DataCell(Text(ad.id.toString())),
+              DataCell(SizedBox(
+                width: 300,
+                child: Text(
+                  ad.title,
+                  overflow: TextOverflow.ellipsis,
+                  maxLines: 1,
+                ),
+              )),
+              DataCell(Text(NumberFormat("#,###").format(ad.price))),
+              DataCell(Text(NumberFormat("#,###").format(ad.mileage))),
+              DataCell(Text(ad.yearOfManufacture.toString())),
+              DataCell(Text(ad.status)),
+              DataCell(Text('${ad.user?.firstName} ${ad.user?.lastName}')),
+              DataCell(Text('${ad.user?.city?.canton.title}')),
+              DataCell(Text('${ad.user?.city?.title}')),
+              DataCell(Text(DateFormat('dd.MM.yyyy').format(ad.dateOfAdd))),
+              DataCell(Text(ad.viewsCount.toString())),
+              DataCell(
+                ad.registered
+                    ? const Icon(Icons.check_circle, color: Colors.green)
+                    : const Icon(Icons.cancel, color: Colors.red),
+              ),
+              DataCell(
+                ad.isHighlighted
+                    ? Text(
+                        'Ističe: ${DateFormat('dd.MM.yyyy').format(ad.highlightExpiryDate!)}',
+                        style: const TextStyle(
+                            color: Colors.orange, fontWeight: FontWeight.bold),
+                      )
+                    : const Text('-'),
+              ),
+              DataCell(
+                MouseRegion(
+                  cursor: SystemMouseCursors.click,
+                  child: GestureDetector(
+                    onTap: () => _showAllImages(
+                      context,
+                      ad.images.map((e) => e.imageUrl).toList(),
+                    ),
+                    child: Tooltip(
+                      message: "Klikom prikaži sve slike",
+                      child: Image.network(
+                        '${ApiConfig.baseUrl}${ad.images.first.imageUrl}',
+                        width: 50,
+                        height: 50,
                       ),
                     ),
-
-                    DataCell(Text(NumberFormat("#,###")
-                        .format(ad.price))), // ✅ Formatirana cijena
-                    DataCell(Text(NumberFormat("#,###").format(ad.mileage))),
-                    DataCell(Text(
-                        ad.yearOfManufacture.toString())), // Godina proizvodnje
-                    DataCell(Text(ad.status)), // Status
-                    DataCell(Text(
-                        '${ad.user?.firstName} ${ad.user?.lastName}')), // Vlasnik
-                    DataCell(Text('${ad.user?.city?.canton.title}')), // Kanton
-                    DataCell(Text('${ad.user?.city?.title}')), // Grad
-                    DataCell(Text(DateFormat('dd.MM.yyyy')
-                        .format(ad.dateOfAdd))), // Datum dodavanja
-                    DataCell(Text(ad.viewsCount.toString())), // Pregledi
-                    DataCell(
-                      ad.registered
-                          ? const Icon(Icons.check_circle,
-                              color: Colors.green) // Registrovano (✅)
-                          : const Icon(Icons.cancel,
-                              color: Colors.red), // Nije registrovano (❌)
+                  ),
+                ),
+              ),
+              DataCell(
+                Row(
+                  children: [
+                    if (ad.status == "Pending")
+                      IconButton(
+                        icon: const Icon(Icons.check_circle, color: Colors.green),
+                        onPressed: () => onApprove(ad.id),
+                      ),
+                    IconButton(
+                      icon: const Icon(Icons.delete, color: Colors.red),
+                      onPressed: () => onDelete(ad.id),
                     ),
-                    DataCell(
-                      ad.isHighlighted
-                          ? Text(
-                              'Ističe: ${DateFormat('dd.MM.yyyy').format(ad.highlightExpiryDate!)}',
-                              style: const TextStyle(
-                                  color: Colors.orange,
-                                  fontWeight: FontWeight.bold),
-                            )
-                          : const Text('-'),
-                    ), // Istaknuto
-                    DataCell(
-                      MouseRegion(
-                        cursor: SystemMouseCursors.click,
-                        child: GestureDetector(
-                          onTap: () => _showAllImages(context,
-                              ad.images.map((e) => e.imageUrl).toList()),
-                          child: Tooltip(
-                            message: "Klikom prikaži sve slike",
-                            child: Image.network(
-                              '${ApiConfig.baseUrl}${ad.images.first.imageUrl}',
-                              width: 50,
-                              height: 50,
-                            ),
-                          ),
-                        ),
-                      ),
-                    ), // Slika
-                    DataCell(
-                      Row(
-                        children: [
-                          if (ad.status == "Pending")
-                            IconButton(
-                              icon: const Icon(Icons.check_circle,
-                                  color: Colors.green),
-                              onPressed: () => onApprove(ad.id),
-                            ),
-                          IconButton(
-                            icon: const Icon(Icons.delete, color: Colors.red),
-                            onPressed: () => onDelete(ad.id),
-                          ),
-                        ],
-                      ),
-                    ), // Akcije (Odobravanje ili brisanje)
                   ],
                 ),
-              )
-              .toList(),
+              ),
+            ]);
+          }).toList(),
         ),
       ),
     );
