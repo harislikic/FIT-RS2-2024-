@@ -14,9 +14,16 @@ class UsersList extends StatefulWidget {
 class _UsersListState extends State<UsersList> {
   final TextEditingController _searchController = TextEditingController();
   final ScrollController _scrollController = ScrollController();
+
   List<dynamic> _users = [];
+
+
   int _count = 0;
+
   int _currentPage = 0;
+
+  int _tablePage = 0;
+
   bool _isLoading = false;
   final int _pageSize = 25;
 
@@ -24,13 +31,7 @@ class _UsersListState extends State<UsersList> {
   void initState() {
     super.initState();
     _fetchUsers();
-    _scrollController.addListener(_onScroll);
-  }
-
-  void _onScroll() {
-    if (_scrollController.position.pixels >= _scrollController.position.maxScrollExtent - 100 && !_isLoading) {
-      _fetchUsers();
-    }
+ 
   }
 
   Future<void> _fetchUsers({String? query}) async {
@@ -39,13 +40,14 @@ class _UsersListState extends State<UsersList> {
     setState(() {
       _isLoading = true;
       if (query != null) {
+     
         _users = [];
         _currentPage = 0;
+        _tablePage = 0;
       }
     });
 
     try {
-      
       final data = await UserService.getAllAdmins(
         page: _currentPage,
         pageSize: _pageSize,
@@ -54,7 +56,7 @@ class _UsersListState extends State<UsersList> {
       );
 
       setState(() {
-        _count = data['count'];
+        _count = data['count'] ?? 0;
         _users.addAll(data['data']);
         _currentPage++;
       });
@@ -66,6 +68,7 @@ class _UsersListState extends State<UsersList> {
       });
     }
   }
+
 
   Future<void> _deleteUser(int userId) async {
     final confirm = await showDialog<bool>(
@@ -96,22 +99,93 @@ class _UsersListState extends State<UsersList> {
         _count--;
       });
 
-      SnackbarHelper.showSnackbar(context, 'Korisnik obrisan uspešno', backgroundColor: Colors.green);
+      SnackbarHelper.showSnackbar(context, 'Korisnik obrisan uspešno',
+          backgroundColor: Colors.green);
 
+    
       _fetchUsers(query: _searchController.text);
     } catch (e) {
       SnackbarHelper.showSnackbar(context, 'Error: $e');
     }
   }
 
+
+  List<dynamic> get _currentUsers {
+    final startIndex = _tablePage * _pageSize;
+    int endIndex = startIndex + _pageSize;
+    if (endIndex > _users.length) {
+      endIndex = _users.length;
+    }
+    if (startIndex >= _users.length) {
+      return [];
+    }
+    return _users.sublist(startIndex, endIndex);
+  }
+
+
+  bool get canGoNext {
+    final nextPageIndex = (_tablePage + 1) * _pageSize;
+    if (nextPageIndex >= _count) {
+
+      return false;
+    }
+    return true;
+  }
+
+
+  bool get canGoPrev => _tablePage > 0;
+
+ 
+  void _nextPage() {
+    setState(() {
+      final nextPage = _tablePage + 1;
+      final nextStartIndex = nextPage * _pageSize;
+
+     
+      if (nextStartIndex >= _users.length && _users.length < _count) {
+        _fetchUsers();
+      }
+
+      _tablePage = nextPage;
+    });
+  }
+
+  void _prevPage() {
+    if (_tablePage > 0) {
+      setState(() {
+        _tablePage--;
+      });
+    }
+  }
+
+  void _onSearch() {
+    _fetchUsers(query: _searchController.text);
+  }
+
   @override
   Widget build(BuildContext context) {
+
+    int startDisplay;
+    int endDisplay;
+
+    if (_count == 0) {
+      startDisplay = 0;
+      endDisplay = 0;
+    } else {
+      startDisplay = _tablePage * _pageSize + 1;
+      endDisplay = startDisplay + _pageSize - 1;
+      if (endDisplay > _count) {
+        endDisplay = _count;
+      }
+    }
+
     return Scaffold(
       appBar: AppBar(
         title: const Text('Lista korisnika'),
       ),
       body: Column(
         children: [
+  
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: Row(
@@ -129,7 +203,7 @@ class _UsersListState extends State<UsersList> {
                               icon: const Icon(Icons.clear),
                               onPressed: () {
                                 _searchController.clear();
-                                _fetchUsers();
+                               _onSearch();
                               },
                             )
                           : null,
@@ -147,11 +221,12 @@ class _UsersListState extends State<UsersList> {
               ],
             ),
           ),
+
+       
           Expanded(
             child: SizedBox(
               height: MediaQuery.of(context).size.height * 0.8,
               child: SingleChildScrollView(
-                controller: _scrollController,
                 scrollDirection: Axis.vertical,
                 child: SingleChildScrollView(
                   scrollDirection: Axis.horizontal,
@@ -171,7 +246,8 @@ class _UsersListState extends State<UsersList> {
                       DataColumn(label: Text('Slika')),
                       DataColumn(label: Text('Akcija')),
                     ],
-                    rows: _users.map(
+                 
+                    rows: _currentUsers.map(
                       (user) => DataRow(
                         cells: [
                           DataCell(Text(user['id'].toString())),
@@ -183,9 +259,12 @@ class _UsersListState extends State<UsersList> {
                           DataCell(Text(user['adress'] ?? '-')),
                           DataCell(Text(user['city']['title'] ?? '-')),
                           DataCell(
-                            Text(user['dateOfBirth'] != null
-                                ? DateFormat('dd.MM.yyyy').format(DateTime.parse(user['dateOfBirth']))
-                                : '-'),
+                            Text(
+                              user['dateOfBirth'] != null
+                                  ? DateFormat('dd.MM.yyyy').format(
+                                      DateTime.parse(user['dateOfBirth']))
+                                  : '-',
+                            ),
                           ),
                           DataCell(
                             user['profilePicture'] != null
@@ -210,6 +289,31 @@ class _UsersListState extends State<UsersList> {
               ),
             ),
           ),
+
+       
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              ElevatedButton(
+                onPressed: canGoPrev ? _prevPage : null,
+                  child: const Icon(Icons.arrow_back), // Iko
+              ),
+              const SizedBox(width: 16),
+              ElevatedButton(
+                onPressed: canGoNext ? _nextPage : null,
+                 child: const Icon(Icons.arrow_forward), // 
+              ),
+            ],
+          ),
+          const SizedBox(height: 6),
+
+          // Ispis "X - Y (od count)"
+          Text(
+            'Prikaz: $startDisplay - $endDisplay (od $_count)',
+            style: const TextStyle(fontSize: 15),
+          ),
+
+          // ---- Loader ako se trenutno učitava ----
           if (_isLoading)
             const Padding(
               padding: EdgeInsets.all(8.0),

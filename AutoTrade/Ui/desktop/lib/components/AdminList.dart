@@ -14,9 +14,15 @@ class AdminList extends StatefulWidget {
 class _AdminListState extends State<AdminList> {
   final TextEditingController _searchController = TextEditingController();
   final ScrollController _scrollController = ScrollController();
+
   List<dynamic> _admins = [];
+
   int _count = 0;
+
   int _currentPage = 0;
+
+  int _tablePage = 0;
+
   bool _isLoading = false;
   final int _pageSize = 25;
 
@@ -24,13 +30,6 @@ class _AdminListState extends State<AdminList> {
   void initState() {
     super.initState();
     _fetchAdmins();
-    _scrollController.addListener(_onScroll);
-  }
-
-  void _onScroll() {
-    if (_scrollController.position.pixels >= _scrollController.position.maxScrollExtent - 100 && !_isLoading) {
-      _fetchAdmins();
-    }
   }
 
   Future<void> _fetchAdmins({String? query}) async {
@@ -38,10 +37,10 @@ class _AdminListState extends State<AdminList> {
 
     setState(() {
       _isLoading = true;
-
       if (query != null) {
         _admins = [];
         _currentPage = 0;
+        _tablePage = 0;
       }
     });
 
@@ -56,6 +55,7 @@ class _AdminListState extends State<AdminList> {
       setState(() {
         _count = data['count'];
         _admins.addAll(data['data']);
+
         _currentPage++;
       });
     } catch (e) {
@@ -74,7 +74,8 @@ class _AdminListState extends State<AdminList> {
       context: context,
       builder: (context) => AlertDialog(
         title: const Text('Potvrda'),
-        content: const Text('Da li ste sigurni da želite obrisati ovog admina?'),
+        content:
+            const Text('Da li ste sigurni da želite obrisati ovog admina?'),
         actions: [
           TextButton(
             onPressed: () => Navigator.of(context).pop(false),
@@ -98,8 +99,10 @@ class _AdminListState extends State<AdminList> {
         _count--;
       });
 
-      SnackbarHelper.showSnackbar(context, 'Admin obrisan uspešno', backgroundColor: Colors.green);
+      SnackbarHelper.showSnackbar(context, 'Admin obrisan uspešno',
+          backgroundColor: Colors.green);
 
+      // Ponovo filtriraj ako treba
       _fetchAdmins(query: _searchController.text);
     } catch (e) {
       ScaffoldMessenger.of(context).showSnackBar(
@@ -108,8 +111,74 @@ class _AdminListState extends State<AdminList> {
     }
   }
 
+  List<dynamic> get _currentAdmins {
+    final startIndex = _tablePage * _pageSize;
+    int endIndex = startIndex + _pageSize;
+    if (endIndex > _admins.length) {
+      endIndex = _admins.length;
+    }
+    if (startIndex >= _admins.length) {
+      // Nema više admina za prikaz
+      return [];
+    }
+    return _admins.sublist(startIndex, endIndex);
+  }
+
+  void _onSearch() {
+    _fetchAdmins(query: _searchController.text);
+  }
+
+  bool get canGoNext {
+    // Sledeća stranica
+    final nextPage = _tablePage + 1;
+    final nextStartIndex = nextPage * _pageSize;
+
+    if (nextStartIndex >= _count) {
+      // Već smo prikazali sve što postoji
+      return false;
+    }
+    return true;
+  }
+
+  bool get canGoPrev => _tablePage > 0;
+
+  void _nextPage() {
+    setState(() {
+      final nextPage = _tablePage + 1;
+      final nextStartIndex = nextPage * _pageSize;
+      if (nextStartIndex >= _admins.length && _admins.length < _count) {
+        _fetchAdmins();
+      }
+
+      _tablePage = nextPage;
+    });
+  }
+
+  /// Kad kliknemo "Previous"
+  void _prevPage() {
+    if (_tablePage > 0) {
+      setState(() {
+        _tablePage--;
+      });
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
+    int startDisplay;
+    int endDisplay;
+
+    if (_count == 0) {
+      startDisplay = 0;
+      endDisplay = 0;
+    } else {
+      startDisplay = _tablePage * _pageSize + 1;
+      endDisplay = startDisplay + _pageSize - 1;
+      if (endDisplay > _count) {
+        endDisplay = _count;
+      }
+    }
+
     return Scaffold(
       appBar: AppBar(
         title: const Text('Admin lista'),
@@ -133,12 +202,13 @@ class _AdminListState extends State<AdminList> {
                               icon: const Icon(Icons.clear),
                               onPressed: () {
                                 _searchController.clear();
-                                _fetchAdmins();
+                                _fetchAdmins(query: '');
                               },
                             )
                           : null,
                     ),
-                    onSubmitted: (_) => _fetchAdmins(query: _searchController.text),
+                    onSubmitted: (_) =>
+                        _fetchAdmins(query: _searchController.text),
                   ),
                 ),
                 const SizedBox(width: 8),
@@ -151,6 +221,7 @@ class _AdminListState extends State<AdminList> {
               ],
             ),
           ),
+
           Expanded(
             child: SizedBox(
               height: MediaQuery.of(context).size.height * 0.8,
@@ -161,7 +232,8 @@ class _AdminListState extends State<AdminList> {
                   scrollDirection: Axis.horizontal,
                   child: DataTable(
                     dividerThickness: 1,
-                    headingRowColor: MaterialStateProperty.all(Colors.blueGrey[50]),
+                    headingRowColor:
+                        MaterialStateProperty.all(Colors.blueGrey[50]),
                     columns: const [
                       DataColumn(label: Text('ID')),
                       DataColumn(label: Text('Ime')),
@@ -175,45 +247,77 @@ class _AdminListState extends State<AdminList> {
                       DataColumn(label: Text('Slika')),
                       DataColumn(label: Text('Akcija')),
                     ],
-                    rows: _admins.map(
-                      (user) => DataRow(
-                        cells: [
-                          DataCell(Text(user['id'].toString())),
-                          DataCell(Text(user['firstName'] ?? '-')),
-                          DataCell(Text(user['lastName'] ?? '-')),
-                          DataCell(Text(user['userName'] ?? '-')),
-                          DataCell(Text(user['email'] ?? '-')),
-                          DataCell(Text(user['phoneNumber'] ?? '-')),
-                          DataCell(Text(user['adress'] ?? '-')),
-                          DataCell(Text(user['city']['title'] ?? '-')),
-                          DataCell(
-                            Text(user['dateOfBirth'] != null
-                                ? DateFormat('dd.MM.yyyy').format(DateTime.parse(user['dateOfBirth']))
-                                : '-'),
+                    rows: _currentAdmins
+                        .map(
+                          (user) => DataRow(
+                            cells: [
+                              DataCell(Text(user['id'].toString())),
+                              DataCell(Text(user['firstName'] ?? '-')),
+                              DataCell(Text(user['lastName'] ?? '-')),
+                              DataCell(Text(user['userName'] ?? '-')),
+                              DataCell(Text(user['email'] ?? '-')),
+                              DataCell(Text(user['phoneNumber'] ?? '-')),
+                              DataCell(Text(user['adress'] ?? '-')),
+                              DataCell(Text(user['city']['title'] ?? '-')),
+                              DataCell(
+                                Text(
+                                  user['dateOfBirth'] != null
+                                      ? DateFormat('dd.MM.yyyy').format(
+                                          DateTime.parse(user['dateOfBirth']),
+                                        )
+                                      : '-',
+                                ),
+                              ),
+                              DataCell(
+                                user['profilePicture'] != null
+                                    ? Image.network(
+                                        '${ApiConfig.baseUrl}${user['profilePicture']}',
+                                        width: 50,
+                                        height: 50,
+                                      )
+                                    : const Icon(Icons.person),
+                              ),
+                              DataCell(
+                                IconButton(
+                                  icon: const Icon(Icons.delete,
+                                      color: Colors.red),
+                                  onPressed: () => _deleteAdmin(user['id']),
+                                ),
+                              ),
+                            ],
                           ),
-                          DataCell(
-                            user['profilePicture'] != null
-                                ? Image.network(
-                                    '${ApiConfig.baseUrl}${user['profilePicture']}',
-                                    width: 50,
-                                    height: 50,
-                                  )
-                                : const Icon(Icons.person),
-                          ),
-                          DataCell(
-                            IconButton(
-                              icon: const Icon(Icons.delete, color: Colors.red),
-                              onPressed: () => _deleteAdmin(user['id']),
-                            ),
-                          ),
-                        ],
-                      ),
-                    ).toList(),
+                        )
+                        .toList(),
                   ),
                 ),
               ),
             ),
           ),
+
+          // ---- PAGINATION DUGMAD ----
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              ElevatedButton(
+                onPressed: canGoPrev ? _prevPage : null,
+                child: const Icon(Icons.arrow_back),
+              ),
+              const SizedBox(width: 16),
+              ElevatedButton(
+                onPressed: canGoNext ? _nextPage : null,
+                child: const Icon(Icons.arrow_forward),
+              ),
+            ],
+          ),
+          const SizedBox(height: 6),
+
+          // Ispis "X do Y (od _count)"
+          Text(
+            'Prikaz: $startDisplay - $endDisplay (od $_count)',
+            style: const TextStyle(fontSize: 15),
+          ),
+
+          // Ako se učitava, prikaži spinner
           if (_isLoading)
             const Padding(
               padding: EdgeInsets.all(8.0),
