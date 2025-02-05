@@ -22,6 +22,8 @@ class AutomobileAdService {
         .replace(queryParameters: queryParams);
     final response = await http.get(uri);
 
+    print('url ${uri}');
+
     if (response.statusCode == 200) {
       final Map<String, dynamic> data = json.decode(response.body);
       return {

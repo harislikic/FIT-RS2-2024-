@@ -125,9 +125,12 @@ namespace AutoTrade.Services
 
             if (!string.IsNullOrWhiteSpace(search?.Title))
             {
-                query = query.Where(ad => ad.Title.Contains(search.Title));
+                query = query.Where(ad =>
+                    ad.Title.Contains(search.Title) ||
+                    ad.User.FirstName.Contains(search.Title) ||
+                    ad.User.LastName.Contains(search.Title) ||
+                    ad.User.UserName.Contains(search.Title));
             }
-
 
             if (search.MinPrice.HasValue && search.MaxPrice.HasValue)
             {

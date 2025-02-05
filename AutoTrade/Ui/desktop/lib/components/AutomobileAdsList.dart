@@ -1,9 +1,7 @@
 import 'package:desktop_app/components/AutomobileAdsTable.dart';
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
 import 'package:desktop_app/services/AutomobileAdService.dart';
 import 'package:desktop_app/components/shared/SnackbarHelper.dart';
-import 'package:desktop_app/services/ApiConfig.dart';
 import 'package:desktop_app/models/automobileAd.dart';
 
 class AutomobileAdsList extends StatefulWidget {
@@ -155,7 +153,7 @@ class _AutomobileAdsListState extends State<AutomobileAdsList> {
                   child: TextField(
                     controller: _searchController,
                     decoration: InputDecoration(
-                      labelText: 'Pretraga po naslovu',
+                      labelText: 'Pretraga po nazivu ili vlasniku',
                       border: const OutlineInputBorder(),
                       isDense: true,
                       suffixIcon: _searchController.text.isNotEmpty
