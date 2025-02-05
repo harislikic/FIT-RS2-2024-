@@ -51,7 +51,7 @@ class AdminPanelScreen extends StatelessWidget {
               ),
             ),
             ListTile(
-              leading: const Icon(Icons.person_add),
+              leading: const Icon(Icons.person_add, color: Colors.green),
               title: const Text('Dodaj Admina'),
               onTap: () {
                 Navigator.of(context).push(
@@ -62,7 +62,7 @@ class AdminPanelScreen extends StatelessWidget {
               },
             ),
             ListTile(
-              leading: const Icon(Icons.group),
+              leading: const Icon(Icons.group, color: Colors.orange),
               title: const Text('Pregled Korsnika'),
               onTap: () {
                 Navigator.of(context).push(
@@ -84,7 +84,7 @@ class AdminPanelScreen extends StatelessWidget {
               },
             ),
             ListTile(
-              leading: const Icon(Icons.analytics_sharp),
+              leading: const Icon(Icons.analytics_sharp, color: Colors.purple),
               title: const Text('Stripe Analitika transkacija'),
               onTap: () {
                 Navigator.of(context).push(
@@ -95,7 +95,7 @@ class AdminPanelScreen extends StatelessWidget {
               },
             ),
             ListTile(
-              leading: const Icon(Icons.analytics),
+              leading: const Icon(Icons.analytics, color: Colors.redAccent),
               title: const Text('Bazza Analitika transkacija'),
               onTap: () {
                 Navigator.of(context).push(

@@ -140,39 +140,6 @@ class _AutomobileAdsListState extends State<AutomobileAdsList> {
     }
   }
 
-  void _showAllImages(List<String> imageUrls) {
-    showDialog(
-      context: context,
-      builder: (context) => Dialog(
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            const Padding(
-              padding: EdgeInsets.all(8.0),
-              child: Text("Sve slike",
-                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
-            ),
-            SizedBox(
-              height: 300,
-              child: ListView.builder(
-                scrollDirection: Axis.horizontal,
-                itemCount: imageUrls.length,
-                itemBuilder: (context, index) => Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child:
-                      Image.network('${ApiConfig.baseUrl}${imageUrls[index]}'),
-                ),
-              ),
-            ),
-            TextButton(
-                onPressed: () => Navigator.pop(context),
-                child: const Text("Zatvori")),
-          ],
-        ),
-      ),
-    );
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
