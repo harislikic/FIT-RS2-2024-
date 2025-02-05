@@ -520,6 +520,12 @@ namespace AutoTrade.Services.Database
                     AutomobileAdId = 28,
                     ImageUrl = "/uploads/automobiles/WVTiguan/vanjska2.jpg"
                 },
+                    new AutomobileAdImage
+                {
+                    Id = 80,
+                    AutomobileAdId = 29,
+                    ImageUrl = "/uploads/automobiles/WVTiguan/vanjska2.jpg"
+                },
             };
         }
     }

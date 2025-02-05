@@ -1,4 +1,5 @@
 import 'package:desktop_app/components/AdminList.dart';
+import 'package:desktop_app/components/AutomobileAdsList.dart';
 import 'package:desktop_app/components/PaymentAnalytics.dart';
 import 'package:desktop_app/components/UsersList.dart';
 import 'package:desktop_app/components/shared/TooltipIconButton.dart';
@@ -72,23 +73,34 @@ class AdminPanelScreen extends StatelessWidget {
               },
             ),
             ListTile(
+              leading: const Icon(Icons.car_crash, color: Colors.blue),
+              title: const Text('Pregled oglasa'),
+              onTap: () {
+                Navigator.of(context).push(
+                  MaterialPageRoute(
+                    builder: (context) => AutomobileAdsList(),
+                  ),
+                );
+              },
+            ),
+            ListTile(
               leading: const Icon(Icons.analytics_sharp),
               title: const Text('Stripe Analitika transkacija'),
               onTap: () {
                 Navigator.of(context).push(
                   MaterialPageRoute(
-                    builder: (context) =>  StripeTransactionsScreen(),
+                    builder: (context) => StripeTransactionsScreen(),
                   ),
                 );
               },
             ),
-              ListTile(
+            ListTile(
               leading: const Icon(Icons.analytics),
               title: const Text('Bazza Analitika transkacija'),
               onTap: () {
                 Navigator.of(context).push(
                   MaterialPageRoute(
-                    builder: (context) =>  PaymentAnalytics(),
+                    builder: (context) => PaymentAnalytics(),
                   ),
                 );
               },

@@ -424,6 +424,12 @@ namespace AutoTrade.Services.Database
                     AutomobileAdId = 28,
                     EquipmentId = 5
                 },
+                //28
+                new AutomobileAdEquipment
+                {
+                    AutomobileAdId = 29,
+                    EquipmentId = 1
+                },
             };
         }
     }

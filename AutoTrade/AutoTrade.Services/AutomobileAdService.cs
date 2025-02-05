@@ -31,6 +31,10 @@ namespace AutoTrade.Services
             {
                 query = query.Where(ad => ad.Status != "Done");
             }
+            if (!string.IsNullOrEmpty(search?.Status))
+            {
+                query = query.Where(ad => ad.Status == search.Status);
+            }
 
             query = query
          .Include(ad => ad.User).ThenInclude(x => x.City).ThenInclude(x => x.Canton)
@@ -58,6 +62,7 @@ namespace AutoTrade.Services
         {
             entity.DateOFadd = DateTime.Now;
             entity.Status = "Active";
+            //
             entity.Images = null;
 
             try
@@ -228,6 +233,20 @@ namespace AutoTrade.Services
             }
 
             ad.Status = "Done";
+            _context.SaveChanges();
+
+            return Mapper.Map<Model.AutomobileAd>(ad);
+        }
+
+        public Model.AutomobileAd MarkAsActive(int id)
+        {
+            var ad = _context.AutomobileAds.Find(id);
+            if (ad == null)
+            {
+                throw new Exception("Automobile ad not found");
+            }
+
+            ad.Status = "Active";
             _context.SaveChanges();
 
             return Mapper.Map<Model.AutomobileAd>(ad);

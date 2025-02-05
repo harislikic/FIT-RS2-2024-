@@ -17,6 +17,7 @@ namespace SearchObject
         public int? CityId { get; set; }
         public string? OrderBy { get; set; }
         public string? OrderDirection { get; set; }
+        public string? Status { get; set; }
 
     }
 }

@@ -39,6 +39,22 @@ namespace Controllers
         }
 
 
+        [HttpPut("mar-as-active/{id}")]
+        public IActionResult MarkAsActive(int id)
+        {
+            try
+            {
+                var updatedAd = _automobileAdService.MarkAsActive(id);
+                return Ok(updatedAd);
+            }
+            catch (Exception ex)
+            {
+                return NotFound(ex.Message);
+            }
+        }
+
+
+
         [HttpPost("api/highlight-ad")]
         public async Task<IActionResult> HighlightOglas(int id, [FromBody] HighlightAdRequest request)
         {
