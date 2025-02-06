@@ -3,8 +3,10 @@ import 'package:desktop_app/components/AutomobileAdsList.dart';
 import 'package:desktop_app/components/PaymentAnalytics.dart';
 import 'package:desktop_app/components/UsersList.dart';
 import 'package:desktop_app/components/shared/TooltipIconButton.dart';
+import 'package:desktop_app/screens/ LoginScreen.dart';
 import 'package:desktop_app/screens/AdAdminScreen.dart';
 import 'package:desktop_app/screens/StripeTransactionsScreen.dart';
+import 'package:desktop_app/services/AuthService.dart';
 import 'package:flutter/material.dart';
 
 class AdminPanelScreen extends StatelessWidget {
@@ -102,6 +104,33 @@ class AdminPanelScreen extends StatelessWidget {
                   MaterialPageRoute(
                     builder: (context) => PaymentAnalytics(),
                   ),
+                );
+              },
+            ),
+            
+            FutureBuilder<bool>(
+              future: AuthService.checkIfUserIsLoggedIn(),
+              builder: (context, snapshot) {
+               
+                if (!snapshot.hasData) {
+                  return const SizedBox();
+                }
+             
+                if (!snapshot.data!) {
+                  return const SizedBox();
+                }
+
+                return ListTile(
+                  leading: const Icon(Icons.logout, color: Colors.grey),
+                  title: const Text('Odjava'),
+                  onTap: () async {
+                    await AuthService.logout();
+                    Navigator.of(context).pushReplacement(
+                      MaterialPageRoute(
+                        builder: (context) => const LoginScreen(),
+                      ),
+                    );
+                  },
                 );
               },
             ),

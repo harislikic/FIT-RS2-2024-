@@ -1,8 +1,11 @@
+import 'dart:io';
+
 import 'package:desktop_app/components/GenderSelector.dart';
 import 'package:desktop_app/components/shared/SnackbarHelper.dart';
 import 'package:desktop_app/models/city.dart';
 import 'package:desktop_app/services/ApiConfig.dart';
 import 'package:desktop_app/services/CityService.dart';
+import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:http/http.dart' as http;
@@ -30,6 +33,7 @@ class _AddAdminScreenState extends State<AddAdminScreen> {
   String? _selectedGender;
   DateTime? _selectedDate;
   int? _selectedCityId;
+  File? _selectedImage;
 
   List<City> _cities = [];
 
@@ -109,6 +113,24 @@ class _AddAdminScreenState extends State<AddAdminScreen> {
     }
   }
 
+  Future<void> _pickImage() async {
+    final result = await FilePicker.platform.pickFiles(
+      type: FileType.image,
+    );
+
+    if (result != null && result.files.single.path != null) {
+      setState(() {
+        _selectedImage = File(result.files.single.path!);
+      });
+    }
+  }
+
+  void _removeSelectedImage() {
+    setState(() {
+      _selectedImage = null;
+    });
+  }
+
   Future<void> _registerUser() async {
     if (!_formKey.currentState!.validate()) {
       return;
@@ -148,6 +170,17 @@ class _AddAdminScreenState extends State<AddAdminScreen> {
       request.fields['passwordConfirmation'] = _passwordConfController.text;
       request.fields['dateOfBirth'] = _selectedDate!.toIso8601String();
       request.fields['cityId'] = _selectedCityId.toString();
+
+      if (_selectedImage != null) {
+        final fileBytes = await _selectedImage!.readAsBytes();
+        final fileName = _selectedImage!.path.split('/').last;
+        final multiPart = http.MultipartFile.fromBytes(
+          'profilePicture',
+          fileBytes,
+          filename: fileName,
+        );
+        request.files.add(multiPart);
+      }
 
       final responseStream = await request.send();
       final response = await http.Response.fromStream(responseStream);
@@ -317,6 +350,26 @@ class _AddAdminScreenState extends State<AddAdminScreen> {
                       child: Text(_selectedDate == null
                           ? 'Izaberite datum rođenja'
                           : 'Datum rođenja: ${_selectedDate!.toIso8601String().split('T')[0]}'),
+                    ),
+                    const SizedBox(height: 16),
+                    if (_selectedImage != null)
+                      Stack(
+                        children: [
+                          Image.file(_selectedImage!, height: 150),
+                          Positioned(
+                            right: 0,
+                            top: 0,
+                            child: IconButton(
+                              icon: const Icon(Icons.close, color: Colors.red),
+                              onPressed: _removeSelectedImage,
+                            ),
+                          ),
+                        ],
+                      ),
+                    const SizedBox(height: 16),
+                    ElevatedButton(
+                      onPressed: _pickImage,
+                      child: const Text('Dodaj Sliku'),
                     ),
                     const SizedBox(height: 16),
                     ElevatedButton(

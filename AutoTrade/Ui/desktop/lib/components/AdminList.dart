@@ -1,5 +1,6 @@
 import 'package:desktop_app/components/shared/SnackbarHelper.dart';
 import 'package:desktop_app/services/ApiConfig.dart';
+import 'package:desktop_app/services/AuthService.dart';
 import 'package:desktop_app/services/UserService.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
@@ -16,7 +17,7 @@ class _AdminListState extends State<AdminList> {
   final ScrollController _scrollController = ScrollController();
 
   List<dynamic> _admins = [];
-
+  int? _loggedInUserId;
   int _count = 0;
 
   int _currentPage = 0;
@@ -30,6 +31,14 @@ class _AdminListState extends State<AdminList> {
   void initState() {
     super.initState();
     _fetchAdmins();
+    _fetchLoggedInUserId();
+  }
+
+  Future<void> _fetchLoggedInUserId() async {
+    final userId = await AuthService.getUserId();
+    setState(() {
+      _loggedInUserId = userId;
+    });
   }
 
   Future<void> _fetchAdmins({String? query}) async {
@@ -181,7 +190,7 @@ class _AdminListState extends State<AdminList> {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Admin lista'),
+        title: const Text('Pregled Admina'),
       ),
       body: Column(
         children: [
@@ -243,14 +252,13 @@ class _AdminListState extends State<AdminList> {
                       DataColumn(label: Text('Telefon')),
                       DataColumn(label: Text('Adresa')),
                       DataColumn(label: Text('Grad')),
+                      DataColumn(label: Text('Kanton')),
                       DataColumn(label: Text('Datum Rođenja')),
                       DataColumn(label: Text('Slika')),
                       DataColumn(label: Text('Akcija')),
                     ],
                     rows: _currentAdmins
-                        .map(
-                          (user) => DataRow(
-                            cells: [
+                        .map((user) => DataRow(cells: [
                               DataCell(Text(user['id'].toString())),
                               DataCell(Text(user['firstName'] ?? '-')),
                               DataCell(Text(user['lastName'] ?? '-')),
@@ -259,6 +267,8 @@ class _AdminListState extends State<AdminList> {
                               DataCell(Text(user['phoneNumber'] ?? '-')),
                               DataCell(Text(user['adress'] ?? '-')),
                               DataCell(Text(user['city']['title'] ?? '-')),
+                              DataCell(
+                                  Text(user['city']['canton']['title'] ?? '-')),
                               DataCell(
                                 Text(
                                   user['dateOfBirth'] != null
@@ -278,15 +288,17 @@ class _AdminListState extends State<AdminList> {
                                     : const Icon(Icons.person),
                               ),
                               DataCell(
-                                IconButton(
-                                  icon: const Icon(Icons.delete,
-                                      color: Colors.red),
-                                  onPressed: () => _deleteAdmin(user['id']),
-                                ),
+                                _loggedInUserId != null &&
+                                        user['id'] == _loggedInUserId
+                                    ? const SizedBox()
+                                    : IconButton(
+                                        icon: const Icon(Icons.delete,
+                                            color: Colors.red),
+                                        onPressed: () =>
+                                            _deleteAdmin(user['id']),
+                                      ),
                               ),
-                            ],
-                          ),
-                        )
+                            ]))
                         .toList(),
                   ),
                 ),
