@@ -170,147 +170,149 @@ class _UsersListState extends State<UsersList> {
       appBar: AppBar(
         title: const Text('Pregled korisnika'),
       ),
-      body: Column(
-        children: [
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Row(
-              children: [
-                SizedBox(
-                  width: 400,
-                  child: TextField(
-                    controller: _searchController,
-                    decoration: InputDecoration(
-                      labelText: 'Pretraga',
-                      border: const OutlineInputBorder(),
-                      isDense: true,
-                      suffixIcon: _searchController.text.isNotEmpty
-                          ? IconButton(
-                              icon: const Icon(Icons.clear),
-                              onPressed: () {
-                                _searchController.clear();
-                                _onSearch();
-                              },
-                            )
-                          : null,
+      body: SingleChildScrollView(
+        scrollDirection: Axis.vertical,
+        child: Column(
+          children: [
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Row(
+                children: [
+                  SizedBox(
+                    width: 400,
+                    child: TextField(
+                      controller: _searchController,
+                      decoration: InputDecoration(
+                        labelText: 'Pretraga',
+                        border: const OutlineInputBorder(),
+                        isDense: true,
+                        suffixIcon: _searchController.text.isNotEmpty
+                            ? IconButton(
+                                icon: const Icon(Icons.clear),
+                                onPressed: () {
+                                  _searchController.clear();
+                                  _onSearch();
+                                },
+                              )
+                            : null,
+                      ),
+                      onSubmitted: (_) => _onSearch(),
                     ),
-                    onSubmitted: (_) =>
-                        _fetchUsers(query: _searchController.text),
                   ),
+                  const SizedBox(width: 8),
+                  ElevatedButton(
+                    onPressed: _onSearch,
+                    child: const Text('Traži'),
+                  ),
+                  const SizedBox(width: 16),
+                  Text('Broj registrovanih korisnika: $_count'),
+                ],
+              ),
+            ),
+
+            // Tabela sa skrolovanjem
+            SingleChildScrollView(
+              scrollDirection: Axis.horizontal,
+              child: ConstrainedBox(
+                constraints: BoxConstraints(
+                  minWidth: MediaQuery.of(context).size.width,
                 ),
-                const SizedBox(width: 8),
+                child: DataTable(
+                  dividerThickness: 1,
+                  headingRowColor:
+                      MaterialStateProperty.all(Colors.blueGrey[50]),
+                  columns: const [
+                    DataColumn(label: Text('ID')),
+                    DataColumn(label: Text('Ime')),
+                    DataColumn(label: Text('Prezime')),
+                    DataColumn(label: Text('Username')),
+                    DataColumn(label: Text('Email')),
+                    DataColumn(label: Text('Telefon')),
+                    DataColumn(label: Text('Adresa')),
+                    DataColumn(label: Text('Kanton')),
+                    DataColumn(label: Text('Grad')),
+                    DataColumn(label: Text('Datum Rođenja')),
+                    DataColumn(label: Text('Slika')),
+                    DataColumn(label: Text('Akcija')),
+                  ],
+                  rows: _currentUsers
+                      .map(
+                        (user) => DataRow(
+                          cells: [
+                            DataCell(Text(user['id'].toString())),
+                            DataCell(Text(user['firstName'] ?? '-')),
+                            DataCell(Text(user['lastName'] ?? '-')),
+                            DataCell(Text(user['userName'] ?? '-')),
+                            DataCell(Text(user['email'] ?? '-')),
+                            DataCell(Text(user['phoneNumber'] ?? '-')),
+                            DataCell(Text(user['adress'] ?? '-')),
+                            DataCell(Text(user['city']['title'] ?? '-')),
+                            DataCell(
+                                Text(user['city']['canton']['title'] ?? '-')),
+                            DataCell(
+                              Text(
+                                user['dateOfBirth'] != null
+                                    ? DateFormat('dd.MM.yyyy').format(
+                                        DateTime.parse(user['dateOfBirth']))
+                                    : '-',
+                              ),
+                            ),
+                            DataCell(
+                              user['profilePicture'] != null
+                                  ? Image.network(
+                                      '${ApiConfig.baseUrl}${user['profilePicture']}',
+                                      width: 50,
+                                      height: 50,
+                                    )
+                                  : const Icon(Icons.person),
+                            ),
+                            DataCell(
+                              IconButton(
+                                icon:
+                                    const Icon(Icons.delete, color: Colors.red),
+                                onPressed: () => _deleteUser(user['id']),
+                              ),
+                            ),
+                          ],
+                        ),
+                      )
+                      .toList(),
+                ),
+              ),
+            ),
+
+            const SizedBox(height: 8),
+
+            // Paginacija
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
                 ElevatedButton(
-                  onPressed: () => _fetchUsers(query: _searchController.text),
-                  child: const Text('Traži'),
+                  onPressed: canGoPrev ? _prevPage : null,
+                  child: const Icon(Icons.arrow_back),
                 ),
                 const SizedBox(width: 16),
-                Text('Broj registrovanih korisnika: $_count'),
+                ElevatedButton(
+                  onPressed: canGoNext ? _nextPage : null,
+                  child: const Icon(Icons.arrow_forward),
+                ),
               ],
             ),
-          ),
 
-          Expanded(
-            child: SizedBox(
-              height: MediaQuery.of(context).size.height * 0.8,
-              child: SingleChildScrollView(
-                scrollDirection: Axis.vertical,
-                child: SingleChildScrollView(
-                  scrollDirection: Axis.horizontal,
-                  child: DataTable(
-                    dividerThickness: 1,
-                    headingRowColor:
-                        MaterialStateProperty.all(Colors.blueGrey[50]),
-                    columns: const [
-                      DataColumn(label: Text('ID')),
-                      DataColumn(label: Text('Ime')),
-                      DataColumn(label: Text('Prezime')),
-                      DataColumn(label: Text('Username')),
-                      DataColumn(label: Text('Email')),
-                      DataColumn(label: Text('Telefon')),
-                      DataColumn(label: Text('Adresa')),
-                      DataColumn(label: Text('Kanton')),
-                      DataColumn(label: Text('Grad')),
-                      DataColumn(label: Text('Datum Rođenja')),
-                      DataColumn(label: Text('Slika')),
-                      DataColumn(label: Text('Akcija')),
-                    ],
-                    rows: _currentUsers
-                        .map(
-                          (user) => DataRow(
-                            cells: [
-                              DataCell(Text(user['id'].toString())),
-                              DataCell(Text(user['firstName'] ?? '-')),
-                              DataCell(Text(user['lastName'] ?? '-')),
-                              DataCell(Text(user['userName'] ?? '-')),
-                              DataCell(Text(user['email'] ?? '-')),
-                              DataCell(Text(user['phoneNumber'] ?? '-')),
-                              DataCell(Text(user['adress'] ?? '-')),
-                              DataCell(Text(user['city']['title'] ?? '-')),
-                              DataCell(
-                                  Text(user['city']['canton']['title'] ?? '-')),
-                              DataCell(
-                                Text(
-                                  user['dateOfBirth'] != null
-                                      ? DateFormat('dd.MM.yyyy').format(
-                                          DateTime.parse(user['dateOfBirth']))
-                                      : '-',
-                                ),
-                              ),
-                              DataCell(
-                                user['profilePicture'] != null
-                                    ? Image.network(
-                                        '${ApiConfig.baseUrl}${user['profilePicture']}',
-                                        width: 50,
-                                        height: 50,
-                                      )
-                                    : const Icon(Icons.person),
-                              ),
-                              DataCell(
-                                IconButton(
-                                  icon: const Icon(Icons.delete,
-                                      color: Colors.red),
-                                  onPressed: () => _deleteUser(user['id']),
-                                ),
-                              ),
-                            ],
-                          ),
-                        )
-                        .toList(),
-                  ),
-                ),
-              ),
+            const SizedBox(height: 8),
+
+            Text(
+              'Prikaz: $startDisplay - $endDisplay (od $_count)',
+              style: const TextStyle(fontSize: 15),
             ),
-          ),
 
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              ElevatedButton(
-                onPressed: canGoPrev ? _prevPage : null,
-                child: const Icon(Icons.arrow_back), // Iko
+            if (_isLoading)
+              const Padding(
+                padding: EdgeInsets.all(8.0),
+                child: CircularProgressIndicator(),
               ),
-              const SizedBox(width: 16),
-              ElevatedButton(
-                onPressed: canGoNext ? _nextPage : null,
-                child: const Icon(Icons.arrow_forward), //
-              ),
-            ],
-          ),
-          const SizedBox(height: 6),
-
-          // Ispis "X - Y (od count)"
-          Text(
-            'Prikaz: $startDisplay - $endDisplay (od $_count)',
-            style: const TextStyle(fontSize: 15),
-          ),
-
-          // ---- Loader ako se trenutno učitava ----
-          if (_isLoading)
-            const Padding(
-              padding: EdgeInsets.all(8.0),
-              child: CircularProgressIndicator(),
-            ),
-        ],
+          ],
+        ),
       ),
     );
   }
