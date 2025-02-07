@@ -187,153 +187,170 @@ class _AdminListState extends State<AdminList> {
       }
     }
 
-  return Scaffold(
-  appBar: AppBar(
-    title: const Text('Pregled Admina'),
-  ),
-  body: SingleChildScrollView(
-    scrollDirection: Axis.vertical,
-    child: Column(
-      children: [
-        Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Row(
-            children: [
-              SizedBox(
-                width: 400,
-                child: TextField(
-                  controller: _searchController,
-                  decoration: InputDecoration(
-                    labelText: 'Pretraga',
-                    border: const OutlineInputBorder(),
-                    isDense: true,
-                    suffixIcon: _searchController.text.isNotEmpty
-                        ? IconButton(
-                            icon: const Icon(Icons.clear),
-                            onPressed: () {
-                              _searchController.clear();
-                              _fetchAdmins(query: '');
-                            },
-                          )
-                        : null,
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('Pregled Admina'),
+      ),
+      body: SingleChildScrollView(
+        scrollDirection: Axis.vertical,
+        child: Column(
+          children: [
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Row(
+                children: [
+                  SizedBox(
+                    width: 400,
+                    child: TextField(
+                      controller: _searchController,
+                      decoration: InputDecoration(
+                        labelText: 'Pretraga',
+                        border: const OutlineInputBorder(),
+                        isDense: true,
+                        suffixIcon: _searchController.text.isNotEmpty
+                            ? IconButton(
+                                icon: const Icon(Icons.clear),
+                                onPressed: () {
+                                  _searchController.clear();
+                                  _fetchAdmins(query: '');
+                                },
+                              )
+                            : null,
+                      ),
+                      onSubmitted: (_) =>
+                          _fetchAdmins(query: _searchController.text),
+                    ),
                   ),
-                  onSubmitted: (_) => _fetchAdmins(query: _searchController.text),
+                  const SizedBox(width: 8),
+                  ElevatedButton(
+                    onPressed: () =>
+                        _fetchAdmins(query: _searchController.text),
+                    child: const Text('Traži'),
+                  ),
+                  const SizedBox(width: 16),
+                  Text('Ukupan broj: $_count'),
+                ],
+              ),
+            ),
+
+            // Glavna tabela sa skrolovanjem
+            SingleChildScrollView(
+              scrollDirection: Axis.horizontal,
+              child: ConstrainedBox(
+                constraints: BoxConstraints(
+                  minWidth: MediaQuery.of(context).size.width,
+                ),
+                child: DataTable(
+                  dividerThickness: 1,
+                  headingRowColor:
+                      MaterialStateProperty.all(Colors.blueGrey[50]),
+                  columns: const [
+                    DataColumn(label: Text('ID')),
+                    DataColumn(label: Text('Ime')),
+                    DataColumn(label: Text('Prezime')),
+                    DataColumn(label: Text('Username')),
+                    DataColumn(label: Text('Email')),
+                    DataColumn(label: Text('Telefon')),
+                    DataColumn(label: Text('Adresa')),
+                    DataColumn(label: Text('Grad')),
+                    DataColumn(label: Text('Kanton')),
+                    DataColumn(label: Text('Datum Rođenja')),
+                    DataColumn(label: Text('Slika')),
+                    DataColumn(label: Text('Akcija')),
+                  ],
+                  rows: _currentAdmins
+                      .map((user) => DataRow(cells: [
+                            DataCell(Text(user['id'].toString())),
+                            DataCell(Text(user['firstName'] ?? '-')),
+                            DataCell(Text(user['lastName'] ?? '-')),
+                            DataCell(Text(user['userName'] ?? '-')),
+                            DataCell(Text(user['email'] ?? '-')),
+                            DataCell(Text(user['phoneNumber'] ?? '-')),
+                            DataCell(Text(user['adress'] ?? '-')),
+                            DataCell(Text(user['city']['title'] ?? '-')),
+                            DataCell(
+                                Text(user['city']['canton']['title'] ?? '-')),
+                            DataCell(
+                              Text(
+                                user['dateOfBirth'] != null
+                                    ? DateFormat('dd.MM.yyyy').format(
+                                        DateTime.parse(user['dateOfBirth']),
+                                      )
+                                    : '-',
+                              ),
+                            ),
+                            DataCell(
+                              user['profilePicture'] != null
+                                  ? Image.network(
+                                      '${ApiConfig.baseUrl}${user['profilePicture']}',
+                                      width: 50,
+                                      height: 50,
+                                      errorBuilder:
+                                          (context, error, stackTrace) {
+                                        return Image.asset(
+                                          'assets/fallback.jpg',
+                                          width: 50,
+                                          height: 50,
+                                          fit: BoxFit.cover,
+                                        );
+                                      },
+                                    )
+                                  : Image.asset(
+                                      'assets/fallback.jpg',
+                                      width: 50,
+                                      height: 50,
+                                      fit: BoxFit.cover,
+                                    ),
+                            ),
+                            DataCell(
+                              _loggedInUserId != null &&
+                                      user['id'] == _loggedInUserId
+                                  ? const SizedBox()
+                                  : IconButton(
+                                      icon: const Icon(Icons.delete,
+                                          color: Colors.red),
+                                      onPressed: () => _deleteAdmin(user['id']),
+                                    ),
+                            ),
+                          ]))
+                      .toList(),
                 ),
               ),
-              const SizedBox(width: 8),
-              ElevatedButton(
-                onPressed: () => _fetchAdmins(query: _searchController.text),
-                child: const Text('Traži'),
-              ),
-              const SizedBox(width: 16),
-              Text('Ukupan broj: $_count'),
-            ],
-          ),
-        ),
-
-        // Glavna tabela sa skrolovanjem
-        SingleChildScrollView(
-          scrollDirection: Axis.horizontal,
-          child: ConstrainedBox(
-            constraints: BoxConstraints(
-              minWidth: MediaQuery.of(context).size.width,
             ),
-            child: DataTable(
-              dividerThickness: 1,
-              headingRowColor: MaterialStateProperty.all(Colors.blueGrey[50]),
-              columns: const [
-                DataColumn(label: Text('ID')),
-                DataColumn(label: Text('Ime')),
-                DataColumn(label: Text('Prezime')),
-                DataColumn(label: Text('Username')),
-                DataColumn(label: Text('Email')),
-                DataColumn(label: Text('Telefon')),
-                DataColumn(label: Text('Adresa')),
-                DataColumn(label: Text('Grad')),
-                DataColumn(label: Text('Kanton')),
-                DataColumn(label: Text('Datum Rođenja')),
-                DataColumn(label: Text('Slika')),
-                DataColumn(label: Text('Akcija')),
+
+            const SizedBox(height: 8),
+
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                ElevatedButton(
+                  onPressed: canGoPrev ? _prevPage : null,
+                  child: const Icon(Icons.arrow_back),
+                ),
+                const SizedBox(width: 16),
+                ElevatedButton(
+                  onPressed: canGoNext ? _nextPage : null,
+                  child: const Icon(Icons.arrow_forward),
+                ),
               ],
-              rows: _currentAdmins
-                  .map((user) => DataRow(cells: [
-                        DataCell(Text(user['id'].toString())),
-                        DataCell(Text(user['firstName'] ?? '-')),
-                        DataCell(Text(user['lastName'] ?? '-')),
-                        DataCell(Text(user['userName'] ?? '-')),
-                        DataCell(Text(user['email'] ?? '-')),
-                        DataCell(Text(user['phoneNumber'] ?? '-')),
-                        DataCell(Text(user['adress'] ?? '-')),
-                        DataCell(Text(user['city']['title'] ?? '-')),
-                        DataCell(Text(user['city']['canton']['title'] ?? '-')),
-                        DataCell(
-                          Text(
-                            user['dateOfBirth'] != null
-                                ? DateFormat('dd.MM.yyyy').format(
-                                    DateTime.parse(user['dateOfBirth']),
-                                  )
-                                : '-',
-                          ),
-                        ),
-                        DataCell(
-                          user['profilePicture'] != null
-                              ? Image.network(
-                                  '${ApiConfig.baseUrl}${user['profilePicture']}',
-                                  width: 50,
-                                  height: 50,
-                                )
-                              : const Icon(Icons.person),
-                        ),
-                        DataCell(
-                          _loggedInUserId != null &&
-                                  user['id'] == _loggedInUserId
-                              ? const SizedBox()
-                              : IconButton(
-                                  icon: const Icon(Icons.delete,
-                                      color: Colors.red),
-                                  onPressed: () => _deleteAdmin(user['id']),
-                                ),
-                        ),
-                      ]))
-                  .toList(),
             ),
-          ),
-        ),
 
-        const SizedBox(height: 8),
+            const SizedBox(height: 8),
 
-        Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            ElevatedButton(
-              onPressed: canGoPrev ? _prevPage : null,
-              child: const Icon(Icons.arrow_back),
+            Text(
+              'Prikaz: $startDisplay - $endDisplay (od $_count)',
+              style: const TextStyle(fontSize: 15),
             ),
-            const SizedBox(width: 16),
-            ElevatedButton(
-              onPressed: canGoNext ? _nextPage : null,
-              child: const Icon(Icons.arrow_forward),
-            ),
+
+            // Ako se učitava, prikaži spinner
+            if (_isLoading)
+              const Padding(
+                padding: EdgeInsets.all(8.0),
+                child: CircularProgressIndicator(),
+              ),
           ],
         ),
-
-        const SizedBox(height: 8),
-
-        Text(
-          'Prikaz: $startDisplay - $endDisplay (od $_count)',
-          style: const TextStyle(fontSize: 15),
-        ),
-
-        // Ako se učitava, prikaži spinner
-        if (_isLoading)
-          const Padding(
-            padding: EdgeInsets.all(8.0),
-            child: CircularProgressIndicator(),
-          ),
-      ],
-    ),
-  ),
-);
-
+      ),
+    );
   }
 }

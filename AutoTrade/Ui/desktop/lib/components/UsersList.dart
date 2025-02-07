@@ -263,8 +263,22 @@ class _UsersListState extends State<UsersList> {
                                       '${ApiConfig.baseUrl}${user['profilePicture']}',
                                       width: 50,
                                       height: 50,
+                                      errorBuilder:
+                                          (context, error, stackTrace) {
+                                        return Image.asset(
+                                          'assets/fallback.jpg',
+                                          width: 50,
+                                          height: 50,
+                                          fit: BoxFit.cover,
+                                        );
+                                      },
                                     )
-                                  : const Icon(Icons.person),
+                                  : Image.asset(
+                                      'assets/fallback.jpg',
+                                      width: 50,
+                                      height: 50,
+                                      fit: BoxFit.cover,
+                                    ),
                             ),
                             DataCell(
                               IconButton(

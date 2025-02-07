@@ -1,3 +1,4 @@
+import 'package:desktop_app/components/ImageGalleryDialog.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:desktop_app/models/automobileAd.dart';
@@ -16,35 +17,9 @@ class AutomobileAdsTable extends StatelessWidget {
   }) : super(key: key);
 
   void _showAllImages(BuildContext context, List<String> imageUrls) {
-        showDialog(
+    showDialog(
       context: context,
-      builder: (context) => Dialog(
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            const Padding(
-              padding: EdgeInsets.all(8.0),
-              child: Text("Sve slike",
-                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
-            ),
-            SizedBox(
-              height: 300,
-              child: ListView.builder(
-                scrollDirection: Axis.horizontal,
-                itemCount: imageUrls.length,
-                itemBuilder: (context, index) => Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child:
-                      Image.network('${ApiConfig.baseUrl}${imageUrls[index]}'),
-                ),
-              ),
-            ),
-            TextButton(
-                onPressed: () => Navigator.pop(context),
-                child: const Text("Zatvori")),
-          ],
-        ),
-      ),
+      builder: (context) => ImageGalleryDialog(imageUrls: imageUrls),
     );
   }
 
@@ -106,30 +81,42 @@ class AutomobileAdsTable extends StatelessWidget {
                     : const Text('-'),
               ),
               DataCell(
-                MouseRegion(
-                  cursor: SystemMouseCursors.click,
-                  child: GestureDetector(
-                    onTap: () => _showAllImages(
-                      context,
-                      ad.images.map((e) => e.imageUrl).toList(),
-                    ),
-                    child: Tooltip(
-                      message: "Klikom prikaži sve slike",
-                      child: Image.network(
-                        '${ApiConfig.baseUrl}${ad.images.first.imageUrl}',
-                        width: 50,
-                        height: 50,
-                      ),
-                    ),
-                  ),
-                ),
+                ad.images.isNotEmpty
+                    ? MouseRegion(
+                        cursor: SystemMouseCursors.click,
+                        child: GestureDetector(
+                          onTap: () {
+                            showDialog(
+                              context: context,
+                              builder: (context) => ImageGalleryDialog(
+                                imageUrls:
+                                    ad.images.map((e) => e.imageUrl).toList(),
+                              ),
+                            );
+                          },
+                          child: Tooltip(
+                            message: "Klikom prikaži sve slike",
+                            child: Image.network(
+                              '${ApiConfig.baseUrl}${ad.images.first.imageUrl}',
+                              width: 50,
+                              height: 50,
+                              errorBuilder: (context, error, stackTrace) {
+                                return const Icon(Icons.broken_image,
+                                    size: 50, color: Colors.grey);
+                              },
+                            ),
+                          ),
+                        ),
+                      )
+                    : const Text('-'), // Ako nema slika, prikaži crticu
               ),
               DataCell(
                 Row(
                   children: [
                     if (ad.status == "Pending")
                       IconButton(
-                        icon: const Icon(Icons.check_circle, color: Colors.green),
+                        icon:
+                            const Icon(Icons.check_circle, color: Colors.green),
                         onPressed: () => onApprove(ad.id),
                       ),
                     IconButton(
