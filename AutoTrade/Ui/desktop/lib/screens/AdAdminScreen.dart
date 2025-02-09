@@ -3,10 +3,10 @@ import 'dart:io';
 import 'package:desktop_app/components/GenderSelector.dart';
 import 'package:desktop_app/components/shared/SnackbarHelper.dart';
 import 'package:desktop_app/models/city.dart';
-import 'package:desktop_app/services/ApiConfig.dart';
 import 'package:desktop_app/services/CityService.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:http/http.dart' as http;
 
@@ -20,7 +20,6 @@ class AddAdminScreen extends StatefulWidget {
 class _AddAdminScreenState extends State<AddAdminScreen> {
   final _formKey = GlobalKey<FormState>();
 
-  // Kontroleri za polja
   final TextEditingController _userNameController = TextEditingController();
   final TextEditingController _firstNameController = TextEditingController();
   final TextEditingController _lastNameController = TextEditingController();
@@ -155,7 +154,7 @@ class _AddAdminScreenState extends State<AddAdminScreen> {
     }
 
     try {
-      final url = Uri.parse('${ApiConfig.baseUrl}/User/admin');
+      final url = Uri.parse('${dotenv.env['BASE_URL']}/User/admin');
       final request = http.MultipartRequest('POST', url);
       request.headers['Content-Type'] = 'multipart/form-data';
 

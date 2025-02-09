@@ -1,7 +1,7 @@
 import 'package:desktop_app/components/shared/SnackbarHelper.dart';
-import 'package:desktop_app/services/ApiConfig.dart';
 import 'package:desktop_app/services/UserService.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:intl/intl.dart';
 
 class UsersList extends StatefulWidget {
@@ -205,7 +205,11 @@ class _UsersListState extends State<UsersList> {
                     child: const Text('Traži'),
                   ),
                   const SizedBox(width: 16),
-                  Text('Broj registrovanih korisnika: $_count'),
+                  Text(
+                    'Ukupan broj registrovanih korisnika: $_count',
+                    style: const TextStyle(
+                        fontSize: 16, fontWeight: FontWeight.bold),
+                  ),
                 ],
               ),
             ),
@@ -260,7 +264,7 @@ class _UsersListState extends State<UsersList> {
                             DataCell(
                               user['profilePicture'] != null
                                   ? Image.network(
-                                      '${ApiConfig.baseUrl}${user['profilePicture']}',
+                                      '${dotenv.env['BASE_URL']}${user['profilePicture']}',
                                       width: 50,
                                       height: 50,
                                       errorBuilder:

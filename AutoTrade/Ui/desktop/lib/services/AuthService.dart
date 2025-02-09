@@ -1,5 +1,5 @@
 import 'dart:convert';
-import 'package:desktop_app/services/ApiConfig.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -8,7 +8,7 @@ class AuthService {
   static Future<bool> login(String username, String password) async {
     try {
       final response = await http.post(
-        Uri.parse('${ApiConfig.baseUrl}/User/login/admin'),
+        Uri.parse('${dotenv.env['BASE_URL']}/User/login/admin'),
         headers: {'Content-Type': 'application/json'},
         body: jsonEncode({
           'username': username,

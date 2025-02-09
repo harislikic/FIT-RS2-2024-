@@ -1,8 +1,8 @@
 import 'package:desktop_app/components/ImageGalleryDialog.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:intl/intl.dart';
 import 'package:desktop_app/models/automobileAd.dart';
-import 'package:desktop_app/services/ApiConfig.dart';
 
 class AutomobileAdsTable extends StatelessWidget {
   final List<AutomobileAd> ads;
@@ -97,7 +97,7 @@ class AutomobileAdsTable extends StatelessWidget {
                           child: Tooltip(
                             message: "Klikom prikaži sve slike",
                             child: Image.network(
-                              '${ApiConfig.baseUrl}${ad.images.first.imageUrl}',
+                              '${dotenv.env['BASE_URL']}${ad.images.first.imageUrl}',
                               width: 50,
                               height: 50,
                               errorBuilder: (context, error, stackTrace) {

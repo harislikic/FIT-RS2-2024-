@@ -1,5 +1,6 @@
 import 'package:desktop_app/components/AdminList.dart';
 import 'package:desktop_app/components/AutomobileAdsList.dart';
+import 'package:desktop_app/components/CommentList.dart';
 import 'package:desktop_app/components/PaymentAnalytics.dart';
 import 'package:desktop_app/components/UsersList.dart';
 import 'package:desktop_app/components/shared/TooltipIconButton.dart';
@@ -80,7 +81,18 @@ class AdminPanelScreen extends StatelessWidget {
               onTap: () {
                 Navigator.of(context).push(
                   MaterialPageRoute(
-                    builder: (context) => AutomobileAdsList(),
+                    builder: (context) => const AutomobileAdsList(),
+                  ),
+                );
+              },
+            ),
+            ListTile(
+              leading: const Icon(Icons.comment, color: Colors.amber),
+              title: const Text('Pregled komentara'),
+              onTap: () {
+                Navigator.of(context).push(
+                  MaterialPageRoute(
+                    builder: (context) => const CommentList(),
                   ),
                 );
               },
@@ -107,15 +119,13 @@ class AdminPanelScreen extends StatelessWidget {
                 );
               },
             ),
-            
             FutureBuilder<bool>(
               future: AuthService.checkIfUserIsLoggedIn(),
               builder: (context, snapshot) {
-               
                 if (!snapshot.hasData) {
                   return const SizedBox();
                 }
-             
+
                 if (!snapshot.data!) {
                   return const SizedBox();
                 }

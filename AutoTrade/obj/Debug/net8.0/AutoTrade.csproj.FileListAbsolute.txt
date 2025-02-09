@@ -167,7 +167,7 @@
 /Users/harislikic/Desktop/FIT-RS2-2024-/AutoTrade/bin/Debug/net8.0/Ui/desktop/build/macos/Build/Intermediates.noindex/XCBuildData/1c06a4cc23398252fbf1a29325bc9e77.xcbuilddata/manifest.json
 /Users/harislikic/Desktop/FIT-RS2-2024-/AutoTrade/bin/Debug/net8.0/Ui/desktop/build/macos/Build/Intermediates.noindex/XCBuildData/4abb73df60a388d960cac9cbb585e9f5.xcbuilddata/build-request.json
 /Users/harislikic/Desktop/FIT-RS2-2024-/AutoTrade/bin/Debug/net8.0/Ui/desktop/build/macos/Build/Intermediates.noindex/XCBuildData/4abb73df60a388d960cac9cbb585e9f5.xcbuilddata/manifest.json
-/Users/harislikic/Desktop/FIT-RS2-2024-/AutoTrade/bin/Debug/net8.0/Ui/desktop/build/macos/Build/Intermediates.noindex/XCBuildData/88fdd0b247d826330f19142673e9c109.xcbuilddata/build-request.json
-/Users/harislikic/Desktop/FIT-RS2-2024-/AutoTrade/bin/Debug/net8.0/Ui/desktop/build/macos/Build/Intermediates.noindex/XCBuildData/88fdd0b247d826330f19142673e9c109.xcbuilddata/manifest.json
 /Users/harislikic/Desktop/FIT-RS2-2024-/AutoTrade/bin/Debug/net8.0/Ui/desktop/build/macos/Build/Intermediates.noindex/XCBuildData/0a23f438363e3b07df128dc42e404f0b.xcbuilddata/build-request.json
 /Users/harislikic/Desktop/FIT-RS2-2024-/AutoTrade/bin/Debug/net8.0/Ui/desktop/build/macos/Build/Intermediates.noindex/XCBuildData/0a23f438363e3b07df128dc42e404f0b.xcbuilddata/manifest.json
+/Users/harislikic/Desktop/FIT-RS2-2024-/AutoTrade/bin/Debug/net8.0/Ui/desktop/build/macos/Build/Intermediates.noindex/XCBuildData/eadd975bc59754f244ecd7ff03d44574.xcbuilddata/build-request.json
+/Users/harislikic/Desktop/FIT-RS2-2024-/AutoTrade/bin/Debug/net8.0/Ui/desktop/build/macos/Build/Intermediates.noindex/XCBuildData/eadd975bc59754f244ecd7ff03d44574.xcbuilddata/manifest.json

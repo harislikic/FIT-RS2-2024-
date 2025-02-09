@@ -208,103 +208,99 @@ class _AutomobileAdsListState extends State<AutomobileAdsList> {
       }
     }
 
- return Scaffold(
-  appBar: AppBar(title: const Text('Lista oglasa')),
-  body: SingleChildScrollView(
-    child: Column(
-      children: [
-        Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Row(
-            children: [
-              SizedBox(
-                width: 400,
-                child: TextField(
-                  controller: _searchController,
-                  decoration: InputDecoration(
-                    labelText: 'Pretraga po nazivu ili vlasniku',
-                    border: const OutlineInputBorder(),
-                    isDense: true,
-                    suffixIcon: _searchController.text.isNotEmpty
-                        ? IconButton(
-                            icon: const Icon(Icons.clear),
-                            onPressed: () {
-                              _searchController.clear();
-                              _onSearch();
-                            },
-                          )
-                        : null,
-                  ),
-                  onSubmitted: (_) => _onSearch(),
-                ),
-              ),
-              const SizedBox(width: 8),
-              Row(
+    return Scaffold(
+      appBar: AppBar(title: const Text('Lista oglasa')),
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Row(
                 children: [
-                  Radio<String>(
-                    value: "Active",
-                    groupValue: _selectedStatus,
-                    onChanged: _onStatusChanged,
+                  SizedBox(
+                    width: 400,
+                    child: TextField(
+                      controller: _searchController,
+                      decoration: InputDecoration(
+                        labelText: 'Pretraga po nazivu ili vlasniku',
+                        border: const OutlineInputBorder(),
+                        isDense: true,
+                        suffixIcon: _searchController.text.isNotEmpty
+                            ? IconButton(
+                                icon: const Icon(Icons.clear),
+                                onPressed: () {
+                                  _searchController.clear();
+                                  _onSearch();
+                                },
+                              )
+                            : null,
+                      ),
+                      onSubmitted: (_) => _onSearch(),
+                    ),
                   ),
-                  const Text("Active"),
-                  Radio<String>(
-                    value: "Pending",
-                    groupValue: _selectedStatus,
-                    onChanged: _onStatusChanged,
+                  const SizedBox(width: 8),
+                  Row(
+                    children: [
+                      Radio<String>(
+                        value: "Active",
+                        groupValue: _selectedStatus,
+                        onChanged: _onStatusChanged,
+                      ),
+                      const Text("Active"),
+                      Radio<String>(
+                        value: "Pending",
+                        groupValue: _selectedStatus,
+                        onChanged: _onStatusChanged,
+                      ),
+                      const Text("Pending"),
+                    ],
                   ),
-                  const Text("Pending"),
+                  const SizedBox(width: 8),
+                  ElevatedButton(
+                    onPressed: _onSearch,
+                    child: const Text('Traži'),
+                  ),
+                  const SizedBox(width: 16),
+                  Text(
+                    'Ukupan broj oglasa: $_count',
+                    style: const TextStyle(
+                        fontSize: 16, fontWeight: FontWeight.bold),
+                  ),
                 ],
               ),
-              const SizedBox(width: 8),
-              ElevatedButton(
-                onPressed: _onSearch,
-                child: const Text('Traži'),
+            ),
+            SingleChildScrollView(
+              scrollDirection: Axis.horizontal,
+              child: AutomobileAdsTable(
+                ads: _pageAds,
+                onDelete: _deleteAutomobile,
+                onApprove: _approveAutomobile,
               ),
-              const SizedBox(width: 16),
-              Text('Ukupno oglasa: $_count'),
-            ],
-          ),
-        ),
-
-
-        SingleChildScrollView(
-          scrollDirection: Axis.horizontal,
-          child: AutomobileAdsTable(
-            ads: _pageAds,
-            onDelete: _deleteAutomobile,
-            onApprove: _approveAutomobile,
-          ),
-        ),
-
-        const SizedBox(height: 8),
-
-        Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            ElevatedButton(
-              onPressed: canGoPrev ? _prevPage : null,
-              child: const Icon(Icons.arrow_back),
             ),
-            const SizedBox(width: 16),
-            ElevatedButton(
-              onPressed: canGoNext ? _nextPage : null,
-              child: const Icon(Icons.arrow_forward),
+            const SizedBox(height: 8),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                ElevatedButton(
+                  onPressed: canGoPrev ? _prevPage : null,
+                  child: const Icon(Icons.arrow_back),
+                ),
+                const SizedBox(width: 16),
+                ElevatedButton(
+                  onPressed: canGoNext ? _nextPage : null,
+                  child: const Icon(Icons.arrow_forward),
+                ),
+              ],
             ),
+            const SizedBox(height: 8),
+            Text(
+              'Prikaz oglasa: $startDisplay - $endDisplay (od $_count)',
+              style: const TextStyle(fontSize: 15),
+            ),
+            const SizedBox(height: 8),
           ],
         ),
-
-        const SizedBox(height: 8),
-
-        Text(
-          'Prikaz oglasa: $startDisplay - $endDisplay (od $_count)',
-          style: const TextStyle(fontSize: 15),
-        ),
-
-        const SizedBox(height: 8),
-      ],
-    ),
-  ),
-);
-
+      ),
+    );
   }
 }

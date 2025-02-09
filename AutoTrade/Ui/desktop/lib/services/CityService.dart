@@ -1,16 +1,14 @@
 import 'dart:convert';
 import 'package:desktop_app/models/city.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:http/http.dart' as http;
 
-import 'ApiConfig.dart';
-
 class CityService {
-  Future<List<City>> fetchCities(
-      {int page = 0, int pageSize = 90}) async {
+  Future<List<City>> fetchCities({int page = 0, int pageSize = 90}) async {
+    // final String baseUrl = dotenv.env['BASE_URL'] ?? 'http://localhost:5194';
+    final String url = '${dotenv.env['BASE_URL']}/City';
 
-    const String baseUrl = '${ApiConfig.baseUrl}/City';
-
-    final Uri uri = Uri.parse(baseUrl).replace(queryParameters: {
+    final Uri uri = Uri.parse(url).replace(queryParameters: {
       'Page': page.toString(),
       'PageSize': pageSize.toString(),
     });

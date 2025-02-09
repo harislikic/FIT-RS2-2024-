@@ -1,8 +1,8 @@
 import 'dart:async';
 import 'dart:convert';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:http/http.dart' as http;
 import '../models/automobileAd.dart';
-import 'ApiConfig.dart';
 
 class AutomobileAdService {
   Future<Map<String, dynamic>> fetchAutomobileAds({
@@ -18,7 +18,7 @@ class AutomobileAdService {
       if (status != null) 'Status': status,
     };
 
-    final uri = Uri.parse('${ApiConfig.baseUrl}/AutomobileAd')
+    final uri = Uri.parse('${dotenv.env['BASE_URL']}/AutomobileAd')
         .replace(queryParameters: queryParams);
     final response = await http.get(uri);
 
@@ -27,7 +27,7 @@ class AutomobileAdService {
     if (response.statusCode == 200) {
       final Map<String, dynamic> data = json.decode(response.body);
       return {
-        'count': data['count'], // ✔️ Pravi API vraća 'count'
+        'count': data['count'],
         'data': List<AutomobileAd>.from(
             data['data'].map((item) => AutomobileAd.fromJson(item))),
       };
@@ -41,7 +41,7 @@ class AutomobileAdService {
     authHeaders['accept'] = 'text/plain';
 
     final response = await http.delete(
-      Uri.parse('${ApiConfig.baseUrl}/AutomobileAd/$automobileId'),
+      Uri.parse('${dotenv.env['BASE_URL']}/AutomobileAd/$automobileId'),
       headers: authHeaders,
     );
 
@@ -52,7 +52,7 @@ class AutomobileAdService {
 
   Future<void> markAsActive(int automobileId) async {
     final uri = Uri.parse(
-        '${ApiConfig.baseUrl}/AutomobileAd/mar-as-active/$automobileId');
+        '${dotenv.env['BASE_URL']}/AutomobileAd/mar-as-active/$automobileId');
 
     final response =
         await http.put(uri, headers: {'accept': 'application/json'});

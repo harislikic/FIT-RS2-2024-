@@ -1,4 +1,5 @@
 import 'package:desktop_app/screens/%20LoginScreen.dart';
+import 'package:desktop_app/screens/SplashScreen.dart';
 
 import 'package:desktop_app/services/AuthService.dart';
 import 'package:desktop_app/screens/AdminPanelScreen.dart';
@@ -37,11 +38,11 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home: const InitialScreen(), // Početni ekran
+      home: const SplashScreen(), // Postavljamo SplashScreen kao početni ekran
       routes: {
         '/admin-panel': (context) =>
             const AdminPanelScreen(), // Ruta za Admin Panel
-        '/login': (context) => const LoginScreen(), // Ruta za Login
+        '/login': (context) => const LoginScreen(), // Ruta za Login Screen
       },
     );
   }

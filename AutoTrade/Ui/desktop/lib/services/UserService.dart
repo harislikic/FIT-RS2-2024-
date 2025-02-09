@@ -1,6 +1,6 @@
 import 'dart:convert';
-import 'package:desktop_app/services/ApiConfig.dart';
 import 'package:desktop_app/services/AuthService.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:http/http.dart' as http;
 
 class UserService {
@@ -11,7 +11,7 @@ class UserService {
 
       final headers = await AuthService.getAuthHeaders();
       final response = await http.get(
-        Uri.parse('${ApiConfig.baseUrl}/User/$userId'),
+        Uri.parse('${dotenv.env['BASE_URL']}/User/$userId'),
         headers: headers,
       );
 
@@ -41,7 +41,7 @@ class UserService {
         if (isAdmin != null) "IsAdmin": isAdmin.toString(),
       };
 
-      final uri = Uri.parse('${ApiConfig.baseUrl}/User')
+      final uri = Uri.parse('${dotenv.env['BASE_URL']}/User')
           .replace(queryParameters: queryParams);
 
       final response = await http.get(uri, headers: headers);
@@ -60,7 +60,7 @@ class UserService {
     try {
       final headers = await AuthService.getAuthHeaders();
       final response = await http.delete(
-        Uri.parse('${ApiConfig.baseUrl}/User/$adminId'),
+        Uri.parse('${dotenv.env['BASE_URL']}/User/$adminId'),
         headers: headers,
       );
 
