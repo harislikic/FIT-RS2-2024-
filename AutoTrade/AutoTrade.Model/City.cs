@@ -7,7 +7,5 @@ namespace AutoTrade.Model
 
         public int CantonId { get; set; }
         public Canton Canton { get; set; }
-
-
     }
 }

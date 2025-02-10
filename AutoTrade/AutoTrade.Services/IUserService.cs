@@ -14,5 +14,7 @@ namespace AutoTrade.Services
         Model.User Update(int id, Model.User user);
 
         Model.User InsertAdmin(UserInsertRequest request);
+
+        Database.City GetCityById(int cityId);
     }
 }

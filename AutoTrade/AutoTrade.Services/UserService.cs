@@ -1,5 +1,4 @@
 
-using AutoTrade.Model;
 using AutoTrade.Services.Database;
 using AutoTrader.Services.Helpers;
 using MapsterMapper;
@@ -216,10 +215,17 @@ namespace AutoTrade.Services
             return Mapper.Map<Model.User>(entity);
         }
 
+        public City GetCityById(int cityId)
+        {
+            return Context.Cities
+                .Include(c => c.Canton) // Ako je potrebno učitati i Canton
+                .FirstOrDefault(c => c.Id == cityId);
+        }
+
         public Model.User Update(int id, Model.User user)
         {
+             var entity = Context.Users.FirstOrDefault(u => u.Id == id);
 
-            var entity = Context.Users.FirstOrDefault(u => u.Id == id);
             if (entity == null)
             {
                 throw new KeyNotFoundException("User not found.");

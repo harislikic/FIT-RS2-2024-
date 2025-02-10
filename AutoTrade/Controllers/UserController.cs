@@ -1,11 +1,9 @@
 using AutoTrade.Model;
 using AutoTrade.Services;
-using AutoTrader.Services.Helpers;
 using Controllers;
+using MapsterMapper;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using Request;
 using SerachObject;
 
@@ -16,9 +14,11 @@ public class UserController : BaseCRUDController<User, UserSearchObject, UserIns
 {
 
     protected IUserService _service;
-    public UserController(IUserService service) : base(service)
+    private readonly IMapper _mapper;
+    public UserController(IUserService service, IMapper mapper) : base(service)
     {
         _service = service;
+        _mapper = mapper;
     }
 
     [HttpPost]
@@ -96,16 +96,26 @@ public class UserController : BaseCRUDController<User, UserSearchObject, UserIns
         if (request.CityId.HasValue)
             user.CityId = request.CityId.Value;
 
-        if (request.ProfilePicture != null && request.ProfilePicture.Length > 0)
+        if (request.CityId.HasValue && request.CityId.Value > 0)
         {
-            // Otpremi novu sliku
-            user.ProfilePicture = FileUploadHelper.UploadProfilePicture(request.ProfilePicture);
+            var cityEntity = _service.GetCityById(request.CityId.Value);
+
+            if (cityEntity == null)
+            {
+                return BadRequest("Invalid CityId, city not found.");
+            }
+
+            user.CityId = cityEntity.Id;
+            user.City = _mapper.Map<City>(cityEntity);
         }
 
-        // Ažuriraj korisnika u bazi
+
+        if (request.ProfilePicture != null && request.ProfilePicture.Length > 0)
+        {
+
+            user.ProfilePicture = FileUploadHelper.UploadProfilePicture(request.ProfilePicture);
+        }
         _service.Update(id, user);
-
-
 
         return Ok(user);
     }
