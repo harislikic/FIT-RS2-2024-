@@ -1,6 +1,6 @@
 import 'dart:async';
 import 'dart:convert';
-import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:desktop_app/services/config.dart';
 import 'package:http/http.dart' as http;
 import '../models/automobileAd.dart';
 
@@ -18,7 +18,7 @@ class AutomobileAdService {
       if (status != null) 'Status': status,
     };
 
-    final uri = Uri.parse('${dotenv.env['BASE_URL']}/AutomobileAd')
+    final uri = Uri.parse('$baseUrl/AutomobileAd')
         .replace(queryParameters: queryParams);
     final response = await http.get(uri);
 
@@ -41,7 +41,7 @@ class AutomobileAdService {
     authHeaders['accept'] = 'text/plain';
 
     final response = await http.delete(
-      Uri.parse('${dotenv.env['BASE_URL']}/AutomobileAd/$automobileId'),
+      Uri.parse('$baseUrl/AutomobileAd/$automobileId'),
       headers: authHeaders,
     );
 
@@ -52,7 +52,7 @@ class AutomobileAdService {
 
   Future<void> markAsActive(int automobileId) async {
     final uri = Uri.parse(
-        '${dotenv.env['BASE_URL']}/AutomobileAd/mar-as-active/$automobileId');
+        '$baseUrl/AutomobileAd/mar-as-active/$automobileId');
 
     final response =
         await http.put(uri, headers: {'accept': 'application/json'});

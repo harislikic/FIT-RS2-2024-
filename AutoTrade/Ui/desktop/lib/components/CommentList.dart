@@ -1,8 +1,8 @@
 import 'package:desktop_app/components/shared/SnackbarHelper.dart';
 import 'package:desktop_app/models/comment.dart';
 import 'package:desktop_app/services/CommentService.dart';
+import 'package:desktop_app/services/config.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:intl/intl.dart';
 
 class CommentList extends StatefulWidget {
@@ -184,10 +184,25 @@ class _CommentListState extends State<CommentList> {
                   width: 200,
                   child: TextField(
                     controller: _searchController,
-                    decoration: const InputDecoration(
+                    decoration: InputDecoration(
                       labelText: 'Pretraga po User ID',
-                      border: OutlineInputBorder(),
+                      border: const OutlineInputBorder(),
+                      suffixIcon: _searchController.text.isNotEmpty
+                          ? IconButton(
+                              icon: const Icon(Icons.clear),
+                              onPressed: () {
+                                setState(() {
+                                  _searchController.clear();
+                                  _currentPage = 0;
+                                  _tablePage = 0;
+                                  _fetchComments();
+                                });
+                              },
+                            )
+                          : null,
                     ),
+                    onChanged: (value) =>
+                        setState(() {}), // Osvežava UI za dugme "X"
                     onSubmitted: (_) => _onSearch(),
                   ),
                 ),
@@ -196,10 +211,25 @@ class _CommentListState extends State<CommentList> {
                   width: 200,
                   child: TextField(
                     controller: _automobileIdController,
-                    decoration: const InputDecoration(
+                    decoration: InputDecoration(
                       labelText: 'Pretraga po Auto ID',
-                      border: OutlineInputBorder(),
+                      border: const OutlineInputBorder(),
+                      suffixIcon: _automobileIdController.text.isNotEmpty
+                          ? IconButton(
+                              icon: const Icon(Icons.clear),
+                              onPressed: () {
+                                setState(() {
+                                  _automobileIdController.clear();
+                                  _currentPage = 0; 
+                                  _tablePage = 0;
+                                  _fetchComments();
+                                });
+                              },
+                            )
+                          : null,
                     ),
+                    onChanged: (value) =>
+                        setState(() {}), 
                     onSubmitted: (_) => _onSearch(),
                   ),
                 ),
@@ -247,7 +277,7 @@ class _CommentListState extends State<CommentList> {
                           DataCell(
                             comment.user.profilePicture != null
                                 ? Image.network(
-                                    '${dotenv.env['BASE_URL']}${comment.user.profilePicture}',
+                                    '$baseUrl${comment.user.profilePicture}',
                                     width: 50,
                                     height: 50,
                                     errorBuilder: (context, error, stackTrace) {

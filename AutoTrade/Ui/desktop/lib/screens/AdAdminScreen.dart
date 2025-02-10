@@ -4,9 +4,9 @@ import 'package:desktop_app/components/GenderSelector.dart';
 import 'package:desktop_app/components/shared/SnackbarHelper.dart';
 import 'package:desktop_app/models/city.dart';
 import 'package:desktop_app/services/CityService.dart';
+import 'package:desktop_app/services/config.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:http/http.dart' as http;
 
@@ -154,7 +154,7 @@ class _AddAdminScreenState extends State<AddAdminScreen> {
     }
 
     try {
-      final url = Uri.parse('${dotenv.env['BASE_URL']}/User/admin');
+      final url = Uri.parse('$baseUrl/User/admin');
       final request = http.MultipartRequest('POST', url);
       request.headers['Content-Type'] = 'multipart/form-data';
 

@@ -2,8 +2,8 @@ import 'package:desktop_app/components/shared/SnackbarHelper.dart';
 import 'package:desktop_app/services/AuthService.dart';
 import 'package:desktop_app/services/UserService.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:intl/intl.dart';
+import 'package:desktop_app/services/config.dart';
 
 class AdminList extends StatefulWidget {
   const AdminList({Key? key}) : super(key: key);
@@ -286,7 +286,7 @@ class _AdminListState extends State<AdminList> {
                             DataCell(
                               user['profilePicture'] != null
                                   ? Image.network(
-                                      '${dotenv.env['BASE_URL']}${user['profilePicture']}',
+                                      '$baseUrl${user['profilePicture']}',
                                       width: 50,
                                       height: 50,
                                       errorBuilder:

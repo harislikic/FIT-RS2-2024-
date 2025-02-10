@@ -1,6 +1,6 @@
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:desktop_app/services/config.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 class ImageGalleryDialog extends StatefulWidget {
   final List<String> imageUrls;
@@ -52,7 +52,7 @@ class _ImageGalleryDialogState extends State<ImageGalleryDialog> {
                         child: ClipRRect(
                           borderRadius: BorderRadius.circular(10),
                           child: Image.network(
-                            '${dotenv.env['BASE_URL']}$imageUrl',
+                            '$baseUrl$imageUrl',
                             fit: BoxFit.contain,
                             width: double.infinity,
                             height: 500,

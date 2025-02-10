@@ -1,12 +1,13 @@
 import 'dart:convert';
 
 import 'package:desktop_app/models/PaymentResponse.dart';
+import 'package:desktop_app/services/config.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:http/http.dart' as http;
 
 class PaymentService {
   Future<PaymentResponse> getAllTransactions({int? year, int? month}) async {
-    String url = '${dotenv.env['BASE_URL']}/PaymentTransaction';
+    String url = '$baseUrl/PaymentTransaction';
 
     if (year != null || month != null) {
       List<String> params = [];

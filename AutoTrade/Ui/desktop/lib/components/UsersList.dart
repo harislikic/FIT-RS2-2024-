@@ -1,7 +1,7 @@
 import 'package:desktop_app/components/shared/SnackbarHelper.dart';
 import 'package:desktop_app/services/UserService.dart';
+import 'package:desktop_app/services/config.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:intl/intl.dart';
 
 class UsersList extends StatefulWidget {
@@ -264,7 +264,7 @@ class _UsersListState extends State<UsersList> {
                             DataCell(
                               user['profilePicture'] != null
                                   ? Image.network(
-                                      '${dotenv.env['BASE_URL']}${user['profilePicture']}',
+                                      '$baseUrl${user['profilePicture']}',
                                       width: 50,
                                       height: 50,
                                       errorBuilder:

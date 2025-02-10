@@ -2,15 +2,14 @@ import 'dart:convert';
 
 import 'package:desktop_app/models/comment.dart';
 import 'package:desktop_app/services/AuthService.dart';
-import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:desktop_app/services/config.dart';
 import 'package:http/http.dart' as http;
 
 class CommentService {
   Future<List<Comment>> fetchCommentsByAutomobileId(int automobileId) async {
-    final String baseUrl =
-        '${dotenv.env['BASE_URL']}/Comment/automobile/$automobileId';
+    final String url = '$baseUrl/Comment/automobile/$automobileId';
 
-    final response = await http.get(Uri.parse(baseUrl));
+    final response = await http.get(Uri.parse(url));
 
     if (response.statusCode == 200) {
       final data = json.decode(response.body);
@@ -31,7 +30,7 @@ class CommentService {
     int page = 0,
     int pageSize = 25,
   }) async {
-    final String baseUrl = '${dotenv.env['BASE_URL']}/Comment/search';
+    final String urlBase = '$baseUrl/Comment/search';
 
     // Kreiranje liste parametara
     final Map<String, String> queryParams = {
@@ -39,13 +38,17 @@ class CommentService {
       'PageSize': pageSize.toString(),
     };
 
+    print("page:: ${page}");
+
     if (userId != null) {
       queryParams['UserId'] = userId.toString();
     }
     if (automobileId != null) {
       queryParams['AutomobileId'] = automobileId.toString();
     }
-    final Uri url = Uri.parse(baseUrl).replace(queryParameters: queryParams);
+    final Uri url = Uri.parse(urlBase).replace(queryParameters: queryParams);
+
+    print("url:: ${url}");
 
     final response = await http.get(url);
 
@@ -77,7 +80,7 @@ class CommentService {
   Future<void> deleteComment({
     required int commentId,
   }) async {
-    final String url = '${dotenv.env['BASE_URL']}/Comment/$commentId';
+    final String url = '$baseUrl/Comment/$commentId';
     final headers = await AuthService.getAuthHeaders();
 
     final response = await http.delete(
