@@ -1,11 +1,11 @@
 import 'package:desktop_app/components/AdminList.dart';
 import 'package:desktop_app/components/AutomobileAdsList.dart';
 import 'package:desktop_app/components/CommentList.dart';
-import 'package:desktop_app/components/PaymentAnalytics.dart';
 import 'package:desktop_app/components/UsersList.dart';
 import 'package:desktop_app/components/shared/TooltipIconButton.dart';
 import 'package:desktop_app/screens/ LoginScreen.dart';
 import 'package:desktop_app/screens/AdAdminScreen.dart';
+import 'package:desktop_app/screens/StatisticsScreen.dart';
 import 'package:desktop_app/screens/StripeTransactionsScreen.dart';
 import 'package:desktop_app/services/AuthService.dart';
 import 'package:flutter/material.dart';
@@ -99,7 +99,7 @@ class AdminPanelScreen extends StatelessWidget {
             ),
             ListTile(
               leading: const Icon(Icons.analytics_sharp, color: Colors.purple),
-              title: const Text('Stripe Analitika transkacija'),
+              title: const Text('Stripe Analitika'),
               onTap: () {
                 Navigator.of(context).push(
                   MaterialPageRoute(
@@ -110,11 +110,11 @@ class AdminPanelScreen extends StatelessWidget {
             ),
             ListTile(
               leading: const Icon(Icons.analytics, color: Colors.redAccent),
-              title: const Text('Bazza Analitika transkacija'),
+              title: const Text('Analitika'),
               onTap: () {
                 Navigator.of(context).push(
                   MaterialPageRoute(
-                    builder: (context) => PaymentAnalytics(),
+                    builder: (context) => StatisticsScreen(),
                   ),
                 );
               },
