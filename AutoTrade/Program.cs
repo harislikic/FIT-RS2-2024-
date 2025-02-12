@@ -59,6 +59,8 @@ builder.Services.AddTransient<ITransmissionTypeService, TransmissionTypeService>
 builder.Services.AddTransient<IVehicleConditionService, VehicleConditionService>();
 builder.Services.AddTransient<IAutomobileAdService, AutomobileAdService>();
 builder.Services.AddTransient<IEquipmentService, EquipmentService>();
+builder.Services.AddHostedService<ExpiredHighlightsService>();
+
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
@@ -121,7 +123,7 @@ using (var scope = app.Services.CreateScope())
 {
     var dbContext = scope.ServiceProvider.GetRequiredService<AutoTradeContext>();
 
-        dbContext.Database.Migrate();
+    dbContext.Database.Migrate();
 
     if (!dbContext.AutomobileAdEquipments.Any())
     {
@@ -136,6 +138,8 @@ using (var scope = app.Services.CreateScope())
 // {
 //     var listener = scope.ServiceProvider.GetRequiredService<RabbitMqListener>();
 //     listener.StartListening();  // Start listening for RabbitMQ messages
+
+// context.Database.Migrate(); // ✅ Automatski izvršava migracije
 // }
 
 

@@ -116,10 +116,10 @@ namespace AutoTrade.Services
         public override IQueryable<AutomobileAd> AddFilter(AutomobileAdSearchObject search, IQueryable<AutomobileAd> query)
         {
 
-            using (var context = new AutoTradeContext())
-            {
-                context.Database.ExecuteSqlRaw("EXEC UpdateExpiredHighlights");
-            }
+            // using (var context = new AutoTradeContext())
+            // {
+            //     context.Database.ExecuteSqlRaw("EXEC UpdateExpiredHighlights");
+            // }
 
             query = query.OrderByDescending(ad => ad.HighlightExpiryDate.HasValue && ad.HighlightExpiryDate > DateTime.Now);
 
