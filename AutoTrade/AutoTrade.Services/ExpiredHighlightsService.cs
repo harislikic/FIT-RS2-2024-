@@ -1,5 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using AutoTrade.Services.Database;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
 
 public class ExpiredHighlightsService : BackgroundService
 {
