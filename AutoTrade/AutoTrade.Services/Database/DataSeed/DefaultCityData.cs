@@ -1,6 +1,3 @@
-using System;
-using System.Collections.Generic;
-
 namespace AutoTrade.Services.Database
 {
     public static class DefaultCityData
@@ -12,11 +9,11 @@ namespace AutoTrade.Services.Database
                 // Unsko-sanski kanton (ID = 1)
                 new City { Id = 1, Title = "Bihać", CantonId = 1 },
                 new City { Id = 2, Title = "Cazin", CantonId = 1 },
-                new City { Id = 3, Title = "Velika Kladuša", CantonId = 1 },
-                new City { Id = 4, Title = "Bosanska Krupa", CantonId = 1 },
+                new City { Id = 3, Title = "Kladuša", CantonId = 1 },
+                new City { Id = 4, Title = "Krupa", CantonId = 1 },
                 new City { Id = 5, Title = "Bužim", CantonId = 1 },
                 new City { Id = 6, Title = "Ključ", CantonId = 1 },
-                new City { Id = 7, Title = "Bosanski Petrovac", CantonId = 1 },
+                new City { Id = 7, Title = "Petrovac", CantonId = 1 },
                 new City { Id = 8, Title = "Sanski Most", CantonId = 1 },
                 new City { Id = 9, Title = "Ostrožac", CantonId = 1 },
                 new City { Id = 10, Title = "Ćoralići", CantonId = 1 },
@@ -28,7 +25,7 @@ namespace AutoTrade.Services.Database
                 new City { Id = 14, Title = "Kostrč", CantonId = 2 },
                 new City { Id = 15, Title = "Tolisa", CantonId = 2 },
                 new City { Id = 16, Title = "Ugljara", CantonId = 2 },
-                new City { Id = 17, Title = "Bukova Greda", CantonId = 2 },
+                new City { Id = 17, Title = "Bukova", CantonId = 2 },
                 new City { Id = 18, Title = "Vidovice", CantonId = 2 },
                 new City { Id = 19, Title = "Jenjić", CantonId = 2 },
                 new City { Id = 20, Title = "Lončari", CantonId = 2 },
@@ -60,7 +57,7 @@ namespace AutoTrade.Services.Database
                 // Bosansko-podrinjski kanton (ID = 5)
                 new City { Id = 41, Title = "Goražde", CantonId = 5 },
                 new City { Id = 42, Title = "Pale-Prača", CantonId = 5 },
-                new City { Id = 43, Title = "Foča-Ustikolina", CantonId = 5 },
+                new City { Id = 43, Title = "Foča", CantonId = 5 },
                 new City { Id = 44, Title = "Ilovača", CantonId = 5 },
                 new City { Id = 45, Title = "Vitkovići", CantonId = 5 },
                 new City { Id = 46, Title = "Hubjeri", CantonId = 5 },
@@ -75,7 +72,7 @@ namespace AutoTrade.Services.Database
                 new City { Id = 53, Title = "Novi Travnik", CantonId = 6 },
                 new City { Id = 54, Title = "Vitez", CantonId = 6 },
                 new City { Id = 55, Title = "Jajce", CantonId = 6 },
-                new City { Id = 56, Title = "Gornji Vakuf-Uskoplje", CantonId = 6 },
+                new City { Id = 56, Title = "Gornji Vakuf", CantonId = 6 },
                 new City { Id = 57, Title = "Donji Vakuf", CantonId = 6 },
                 new City { Id = 58, Title = "Busovača", CantonId = 6 },
                 new City { Id = 59, Title = "Kiseljak", CantonId = 6 },
@@ -113,7 +110,7 @@ namespace AutoTrade.Services.Database
                 new City { Id = 86, Title = "Hadžići", CantonId = 9 },
                 new City { Id = 87, Title = "Vogošća", CantonId = 9 },
                 new City { Id = 88, Title = "Ilijaš", CantonId = 9 },
-                new City { Id = 89, Title = "Trnovo (FBiH)", CantonId = 9 },
+                new City { Id = 89, Title = "Trnovo", CantonId = 9 },
                 new City { Id = 90, Title = "Hrasnica", CantonId = 9 }
             };
         }
