@@ -1,3 +1,4 @@
+using AutoTrade.EmailSubscriber;
 using AutoTrade.Model;
 using AutoTrade.Services;
 using AutoTrade.Services.Database;
@@ -18,12 +19,14 @@ namespace Controllers
     public class ReservationController : BaseCRUDController<Reservation, BaseSerachObject, ReservationUpsertRequest, ReservationUpsertRequest>
     {
 
-        private readonly AutoTradeContext _context;
+     private readonly AutoTradeContext _context;
         private readonly ReservationApprovalEmail _reservationApprovalEmail;
-        public ReservationController(IReservationService service, AutoTradeContext context, ReservationApprovalEmail reservationApprovalEmail) : base(service)
+        private readonly IBus _bus;
+        public ReservationController(IReservationService service, AutoTradeContext context, ReservationApprovalEmail reservationApprovalEmail, IBus bus) : base(service)
         {
             _context = context;
             _reservationApprovalEmail = reservationApprovalEmail;
+            _bus = bus;
         }
 
         [HttpGet("automobile/{automobileAdId}")]
@@ -113,7 +116,7 @@ namespace Controllers
         [HttpPost("approve/{reservationId}")]
         public async Task<ActionResult> ApproveReservation(int reservationId)
         {
-            var reservation = await _context.Reservations
+            var reservation = await _context.Reservations.Include(x => x.User)
                 .FirstOrDefaultAsync(r => r.Id == reservationId);
 
             if (reservation == null)
@@ -125,15 +128,11 @@ namespace Controllers
             {
                 reservation.Status = "Approved";
                 await _context.SaveChangesAsync();
-                // await _reservationApprovalEmail.SendReservationApprovalEmail(reservationId);
-
-                //rabit mq slanje maila
-
-                var bus = RabbitHutch.CreateBus("host=localhost");
-                await bus.PubSub.PublishAsync(new ReservationNotification { ReservationId = reservationId });
-
-                // var emailService = new EmailService(_context);
-                // await emailService.SendReservationApprovalEmail(reservationId);
+                       await _bus.PubSub.PublishAsync(new ReservationApproved
+                {
+                    ReservationId = reservation.Id,
+                    Email = reservation.User.Email
+                });
 
                 return Ok(new { message = "Reservation approved and email sent." });
 

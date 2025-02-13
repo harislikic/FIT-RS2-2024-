@@ -11,6 +11,7 @@ using Messages;
 using EasyNetQ;
 using Database;
 using System.Text.Json.Serialization;
+using AutoTrade.EmailSubscriber;
 
 
 var builder = WebApplication.CreateBuilder(args);
@@ -31,12 +32,14 @@ builder.Services.AddCors(options =>
 
 
 
-builder.Services.AddScoped<EmailService>();  // EmailService
-builder.Services.AddScoped<RabbitMqListener>();   // RabbitMqListener
-builder.Services.AddTransient<ReservationApprovalEmail>();
+// builder.Services.AddScoped<EmailService>();  // EmailService
+// builder.Services.AddScoped<RabbitMqListener>();   // RabbitMqListener
+// builder.Services.AddTransient<ReservationApprovalEmail>();
 
-builder.Services.AddSingleton<IBus>(provider =>
-    RabbitHutch.CreateBus("host=localhost"));
+// builder.Services.AddSingleton<IBus>(provider =>
+//     RabbitHutch.CreateBus("host=localhost"));
+
+
 
 // Dio koji rjesava kad ima poveznica u tabelama za dupliranje objekata IgnoreCycles
 builder.Services.AddControllers().AddJsonOptions(options =>
@@ -44,6 +47,19 @@ builder.Services.AddControllers().AddJsonOptions(options =>
     options.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles;
     options.JsonSerializerOptions.WriteIndented = true;
 });
+
+
+builder.Services.AddSingleton<IBus>(sp =>
+{
+    var config = builder.Configuration;
+    var rabbitHost = config["RabbitMQ:Host"] ?? "localhost";
+    var rabbitUser = config["RabbitMQ:Username"] ?? "guest";
+    var rabbitPass = config["RabbitMQ:Password"] ?? "guest";
+
+    var connString = $"host={rabbitHost};username={rabbitUser};password={rabbitPass}";
+    return RabbitHutch.CreateBus(connString);
+});
+
 
 builder.Services.AddTransient<IUserService, UserService>();
 builder.Services.AddTransient<ICantonService, CantonService>();
@@ -60,6 +76,8 @@ builder.Services.AddTransient<IVehicleConditionService, VehicleConditionService>
 builder.Services.AddTransient<IAutomobileAdService, AutomobileAdService>();
 builder.Services.AddTransient<IEquipmentService, EquipmentService>();
 builder.Services.AddHostedService<ExpiredHighlightsService>();
+builder.Services.AddTransient<ReservationApprovalEmail>();
+builder.Services.AddHostedService<Worker>();
 
 
 builder.Services.AddControllers();
@@ -141,7 +159,5 @@ using (var scope = app.Services.CreateScope())
 
 // context.Database.Migrate(); // ✅ Automatski izvršava migracije
 // }
-
-
 
 app.Run();
