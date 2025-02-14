@@ -1,9 +1,8 @@
 using AutoTrade.Services.Database;
+using Database;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using MimeKit;
-using System;
-using System.Threading.Tasks;
 
 namespace Helpers
 {
@@ -24,10 +23,8 @@ namespace Helpers
             {
                 _logger.LogInformation($"[Email Servis] Dohvaćam podatke o rezervaciji sa ID={reservationId}");
 
-                // 1️⃣ Dohvatanje rezervacije iz baze
-                var reservation = await _context.Reservations
-                    .Include(u => u.User).ThenInclude(x => x.City)
-                    .Include(a => a.AutomobileAd)
+                var reservation = await _context.Reservations.Include(x => x.User)
+                    .Include(a => a.AutomobileAd).ThenInclude(x => x.User).ThenInclude(x => x.City)
                     .FirstOrDefaultAsync(r => r.Id == reservationId);
 
                 if (reservation == null)
@@ -51,29 +48,19 @@ namespace Helpers
 
                 _logger.LogInformation($"[Email Servis] Pripremam email za korisnika: {reservation.User.FirstName} ({email})");
 
-                // 2️⃣ Kreiranje email poruke
                 var message = new MimeMessage();
-                message.From.Add(new MailboxAddress("AutoTrade App", "creatus.xoxo@gmail.com"));
+                message.From.Add(new MailboxAddress("Vroom App", "creatus.xoxo@gmail.com"));
                 message.To.Add(new MailboxAddress(reservation.User.FirstName, email));
                 message.Subject = $"Rezervacija odobrena: {reservation.AutomobileAd.Title}";
 
-                message.Body = new TextPart("plain")
+                message.Body = new TextPart("html")
                 {
-                    Text = $"Poštovani {reservation.User.FirstName},\n\n" +
-                           $"Vaša rezervacija je odobrena!\n\n" +
-                           $"📌 Detalji rezervacije:\n" +
-                           $"🚗 Vozilo: {reservation.AutomobileAd.Title}\n" +
-                           $"👤 Ime korisnika: {reservation.User.FirstName}\n" +
-                           $"📍 Lokacija automobila: {reservation.User.City.Title}\n" +
-                           $"📞 Kontakt telefon: {reservation.User.PhoneNumber}\n" +
-                           $"📅 Datum rezervacije: {reservation.ReservationDate}\n" +
-                           $"✅ Status rezervacije: {reservation.Status}\n\n" +
-                           $"Hvala što koristite Vroom aplikaciju!"
+                    Text = GenerateReservationEmailBody(reservation)
                 };
+
 
                 _logger.LogInformation($"[Email Servis] Pokušavam poslati email na {email}...");
 
-                // 3️⃣ Slanje email-a
                 try
                 {
                     using (var client = new MailKit.Net.Smtp.SmtpClient())
@@ -103,5 +90,88 @@ namespace Helpers
                 _logger.LogError($"❌ [GREŠKA] Neočekivana greška u SendReservationApprovalEmail za rezervaciju ID={reservationId}: {ex.Message}");
             }
         }
+
+
+
+        private string GenerateReservationEmailBody(Reservation reservation)
+        {
+            return $@"
+        <html>
+        <head>
+        <style>
+            body {{
+                font-family: Arial, sans-serif;
+                line-height: 1.6;
+                color: #333;
+            }}
+            .container {{
+                max-width: 600px;
+                margin: 0 auto;
+                padding: 20px;
+                border: 1px solid #ddd;
+                border-radius: 8px;
+                background-color: #f9f9f9;
+            }}
+            h2 {{
+                color: #2c3e50;
+                text-align: center;
+            }}
+            .details {{
+                background-color: #fff;
+                padding: 15px;
+                border-radius: 8px;
+                box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+            }}
+            .details p {{
+                margin: 8px 0;
+            }}
+            .highlight {{
+                color: #e74c3c;
+                font-weight: bold;
+            }}
+            .footer {{
+                text-align: center;
+                margin-top: 20px;
+                font-size: 12px;
+                color: #888;
+                     }}
+         </style>
+             </head>
+             <body>
+                 <div class='container'>
+                     <h2>🚗 Rezervacija odobrena!</h2>
+                     <p>Poštovani <b>{reservation.User.FirstName} {reservation.User.LastName}</b>,</p>
+                     <p>Vaša rezervacija je uspešno odobrena! 🎉</p>
+
+                     <div class='details'>
+                         <p><b>📌 Detalji rezervacije:</b></p>
+                         <p><b>🚗 Vozilo:</b> <span class='highlight'>{reservation.AutomobileAd.Title}</span></p>
+                         <p><b>👤 Vlasnik oglasa:</b> {reservation.AutomobileAd.User.FirstName} {reservation.AutomobileAd.User.LastName}</p>
+                         <p><b>📍 Lokacija automobila:</b> {reservation.AutomobileAd.User.City.Title}</p>
+                         <p><b>📞 Kontakt telefon:</b> {FormatPhoneNumber(reservation.AutomobileAd.User.PhoneNumber)}</p>          
+                         <p><b>📅 Datum rezervacije:</b> {reservation.ReservationDate:dd.MM.yyyy}</p>
+                         <p><b>✅ Status rezervacije:</b> {reservation.Status}</p>
+                     </div>
+
+                     <p class='footer'>Hvala što koristite Vroom aplikaciju! 🚗✨</p>
+                 </div>
+        </body>
+        </html>";
+        }
+
+        private string FormatPhoneNumber(string phoneNumber)
+        {
+            if (string.IsNullOrEmpty(phoneNumber) || phoneNumber.Length < 6)
+                return phoneNumber;
+
+            if (phoneNumber.Length == 9)
+                return $"{phoneNumber[..3]}-{phoneNumber[3..6]}-{phoneNumber[6..]}";
+
+            if (phoneNumber.Length == 10)
+                return $"{phoneNumber[..3]}-{phoneNumber[3..6]}-{phoneNumber[6..]}";
+
+            return phoneNumber;
+        }
+
     }
 }

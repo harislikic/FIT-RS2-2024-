@@ -1,9 +1,6 @@
 using EasyNetQ;
 using Helpers;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
-using System.Threading.Tasks;
+
 
 namespace AutoTrade.EmailSubscriber
 {
@@ -28,18 +25,14 @@ namespace AutoTrade.EmailSubscriber
             {
                 _logger.LogInformation($"Received message: ReservationId={message.ReservationId}, Email={message.Email}");
 
-                // Create a new scope for each message
                 using var scope = _scopeFactory.CreateScope();
 
-                // ✅ Resolve ReservationApprovalEmail instead of IMailService
                 var emailService = scope.ServiceProvider.GetRequiredService<ReservationApprovalEmail>();
 
-                // ✅ Call the correct method
                 await emailService.SendReservationApprovalEmail(message.ReservationId);
 
             }, cancellationToken: stoppingToken);
 
-            // Wait indefinitely
             await Task.Delay(Timeout.Infinite, stoppingToken);
         }
     }
