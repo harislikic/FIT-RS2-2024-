@@ -37,13 +37,10 @@ namespace AutoTrader.Services.Helpers
                 throw new ArgumentException("Password cannot be null or empty.");
             }
 
-            // Generiše salt
             string salt = GenerateSalt();
 
-            // Generiše heš sa salton i lozinkom
             string hash = GenerateHash(salt, password);
 
-            // Postavlja vrednosti u korisnika
             user.PasswordSalt = salt;
             user.PasswordHash = hash;
         }

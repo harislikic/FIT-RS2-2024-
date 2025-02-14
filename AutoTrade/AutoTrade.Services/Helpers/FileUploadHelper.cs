@@ -1,7 +1,5 @@
-using System.IO;
 using SixLabors.ImageSharp;
 using SixLabors.ImageSharp.Processing;
-using SixLabors.ImageSharp.Formats;
 using Microsoft.AspNetCore.Http;
 
 public static class FileUploadHelper

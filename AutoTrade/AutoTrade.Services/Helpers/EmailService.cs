@@ -1,11 +1,6 @@
-using System.Linq;
-using System.Net.Mail;
 using Database;
 using MimeKit;
-using MailKit.Net.Smtp;
-using AutoTrade.Services;
 using AutoTrade.Services.Database;
-using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 
 namespace Helpers
