@@ -110,7 +110,6 @@ class _AdminListState extends State<AdminList> {
       SnackbarHelper.showSnackbar(context, 'Admin obrisan uspešno',
           backgroundColor: Colors.green);
 
-      // Ponovo filtriraj ako treba
       _fetchAdmins(query: _searchController.text);
     } catch (e) {
       ScaffoldMessenger.of(context).showSnackBar(
@@ -126,7 +125,6 @@ class _AdminListState extends State<AdminList> {
       endIndex = _admins.length;
     }
     if (startIndex >= _admins.length) {
-      // Nema više admina za prikaz
       return [];
     }
     return _admins.sublist(startIndex, endIndex);
@@ -137,12 +135,11 @@ class _AdminListState extends State<AdminList> {
   }
 
   bool get canGoNext {
-    // Sledeća stranica
+
     final nextPage = _tablePage + 1;
     final nextStartIndex = nextPage * _pageSize;
 
     if (nextStartIndex >= _count) {
-      // Već smo prikazali sve što postoji
       return false;
     }
     return true;
@@ -162,7 +159,6 @@ class _AdminListState extends State<AdminList> {
     });
   }
 
-  /// Kad kliknemo "Previous"
   void _prevPage() {
     if (_tablePage > 0) {
       setState(() {
@@ -237,7 +233,6 @@ class _AdminListState extends State<AdminList> {
               ),
             ),
 
-            // Glavna tabela sa skrolovanjem
             SingleChildScrollView(
               scrollDirection: Axis.horizontal,
               child: ConstrainedBox(
@@ -346,7 +341,6 @@ class _AdminListState extends State<AdminList> {
               style: const TextStyle(fontSize: 15),
             ),
 
-            // Ako se učitava, prikaži spinner
             if (_isLoading)
               const Padding(
                 padding: EdgeInsets.all(8.0),

@@ -33,13 +33,12 @@ class PaymentService {
 
   final String _stripeSecretKey = dotenv.env['STRIPE_SECRET_KEY']!;
 
-  /// ✅ Metoda koja dohvaća SVE Stripe transakcije bez paginacije
   Future<List<dynamic>> getStripeTransactions() async {
     const String url = 'https://api.stripe.com/v1/charges?limit=300';
 
     try {
       final response = await http.get(
-        Uri.parse(url), // Bez paginacije, preuzima sve transakcije
+        Uri.parse(url),
         headers: {
           'Authorization': 'Bearer $_stripeSecretKey',
           'Content-Type': 'application/x-www-form-urlencoded',
@@ -48,7 +47,7 @@ class PaymentService {
 
       if (response.statusCode == 200) {
         final data = json.decode(response.body);
-        return data['data']; // Vraća listu transakcija
+        return data['data'];
       } else {
         throw Exception('Stripe API error: ${response.statusCode}');
       }

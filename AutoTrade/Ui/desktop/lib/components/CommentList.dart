@@ -51,7 +51,7 @@ class _CommentListState extends State<CommentList> {
 
       setState(() {
         _count = data['totalCount'] ?? 0;
-        _comments.addAll(data['comments']); // Direktno dodaj listu komentara
+        _comments.addAll(data['comments']);
         _currentPage++;
       });
     } catch (e) {
@@ -202,7 +202,7 @@ class _CommentListState extends State<CommentList> {
                           : null,
                     ),
                     onChanged: (value) =>
-                        setState(() {}), // Osvežava UI za dugme "X"
+                        setState(() {}),
                     onSubmitted: (_) => _onSearch(),
                   ),
                 ),
@@ -332,7 +332,6 @@ class _CommentListState extends State<CommentList> {
             style: const TextStyle(fontSize: 15),
           ),
 
-          // Ako se učitava, prikaži spinner
           if (_isLoading)
             const Padding(
               padding: EdgeInsets.all(8.0),

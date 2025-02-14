@@ -108,7 +108,7 @@ class AutomobileAdsTable extends StatelessWidget {
                           ),
                         ),
                       )
-                    : const Text('-'), // Ako nema slika, prikaži crticu
+                    : const Text('-'),
               ),
               DataCell(
                 Row(

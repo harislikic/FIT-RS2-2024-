@@ -11,12 +11,11 @@ class PaymentResponse {
     required this.transactions,
   });
 
-  // Factory metoda za parsiranje JSON-a
   factory PaymentResponse.fromJson(Map<String, dynamic> json) {
     return PaymentResponse(
       totalRecords: json['totalRecords'],
       totalAmount: (json['totalAmount'] as num)
-          .toDouble(), // Sigurno konvertovanje u double
+          .toDouble(),
       transactions: (json['transactions'] as List)
           .map((t) => PaymentTransaction.fromJson(t))
           .toList(),

@@ -32,13 +32,11 @@ class CommentService {
   }) async {
     final String urlBase = '$baseUrl/Comment/search';
 
-    // Kreiranje liste parametara
     final Map<String, String> queryParams = {
       'Page': page.toString(),
       'PageSize': pageSize.toString(),
     };
 
-    print("page:: ${page}");
 
     if (userId != null) {
       queryParams['UserId'] = userId.toString();
@@ -48,7 +46,6 @@ class CommentService {
     }
     final Uri url = Uri.parse(urlBase).replace(queryParameters: queryParams);
 
-    print("url:: ${url}");
 
     final response = await http.get(url);
 

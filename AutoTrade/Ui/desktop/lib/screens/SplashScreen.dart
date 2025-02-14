@@ -16,14 +16,11 @@ class _SplashScreenState extends State<SplashScreen> {
   }
 
   Future<void> _checkLoginStatus() async {
-    // Provera da li je korisnik prijavljen
     final isLoggedIn = await AuthService.checkIfUserIsLoggedIn();
 
     if (isLoggedIn) {
-      // Ako je prijavljen, idi na Admin Panel Screen
       Navigator.pushReplacementNamed(context, '/admin-panel');
     } else {
-      // Ako nije prijavljen, idi na Login Screen
       Navigator.pushReplacementNamed(context, '/login');
     }
   }
@@ -32,7 +29,7 @@ class _SplashScreenState extends State<SplashScreen> {
   Widget build(BuildContext context) {
     return const Scaffold(
       body: Center(
-        child: CircularProgressIndicator(), // Prikazivanje loading indikatora
+        child: CircularProgressIndicator(),
       ),
     );
   }

@@ -2,7 +2,6 @@
 const String apiHost = String.fromEnvironment('API_HOST', defaultValue: 'http://localhost');
 const String apiPort = String.fromEnvironment('API_PORT', defaultValue: '5194');
 
-// Bira odgovarajući API host u runtime-u
 
 final String baseUrl = '$apiHost:$apiPort';
 

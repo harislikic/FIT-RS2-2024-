@@ -101,7 +101,7 @@ class _AddAdminScreenState extends State<AddAdminScreen> {
     final now = DateTime.now();
     final newDate = await showDatePicker(
       context: context,
-      initialDate: now.subtract(const Duration(days: 6570)), // 18 godina unazad
+      initialDate: now.subtract(const Duration(days: 6570)),
       firstDate: DateTime(1900),
       lastDate: now,
     );
@@ -187,17 +187,14 @@ class _AddAdminScreenState extends State<AddAdminScreen> {
       if (response.statusCode == 200 || response.statusCode == 201) {
         SnackbarHelper.showSnackbar(context, 'Uspešno kreiran Admin!',
             backgroundColor: Colors.green);
-        // _showSnackBar(context, 'Uspešno kreiran Admin!',
-        //     backgroundColor: Colors.green);
+    
 
         Navigator.pushReplacementNamed(context, '/');
       } else {
         final responseBody = response.body;
 
-        // Definišite poruku greške
         String errorMessage = 'Došlo je do greške. Pokušajte ponovo.';
 
-        // Ako odgovor sadrži specifičan tekst, prilagodite poruku greške
         if (responseBody.contains(
             'A user with the same username or email already exists')) {
           errorMessage =
@@ -208,7 +205,6 @@ class _AddAdminScreenState extends State<AddAdminScreen> {
 
         SnackbarHelper.showSnackbar(context, errorMessage,
             backgroundColor: Colors.red);
-        // _showSnackBar(context, errorMessage, backgroundColor: Colors.red);
       }
     } catch (e) {
       print('Greška: $e');
@@ -223,8 +219,6 @@ class _AddAdminScreenState extends State<AddAdminScreen> {
 
       SnackbarHelper.showSnackbar(context, errorMessage,
           backgroundColor: Colors.red);
-
-      // _showSnackBar(context, errorMessage, backgroundColor: Colors.red);
     }
   }
 
@@ -256,7 +250,7 @@ class _AddAdminScreenState extends State<AddAdminScreen> {
       body: Center(
         child: ConstrainedBox(
           constraints:
-              const BoxConstraints(maxWidth: 600), // Maksimalna širina forme
+              const BoxConstraints(maxWidth: 600),
           child: Card(
             elevation: 4,
             margin: const EdgeInsets.all(16),
@@ -265,7 +259,7 @@ class _AddAdminScreenState extends State<AddAdminScreen> {
               child: Form(
                 key: _formKey,
                 child: ListView(
-                  shrinkWrap: true, // Sprečava nepotrebno širenje liste
+                  shrinkWrap: true,
                   children: [
                     TextFormField(
                       controller: _userNameController,

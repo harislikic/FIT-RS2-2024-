@@ -123,7 +123,6 @@ class _ImageGalleryDialogState extends State<ImageGalleryDialog> {
               ),
             ),
 
-            // Indikatori
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: widget.imageUrls.asMap().entries.map((entry) {

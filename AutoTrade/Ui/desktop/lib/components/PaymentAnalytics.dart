@@ -9,7 +9,6 @@ class PaymentAnalytics extends StatefulWidget {
 }
 
 
-//delete
 class _PaymentAnalyticsState extends State<PaymentAnalytics> {
   final PaymentService _paymentService = PaymentService();
   Future<PaymentResponse>? _paymentData;
@@ -57,7 +56,6 @@ class _PaymentAnalyticsState extends State<PaymentAnalytics> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            // Filteri (godina i mjesec)
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
@@ -100,7 +98,6 @@ class _PaymentAnalyticsState extends State<PaymentAnalytics> {
 
             SizedBox(height: 20),
 
-            // FutureBuilder za grafikone
             FutureBuilder<PaymentResponse>(
               future: _paymentData,
               builder: (context, snapshot) {
@@ -130,12 +127,10 @@ class _PaymentAnalyticsState extends State<PaymentAnalytics> {
 
                       SizedBox(height: 20),
 
-                      // Prikaz ukupnog iznosa po valutama
                       _buildCurrencyTotals(data),
 
                       SizedBox(height: 20),
 
-                      // Grafici (BarChart i PieChart)
                       Expanded(
                         child: Row(
                           children: [
@@ -156,7 +151,6 @@ class _PaymentAnalyticsState extends State<PaymentAnalytics> {
     );
   }
 
-  // Prikaz ukupnog iznosa po valutama
   Widget _buildCurrencyTotals(PaymentResponse data) {
     Map<String, double> currencyTotals = {};
 
@@ -183,7 +177,6 @@ class _PaymentAnalyticsState extends State<PaymentAnalytics> {
     );
   }
 
-  // BarChart za transakcije po mjesecima
   Widget _buildBarChart(PaymentResponse data) {
     Map<int, double> monthlyTotals = {};
 
@@ -225,7 +218,6 @@ class _PaymentAnalyticsState extends State<PaymentAnalytics> {
     );
   }
 
-  // PieChart za transakcije po statusu
   Widget _buildPieChart(PaymentResponse data) {
     Map<String, double> statusTotals = {};
 

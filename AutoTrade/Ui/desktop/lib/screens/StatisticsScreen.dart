@@ -55,7 +55,6 @@ class _StatisticsScreenState extends State<StatisticsScreen> {
     );
   }
 
-  /// ✅ Prikaz osnovnih podataka
   Widget _buildSummaryCards(Statistics statistics) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -86,7 +85,6 @@ class _StatisticsScreenState extends State<StatisticsScreen> {
   }
 
 
-  /// ✅ Prikaz najfavorizovanijeg automobila
   Widget _buildMostFavoritedCar(Statistics statistics) {
     var car = statistics.mostFavoritedCar;
     return Card(
@@ -108,7 +106,6 @@ class _StatisticsScreenState extends State<StatisticsScreen> {
     );
   }
 
-  /// ✅ Prikaz Bar Charta (Oglasi po gradovima)
   Widget _buildBarChart(Statistics statistics) {
     return Card(
       elevation: 4,
@@ -148,7 +145,7 @@ class _StatisticsScreenState extends State<StatisticsScreen> {
                           return Padding(
                             padding: EdgeInsets.only(top: 6),
                             child: Text(
-                              statistics.automobilesPerCity[index].city, // ✅ Prikaz punog imena grada
+                              statistics.automobilesPerCity[index].city,
                               style: TextStyle(fontSize: 10),
                             ),
                           );
@@ -165,7 +162,6 @@ class _StatisticsScreenState extends State<StatisticsScreen> {
     );
   }
 
-  /// ✅ Prikaz Pie Charta (Highlighted vs. Regular oglasi)
   Widget _buildPieChart(Statistics statistics) {
     return Card(
       elevation: 4,

@@ -1,4 +1,4 @@
-import 'dart:ui'; // Za blur efekat
+import 'dart:ui'; 
 import 'package:desktop_app/services/AuthService.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -30,7 +30,6 @@ class _LoginScreenState extends State<LoginScreen> {
       return;
     }
 
-    // Poziv API-ja za prijavu
     final success = await AuthService.login(username, password);
 
     if (success) {
@@ -50,29 +49,26 @@ class _LoginScreenState extends State<LoginScreen> {
     return Scaffold(
       body: Stack(
         children: [
-          // Pozadinska slika
           Positioned.fill(
             child: Image.asset(
               'assets/pozadina.jpg',
               fit: BoxFit.cover,
             ),
           ),
-          // Blur efekat preko pozadine
           Positioned.fill(
             child: BackdropFilter(
               filter: ImageFilter.blur(sigmaX: 5, sigmaY: 5),
               child: Container(
-                color: Colors.black.withOpacity(0.3), // Overlay za tamniji ton
+                color: Colors.black.withOpacity(0.3),
               ),
             ),
           ),
-          // Središnji deo sa login formom
           Center(
             child: Container(
               width: 500,
               padding: const EdgeInsets.all(32.0),
               decoration: BoxDecoration(
-                color: Colors.white.withOpacity(0.1), // Poluprozirni efekat
+                color: Colors.white.withOpacity(0.1),
                 borderRadius: BorderRadius.circular(16),
                 border: Border.all(color: Colors.blue, width: 2),
                 boxShadow: [
@@ -88,7 +84,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   SvgPicture.asset(
-                    'assets/login_illustration.svg', // Dodaj odgovarajući SVG
+                    'assets/login_illustration.svg',
                     height: 100,
                   ),
                   const Row(

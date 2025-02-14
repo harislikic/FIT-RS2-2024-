@@ -34,13 +34,11 @@ class _AutomobileAdsListState extends State<AutomobileAdsList> {
     _fetchAutomobileAds();
   }
 
-  /// Ako [query] != null => resetuje sve (nova pretraga)
   Future<void> _fetchAutomobileAds({String? query}) async {
     if (_isLoading) return;
     setState(() => _isLoading = true);
 
     if (query != null) {
-      // Resetujemo sve ako je nova pretraga
       _ads.clear();
       _currentPage = 0;
       _serverPage = 0;
@@ -80,12 +78,10 @@ class _AutomobileAdsListState extends State<AutomobileAdsList> {
     return _ads.sublist(startIndex, endIndex);
   }
 
-  /// Klik "Traži"
   void _onSearch() {
     _fetchAutomobileAds(query: _searchController.text);
   }
 
-  /// Menja status (Active/Pending) i resetuje
   void _onStatusChanged(String? value) {
     if (value == null) return;
     setState(() {
@@ -122,7 +118,6 @@ class _AutomobileAdsListState extends State<AutomobileAdsList> {
     return true;
   }
 
-  /// Approve
   Future<void> _approveAutomobile(int adId) async {
     final confirm = await showDialog<bool>(
       context: context,
@@ -144,7 +139,6 @@ class _AutomobileAdsListState extends State<AutomobileAdsList> {
 
     try {
       await AutomobileAdService().markAsActive(adId);
-      // Osvežimo sve
       _ads.clear();
       _serverPage = 0;
       _currentPage = 0;
@@ -197,7 +191,6 @@ class _AutomobileAdsListState extends State<AutomobileAdsList> {
     int endDisplay;
 
     if (_count == 0) {
-      // Nema oglasa
       startDisplay = 0;
       endDisplay = 0;
     } else {

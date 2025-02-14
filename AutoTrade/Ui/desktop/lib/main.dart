@@ -9,7 +9,7 @@ import 'package:flutter_stripe/flutter_stripe.dart';
 
 void main() async {
   WidgetsFlutterBinding
-      .ensureInitialized(); // Obezbeđuje da se async pokrene pre `runApp()`
+      .ensureInitialized();
 
   try {
     await dotenv.load(fileName: ".env");
@@ -38,11 +38,11 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home: const SplashScreen(), // Postavljamo SplashScreen kao početni ekran
+      home: const SplashScreen(),
       routes: {
         '/admin-panel': (context) =>
-            const AdminPanelScreen(), // Ruta za Admin Panel
-        '/login': (context) => const LoginScreen(), // Ruta za Login Screen
+            const AdminPanelScreen(),
+        '/login': (context) => const LoginScreen(), 
       },
     );
   }
@@ -55,22 +55,22 @@ class InitialScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return FutureBuilder<bool>(
       future: AuthService
-          .checkIfUserIsLoggedIn(), // Provera da li je korisnik logovan
+          .checkIfUserIsLoggedIn(),
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
-          // Prikazivanje loading ekrana dok se čeka rezultat
+         
           return const Scaffold(
             body: Center(
               child: CircularProgressIndicator(),
             ),
           );
         } else if (snapshot.hasData && snapshot.data == true) {
-          // Ako je korisnik logovan, preusmeravamo ga na Admin Panel
+          
           Future.microtask(() {
             Navigator.pushReplacementNamed(context, '/admin-panel');
           });
         } else {
-          // Ako korisnik nije logovan, preusmeravamo ga na Login ekran
+         
           Future.microtask(() {
             Navigator.pushReplacementNamed(context, '/login');
           });

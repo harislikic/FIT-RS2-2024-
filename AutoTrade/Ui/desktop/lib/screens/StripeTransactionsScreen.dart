@@ -73,7 +73,6 @@ class _StripeTransactionsScreenState extends State<StripeTransactionsScreen> {
     );
   }
 
-  /// 📌 Prikaz ključnih podataka
   Widget _buildSummary(List<dynamic> transactions) {
     int totalTransactions = transactions.length;
     Map<String, double> currencyTotals = {};
@@ -105,7 +104,6 @@ class _StripeTransactionsScreenState extends State<StripeTransactionsScreen> {
     );
   }
 
-  /// 📊 LineChart - Broj transakcija po danima
   Widget _buildLineChart(List<dynamic> transactions) {
     Map<int, int> dailyCounts = {};
 
@@ -176,12 +174,10 @@ class _StripeTransactionsScreenState extends State<StripeTransactionsScreen> {
     );
   }
 
-  /// 📅 Formats x-axis labels to prevent cluttering
   Widget _formatDayLabel(int day, List<int> sortedDays) {
     if (sortedDays.length > 7) {
-      // Show only key dates
       if (sortedDays.indexOf(day) % (sortedDays.length ~/ 7) != 0) {
-        return const SizedBox(); // Skip some labels to prevent clutter
+        return const SizedBox(); 
       }
     }
     return Text(
@@ -190,7 +186,6 @@ class _StripeTransactionsScreenState extends State<StripeTransactionsScreen> {
     );
   }
 
-  /// 🥧 PieChart - Distribucija ukupnih iznosa po statusu transakcija
   Widget _buildPieChart(List<dynamic> transactions) {
     Map<String, double> statusAmounts = {};
 
@@ -206,11 +201,11 @@ class _StripeTransactionsScreenState extends State<StripeTransactionsScreen> {
         padding: const EdgeInsets.all(8.0),
         child: Column(
           children: [
-            Text(
+            const Text(
               'Distribucija iznosa po statusu',
               style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
             ),
-            SizedBox(height: 10),
+            const SizedBox(height: 10),
             Expanded(
               child: PieChart(
                 PieChartData(
@@ -219,7 +214,7 @@ class _StripeTransactionsScreenState extends State<StripeTransactionsScreen> {
                       title: '${entry.key}\n${entry.value.toStringAsFixed(2)}',
                       value: entry.value,
                       radius: 50,
-                      titleStyle: TextStyle(
+                      titleStyle: const TextStyle(
                         fontSize: 12,
                         fontWeight: FontWeight.bold,
                         color: Colors.white,
@@ -238,7 +233,6 @@ class _StripeTransactionsScreenState extends State<StripeTransactionsScreen> {
     );
   }
 
-  /// 🥧 PieChart - Kartični brendovi (Visa, Mastercard, itd.)
   Widget _buildCardBrandPieChart(List<dynamic> transactions) {
     Map<String, double> cardBrandCounts = {};
 
@@ -258,7 +252,7 @@ class _StripeTransactionsScreenState extends State<StripeTransactionsScreen> {
         padding: const EdgeInsets.all(8.0),
         child: Column(
           children: [
-            Text(
+            const Text(
               'Distribucija kartičnih brendova',
               style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
             ),
@@ -271,7 +265,7 @@ class _StripeTransactionsScreenState extends State<StripeTransactionsScreen> {
                       title: '${entry.key}\n${entry.value.toStringAsFixed(0)}',
                       value: entry.value,
                       radius: 50,
-                      titleStyle: TextStyle(
+                      titleStyle: const TextStyle(
                         fontSize: 12,
                         fontWeight: FontWeight.bold,
                         color: Colors.white,
@@ -291,7 +285,6 @@ class _StripeTransactionsScreenState extends State<StripeTransactionsScreen> {
   }
 }
 
-/// 🎨 Assign colors based on transaction status
 Color _getStatusColor(String status) {
   switch (status) {
     case 'succeeded':
@@ -305,11 +298,10 @@ Color _getStatusColor(String status) {
     case 'requires_action':
       return Colors.blue.shade700;
     default:
-      return Colors.blueGrey.shade600; // Default color for unknown statuses
+      return Colors.blueGrey.shade600;
   }
 }
 
-/// 🎨 Assign colors for different card brands
 Color _getCardBrandColor(String brand) {
   switch (brand) {
     case 'VISA':
@@ -325,6 +317,6 @@ Color _getCardBrandColor(String brand) {
     case 'DINERS CLUB':
       return Colors.green.shade700;
     default:
-      return Colors.grey.shade700; // Default color for unknown brands
+      return Colors.grey.shade700; 
   }
 }

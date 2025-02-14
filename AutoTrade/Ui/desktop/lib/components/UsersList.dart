@@ -214,7 +214,6 @@ class _UsersListState extends State<UsersList> {
               ),
             ),
 
-            // Tabela sa skrolovanjem
             SingleChildScrollView(
               scrollDirection: Axis.horizontal,
               child: ConstrainedBox(
@@ -301,7 +300,6 @@ class _UsersListState extends State<UsersList> {
 
             const SizedBox(height: 8),
 
-            // Paginacija
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
