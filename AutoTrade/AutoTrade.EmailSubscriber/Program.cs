@@ -18,7 +18,6 @@ namespace AutoTrade.EmailSubscriber
                     options.UseSqlServer(connectionString);
                 });
 
-                    // 2) Registruj RabbitMQ (IBus)
                     services.AddSingleton<IBus>(_ =>
                     {
                         var rabbitHost = Environment.GetEnvironmentVariable("RABBITMQ_HOST") ?? "localhost";
