@@ -46,7 +46,7 @@ class _AddAutomobileScreenState extends State<AddAutomobileScreen> {
   List<String> _selectedEquipmentNames = [];
   int? _enginePower;
   int? _numberOfDoors;
-  int? _cubicCapacity;
+  double? _cubicCapacity;
   int? _horsePower;
   String? _color;
   String? _vehicleConditionId;
@@ -293,8 +293,7 @@ class _AddAutomobileScreenState extends State<AddAutomobileScreen> {
                 validator: (value) =>
                     value?.isEmpty ?? true ? 'Unesite opis' : null,
                 maxLines: null,
-                keyboardType:
-                    TextInputType.multiline,
+                keyboardType: TextInputType.multiline,
                 textInputAction: TextInputAction.newline,
               ),
               TextFormField(
@@ -337,9 +336,22 @@ class _AddAutomobileScreenState extends State<AddAutomobileScreen> {
               ),
               TextFormField(
                 decoration: const InputDecoration(labelText: 'Kubikaža'),
-                onSaved: (value) => _cubicCapacity = int.tryParse(value ?? ''),
-                validator: (value) =>
-                    value?.isEmpty ?? true ? 'Unesi kubikažu' : null,
+                onSaved: (value) => _cubicCapacity =
+                    double.tryParse(value?.replaceAll(',', '.') ?? '0'),
+                validator: (value) {
+                  if (value == null || value.isEmpty) {
+                    return 'Unesi kubikažu';
+                  }
+
+                  // RegExp koji dozvoljava brojeve sa decimalnim zarezom (npr. "1,9")
+                  final regExp = RegExp(r'^\d+,\d+$');
+
+                  if (!regExp.hasMatch(value)) {
+                    return 'Kubikaža mora biti u formatu X,Y (npr. 1,9)';
+                  }
+
+                  return null; // Validan unos
+                },
                 keyboardType: TextInputType.number,
               ),
               TextFormField(

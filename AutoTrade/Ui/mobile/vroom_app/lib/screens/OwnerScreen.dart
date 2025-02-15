@@ -107,7 +107,7 @@ class _OwnerScreenState extends State<OwnerScreen>
                       ),
                       const SizedBox(height: 4),
                       Text(
-                        'Vroom ID: ${widget.owner.id}',
+                        '${widget.owner.userName}',
                         style: TextStyle(
                           fontSize: 14,
                           color: Colors.blueGrey[600],

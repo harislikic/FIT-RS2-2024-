@@ -61,7 +61,7 @@ namespace AutoTrade.Services
         public override void BeforeInsert(AutomobileAdInsertRequst request, AutomobileAd entity)
         {
             entity.DateOFadd = DateTime.Now;
-            entity.Status = "Active";
+            entity.Status = "Pending";
             //
             entity.Images = null;
 
@@ -328,7 +328,7 @@ namespace AutoTrade.Services
 
                         var favoriteData = Context.Favorites.ToList();
                         var reservationData = Context.Reservations.ToList();
-                        var automobilesData = Context.AutomobileAds.Include(x => x.FuelType).ToList();
+                        var automobilesData = Context.AutomobileAds.Include(x => x.FuelType).Where(x => x.Status != "Done" && x.Status != "Pending").ToList();
 
                         var data = new List<ProductEntry>();
 
@@ -439,7 +439,7 @@ namespace AutoTrade.Services
             var finalResult = predictionResult
               .OrderByDescending(x => x.Item2)
               .Select(x => x.Item1)
-              .Take(4)
+              .Take(8)
               .ToList();
 
             return Mapper.Map<List<Model.AutomobileAd>>(finalResult);

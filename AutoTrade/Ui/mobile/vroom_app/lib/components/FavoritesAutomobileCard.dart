@@ -150,7 +150,7 @@ class FavoritesAutomobileCard extends StatelessWidget {
                       const SizedBox(height: 4),
                       Text(formatPrice(favoritesAutomobile.price),
                           style: const TextStyle(
-                              fontSize: 14, fontWeight: FontWeight.bold)),
+                              fontSize: 12, fontWeight: FontWeight.bold)),
                     ],
                   ),
                 ),
