@@ -57,70 +57,78 @@ class _ReservationModalState extends State<ReservationModal> {
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            crossAxisAlignment: CrossAxisAlignment.start,
+          Stack(
             children: [
-              const SizedBox(),
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.end,
-                children: [
-                  CloseModalButton(
-                    onPressed: () => Navigator.of(context).pop(),
-                  ),
-                  const SizedBox(height: 4),
-                  Text(
-                    'Odaberite vrijeme za datum: ${DateFormat('dd.MM.yyyy').format(widget.selectedDay)}',
+              Align(
+                alignment: Alignment.topRight,
+                child: CloseModalButton(
+                  onPressed: () => Navigator.of(context).pop(),
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.only(top: 8.0),
+                child: Center(
+                  child: Text(
+                    'Odaberite vrijeme za\n${DateFormat('dd.MM.yyyy').format(widget.selectedDay)}',
                     style: const TextStyle(
                       fontSize: 16,
                       fontWeight: FontWeight.bold,
                       color: Colors.black87,
                     ),
-                    textAlign: TextAlign.right,
+                    textAlign: TextAlign.center,
                   ),
-                ],
+                ),
               ),
             ],
           ),
-          const SizedBox(height: 16),
-          OutlinedButton.icon(
-            onPressed: () => _selectTime(context),
-            icon: const Icon(Icons.access_time),
-            label: Text(
-              _selectedTime == null
-                  ? 'Odaberite vrijeme'
-                  : 'Odabrano: ${_selectedTime!.format(context)}',
-            ),
-            style: OutlinedButton.styleFrom(
-              padding:
-                  const EdgeInsets.symmetric(vertical: 12.0, horizontal: 16.0),
-              side: const BorderSide(color: Colors.blueGrey),
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(8.0),
-              ),
-            ),
-          ),
-          const SizedBox(height: 16),
-          ElevatedButton(
-            onPressed: _confirmReservation,
-            style: ElevatedButton.styleFrom(
-              padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 20),
-              backgroundColor: Colors.white,
-              foregroundColor: Colors.blueAccent,
-              side: const BorderSide(color: Colors.blueGrey, width: 2),
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(12),
-              ),
-              elevation: 2,
-            ),
-            child: const Row(
+          const SizedBox(height: 20),
+          Center(
+            child: Column(
               mainAxisSize: MainAxisSize.min,
               children: [
-                Icon(Icons.check_circle, color: Colors.blueAccent),
-                SizedBox(width: 8),
-                Text(
-                  'Potvrdi',
-                  style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                OutlinedButton.icon(
+                  onPressed: () => _selectTime(context),
+                  icon: const Icon(Icons.access_time),
+                  label: Text(
+                    _selectedTime == null
+                        ? 'Odaberite vrijeme'
+                        : 'Odabrano: ${_selectedTime!.format(context)}',
+                  ),
+                  style: OutlinedButton.styleFrom(
+                    padding: const EdgeInsets.symmetric(
+                        vertical: 12.0, horizontal: 16.0),
+                    side: const BorderSide(color: Colors.blueGrey),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(8.0),
+                    ),
+                  ),
+                ),
+                const SizedBox(height: 16),
+                ElevatedButton(
+                  onPressed: _confirmReservation,
+                  style: ElevatedButton.styleFrom(
+                    padding: const EdgeInsets.symmetric(
+                        vertical: 16, horizontal: 20),
+                    backgroundColor: Colors.white,
+                    foregroundColor: Colors.blueAccent,
+                    side: const BorderSide(color: Colors.blueGrey, width: 2),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(12),
+                    ),
+                    elevation: 2,
+                  ),
+                  child: const Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      Icon(Icons.check_circle, color: Colors.blueAccent),
+                      SizedBox(width: 8),
+                      Text(
+                        'Potvrdi',
+                        style: TextStyle(
+                            fontSize: 16, fontWeight: FontWeight.bold),
+                      ),
+                    ],
+                  ),
                 ),
               ],
             ),
