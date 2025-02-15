@@ -269,13 +269,13 @@ class AutomobileCard extends StatelessWidget {
                 Column(
                   children: [
                     Icon(
-                      Icons.speed,
+                      Icons.speed_sharp,
                       size: isGrid ? 20 : 24,
-                      color: Colors.grey,
+                       color: Colors.blueGrey.shade700,
                     ),
                     const SizedBox(height: 2),
                     Text(
-                      '${NumberFormat.decimalPattern().format(automobileAd.mileage)}',
+                      NumberFormat.decimalPattern().format(automobileAd.mileage),
                       style: TextStyle(
                         fontSize: isGrid ? 10 : 12,
                         color: Colors.black,
@@ -302,9 +302,9 @@ class AutomobileCard extends StatelessWidget {
                 Column(
                   children: [
                     Icon(
-                      Icons.calendar_today,
+                      Icons.event,
                       size: isGrid ? 20 : 24,
-                      color: Colors.green.shade900,
+                      color: Colors.blueGrey.shade900,
                     ),
                     const SizedBox(height: 2),
                     Text(
