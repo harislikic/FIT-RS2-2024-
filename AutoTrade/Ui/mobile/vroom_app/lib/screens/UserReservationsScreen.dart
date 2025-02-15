@@ -14,7 +14,7 @@ class UserReservationsScreen extends StatefulWidget {
 }
 
 class _UserReservationsScreenState extends State<UserReservationsScreen> {
-  String selectedStatus = "Pending"; // Initial status for filtering
+  String selectedStatus = "Pending";
   List<Reservation> reservations = [];
   bool isLoading = true;
   bool isFetchingMore = false;
@@ -70,8 +70,8 @@ class _UserReservationsScreenState extends State<UserReservationsScreen> {
         hasMoreData = fetchedReservations.length == 25;
       });
     } catch (e) {
-        ToastUtils.showErrorToast(message: "Greška pri dohvaćanju rezervacija: $e");
-
+      ToastUtils.showErrorToast(
+          message: "Greška pri dohvaćanju rezervacija: $e");
     } finally {
       setState(() {
         isLoading = false;
@@ -105,7 +105,8 @@ class _UserReservationsScreenState extends State<UserReservationsScreen> {
         });
       }
     } catch (e) {
-       ToastUtils.showErrorToast(message: "Greška pri dohvaćanju rezervacija: $e");
+      ToastUtils.showErrorToast(
+          message: "Greška pri dohvaćanju rezervacija: $e");
     } finally {
       setState(() {
         isFetchingMore = false;
@@ -200,13 +201,9 @@ class _UserReservationsScreenState extends State<UserReservationsScreen> {
                           child: Text("Nema dostupnih rezervacija."),
                         );
                       } else if (index == reservations.length) {
-                        // Provera za kraj liste
                         return hasMoreData
-                            ? const Center(
-                                child:
-                                    CircularProgressIndicator()) // Još učitavanja
-                            : const SizedBox
-                                .shrink(); // Ne prikazuj ništa kad nema više stranica
+                            ? const Center(child: CircularProgressIndicator())
+                            : const SizedBox.shrink();
                       }
 
                       final reservation = reservations[index];

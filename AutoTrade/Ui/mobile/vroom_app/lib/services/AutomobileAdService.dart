@@ -37,8 +37,7 @@ class AutomobileAdService {
       if (cityId.isNotEmpty) 'CityId': cityId,
     };
 
-    final uri = Uri.parse('$baseUrl/AutomobileAd')
-        .replace(queryParameters: {
+    final uri = Uri.parse('$baseUrl/AutomobileAd').replace(queryParameters: {
       'Status': 'Active',
       ...queryParams,
     });
@@ -60,8 +59,7 @@ class AutomobileAdService {
   }
 
   Future<AutomobileAd> getAutomobileById(int id) async {
-    final response =
-        await http.get(Uri.parse('$baseUrl/AutomobileAd/$id'));
+    final response = await http.get(Uri.parse('$baseUrl/AutomobileAd/$id'));
 
     if (response.statusCode == 200) {
       final data = json.decode(response.body);
@@ -74,15 +72,12 @@ class AutomobileAdService {
   Future<bool> createAutomobileAd(
       Map<String, dynamic> adData, authHeaders, List<XFile> imageFiles) async {
     try {
-      // Set content type to multipart/form-data
       authHeaders['Content-Type'] = 'multipart/form-data';
 
-      // Create MultipartRequest
-      var request = http.MultipartRequest(
-          'POST', Uri.parse('$baseUrl/AutomobileAd'))
-        ..headers.addAll(authHeaders);
+      var request =
+          http.MultipartRequest('POST', Uri.parse('$baseUrl/AutomobileAd'))
+            ..headers.addAll(authHeaders);
 
-      // Adding fields to the multipart request
       adData.forEach((key, value) {
         if (value != null) {
           request.fields[key] = value.toString();
@@ -119,7 +114,6 @@ class AutomobileAdService {
       'pageSize': pageSize.toString(),
     };
 
-    // Add `status` to query parameters if it's not null or empty
     if (status != null && status.isNotEmpty) {
       queryParams['status'] = status;
     }
@@ -128,11 +122,10 @@ class AutomobileAdService {
       queryParams['IsHighlighted'] = IsHighlighted.toString();
     }
 
-    final uri =
-        Uri.parse('$baseUrl/AutomobileAd/user-ads/$userId')
-            .replace(queryParameters: queryParams);
+    final uri = Uri.parse('$baseUrl/AutomobileAd/user-ads/$userId')
+        .replace(queryParameters: queryParams);
 
-            print("GOLASI USERA:: ${uri}");
+    print("GOLASI USERA:: ${uri}");
 
     try {
       final response = await http.get(uri);
@@ -171,8 +164,7 @@ class AutomobileAdService {
   }
 
   Future<void> markAsDone(int automobileId) async {
-    final uri = Uri.parse(
-        '$baseUrl/AutomobileAd/mark-as-done/$automobileId');
+    final uri = Uri.parse('$baseUrl/AutomobileAd/mark-as-done/$automobileId');
     final headers = {'accept': '*/*'};
 
     final response = await http.put(uri, headers: headers);
@@ -187,8 +179,7 @@ class AutomobileAdService {
       throw Exception('User ID is not available');
     }
 
-    final uri =
-        Uri.parse('$baseUrl/AutomobileAd/$userId/recommend');
+    final uri = Uri.parse('$baseUrl/AutomobileAd/$userId/recommend');
 
     try {
       final response = await http.get(uri);
@@ -212,7 +203,6 @@ class AutomobileAdService {
     List<int>? removedEquipmentIds,
   }) async {
     try {
-      // Ako postoje slike za brisanje, pozovite delete endpoint
       if (removedImageIds != null && removedImageIds.isNotEmpty) {
         final deleteImagesSuccess =
             await deleteAutomobileImages(removedImageIds);
@@ -222,7 +212,6 @@ class AutomobileAdService {
         }
       }
 
-      // Ako postoje ID-jevi opreme za brisanje, pozovite odgovarajući endpoint
       if (removedEquipmentIds != null && removedEquipmentIds.isNotEmpty) {
         final deleteEquipmentSuccess =
             await deleteAutomobileEquipment(automobileId, removedEquipmentIds);
@@ -232,12 +221,10 @@ class AutomobileAdService {
         }
       }
 
-      // Ako nema novih slika ili polja za ažuriranje, vrati true
       if (updatedFields.isEmpty && (newImages == null || newImages.isEmpty)) {
-        return true; // Nothing to update
+        return true;
       }
 
-      // Ako postoji EquipmentIds, pozovite novu metodu
       if (updatedFields.containsKey('EquipmentIds')) {
         final equipmentIds = updatedFields['EquipmentIds'];
         if (equipmentIds is List<int>) {
@@ -247,13 +234,11 @@ class AutomobileAdService {
             print('Failed to update additional equipment.');
             return false;
           }
-          // Nakon uspešnog ažuriranja, uklonite EquipmentIds iz updatedFields
           updatedFields.remove('EquipmentIds');
         }
       }
 
-      final uri =
-          Uri.parse('$baseUrl/AutomobileAd/$automobileId');
+      final uri = Uri.parse('$baseUrl/AutomobileAd/$automobileId');
 
       var request = http.MultipartRequest('PATCH', uri);
 
@@ -269,7 +254,6 @@ class AutomobileAdService {
         }
       });
 
-      // Dodavanje novih slika ako postoje
       if (newImages != null && newImages.isNotEmpty) {
         for (var image in newImages) {
           request.files.add(
@@ -278,19 +262,16 @@ class AutomobileAdService {
         }
       }
 
-      // Dodajte zaglavlja
       final authHeaders = await AuthService.getAuthHeaders();
       request.headers.addAll(authHeaders);
 
-      // Pošaljite zahtev
       var response = await request.send();
 
-      // Proverite status odgovora
       if (response.statusCode == 200) {
-        return true; // Uspešno ažurirano
+        return true;
       } else {
         print('Failed to update automobile ad. Status: ${response.statusCode}');
-        return false; // Ažuriranje nije uspelo
+        return false;
       }
     } catch (e) {
       print('Error during PATCH request: $e');
@@ -301,27 +282,22 @@ class AutomobileAdService {
   Future<bool> updateAdditionalEquipment(
       int automobileAdId, List<int> equipmentIds) async {
     try {
-      // Napravite odgovarajući URL za ažuriranje opreme
-      final uri = Uri.parse(
-          '$baseUrl/api/AutomobileAdEquipment/update-automobile');
+      final uri =
+          Uri.parse('$baseUrl/api/AutomobileAdEquipment/update-automobile');
 
-      // Kreirajte telo zahteva u JSON formatu
       final body = json.encode({
         'newAutomobileAdId': automobileAdId,
         'equipmentIds': equipmentIds,
       });
 
-      // Postavite odgovarajuće zaglavlje
       final headers = {
         'Content-Type': 'application/json',
         'accept': '*/*',
       };
 
-      // Pošaljite PATCH zahtev
       final response = await http.put(uri, headers: headers, body: body);
 
       if (response.statusCode == 200) {
-        // Ako je uspešno, vratite true
         return true;
       } else {
         print(
@@ -337,8 +313,8 @@ class AutomobileAdService {
   Future<bool> deleteAutomobileEquipment(
       int automobileAdId, List<int> equipmentIds) async {
     try {
-      final uri = Uri.parse(
-          '$baseUrl/api/AutomobileAdEquipment/$automobileAdId');
+      final uri =
+          Uri.parse('$baseUrl/api/AutomobileAdEquipment/$automobileAdId');
       final headers = {
         'Content-Type': 'application/json',
         'accept': '*/*',
@@ -355,22 +331,21 @@ class AutomobileAdService {
       print('response: ${response.body}');
 
       if (response.statusCode == 200) {
-        return true; // Successfully deleted
+        return true;
       } else {
         print(
             'Failed to delete automobile equipment. Status: ${response.statusCode}');
-        return false; // Failed to delete
+        return false;
       }
     } catch (e) {
       print('Error during DELETE request for equipment: $e');
-      return false; // Exception occurred
+      return false;
     }
   }
 
   Future<bool> deleteAutomobileImages(List<int> imageIds) async {
     try {
-      final uri =
-          Uri.parse('$baseUrl/AutomobileImages/delete-images');
+      final uri = Uri.parse('$baseUrl/AutomobileImages/delete-images');
       final headers = {
         'Content-Type': 'application/json',
         'accept': '*/*',
@@ -389,14 +364,14 @@ class AutomobileAdService {
       print('Response Body: ${response.body}');
 
       if (response.statusCode == 200) {
-        return true; // Successfully deleted
+        return true;
       } else {
         print('Failed to delete images. Status: ${response.statusCode}');
-        return false; // Failed to delete
+        return false;
       }
     } catch (e) {
       print('Error during DELETE request: $e');
-      return false; // Exception occurred
+      return false;
     }
   }
 }

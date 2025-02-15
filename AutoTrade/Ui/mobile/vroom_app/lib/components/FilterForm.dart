@@ -108,7 +108,7 @@ class _FilterFormState extends State<FilterForm> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          // Min and Max Price
+
           Row(
             children: [
               Expanded(
@@ -130,7 +130,7 @@ class _FilterFormState extends State<FilterForm> {
           ),
           const SizedBox(height: 10),
 
-          // Min and Max Mileage
+
           Row(
             children: [
               Expanded(
@@ -154,7 +154,7 @@ class _FilterFormState extends State<FilterForm> {
           ),
           const SizedBox(height: 10),
 
-          // Year of Manufacture
+   
           TextFormField(
             controller: _yearOfManufactureController,
             keyboardType: TextInputType.number,
@@ -162,7 +162,7 @@ class _FilterFormState extends State<FilterForm> {
           ),
           const SizedBox(height: 10),
 
-          // Registered Checkbox
+
           Row(
             children: [
               Checkbox(
@@ -178,7 +178,7 @@ class _FilterFormState extends State<FilterForm> {
           ),
           const SizedBox(height: 10),
 
-          // Filter Dropdowns
+  
           Column(
             children: [
               Row(
@@ -276,7 +276,7 @@ class _FilterFormState extends State<FilterForm> {
                       isDense: true,
                     ),
                   ),
-                  const SizedBox(width: 10), // Added spacing
+                  const SizedBox(width: 10),
                   Expanded(
                     child: DropdownButtonFormField<String>(
                       value: _selectedCityId,
@@ -313,7 +313,7 @@ class _FilterFormState extends State<FilterForm> {
 
           const SizedBox(height: 20),
 
-          // Filter and Reset Buttons
+
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [

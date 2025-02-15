@@ -81,12 +81,10 @@ class CommentsSection extends StatelessWidget {
             } catch (e) {
               ToastUtils.showErrorToast(message: "Greška prilikom brisanja");
 
-              throw e; // Ponovno bacanje greške kako bi `ConfirmationDialog` mogao da je obradi.
+              throw e;
             }
           },
-          onCancel: () {
-            // Ovde možete dodati dodatne akcije ako je potrebno pri otkazivanju
-          },
+          onCancel: () {},
         );
       },
     );
@@ -94,8 +92,7 @@ class CommentsSection extends StatelessWidget {
 
   void _showCommentsModal(BuildContext context, List<Comment> comments) async {
     final loggedInUserId = await AuthService.getUserId();
-    final isLoggedIn =
-        loggedInUserId != null;
+    final isLoggedIn = loggedInUserId != null;
 
     showModalBottomSheet(
       context: context,
@@ -146,7 +143,6 @@ class CommentsSection extends StatelessWidget {
                   _commentController.clear();
                   ToastUtils.showToast(message: "Komentar uspješno dodan.");
 
-                  // Refresh comments
                   await _refreshComments();
                 } catch (e) {
                   ToastUtils.showErrorToast(

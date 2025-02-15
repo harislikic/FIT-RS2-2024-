@@ -113,7 +113,6 @@ class _AddAutomobileScreenState extends State<AddAutomobileScreen> {
     }
   }
 
-  // Helper function for formatting DateTime
   String? formatDateAds(DateTime? date) {
     if (date == null) return null;
     return "${date.year}-${date.month.toString().padLeft(2, '0')}-${date.day.toString().padLeft(2, '0')}";
@@ -121,10 +120,10 @@ class _AddAutomobileScreenState extends State<AddAutomobileScreen> {
 
   void _submitForm() async {
     if (_formKey.currentState?.validate() ?? false) {
-      _formKey.currentState?.save(); // Save the form data
+      _formKey.currentState?.save();
 
       setState(() {
-        _isLoading = true; // Postavi isLoading na true kada počne proces
+        _isLoading = true;
       });
 
       final userId = await AuthService.getUserId();
@@ -155,7 +154,6 @@ class _AddAutomobileScreenState extends State<AddAutomobileScreen> {
         'VehicleConditionId': _vehicleConditionId,
       };
 
-      // Dodaj svaki EquipmentId kao poseban unos u adData
       for (int i = 0; i < _equipmentIds.length; i++) {
         adData['EquipmentIds[$i]'] = _equipmentIds[i];
       }
@@ -167,7 +165,7 @@ class _AddAutomobileScreenState extends State<AddAutomobileScreen> {
         if (success) {
           ToastUtils.showToast(message: "Uspješno ste kreirali oglas");
 
-          Navigator.of(context).pop(); // Redirekcija na prethodnu stranicu
+          Navigator.of(context).pop();
         } else {
           ToastUtils.showErrorToast(
               message: "Greška prilikom kreiranja oglasa:");
@@ -183,7 +181,6 @@ class _AddAutomobileScreenState extends State<AddAutomobileScreen> {
     }
   }
 
-  // Open a modal to select equipment
   Future<void> _openEquipmentSelectionModal(BuildContext context) async {
     final selected = await showDialog<List<int>>(
       context: context,
@@ -216,8 +213,7 @@ class _AddAutomobileScreenState extends State<AddAutomobileScreen> {
           actions: [
             TextButton(
               onPressed: () {
-                Navigator.of(context)
-                    .pop(_equipmentIds); // Return selected equipment
+                Navigator.of(context).pop(_equipmentIds);
               },
               child: Text('Završi'),
             ),
@@ -226,12 +222,10 @@ class _AddAutomobileScreenState extends State<AddAutomobileScreen> {
       },
     );
 
-    // If the user selected something, update the equipment list
     if (selected != null) {
       setState(() {
         _equipmentIds = selected;
 
-        // Get the names of the selected equipment
         _selectedEquipmentNames = _equipment
             .where((equipment) => _equipmentIds.contains(equipment.id))
             .map((e) => e.name)
@@ -276,8 +270,8 @@ class _AddAutomobileScreenState extends State<AddAutomobileScreen> {
     }
     return Scaffold(
       appBar: AppBar(
-        title: Text('Dodaj oglas'),
-        iconTheme: IconThemeData(
+        title: const Text('Dodaj oglas'),
+        iconTheme: const IconThemeData(
           color: Colors.blue,
         ),
       ),
@@ -287,40 +281,39 @@ class _AddAutomobileScreenState extends State<AddAutomobileScreen> {
           key: _formKey,
           child: Column(
             children: [
-              // Form Fields (Title, Description, Price, Mileage, etc.)
               TextFormField(
-                decoration: InputDecoration(labelText: 'Naziv'),
+                decoration: const InputDecoration(labelText: 'Naziv'),
                 onSaved: (value) => _title = value,
                 validator: (value) =>
                     value?.isEmpty ?? true ? 'Unesite naziv' : null,
               ),
               TextFormField(
-                decoration: InputDecoration(labelText: 'Detaljan opis'),
+                decoration: const InputDecoration(labelText: 'Detaljan opis'),
                 onSaved: (value) => _description = value,
                 validator: (value) =>
                     value?.isEmpty ?? true ? 'Unesite opis' : null,
-                maxLines: null, // This makes the field behave like a textarea
+                maxLines: null,
                 keyboardType:
-                    TextInputType.multiline, // Allows multi-line input
-                textInputAction: TextInputAction
-                    .newline, // Allows new lines when pressing 'Enter'
+                    TextInputType.multiline,
+                textInputAction: TextInputAction.newline,
               ),
               TextFormField(
-                decoration: InputDecoration(labelText: 'Cijena'),
+                decoration: const InputDecoration(labelText: 'Cijena'),
                 onSaved: (value) => _price = double.tryParse(value ?? ''),
                 validator: (value) =>
                     value?.isEmpty ?? true ? 'Unesite cijenu' : null,
                 keyboardType: TextInputType.number,
               ),
               TextFormField(
-                decoration: InputDecoration(labelText: 'Kilometraža'),
+                decoration: const InputDecoration(labelText: 'Kilometraža'),
                 onSaved: (value) => _mileage = int.tryParse(value ?? ''),
                 validator: (value) =>
                     value?.isEmpty ?? true ? 'Unesite kilometražu' : null,
                 keyboardType: TextInputType.number,
               ),
               TextFormField(
-                decoration: InputDecoration(labelText: 'Godina proizvodnje'),
+                decoration:
+                    const InputDecoration(labelText: 'Godina proizvodnje'),
                 onSaved: (value) =>
                     _yearOfManufacture = int.tryParse(value ?? ''),
                 validator: (value) => value?.isEmpty ?? true
@@ -328,46 +321,39 @@ class _AddAutomobileScreenState extends State<AddAutomobileScreen> {
                     : null,
                 keyboardType: TextInputType.number,
               ),
-
               TextFormField(
-                decoration: InputDecoration(labelText: 'Snaga motora'),
+                decoration: const InputDecoration(labelText: 'Snaga motora'),
                 onSaved: (value) => _enginePower = int.tryParse(value ?? ''),
                 validator: (value) =>
                     value?.isEmpty ?? true ? 'Unesite snagu motora' : null,
                 keyboardType: TextInputType.number,
               ),
-
               TextFormField(
-                decoration: InputDecoration(labelText: 'Broj vrata'),
+                decoration: const InputDecoration(labelText: 'Broj vrata'),
                 onSaved: (value) => _numberOfDoors = int.tryParse(value ?? ''),
                 validator: (value) =>
                     value?.isEmpty ?? true ? 'Unesi broj vrata' : null,
                 keyboardType: TextInputType.number,
               ),
-
               TextFormField(
-                decoration: InputDecoration(labelText: 'Kubikaža'),
+                decoration: const InputDecoration(labelText: 'Kubikaža'),
                 onSaved: (value) => _cubicCapacity = int.tryParse(value ?? ''),
                 validator: (value) =>
                     value?.isEmpty ?? true ? 'Unesi kubikažu' : null,
                 keyboardType: TextInputType.number,
               ),
-
               TextFormField(
-                decoration: InputDecoration(labelText: 'Konjskih snaga'),
+                decoration: const InputDecoration(labelText: 'Konjskih snaga'),
                 onSaved: (value) => _horsePower = int.tryParse(value ?? ''),
                 validator: (value) =>
                     value?.isEmpty ?? true ? 'Unesi konjske snage' : null,
                 keyboardType: TextInputType.number,
               ),
-
               TextFormField(
-                decoration: InputDecoration(labelText: 'Boja'),
-                onSaved: (value) =>
-                    _color = value, // Directly save the color as a StringR
-                keyboardType: TextInputType.text, // Use text input for strings
+                decoration: const InputDecoration(labelText: 'Boja'),
+                onSaved: (value) => _color = value,
+                keyboardType: TextInputType.text,
               ),
-
               Column(
                 children: [
                   DatePicker(
@@ -399,198 +385,165 @@ class _AddAutomobileScreenState extends State<AddAutomobileScreen> {
                   ),
                 ],
               ),
-
-              // Car Brand Dropdown with limited width and scroll
-              Container(
-                child: DropdownButtonFormField<String>(
-                  value: _carBrandId,
-                  onChanged: (value) => setState(() => _carBrandId = value),
-                  items: _carBrands.map((brand) {
-                    return DropdownMenuItem<String>(
-                      value: brand.id.toString(),
-                      child: Text(brand.name),
-                    );
-                  }).toList(),
-                  decoration: InputDecoration(labelText: 'Brend'),
-                  isExpanded:
-                      true, // Ensures that the dropdown takes up the full width
-                  menuMaxHeight: 300,
-                  validator: (value) {
-                    if (value == null || value.isEmpty) {
-                      return 'Obavezno polje'; // Poruka greške ako nije odabrano
-                    }
-                    return null; // Ako je validno, vraća null
-                  },
-                ),
+              DropdownButtonFormField<String>(
+                value: _carBrandId,
+                onChanged: (value) => setState(() => _carBrandId = value),
+                items: _carBrands.map((brand) {
+                  return DropdownMenuItem<String>(
+                    value: brand.id.toString(),
+                    child: Text(brand.name),
+                  );
+                }).toList(),
+                decoration: const InputDecoration(labelText: 'Brend'),
+                isExpanded: true,
+                menuMaxHeight: 300,
+                validator: (value) {
+                  if (value == null || value.isEmpty) {
+                    return 'Obavezno polje';
+                  }
+                  return null;
+                },
               ),
-
-              Container(
-                child: DropdownButtonFormField<String>(
-                  value: _carModelId,
-                  onChanged: (value) => setState(() => _carModelId = value),
-                  items: _carModels.map((model) {
-                    return DropdownMenuItem<String>(
-                      value: model.id.toString(),
-                      child: Text(model.name),
-                    );
-                  }).toList(),
-                  decoration: InputDecoration(labelText: 'Model'),
-                  isExpanded:
-                      true, // Ensures that the dropdown takes up the full width
-                  menuMaxHeight: 300,
-                  validator: (value) {
-                    if (value == null || value.isEmpty) {
-                      return 'Obavezno polje'; // Poruka greške ako nije odabrano
-                    }
-                    return null; // Ako je validno, vraća null
-                  },
-                ),
+              DropdownButtonFormField<String>(
+                value: _carModelId,
+                onChanged: (value) => setState(() => _carModelId = value),
+                items: _carModels.map((model) {
+                  return DropdownMenuItem<String>(
+                    value: model.id.toString(),
+                    child: Text(model.name),
+                  );
+                }).toList(),
+                decoration: const InputDecoration(labelText: 'Model'),
+                isExpanded: true,
+                menuMaxHeight: 300,
+                validator: (value) {
+                  if (value == null || value.isEmpty) {
+                    return 'Obavezno polje';
+                  }
+                  return null;
+                },
               ),
-
-              Container(
-                child: DropdownButtonFormField<String>(
-                  value: _carCategoryId,
-                  onChanged: (value) => setState(() => _carCategoryId = value),
-                  items: _carCategories.map((category) {
-                    return DropdownMenuItem<String>(
-                      value: category.id.toString(),
-                      child: Text(category.name),
-                    );
-                  }).toList(),
-                  decoration: InputDecoration(labelText: 'Kateegorija'),
-                  isExpanded:
-                      true, // Ensures that the dropdown takes up the full width
-                  menuMaxHeight: 300,
-                  validator: (value) {
-                    if (value == null || value.isEmpty) {
-                      return 'Obavezno polje'; // Poruka greške ako nije odabrano
-                    }
-                    return null; // Ako je validno, vraća null
-                  },
-                ),
+              DropdownButtonFormField<String>(
+                value: _carCategoryId,
+                onChanged: (value) => setState(() => _carCategoryId = value),
+                items: _carCategories.map((category) {
+                  return DropdownMenuItem<String>(
+                    value: category.id.toString(),
+                    child: Text(category.name),
+                  );
+                }).toList(),
+                decoration: const InputDecoration(labelText: 'Kateegorija'),
+                isExpanded: true,
+                menuMaxHeight: 300,
+                validator: (value) {
+                  if (value == null || value.isEmpty) {
+                    return 'Obavezno polje';
+                  }
+                  return null;
+                },
               ),
-
-              Container(
-                child: DropdownButtonFormField<String>(
-                  value: _fuelTypeId,
-                  onChanged: (value) => setState(() => _fuelTypeId = value),
-                  items: _fuelTypes.map((fuel) {
-                    return DropdownMenuItem<String>(
-                      value: fuel.id.toString(),
-                      child: Text(fuel.name),
-                    );
-                  }).toList(),
-                  decoration: InputDecoration(labelText: 'Tip goriva'),
-                  isExpanded:
-                      true, // Ensures that the dropdown takes up the full width
-                  menuMaxHeight: 300,
-                  validator: (value) {
-                    if (value == null || value.isEmpty) {
-                      return 'Obavezno polje'; // Poruka greške ako nije odabrano
-                    }
-                    return null; // Ako je validno, vraća null
-                  },
-                ),
+              DropdownButtonFormField<String>(
+                value: _fuelTypeId,
+                onChanged: (value) => setState(() => _fuelTypeId = value),
+                items: _fuelTypes.map((fuel) {
+                  return DropdownMenuItem<String>(
+                    value: fuel.id.toString(),
+                    child: Text(fuel.name),
+                  );
+                }).toList(),
+                decoration: const InputDecoration(labelText: 'Tip goriva'),
+                isExpanded: true,
+                menuMaxHeight: 300,
+                validator: (value) {
+                  if (value == null || value.isEmpty) {
+                    return 'Obavezno polje';
+                  }
+                  return null;
+                },
               ),
-
-// Transmission Type Dropdown with limited width and scroll
-              Container(
-                child: DropdownButtonFormField<String>(
-                  value: _transmissionTypeId,
-                  onChanged: (value) =>
-                      setState(() => _transmissionTypeId = value),
-                  items: _transmissionTypes.map((transmission) {
-                    return DropdownMenuItem<String>(
-                      value: transmission.id.toString(),
-                      child: SizedBox(
-                        width: 250, // Control the width of the dropdown items
-                        child: Text(
-                          transmission.name,
-                          overflow: TextOverflow.ellipsis,
-                        ),
+              DropdownButtonFormField<String>(
+                value: _transmissionTypeId,
+                onChanged: (value) =>
+                    setState(() => _transmissionTypeId = value),
+                items: _transmissionTypes.map((transmission) {
+                  return DropdownMenuItem<String>(
+                    value: transmission.id.toString(),
+                    child: SizedBox(
+                      width: 250,
+                      child: Text(
+                        transmission.name,
+                        overflow: TextOverflow.ellipsis,
                       ),
-                    );
-                  }).toList(),
-                  decoration: InputDecoration(labelText: 'Tip transimisije'),
-                  isExpanded:
-                      true, // Ensures that the dropdown takes up the full width
-                  menuMaxHeight: 300,
-                  validator: (value) {
-                    if (value == null || value.isEmpty) {
-                      return 'Obavezno polje'; // Poruka greške ako nije odabrano
-                    }
-                    return null; // Ako je validno, vraća null
-                  },
-                ),
+                    ),
+                  );
+                }).toList(),
+                decoration:
+                    const InputDecoration(labelText: 'Tip transimisije'),
+                isExpanded: true,
+                menuMaxHeight: 300,
+                validator: (value) {
+                  if (value == null || value.isEmpty) {
+                    return 'Obavezno polje';
+                  }
+                  return null;
+                },
               ),
-
-// Vehicle Condition Dropdown with limited width and scroll
-              Container(
-                child: DropdownButtonFormField<String>(
-                  value: _vehicleConditionId,
-                  onChanged: (value) =>
-                      setState(() => _vehicleConditionId = value),
-                  items: _vehicleConditions.map((condition) {
-                    return DropdownMenuItem<String>(
-                      value: condition.id.toString(),
-                      child: Text(condition.name),
-                    );
-                  }).toList(),
-                  decoration: InputDecoration(labelText: 'Stanje'),
-                  isExpanded:
-                      true, // Ensures that the dropdown takes up the full width
-                  menuMaxHeight: 300,
-                  validator: (value) {
-                    if (value == null || value.isEmpty) {
-                      return 'Obavezno polje'; // Poruka greške ako nije odabrano
-                    }
-                    return null; // Ako je validno, vraća null
-                  },
-                ),
+              DropdownButtonFormField<String>(
+                value: _vehicleConditionId,
+                onChanged: (value) =>
+                    setState(() => _vehicleConditionId = value),
+                items: _vehicleConditions.map((condition) {
+                  return DropdownMenuItem<String>(
+                    value: condition.id.toString(),
+                    child: Text(condition.name),
+                  );
+                }).toList(),
+                decoration: const InputDecoration(labelText: 'Stanje'),
+                isExpanded: true,
+                menuMaxHeight: 300,
+                validator: (value) {
+                  if (value == null || value.isEmpty) {
+                    return 'Obavezno polje';
+                  }
+                  return null;
+                },
               ),
-
-              // Checkbox for 'Registered'
               CheckboxListTile(
-                title: Text('Registrovan'),
+                title: const Text('Registrovan'),
                 value: _isRegistered,
                 onChanged: (bool? newValue) {
                   setState(() {
                     _isRegistered = newValue ?? false;
                   });
                 },
-                controlAffinity: ListTileControlAffinity
-                    .leading, // Align the checkbox to the left
-                activeColor: Colors
-                    .blue, // Change the color of the checkbox when selected
-                checkColor: Colors.white, // Color for the checkmark
+                controlAffinity: ListTileControlAffinity.leading,
+                activeColor: Colors.blue,
+                checkColor: Colors.white,
               ),
-
               Padding(
                 padding: const EdgeInsets.only(top: 16.0),
                 child: ElevatedButton(
                   onPressed: () {
-                    _openEquipmentSelectionModal(context); // Open modal
+                    _openEquipmentSelectionModal(context);
                   },
                   style: ElevatedButton.styleFrom(
                     foregroundColor: Colors.black,
-                    backgroundColor: Colors.white, // Text color
+                    backgroundColor: Colors.white,
                     side: const BorderSide(
-                      color: Color(
-                          0xFF263238), // Blue Gray 900 color for the border
-                      width: 2, // Border width
+                      color: Color(0xFF263238),
+                      width: 2,
                     ),
                     shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(8), // Rounded corners
+                      borderRadius: BorderRadius.circular(8),
                     ),
                   ),
-                  child: Text('Dodaj opremu'),
+                  child: const Text('Dodaj opremu'),
                 ),
               ),
-
               Padding(
                 padding: const EdgeInsets.only(top: 16.0),
                 child: _selectedEquipmentNames.isEmpty
-                    ? Text('')
+                    ? const Text('')
                     : Wrap(
                         spacing: 8.0,
                         children: _selectedEquipmentNames.map((equipment) {
@@ -600,36 +553,32 @@ class _AddAutomobileScreenState extends State<AddAutomobileScreen> {
                               children: [
                                 Text(
                                   equipment,
-                                  style: TextStyle(
-                                    color: Colors.black, // Text color black
+                                  style: const TextStyle(
+                                    color: Colors.black,
                                   ),
                                 ),
-                                SizedBox(width: 4),
+                                const SizedBox(width: 4),
                                 const Icon(
-                                  Icons.check, // Checkmark icon
+                                  Icons.check,
                                   color: Colors.black,
                                   size: 18,
                                 ),
                               ],
                             ),
-                            backgroundColor:
-                                Colors.white, // Background color for the chip
+                            backgroundColor: Colors.white,
                             shape: const StadiumBorder(
                               side: BorderSide(
-                                color: Color(
-                                    0xFF263238), // Blue Gray 900 border color
-                                width: 2, // Border width
+                                color: Color(0xFF263238),
+                                width: 2,
                               ),
                             ),
                           );
                         }).toList(),
                       ),
               ),
-
               const SizedBox(
-                height: 16.0, // You can adjust the height as needed for spacing
+                height: 16.0,
               ),
-
               ImagePickerWidget(
                 onImagesPicked: (images) {
                   setState(() {
@@ -637,41 +586,35 @@ class _AddAutomobileScreenState extends State<AddAutomobileScreen> {
                   });
                 },
               ),
-
               const SizedBox(
                 height: 16.0,
               ),
-
               ElevatedButton(
-                onPressed: _isLoading
-                    ? null
-                    : _submitForm, // Onemogućeno dok traje poziv
+                onPressed: _isLoading ? null : _submitForm,
                 style: ElevatedButton.styleFrom(
                   foregroundColor: Colors.black,
-                  backgroundColor: Colors.white, // Pozadina dugmeta
-                  side: BorderSide(
-                    color: Color(0xFF263238), // Blue Gray 900 border
-                    width: 2, // Debljina okvira
+                  backgroundColor: Colors.white,
+                  side: const BorderSide(
+                    color: Color(0xFF263238),
+                    width: 2,
                   ),
                   shape: RoundedRectangleBorder(
-                    borderRadius:
-                        BorderRadius.circular(8), // Zaobljeni uglovi dugmeta
+                    borderRadius: BorderRadius.circular(8),
                   ),
-                  elevation: 0, // Nema senke za dugme
+                  elevation: 0,
                 ),
                 child: _isLoading
-                    ? SizedBox(
-                        width: 20, // Manja veličina indikatora
+                    ? const SizedBox(
+                        width: 20,
                         height: 20,
-                        child: const CircularProgressIndicator(
-                          color: Colors.blueGrey, // Plava boja indikatora
-                          strokeWidth: 2, // Manja debljina indikatora
+                        child: CircularProgressIndicator(
+                          color: Colors.blueGrey,
+                          strokeWidth: 2,
                         ),
                       )
                     : const Text(
                         'Objavi',
-                        style: TextStyle(
-                            color: Colors.black), // Crni tekst dugmeta
+                        style: TextStyle(color: Colors.black),
                       ),
               )
             ],

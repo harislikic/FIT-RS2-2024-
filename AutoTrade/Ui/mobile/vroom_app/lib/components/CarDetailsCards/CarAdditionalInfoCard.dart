@@ -31,7 +31,6 @@ class _CarAdditionalInfoCardState extends State<CarAdditionalInfoCard>
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            // Title Row with Expand Arrow
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
@@ -64,15 +63,12 @@ class _CarAdditionalInfoCardState extends State<CarAdditionalInfoCard>
               thickness: 1.0,
               height: 20,
             ),
-
-            // Main Content Section with Animation
             AnimatedSize(
               duration: const Duration(milliseconds: 200),
               curve: Curves.easeInOut,
               child: _isExpanded
                   ? Column(
                       children: [
-                        // Datum i Pregledi
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
@@ -89,15 +85,14 @@ class _CarAdditionalInfoCardState extends State<CarAdditionalInfoCard>
                           ],
                         ),
                         const SizedBox(height: 16),
-
-                        // Registrovan i Stanje
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             _iconWithText(
                               icon: Icons.car_repair,
                               label: 'Registrovan',
-                              value: widget.automobileAd.registered ? 'Da' : 'Ne',
+                              value:
+                                  widget.automobileAd.registered ? 'Da' : 'Ne',
                               iconColor: widget.automobileAd.registered
                                   ? Colors.green
                                   : Colors.red,
@@ -105,14 +100,13 @@ class _CarAdditionalInfoCardState extends State<CarAdditionalInfoCard>
                             _iconWithText(
                               icon: Icons.car_rental,
                               label: 'Stanje',
-                              value: widget.automobileAd.vehicleCondition?.name ??
-                                  '-',
+                              value:
+                                  widget.automobileAd.vehicleCondition?.name ??
+                                      '-',
                             ),
                           ],
                         ),
                         const SizedBox(height: 16),
-
-                        // Ostale Informacije
                         if (widget.automobileAd.registrationExpirationDate !=
                                 null ||
                             widget.automobileAd.lastSmallService != null ||
@@ -120,13 +114,15 @@ class _CarAdditionalInfoCardState extends State<CarAdditionalInfoCard>
                           Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              if (widget.automobileAd.registrationExpirationDate !=
+                              if (widget.automobileAd
+                                      .registrationExpirationDate !=
                                   null)
                                 _infoRow(
                                   icon: Icons.calendar_today_outlined,
                                   label: 'Registracija ističe',
                                   value: DateFormat('dd.MM.yyyy').format(widget
-                                      .automobileAd.registrationExpirationDate!),
+                                      .automobileAd
+                                      .registrationExpirationDate!),
                                 ),
                               if (widget.automobileAd.lastSmallService != null)
                                 _infoRow(
@@ -146,7 +142,7 @@ class _CarAdditionalInfoCardState extends State<CarAdditionalInfoCard>
                           ),
                       ],
                     )
-                  : const SizedBox.shrink(), // Kad je zatvoreno, zauzima minimalni prostor
+                  : const SizedBox.shrink(),
             ),
           ],
         ),

@@ -1,4 +1,4 @@
-import 'package:vroom_app/models/image.dart'; // Assuming Image is in the 'image.dart' file
+import 'package:vroom_app/models/image.dart';
 
 class FavoritesAutomobiles {
   final int id;
@@ -19,15 +19,14 @@ class FavoritesAutomobiles {
     required this.images,
   });
 
-  // From JSON
   factory FavoritesAutomobiles.fromJson(Map<String, dynamic> json) {
     return FavoritesAutomobiles(
       id: json['id'],
       title: json['title'] ?? 'Unknown',
-      price: json['price']?.toDouble() ?? 0.0, // Default to 0 if null
-      yearOfManufacture: json['yearOfManufacture'] ?? 0, // Default to 0 if null
-      mileage: json['milage'] ?? 0, // Default to 0 if null
-      horsePower: json['horsePower'] ?? 0, // Default to 0 if null
+      price: json['price']?.toDouble() ?? 0.0,
+      yearOfManufacture: json['yearOfManufacture'] ?? 0,
+      mileage: json['milage'] ?? 0,
+      horsePower: json['horsePower'] ?? 0,
       images: (json['images'] as List)
           .map((image) => ImageModel.fromJson(image))
           .toList(),

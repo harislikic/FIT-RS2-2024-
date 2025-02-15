@@ -49,7 +49,6 @@ class ImageGalleryEditAutomobile extends StatelessWidget {
               ],
             ),
           ),
-        // Prikaz novih slika
         for (var newImage in newImages)
           Container(
             margin: const EdgeInsets.all(4.0),

@@ -79,14 +79,14 @@ class AutomobileAd {
 
   factory AutomobileAd.fromJson(Map<String, dynamic> json) {
     return AutomobileAd(
-      id: json['id'] ?? 0, // Default to 0 if id is missing
-      title: json['title'] ?? 'N/A', // Default to 'N/A' if title is null
+      id: json['id'] ?? 0,
+      title: json['title'] ?? 'N/A', 
       description: json['description'] ?? 'N/A',
       price:
-          (json['price'] ?? 0).toDouble(), // Handle null and convert to double
+          (json['price'] ?? 0).toDouble(), 
       dateOfAdd: json['dateOFadd'] != null
           ? DateTime.parse(json['dateOFadd'])
-          : DateTime.now(), // Default to current date if missing
+          : DateTime.now(),
       viewsCount: json['viewsCount'] ?? 0,
       yearOfManufacture: json['yearOfManufacture'] ?? 0,
       registered: json['registered'] ?? false,
@@ -106,7 +106,7 @@ class AutomobileAd {
       mileage: json['milage'] != null ? json['milage'].toDouble() : 0,
       user: json['user'] != null
           ? User.fromJson(json['user'])
-          : null, // Handle null user
+          : null, 
       carBrand:
           json['carBrand'] != null ? CarBrand.fromJson(json['carBrand']) : null,
       carCategory: json['carCategory'] != null
@@ -123,7 +123,7 @@ class AutomobileAd {
           : null,
       images: (json['images'] as List? ?? [])
           .map((image) => ImageModel.fromJson(image))
-          .toList(), // Default to empty list if null
+          .toList(),
       automobileAdEquipments: (json['automobileAdEquipments'] as List? ?? [])
           .map((equipment) => AutomobileAdEquipment.fromJson(equipment))
           .toList(),

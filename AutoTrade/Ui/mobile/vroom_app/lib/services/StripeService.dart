@@ -6,8 +6,6 @@ import 'package:http/http.dart' as http;
 import 'package:vroom_app/services/config.dart';
 
 class StripeService {
-  // final String backendUrl = ApiConfig.baseUrl;
-  //final String stripeSecretKey = ApiConfig.stripeSecretKey;
   String stripeSecretKey = dotenv.env['STRIPE_SECRET_KEY'] ?? '';
 
   Future<void> makePayment({
@@ -65,7 +63,7 @@ class StripeService {
 
       if (response.statusCode == 200) {
         final data = jsonDecode(response.body);
-        return data["status"] ?? "unknown"; // Return the updated status
+        return data["status"] ?? "unknown";
       } else {
         print("Failed to fetch payment status: ${response.body}");
         return "unknown";
@@ -134,8 +132,7 @@ class StripeService {
   }) async {
     try {
       final response = await http.post(
-        Uri.parse(
-            '$baseUrl/AutomobileAd/api/highlight-ad?id=$automobileAdId'),
+        Uri.parse('$baseUrl/AutomobileAd/api/highlight-ad?id=$automobileAdId'),
         headers: {'Content-Type': 'application/json'},
         body: jsonEncode({
           'highlightDays': highlightDays,

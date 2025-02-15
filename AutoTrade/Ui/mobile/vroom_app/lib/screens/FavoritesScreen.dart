@@ -21,10 +21,9 @@ class _FavoritesScreenState extends State<FavoritesScreen> with RouteAware {
   @override
   void initState() {
     super.initState();
-    _favoriteAds = _favoritesService.fetchFavorites(); // Initial fetch
+    _favoriteAds = _favoritesService.fetchFavorites();
   }
 
-  // Pomoćna metoda za refetch
   void _refreshFavorites() {
     setState(() {
       _favoriteAds = _favoritesService.fetchFavorites();
@@ -77,8 +76,7 @@ class _FavoritesScreenState extends State<FavoritesScreen> with RouteAware {
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   const Padding(
-                    padding: EdgeInsets.symmetric(
-                        horizontal: 24.0),
+                    padding: EdgeInsets.symmetric(horizontal: 24.0),
                     child: Text(
                       "Morate se prijaviti da biste videli svoje Favorite oglase.",
                       style: TextStyle(

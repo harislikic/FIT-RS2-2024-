@@ -32,7 +32,6 @@ class _CarAdditionalEquipmentCardState
       margin: const EdgeInsets.symmetric(vertical: 16.0),
       child: Column(
         children: [
-          // Naslovna traka sa dugmetom za otvaranje/zatvaranje
           ListTile(
             contentPadding:
                 const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
@@ -41,7 +40,7 @@ class _CarAdditionalEquipmentCardState
               style: TextStyle(
                 fontSize: 18,
                 fontWeight: FontWeight.bold,
-                color: Colors.black, // Crna boja za naslov
+                color: Colors.black,
               ),
             ),
             trailing: IconButton(
@@ -59,8 +58,6 @@ class _CarAdditionalEquipmentCardState
               },
             ),
           ),
-
-          // Animacija otvaranja/zatvaranja
           AnimatedCrossFade(
             duration: const Duration(milliseconds: 300),
             crossFadeState: _isExpanded
@@ -70,8 +67,8 @@ class _CarAdditionalEquipmentCardState
             secondChild: Padding(
               padding: const EdgeInsets.fromLTRB(16.0, 0, 16.0, 16.0),
               child: Wrap(
-                spacing: 12.0, // Horizontalni razmak
-                runSpacing: 12.0, // Vertikalni razmak kada prelazi u novi red
+                spacing: 12.0,
+                runSpacing: 12.0,
                 children: widget.automobileAdEquipments.map((equipment) {
                   return Container(
                     padding: const EdgeInsets.all(8.0),

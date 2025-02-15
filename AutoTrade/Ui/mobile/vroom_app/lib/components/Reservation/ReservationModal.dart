@@ -47,7 +47,7 @@ class _ReservationModalState extends State<ReservationModal> {
     );
 
     widget.onConfirm(reservationDateTime);
-    Navigator.pop(context); // Zatvara modal
+    Navigator.pop(context);
   }
 
   @override
@@ -59,8 +59,7 @@ class _ReservationModalState extends State<ReservationModal> {
         children: [
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            crossAxisAlignment:
-                CrossAxisAlignment.start, // Poravnanje prema vrhu
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               const SizedBox(),
               Column(
@@ -70,7 +69,6 @@ class _ReservationModalState extends State<ReservationModal> {
                     onPressed: () => Navigator.of(context).pop(),
                   ),
                   const SizedBox(height: 4),
-                  // Tekst sa datumom
                   Text(
                     'Odaberite vrijeme za datum: ${DateFormat('dd.MM.yyyy').format(widget.selectedDay)}',
                     style: const TextStyle(
@@ -107,20 +105,19 @@ class _ReservationModalState extends State<ReservationModal> {
             onPressed: _confirmReservation,
             style: ElevatedButton.styleFrom(
               padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 20),
-              backgroundColor: Colors.white, // Pozadina dugmeta
-              foregroundColor: Colors.blueAccent, // Boja teksta i ikona
-              side:
-                  const BorderSide(color: Colors.blueGrey, width: 2), // Border
+              backgroundColor: Colors.white,
+              foregroundColor: Colors.blueAccent,
+              side: const BorderSide(color: Colors.blueGrey, width: 2),
               shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(12), // Zaobljeni uglovi
+                borderRadius: BorderRadius.circular(12),
               ),
-              elevation: 2, // Efekat senke
+              elevation: 2,
             ),
             child: const Row(
               mainAxisSize: MainAxisSize.min,
               children: [
                 Icon(Icons.check_circle, color: Colors.blueAccent),
-                SizedBox(width: 8), // Razmak između ikone i teksta
+                SizedBox(width: 8),
                 Text(
                   'Potvrdi',
                   style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),

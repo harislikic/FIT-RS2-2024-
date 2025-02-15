@@ -26,12 +26,9 @@ class FavoritesAutomobileCard extends StatelessWidget {
               "Da li ste sigurni da želite da uklonite ovaj oglas iz favorita?",
           successMessage: "Oglas je uspešno uklonjen iz favorita.",
           onConfirm: () {
-            // Call the function to remove the favorite
             onRemoveFavorite(favoritesAutomobile.id);
           },
-          onCancel: () {
-            // Just close the dialog if canceled
-          },
+          onCancel: () {},
         );
       },
     );
@@ -41,7 +38,6 @@ class FavoritesAutomobileCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        // Navigate to the automobile details screen
         Navigator.push(
           context,
           MaterialPageRoute(
@@ -59,11 +55,9 @@ class FavoritesAutomobileCard extends StatelessWidget {
         clipBehavior: Clip.antiAlias,
         child: Stack(
           children: [
-            // Main content (image, title, etc.)
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                // Display the car image, title, and other details
                 if (favoritesAutomobile.images.isNotEmpty)
                   Image.network(
                     '$baseUrl${favoritesAutomobile.images.first.imageUrl}',
@@ -86,7 +80,6 @@ class FavoritesAutomobileCard extends StatelessWidget {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      // Title of the ad
                       SizedBox(
                         height: 40,
                         child: Align(
@@ -103,7 +96,6 @@ class FavoritesAutomobileCard extends StatelessWidget {
                         ),
                       ),
                       const SizedBox(height: 2),
-                      // Row for mileage, year of manufacture, and horsepower
                       Container(
                         decoration: BoxDecoration(
                           color: Colors.white70,
@@ -114,7 +106,6 @@ class FavoritesAutomobileCard extends StatelessWidget {
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            // Mileage icon and text
                             Column(
                               children: [
                                 const Icon(Icons.speed,
@@ -129,7 +120,6 @@ class FavoritesAutomobileCard extends StatelessWidget {
                                 ),
                               ],
                             ),
-                            // Year of manufacture icon and text
                             Column(
                               children: [
                                 const Icon(Icons.calendar_today,
@@ -142,7 +132,6 @@ class FavoritesAutomobileCard extends StatelessWidget {
                                 ),
                               ],
                             ),
-                            // Horsepower icon and text
                             Column(
                               children: [
                                 const Icon(Icons.directions_car,
@@ -158,8 +147,7 @@ class FavoritesAutomobileCard extends StatelessWidget {
                           ],
                         ),
                       ),
-                      const SizedBox(height: 4), // Small spacing
-                      // Price of the car
+                      const SizedBox(height: 4),
                       Text(formatPrice(favoritesAutomobile.price),
                           style: const TextStyle(
                               fontSize: 14, fontWeight: FontWeight.bold)),
@@ -168,20 +156,17 @@ class FavoritesAutomobileCard extends StatelessWidget {
                 ),
               ],
             ),
-            // Absolute "Trash Can" button in the top-right corner
             Positioned(
               top: 4,
               right: 4,
               child: GestureDetector(
                 onTap: () {
-                  // Show confirmation dialog before removing the favorite
                   _showConfirmationDialog(context);
                 },
                 child: Container(
                   padding: const EdgeInsets.all(8),
                   decoration: BoxDecoration(
-                    color: Colors.blueGrey.shade900.withOpacity(
-                        0.7), // Blue-gray background with some opacity
+                    color: Colors.blueGrey.shade900.withOpacity(0.7),
                     shape: BoxShape.circle,
                     boxShadow: [
                       BoxShadow(
@@ -193,7 +178,7 @@ class FavoritesAutomobileCard extends StatelessWidget {
                   ),
                   child: const Icon(
                     Icons.delete_outlined,
-                    color: Colors.redAccent, // White trash can icon
+                    color: Colors.redAccent,
                     size: 20,
                   ),
                 ),

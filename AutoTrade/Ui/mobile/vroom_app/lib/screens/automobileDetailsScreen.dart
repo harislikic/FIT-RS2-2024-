@@ -100,22 +100,17 @@ class _AutomobileDetailsScreenState extends State<AutomobileDetailsScreen> {
                       children: [
                         Stack(
                           children: [
-                            // Image carousel
                             CarImageCarousel(images: automobileAd.images),
-
-                            // Back button
                             Positioned(
                               top: 44,
                               left: 16,
                               child: ClipRRect(
-                                borderRadius: BorderRadius.circular(
-                                    12), // Rounded corners
+                                borderRadius: BorderRadius.circular(12),
                                 child: BackdropFilter(
-                                  filter: ImageFilter.blur(
-                                      sigmaX: 4, sigmaY: 4), // Blur effect
+                                  filter:
+                                      ImageFilter.blur(sigmaX: 4, sigmaY: 4),
                                   child: Container(
-                                    color: Colors.black
-                                        .withOpacity(0.4), // Semi-transparent
+                                    color: Colors.black.withOpacity(0.4),
                                     child: IconButton(
                                       icon: const Icon(Icons.arrow_back,
                                           color: Colors.white),
@@ -127,8 +122,6 @@ class _AutomobileDetailsScreenState extends State<AutomobileDetailsScreen> {
                                 ),
                               ),
                             ),
-
-                            // Edit button
                             Positioned(
                               top: 44,
                               right: 16,
@@ -140,12 +133,10 @@ class _AutomobileDetailsScreenState extends State<AutomobileDetailsScreen> {
                                     if (_loggedInUserId ==
                                         automobileAd.user?.id) {
                                       return ClipRRect(
-                                        borderRadius: BorderRadius.circular(
-                                            12), // Rounded corners
+                                        borderRadius: BorderRadius.circular(12),
                                         child: BackdropFilter(
                                           filter: ImageFilter.blur(
-                                              sigmaX: 2,
-                                              sigmaY: 4), // Blur effect
+                                              sigmaX: 2, sigmaY: 4),
                                           child: Container(
                                             color:
                                                 Colors.black.withOpacity(0.2),

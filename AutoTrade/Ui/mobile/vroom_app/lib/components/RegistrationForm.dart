@@ -5,10 +5,8 @@ import 'package:vroom_app/models/city.dart';
 import 'package:vroom_app/screens/RegisterScreen.dart';
 
 class RegistrationForm extends StatefulWidget {
-  // Forma
   final GlobalKey<FormState> formKey;
 
-  // Kontroleri
   final TextEditingController userNameController;
   final TextEditingController firstNameController;
   final TextEditingController lastNameController;
@@ -17,29 +15,24 @@ class RegistrationForm extends StatefulWidget {
   final TextEditingController adressController;
   final TextEditingController passwordController;
   final TextEditingController passwordConfController;
-  // Datum
+
   final DateTime? selectedDate;
   final VoidCallback onPickDate;
 
-  // Grad
   final List<City> cities;
   final int? selectedCityId;
   final bool isLoadingCities;
   final ValueChanged<int?> onCityChanged;
 
-  // Slika
   final File? pickedImage;
   final VoidCallback onPickImage;
 
-  // Registracija
   final VoidCallback onRegister;
 
-  // Validacije
   final String? Function(String?)? validateEmail;
   final String? Function(String?)? validatePhone;
   final String? Function(String?)? validatePassword;
 
-  // Dodato: Callback za uklanjanje slike
   final VoidCallback? onRemoveImage;
 
   final Gender? selectedGender;
@@ -78,63 +71,55 @@ class RegistrationForm extends StatefulWidget {
 }
 
 class _RegistrationFormState extends State<RegistrationForm> {
-  // Za prikaz/sakrivanje password polja
   bool _obscurePass = true;
   bool _obscurePassConf = true;
 
   @override
   Widget build(BuildContext context) {
     return Form(
-      key: widget.formKey, // Važno za validaciju
+      key: widget.formKey,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          // Username
           TextFormField(
             controller: widget.userNameController,
             decoration: const InputDecoration(labelText: "Korisničko ime"),
             validator: (val) =>
                 val == null || val.isEmpty ? "Polje obavezno" : null,
           ),
-          // FirstName
           TextFormField(
             controller: widget.firstNameController,
             decoration: const InputDecoration(labelText: "Ime"),
             validator: (val) =>
                 val == null || val.isEmpty ? "Polje obavezno" : null,
           ),
-          // LastName
           TextFormField(
             controller: widget.lastNameController,
             decoration: const InputDecoration(labelText: "Prezime"),
             validator: (val) =>
                 val == null || val.isEmpty ? "Polje obavezno" : null,
           ),
-          // Email
           TextFormField(
             controller: widget.emailController,
             decoration: const InputDecoration(labelText: "Email"),
             keyboardType: TextInputType.emailAddress,
             validator: widget.validateEmail,
           ),
-          // Telefon
           TextFormField(
             controller: widget.phoneNumberController,
             decoration: const InputDecoration(
               labelText: "Telefon",
-              prefixText: '+387 ', // Ovde ubaci prefiks
+              prefixText: '+387 ',
             ),
             keyboardType: TextInputType.phone,
             validator: widget.validatePhone,
           ),
-          // Adresa
           TextFormField(
             controller: widget.adressController,
             decoration: const InputDecoration(labelText: "Adresa"),
             validator: (val) =>
                 val == null || val.isEmpty ? "Polje obavezno" : null,
           ),
-          // Spol
           FormField<Gender>(
             builder: (field) {
               return Column(
@@ -142,7 +127,6 @@ class _RegistrationFormState extends State<RegistrationForm> {
                 children: [
                   FormField<Gender>(
                     validator: (value) {
-                      // Ako korisnik nije izabrao pol, vrati grešku
                       if (value == null) {
                         return 'Polje obavezno';
                       }
@@ -163,7 +147,7 @@ class _RegistrationFormState extends State<RegistrationForm> {
                                 },
                               ),
                               const Text('Muški (M)'),
-                              SizedBox(width: 20),
+                              const SizedBox(width: 20),
                               Radio<Gender>(
                                 value: Gender.female,
                                 groupValue: widget.selectedGender,
@@ -184,8 +168,6 @@ class _RegistrationFormState extends State<RegistrationForm> {
                       );
                     },
                   ),
-
-                  // Ako validator vrati grešku, prikaži ispod
                   if (field.hasError)
                     Text(
                       field.errorText ?? '',
@@ -195,8 +177,6 @@ class _RegistrationFormState extends State<RegistrationForm> {
               );
             },
           ),
-
-          // Lozinka
           TextFormField(
             controller: widget.passwordController,
             decoration: InputDecoration(
@@ -215,8 +195,6 @@ class _RegistrationFormState extends State<RegistrationForm> {
             obscureText: _obscurePass,
             validator: widget.validatePassword,
           ),
-
-          // Potvrda lozinke
           TextFormField(
             controller: widget.passwordConfController,
             decoration: InputDecoration(
@@ -235,10 +213,7 @@ class _RegistrationFormState extends State<RegistrationForm> {
             obscureText: _obscurePassConf,
             validator: widget.validatePassword,
           ),
-
           const SizedBox(height: 10),
-
-          // Date of Birth
           FormField<DateTime>(
             validator: (value) {
               if (widget.selectedDate == null) {
@@ -253,14 +228,12 @@ class _RegistrationFormState extends State<RegistrationForm> {
                   InkWell(
                     onTap: () {
                       widget.onPickDate();
-                      field.didChange(widget
-                          .selectedDate); // Obavesti formu da je vrednost promenjena
+                      field.didChange(widget.selectedDate);
                     },
                     child: InputDecorator(
                       decoration: InputDecoration(
                         labelText: "Datum rođenja",
-                        errorText:
-                            field.errorText, // Prikazuje grešku ako postoji
+                        errorText: field.errorText,
                       ),
                       child: Text(
                         widget.selectedDate == null
@@ -276,8 +249,6 @@ class _RegistrationFormState extends State<RegistrationForm> {
               );
             },
           ),
-
-          // Grad (dropdown)
           const SizedBox(height: 10),
           widget.isLoadingCities
               ? const Center(child: CircularProgressIndicator())
@@ -294,10 +265,7 @@ class _RegistrationFormState extends State<RegistrationForm> {
                   validator: (val) =>
                       val == null ? "Morate izabrati grad." : null,
                 ),
-
           const SizedBox(height: 10),
-
-          // Slika sa X dugmetom
           Row(
             children: [
               ElevatedButton(
@@ -311,10 +279,8 @@ class _RegistrationFormState extends State<RegistrationForm> {
                   height: 120,
                   child: Stack(
                     children: [
-                      // GestureDetector za prikaz slika u modalu
                       GestureDetector(
                         onTap: () {
-                          // Otvorimo dijalog za prikaz pune slike
                           showDialog(
                             context: context,
                             builder: (ctx) {
@@ -353,14 +319,11 @@ class _RegistrationFormState extends State<RegistrationForm> {
                           ),
                         ),
                       ),
-
-                      // X (close) dugme u gornjem desnom uglu
                       Positioned(
                         top: 2,
                         right: 2,
                         child: GestureDetector(
                           onTap: () {
-                            // Pozovi callback za uklanjanje slike
                             if (widget.onRemoveImage != null) {
                               widget.onRemoveImage!();
                             }
@@ -385,10 +348,7 @@ class _RegistrationFormState extends State<RegistrationForm> {
                 const Text("Nema slike"),
             ],
           ),
-
           const SizedBox(height: 20),
-
-          // Dugme za registraciju
           ElevatedButton(
             onPressed: widget.onRegister,
             style: ElevatedButton.styleFrom(
@@ -403,7 +363,6 @@ class _RegistrationFormState extends State<RegistrationForm> {
               style: TextStyle(fontSize: 16, color: Colors.white),
             ),
           ),
-
           const SizedBox(height: 30),
         ],
       ),

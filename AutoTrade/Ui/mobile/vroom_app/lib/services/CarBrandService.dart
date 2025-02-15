@@ -4,8 +4,8 @@ import 'package:vroom_app/models/carBrand.dart';
 import 'package:vroom_app/services/config.dart';
 
 class CarBrandService {
-  Future<List<CarBrand>> fetchCarBrands({int page = 0, int pageSize = 50}) async {
-    //const String baseUrl = '${ApiConfig.baseUrl}/CarBrand';
+  Future<List<CarBrand>> fetchCarBrands(
+      {int page = 0, int pageSize = 50}) async {
     final String url = '$baseUrl/CarBrand';
 
     final Uri uri = Uri.parse(url).replace(queryParameters: {

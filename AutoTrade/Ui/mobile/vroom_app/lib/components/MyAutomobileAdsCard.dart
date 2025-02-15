@@ -64,7 +64,6 @@ class MyAutomobileAdsCard extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          // Velika slika na vrhu
           ClipRRect(
             borderRadius: const BorderRadius.vertical(top: Radius.circular(15)),
             child: automobileAd.images.isNotEmpty
@@ -83,8 +82,6 @@ class MyAutomobileAdsCard extends StatelessWidget {
                     ),
                   ),
           ),
-
-          // Naslov, datum i cena
           Padding(
             padding:
                 const EdgeInsets.symmetric(horizontal: 12.0, vertical: 8.0),
@@ -160,25 +157,21 @@ class MyAutomobileAdsCard extends StatelessWidget {
               ],
             ),
           ),
-
-          // Buttons for actions
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 8.0),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                // Delete Icon at the start
                 Container(
                   decoration: BoxDecoration(
-                    color:
-                        Colors.grey.shade200, // Background color for the icon
-                    shape: BoxShape.circle, // Rounded shape
+                    color: Colors.grey.shade200,
+                    shape: BoxShape.circle,
                     boxShadow: [
                       BoxShadow(
-                        color: Colors.black.withOpacity(0.1), // Shadow color
-                        blurRadius: 6, // Shadow blur
-                        spreadRadius: 3, // Shadow spread
-                        offset: const Offset(0, 3), // Shadow offset
+                        color: Colors.black.withOpacity(0.1),
+                        blurRadius: 6,
+                        spreadRadius: 3,
+                        offset: const Offset(0, 3),
                       ),
                     ],
                   ),
@@ -191,11 +184,8 @@ class MyAutomobileAdsCard extends StatelessWidget {
                     onPressed: () => _showConfirmationDialog(context),
                   ),
                 ),
-
-                // Buttons for "Završi" and "Posjeti"
                 Row(
                   children: [
-                    // Complete Ad Button
                     if (selectedTab != 'done')
                       ElevatedButton.icon(
                         onPressed: () => _showCompleteDialog(context),
@@ -217,10 +207,7 @@ class MyAutomobileAdsCard extends StatelessWidget {
                           ),
                         ),
                       ),
-                    if (selectedTab != 'done')
-                      const SizedBox(width: 8), // Small space
-
-                    // Visit Ad Button
+                    if (selectedTab != 'done') const SizedBox(width: 8),
                     ElevatedButton.icon(
                       onPressed: () {
                         Navigator.push(

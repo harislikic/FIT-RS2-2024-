@@ -25,13 +25,12 @@ class _AutomobileListScreenState extends State<AutomobileListScreen>
   final PagingController<int, AutomobileAd> _pagingController =
       PagingController(firstPageKey: 0);
 
-  String _searchTerm = ''; // For search
-  bool _isSearchVisible = false; // To toggle search visibility
-  bool _isFilterVisible = false; // To toggle filter visibility
-  bool _isGridView = true; // To toggle between GridView and ListView
+  String _searchTerm = '';
+  bool _isSearchVisible = false;
+  bool _isFilterVisible = false;
+  bool _isGridView = true;
   bool _isLoggedIn = false;
 
-  // Filter parameters
   String _minPrice = '';
   String _maxPrice = '';
   String _minMileage = '';
@@ -55,14 +54,13 @@ class _AutomobileListScreenState extends State<AutomobileListScreen>
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
-    routeObserver.subscribe(
-        this, ModalRoute.of(context)!); // Prijava na RouteObserver
+    routeObserver.subscribe(this, ModalRoute.of(context)!);
   }
 
   @override
   void dispose() {
     _pagingController.dispose();
-    routeObserver.unsubscribe(this); // Odjava sa RouteObserver
+    routeObserver.unsubscribe(this);
     super.dispose();
   }
 
@@ -72,10 +70,9 @@ class _AutomobileListScreenState extends State<AutomobileListScreen>
   }
 
   Future<void> _checkLoginStatus() async {
-    final userId = await AuthService.getUserId(); // Pozivanje getUserId
+    final userId = await AuthService.getUserId();
     setState(() {
-      _isLoggedIn =
-          userId != null; // Ako je userId null, korisnik nije prijavljen
+      _isLoggedIn = userId != null;
     });
   }
 
@@ -95,7 +92,6 @@ class _AutomobileListScreenState extends State<AutomobileListScreen>
 
   Future<void> _fetchPage(int pageKey) async {
     try {
-      // Simulate a delay for the loading effect
       await Future.delayed(const Duration(milliseconds: 500));
 
       final newAds = await _automobileAdService.fetchAutomobileAds(
@@ -156,7 +152,7 @@ class _AutomobileListScreenState extends State<AutomobileListScreen>
       _carCategoryId = carCategoryId;
       _carModelId = carModelId;
       _cityId = cityId;
-      _pagingController.refresh(); // Refresh data based on filters
+      _pagingController.refresh();
     });
   }
 
@@ -172,7 +168,7 @@ class _AutomobileListScreenState extends State<AutomobileListScreen>
       _carCategoryId = '';
       _carModelId = '';
       _cityId = '';
-      _pagingController.refresh(); // Refresh data after clearing filters
+      _pagingController.refresh();
     });
   }
 
@@ -207,11 +203,11 @@ class _AutomobileListScreenState extends State<AutomobileListScreen>
                 });
               },
             ),
-            Expanded(
+            const Expanded(
               child: Center(
                 child: Text(
                   'Oglasi',
-                  style: const TextStyle(color: Colors.white, fontSize: 20),
+                  style: TextStyle(color: Colors.white, fontSize: 20),
                 ),
               ),
             ),
@@ -272,7 +268,6 @@ class _AutomobileListScreenState extends State<AutomobileListScreen>
             Expanded(
               child: CustomScrollView(
                 slivers: [
-                  // Prikazati Recommended Carousel samo ako Search ili Filter nisu aktivni
                   if (_isLoggedIn &&
                       !_isSearchVisible &&
                       !_isFilterVisible &&
@@ -285,8 +280,6 @@ class _AutomobileListScreenState extends State<AutomobileListScreen>
                         ),
                       ),
                     ),
-
-                  // Dodajte razmak ispod carousel-a samo ako je carousel prikazan
                   if (_isLoggedIn &&
                       !_isSearchVisible &&
                       !_isFilterVisible &&
@@ -294,8 +287,6 @@ class _AutomobileListScreenState extends State<AutomobileListScreen>
                     const SliverToBoxAdapter(
                       child: SizedBox(height: 16.0),
                     ),
-
-                  // Prikazati "Ostali oglasi" samo ako Search ili Filter nisu aktivni
                   if (_isLoggedIn &&
                       !_isSearchVisible &&
                       !_isFilterVisible &&
@@ -314,8 +305,6 @@ class _AutomobileListScreenState extends State<AutomobileListScreen>
                         ),
                       ),
                     ),
-
-                  // Either a grid view or a list view based on _isGridView
                   if (_isGridView)
                     PagedSliverGrid<int, AutomobileAd>(
                       pagingController: _pagingController,

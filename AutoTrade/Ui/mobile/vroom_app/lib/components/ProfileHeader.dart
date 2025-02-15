@@ -20,7 +20,6 @@ class ProfileHeader extends StatelessWidget {
   Widget build(BuildContext context) {
     return Stack(
       children: [
-        // Background container sa gradientom
         Container(
           width: double.infinity,
           height: 300,
@@ -34,7 +33,6 @@ class ProfileHeader extends StatelessWidget {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              // Avatar sa belim obrubom
               Container(
                 padding: const EdgeInsets.all(4),
                 decoration: const BoxDecoration(
@@ -57,7 +55,6 @@ class ProfileHeader extends StatelessWidget {
                 ),
               ),
               const SizedBox(height: 8),
-              // Uredi profil dugme
               ElevatedButton(
                 onPressed: onEdit,
                 style: ElevatedButton.styleFrom(
@@ -102,7 +99,6 @@ class ProfileHeader extends StatelessWidget {
                 ),
               ),
               const SizedBox(height: 8),
-              // Dugme za "Moje rezervacije"
               ElevatedButton.icon(
                 onPressed: onMyReservations,
                 icon: const Icon(
@@ -126,7 +122,6 @@ class ProfileHeader extends StatelessWidget {
             ],
           ),
         ),
-        // Logout dugme (ikona + tekst) u gornjem desnom uglu
         Positioned(
           top: 16,
           right: 16,

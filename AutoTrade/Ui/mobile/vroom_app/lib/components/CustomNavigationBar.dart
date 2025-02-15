@@ -15,11 +15,11 @@ class CustomNavigationBarWithButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: 85, // Smanjena visina celog navigacionog bara
+      height: 85,
       child: BottomAppBar(
         shape: const CircularNotchedRectangle(),
         notchMargin: 6.0,
-        color: Colors.blueGrey[900], // Metalik plava pozadina
+        color: Colors.blueGrey[900],
         child: Stack(
           alignment: Alignment.center,
           clipBehavior: Clip.none,
@@ -41,10 +41,10 @@ class CustomNavigationBarWithButton extends StatelessWidget {
                   ),
                   onPressed: () => onTap(1),
                 ),
-                const SizedBox(width: 40), // Prostor za centralno dugme
-                  IconButton(
+                const SizedBox(width: 40),
+                IconButton(
                   icon: Icon(
-                    Icons.dashboard, // Ikona za "Moji oglasi"
+                    Icons.dashboard,
                     color: currentIndex == 2 ? Colors.blue : Colors.grey[400],
                   ),
                   onPressed: () => onTap(2),
@@ -59,21 +59,19 @@ class CustomNavigationBarWithButton extends StatelessWidget {
               ],
             ),
             Positioned(
-              bottom: 0, // Podešavanje visine FloatingActionButton
+              bottom: 0,
               child: Container(
-                height: 50, // Smanjena visina centralnog dugmeta
-                width: 50, // Smanjena širina centralnog dugmeta
+                height: 50,
+                width: 50,
                 decoration: BoxDecoration(
-                  color: Colors.lightBlue, // Svetlo plava pozadina
+                  color: Colors.lightBlue,
                   borderRadius: BorderRadius.circular(15),
                 ),
                 child: FloatingActionButton(
                   backgroundColor: Colors.lightBlue,
                   elevation: 5,
                   onPressed: onAddPressed,
-                  child: const Icon(Icons.add,
-                      size: 20,
-                      color: Colors.white), // Ikona centralnog dugmeta
+                  child: const Icon(Icons.add, size: 20, color: Colors.white),
                 ),
               ),
             ),

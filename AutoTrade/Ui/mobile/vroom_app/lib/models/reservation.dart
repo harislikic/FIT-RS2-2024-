@@ -5,9 +5,9 @@ class Reservation {
   final int? userId;
   final ReservationUser? user;
   final int? automobileAdId;
-  final String? title; // Naziv oglasa
-  final int? price; // Naziv oglasa
-  final String? firstImage; // URL prve slike oglasa
+  final String? title;
+  final int? price;
+  final String? firstImage;
 
   Reservation({
     required this.reservationId,

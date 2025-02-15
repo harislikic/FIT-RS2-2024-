@@ -23,11 +23,10 @@ class _EditAutomobileScreenState extends State<EditAutomobileScreen> {
   final _formKey = GlobalKey<FormState>();
   final Map<String, dynamic> _updatedFields = {};
   final List<int> _removedImageIds = [];
-  final List<int> _removedEquipmentIds =
-      []; // Nova lista za praćenje uklonjene opreme
+  final List<int> _removedEquipmentIds = [];
   final List<XFile> _newImages = [];
   bool _isFormChanged = false;
-  
+
   late TextEditingController _titleController;
   late TextEditingController _descriptionController;
   late TextEditingController _priceController;
@@ -139,8 +138,7 @@ class _EditAutomobileScreenState extends State<EditAutomobileScreen> {
                               _selectedEquipmentIds.remove(equipment.id);
                               if (_originalEquipmentIds
                                   .contains(equipment.id)) {
-                                _removedEquipmentIds
-                                    .add(equipment.id); // Dodaj u uklonjene
+                                _removedEquipmentIds.add(equipment.id);
                               }
                             }
                           }
@@ -209,12 +207,10 @@ class _EditAutomobileScreenState extends State<EditAutomobileScreen> {
           _removedEquipmentIds.isNotEmpty) {
         final automobileAdService = AutomobileAdService();
 
-        // Ažuriraj novu opremu
         if (equipmentChanged) {
           _updatedFields['EquipmentIds'] = _selectedEquipmentIds;
         }
 
-        // Ukloni postojeću opremu
         if (_removedEquipmentIds.isNotEmpty) {
           final deleteSuccess =
               await automobileAdService.deleteAutomobileEquipment(
@@ -228,7 +224,6 @@ class _EditAutomobileScreenState extends State<EditAutomobileScreen> {
           }
         }
 
-        // Ažuriraj oglas
         final success = await automobileAdService.updateAutomobileAd(
           widget.automobileAd.id,
           _updatedFields,

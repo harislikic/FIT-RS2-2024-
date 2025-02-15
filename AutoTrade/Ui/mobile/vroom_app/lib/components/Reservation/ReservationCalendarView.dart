@@ -77,13 +77,11 @@ class ReservationCalendarView extends StatelessWidget {
               width: 40,
               decoration: BoxDecoration(
                 shape: BoxShape.circle,
-                color: Colors
-                    .grey[300], // Light grey background for disabled past dates
+                color: Colors.grey[300],
               ),
               child: Text(
                 '${day.day}',
-                style: const TextStyle(
-                    color: Colors.black54), // Text in white for disabled dates
+                style: const TextStyle(color: Colors.black54),
               ),
             );
           }
@@ -102,8 +100,7 @@ class ReservationCalendarView extends StatelessWidget {
                   child: CircleAvatar(
                     radius: 8,
                     backgroundImage: user?.profilePicture != null
-                        ? NetworkImage(
-                            '$baseUrl${user?.profilePicture!}')
+                        ? NetworkImage('$baseUrl${user?.profilePicture!}')
                         : null,
                     child: user?.profilePicture == null
                         ? const Icon(Icons.person, size: 8)
@@ -118,7 +115,6 @@ class ReservationCalendarView extends StatelessWidget {
       ),
       onDaySelected: (selectedDay, _) {
         if (!selectedDay.isBefore(today)) {
-          // Allow selection only for dates today or in the future
           onDaySelected(selectedDay);
         }
       },

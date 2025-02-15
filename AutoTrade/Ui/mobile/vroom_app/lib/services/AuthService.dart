@@ -4,8 +4,6 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:vroom_app/services/config.dart';
 
 class AuthService {
-  //static const String _baseUrl = 'http://localhost:5194'; // Vaša baza URL-a
-
   static Future<bool> login(String username, String password) async {
     try {
       final response = await http.post(
@@ -18,14 +16,12 @@ class AuthService {
       );
 
       if (response.statusCode == 200) {
-        // Prijava uspešna
         final responseData = jsonDecode(response.body);
         final userId = responseData['id'];
 
         await saveCredentials(username, password, userId);
         return true;
       } else {
-        // Neuspešna prijava
         return false;
       }
     } catch (e) {
@@ -34,7 +30,6 @@ class AuthService {
     }
   }
 
-  /// Čuva korisničko ime i lozinku
   static Future<void> saveCredentials(
       String username, String password, int userId) async {
     final prefs = await SharedPreferences.getInstance();
@@ -43,19 +38,16 @@ class AuthService {
     await prefs.setInt('userId', userId);
   }
 
-  /// Dohvata korisničko ime
   static Future<String?> getUsername() async {
     final prefs = await SharedPreferences.getInstance();
     return prefs.getString('username');
   }
 
-  /// Dohvata lozinku
   static Future<String?> getPassword() async {
     final prefs = await SharedPreferences.getInstance();
     return prefs.getString('password');
   }
 
-  /// Odjavljuje korisnika
   static Future<void> logout() async {
     final prefs = await SharedPreferences.getInstance();
     await prefs.remove('username');
@@ -68,13 +60,11 @@ class AuthService {
     return userId != null;
   }
 
-  /// Dohvata ID korisnika
   static Future<int?> getUserId() async {
     final prefs = await SharedPreferences.getInstance();
     return prefs.getInt('userId');
   }
 
-  /// Generiše Basic Auth zaglavlje
   static Future<Map<String, String>> getAuthHeaders() async {
     final username = await getUsername();
     final password = await getPassword();

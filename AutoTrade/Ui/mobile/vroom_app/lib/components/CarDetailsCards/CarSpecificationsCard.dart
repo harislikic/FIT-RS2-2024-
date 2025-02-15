@@ -65,7 +65,6 @@ class CarSpecificationsCard extends StatelessWidget {
   }
 }
 
-// Definicija InfoColumn komponente u istoj datoteci s pozadinom
 class InfoColumn extends StatelessWidget {
   final IconData icon;
   final String label;
@@ -81,11 +80,10 @@ class InfoColumn extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding:
-          const EdgeInsets.all(12.0), // Dodaje malo prostora unutar elemenata
+      padding: const EdgeInsets.all(12.0),
       decoration: BoxDecoration(
-        color: Colors.lightBlue.shade50, // Dodaje pozadinsku boju
-        borderRadius: BorderRadius.circular(10), // Zaobljeni rubovi za karticu
+        color: Colors.lightBlue.shade50,
+        borderRadius: BorderRadius.circular(10),
       ),
       child: Column(
         children: [

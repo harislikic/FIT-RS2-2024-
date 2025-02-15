@@ -35,7 +35,7 @@ class _MyAutomobileAdsScreenState extends State<MyAutomobileAdsScreen>
 
   Future<bool> _checkIfLoggedIn() async {
     final userId = await AuthService.getUserId();
-    return userId != null; // Check if user ID exists
+    return userId != null;
   }
 
   bool _isFetchingPage = false;
@@ -93,11 +93,10 @@ class _MyAutomobileAdsScreenState extends State<MyAutomobileAdsScreen>
     }
   }
 
-  // RouteAware: Refresh data when the screen is revisited
   @override
   void didPopNext() {
     super.didPopNext();
-    _pagingController.refresh(); // Refresh data
+    _pagingController.refresh();
   }
 
   @override
@@ -145,14 +144,12 @@ class _MyAutomobileAdsScreenState extends State<MyAutomobileAdsScreen>
           }
 
           if (snapshot.hasData && !snapshot.data!) {
-            // If the user is NOT logged in
             return Center(
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   const Padding(
-                    padding: EdgeInsets.symmetric(
-                        horizontal: 24.0), // Dodaje padding levo i desno
+                    padding: EdgeInsets.symmetric(horizontal: 24.0),
                     child: Text(
                       "Morate se prijaviti da biste vidjeli svoje oglase.",
                       style: TextStyle(
@@ -174,7 +171,6 @@ class _MyAutomobileAdsScreenState extends State<MyAutomobileAdsScreen>
             );
           }
 
-          // If the user is logged in
           return Column(
             children: [
               Container(

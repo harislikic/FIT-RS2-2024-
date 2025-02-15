@@ -13,9 +13,7 @@ class ProfileCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
-      // Minimalna elevacija
       elevation: 0.5,
-      // Blago zaobljeni uglovi
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(4),
       ),
@@ -32,7 +30,7 @@ class ProfileCard extends StatelessWidget {
               label,
               style: TextStyle(
                 fontSize: 14,
-                color: Colors.grey[800], // Tamnija siva boja
+                color: Colors.grey[800],
               ),
             ),
             const SizedBox(height: 4),

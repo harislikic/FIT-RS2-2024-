@@ -26,14 +26,13 @@ class _CarOwnerInfoCardState extends State<CarOwnerInfoCard>
         borderRadius: BorderRadius.circular(12),
       ),
       child: AnimatedSize(
-        duration: const Duration(milliseconds: 300), // Animation duration
-        curve: Curves.easeInOut, // Animation curve
+        duration: const Duration(milliseconds: 300),
+        curve: Curves.easeInOut,
         child: Padding(
           padding: const EdgeInsets.all(16.0),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              // Header Section to indicate owner profile
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -48,26 +47,22 @@ class _CarOwnerInfoCardState extends State<CarOwnerInfoCard>
                   GestureDetector(
                     onTap: () {
                       setState(() {
-                        _isExpanded =
-                            !_isExpanded; // Toggle expansion state on arrow click
+                        _isExpanded = !_isExpanded;
                       });
                     },
                     child: Icon(
                       _isExpanded
-                          ? Icons.keyboard_arrow_up // Icon for collapse
-                          : Icons.keyboard_arrow_down, // Icon for expand
+                          ? Icons.keyboard_arrow_up
+                          : Icons.keyboard_arrow_down,
                       color: Colors.black54,
                     ),
                   ),
                 ],
               ),
               if (_isExpanded) ...[
-                const SizedBox(height: 12), // Spacing below header
-
-                // User Profile Row
+                const SizedBox(height: 12),
                 Row(
                   children: [
-                    // Avatar or user's profile picture
                     GestureDetector(
                       onTap: () {
                         Navigator.push(
@@ -83,13 +78,11 @@ class _CarOwnerInfoCardState extends State<CarOwnerInfoCard>
                         radius: 30,
                         backgroundImage: NetworkImage(
                           '$baseUrl${widget.automobileAd.user?.profilePicture}',
-                        ), // User's profile picture
+                        ),
                         backgroundColor: Colors.grey.shade300,
                       ),
                     ),
-                    const SizedBox(width: 16), // Spacing between image and text
-
-                    // User information
+                    const SizedBox(width: 16),
                     Expanded(
                       child: GestureDetector(
                         onTap: () {
@@ -105,7 +98,6 @@ class _CarOwnerInfoCardState extends State<CarOwnerInfoCard>
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            // User's full name
                             Text(
                               '${widget.automobileAd.user?.firstName} ${widget.automobileAd.user?.lastName}',
                               style: const TextStyle(
@@ -114,10 +106,7 @@ class _CarOwnerInfoCardState extends State<CarOwnerInfoCard>
                                 color: Colors.black87,
                               ),
                             ),
-                            const SizedBox(
-                                height: 8), // Small spacing below name
-
-                            // Contact number
+                            const SizedBox(height: 8),
                             Row(
                               children: [
                                 const Icon(
@@ -138,9 +127,7 @@ class _CarOwnerInfoCardState extends State<CarOwnerInfoCard>
                                 ),
                               ],
                             ),
-                            const SizedBox(height: 4), // Small spacing
-
-                            // Label indicating contact information
+                            const SizedBox(height: 4),
                             const Text(
                               'Kontakt broj',
                               style: TextStyle(
@@ -155,9 +142,7 @@ class _CarOwnerInfoCardState extends State<CarOwnerInfoCard>
                     ),
                   ],
                 ),
-                const SizedBox(height: 16), // Spacing between sections
-
-                // City and Canton Section
+                const SizedBox(height: 16),
                 Row(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
@@ -171,7 +156,6 @@ class _CarOwnerInfoCardState extends State<CarOwnerInfoCard>
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          // Owner's city
                           Text(
                             'Grad: ${widget.automobileAd.user?.city?.title ?? ''}',
                             style: const TextStyle(
@@ -181,8 +165,6 @@ class _CarOwnerInfoCardState extends State<CarOwnerInfoCard>
                             ),
                           ),
                           const SizedBox(height: 4),
-
-                          // Owner's canton
                           Text(
                             'Kanton: ${widget.automobileAd.user?.city?.canton.title ?? ''}',
                             style: const TextStyle(

@@ -166,13 +166,9 @@ class _MyReservationsScreenState extends State<MyReservationsScreen> {
                           child: Text("Nema dostupnih rezervacija."),
                         );
                       } else if (index == reservations.length) {
-                        // Provera za kraj liste
                         return hasMoreData
-                            ? const Center(
-                                child:
-                                    CircularProgressIndicator()) // Još učitavanja
-                            : const SizedBox
-                                .shrink(); // Ne prikazuj ništa kad nema više stranica
+                            ? const Center(child: CircularProgressIndicator())
+                            : const SizedBox.shrink();
                       }
 
                       final reservation = reservations[index];

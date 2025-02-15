@@ -20,7 +20,6 @@ class RegisterScreen extends StatefulWidget {
 class _RegisterScreenState extends State<RegisterScreen> {
   final _formKey = GlobalKey<FormState>();
 
-  // Kontroleri za polja
   final TextEditingController _userNameController = TextEditingController();
   final TextEditingController _firstNameController = TextEditingController();
   final TextEditingController _lastNameController = TextEditingController();
@@ -69,7 +68,6 @@ class _RegisterScreenState extends State<RegisterScreen> {
     }
   }
 
-  // Validacije
   String? _validateEmail(String? value) {
     if (value == null || value.isEmpty) {
       return 'Email je obavezan.';
@@ -86,8 +84,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
       return 'Broj telefona je obavezan.';
     }
 
-    // Napravi pun broj uključujući prefiks
-    final fullNumber = '+387$value'; // ili '+387${value.trim()}'
+    final fullNumber = '+387$value';
 
     final phoneRegex = RegExp(r'^\+387\d{8,9}$');
     if (!phoneRegex.hasMatch(fullNumber)) {
@@ -106,7 +103,6 @@ class _RegisterScreenState extends State<RegisterScreen> {
     return null;
   }
 
-  // Odabir slike
   Future<void> _pickImage() async {
     final pickedFile =
         await ImagePicker().pickImage(source: ImageSource.gallery);
@@ -117,14 +113,12 @@ class _RegisterScreenState extends State<RegisterScreen> {
     }
   }
 
-  // Uklanjanje slike
   void _removePickedImage() {
     setState(() {
       _pickedImage = null;
     });
   }
 
-  // Odabir datuma
   Future<void> _pickDate() async {
     final now = DateTime.now();
     final initial = DateTime(now.year - 18);
@@ -141,7 +135,6 @@ class _RegisterScreenState extends State<RegisterScreen> {
     }
   }
 
-  // Registracija korisnika
   Future<void> _registerUser() async {
     if (!_formKey.currentState!.validate()) {
       return;
@@ -193,14 +186,13 @@ class _RegisterScreenState extends State<RegisterScreen> {
       final request = http.MultipartRequest('POST', url);
       request.headers['Content-Type'] = 'multipart/form-data';
 
-      // Polja
       request.fields['userName'] = _userNameController.text;
       request.fields['firstName'] = _firstNameController.text;
       request.fields['lastName'] = _lastNameController.text;
       request.fields['email'] = _emailController.text;
       final finalPhone = '+387${_phoneNumberController.text}';
       request.fields['phoneNumber'] = finalPhone;
-        request.fields['adress'] = _adressController.text;
+      request.fields['adress'] = _adressController.text;
       request.fields['gender'] = genderValue;
       request.fields['password'] = _passwordController.text;
       request.fields['passwordConfirmation'] = _passwordConfController.text;
@@ -208,14 +200,13 @@ class _RegisterScreenState extends State<RegisterScreen> {
       request.fields['dateOfBirth'] = _selectedDate!.toIso8601String();
       request.fields['cityId'] = _selectedCityId.toString();
 
-      // Ako ima upload slike
       if (_pickedImage != null) {
         final fileBytes = await _pickedImage!.readAsBytes();
         final fileName = _pickedImage!.path.split('/').last;
         final multiPart = http.MultipartFile.fromBytes(
           'profilePicture',
           fileBytes,
-          filename: fileName, // Koristi originalni naziv fajla
+          filename: fileName,
         );
         request.files.add(multiPart);
       }
@@ -233,10 +224,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
       } else {
         final responseBody = response.body;
 
-        // Definišite poruku greške
         String errorMessage = 'Došlo je do greške. Pokušajte ponovo.';
 
-        // Ako odgovor sadrži specifičan tekst, prilagodite poruku greške
         if (responseBody.contains(
             'A user with the same username or email already exists')) {
           errorMessage =
@@ -245,7 +234,6 @@ class _RegisterScreenState extends State<RegisterScreen> {
           errorMessage = 'Greška na serveru. Pokušajte ponovo kasnije.';
         }
 
-        // Prikazivanje poruke greške kao Toast
         Fluttertoast.showToast(
           msg: errorMessage,
           backgroundColor: Colors.red,
@@ -292,7 +280,6 @@ class _RegisterScreenState extends State<RegisterScreen> {
           emailController: _emailController,
           phoneNumberController: _phoneNumberController,
           adressController: _adressController,
-          //  genderController: _genderController,
           passwordController: _passwordController,
           passwordConfController: _passwordConfController,
           selectedDate: _selectedDate,
@@ -311,8 +298,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
           validateEmail: _validateEmail,
           validatePhone: _validatePhone,
           validatePassword: _validatePassword,
-          onRemoveImage:
-              _removePickedImage, // Implementiraj callback za uklanjanje slike
+          onRemoveImage: _removePickedImage,
           selectedGender: _selectedGender,
           onGenderChanged: (newGender) {
             setState(() {

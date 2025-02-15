@@ -10,10 +10,9 @@ class FavoritesService {
     final userId = await AuthService.getUserId();
 
     final response = await http.get(
-      Uri.parse(
-          '$baseUrl/Favorite/$userId?page=$page&pageSize=$pageSize'),
+      Uri.parse('$baseUrl/Favorite/$userId?page=$page&pageSize=$pageSize'),
     );
-    
+
     if (response.statusCode == 200) {
       final data = json.decode(response.body);
 
@@ -30,11 +29,9 @@ class FavoritesService {
     }
   }
 
-  // Add a favorite
   Future<void> addFavorite(int userId, int automobileId) async {
     final response = await http.post(
-      Uri.parse(
-          '$baseUrl/Favorite?userId=$userId&automobilId=$automobileId'),
+      Uri.parse('$baseUrl/Favorite?userId=$userId&automobilId=$automobileId'),
     );
 
     if (response.statusCode != 200) {
@@ -42,11 +39,9 @@ class FavoritesService {
     }
   }
 
-  // Remove a favorite
   Future<void> removeFavorite(int userId, int automobileId) async {
     final response = await http.delete(
-      Uri.parse(
-          '$baseUrl/Favorite?userId=$userId&automobilId=$automobileId'),
+      Uri.parse('$baseUrl/Favorite?userId=$userId&automobilId=$automobileId'),
     );
 
     if (response.statusCode != 200) {

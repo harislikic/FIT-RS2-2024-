@@ -13,7 +13,7 @@ class CarImageCarousel extends StatefulWidget {
 }
 
 class _CarImageCarouselState extends State<CarImageCarousel> {
-  int _currentIndex = 0; // Trenutni index slike u carouselu
+  int _currentIndex = 0;
 
   @override
   Widget build(BuildContext context) {
@@ -28,8 +28,7 @@ class _CarImageCarouselState extends State<CarImageCarousel> {
                   viewportFraction: 1,
                   onPageChanged: (index, reason) {
                     setState(() {
-                      _currentIndex =
-                          index; // Ažuriraj trenutni index kada se slika promeni
+                      _currentIndex = index;
                     });
                   },
                 ),
@@ -38,7 +37,6 @@ class _CarImageCarouselState extends State<CarImageCarousel> {
                   return Stack(
                     children: [
                       ClipRRect(
-                        //borderRadius: BorderRadius.circular(15), // Zaobljeni kutovi
                         child: Image.network(
                           '$baseUrl${image.imageUrl}',
                           fit: BoxFit.cover,
@@ -50,8 +48,7 @@ class _CarImageCarouselState extends State<CarImageCarousel> {
                         right: 10,
                         child: GestureDetector(
                           onTap: () {
-                            _showFullScreenImage(
-                                index); // Prikaži sliku u punoj veličini
+                            _showFullScreenImage(index);
                           },
                           child: Container(
                             decoration: BoxDecoration(
@@ -72,7 +69,7 @@ class _CarImageCarouselState extends State<CarImageCarousel> {
                 },
               ),
               Positioned(
-                bottom: 0, // Pozicija na dnu
+                bottom: 0,
                 left: 0,
                 right: 0,
                 child: Row(
@@ -114,8 +111,7 @@ class _CarImageCarouselState extends State<CarImageCarousel> {
   }
 
   void _showFullScreenImage(int initialIndex) {
-    int currentIndex =
-        initialIndex; // Local variable for tracking current index
+    int currentIndex = initialIndex;
 
     showDialog(
       context: context,
@@ -124,20 +120,20 @@ class _CarImageCarouselState extends State<CarImageCarousel> {
           builder: (context, setModalState) {
             return Dialog(
               backgroundColor: Colors.black,
-              insetPadding: const EdgeInsets.all(0), // Fullscreen
+              insetPadding: const EdgeInsets.all(0),
               child: Stack(
                 children: [
                   CarouselSlider.builder(
                     itemCount: widget.images.length,
                     options: CarouselOptions(
-                      height: double.infinity, // Fullscreen height
+                      height: double.infinity,
                       initialPage: initialIndex,
-                      viewportFraction: 1.0, // Show one image at a time
+                      viewportFraction: 1.0,
                       enableInfiniteScroll: true,
                       enlargeCenterPage: false,
                       onPageChanged: (index, reason) {
                         setModalState(() {
-                          currentIndex = index; // Update index in modal state
+                          currentIndex = index;
                         });
                       },
                     ),
@@ -153,12 +149,11 @@ class _CarImageCarouselState extends State<CarImageCarousel> {
                       );
                     },
                   ),
-                  // Close Button
                   Positioned(
                     top: 40,
                     right: 20,
                     child: GestureDetector(
-                      onTap: () => Navigator.of(context).pop(), // Close dialog
+                      onTap: () => Navigator.of(context).pop(),
                       child: const CircleAvatar(
                         backgroundColor: Colors.white,
                         child: Icon(
@@ -168,7 +163,6 @@ class _CarImageCarouselState extends State<CarImageCarousel> {
                       ),
                     ),
                   ),
-                  // Dots Indicator
                   Positioned(
                     bottom: 20,
                     left: 0,

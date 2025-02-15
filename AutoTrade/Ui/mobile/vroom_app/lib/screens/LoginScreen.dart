@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:fluttertoast/fluttertoast.dart'; // Dodaj Fluttertoast import
+
 import 'package:vroom_app/components/shared/ToastUtils.dart';
 import 'package:vroom_app/services/AuthService.dart';
 
@@ -14,7 +14,7 @@ class _LoginScreenState extends State<LoginScreen> {
   final TextEditingController usernameController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
 
-  bool _isPasswordVisible = false; // State za prikaz lozinke
+  bool _isPasswordVisible = false;
 
   void handleLogin() async {
     String username = usernameController.text.trim();
@@ -29,7 +29,7 @@ class _LoginScreenState extends State<LoginScreen> {
 
     final success = await AuthService.login(username, password);
     if (success) {
-      Navigator.pushReplacementNamed(context, '/'); // Navigacija na Home ekran
+      Navigator.pushReplacementNamed(context, '/');
     } else {
       ToastUtils.showErrorToast(
           message: "Korisničko ime ili email nisu ispravni.");
@@ -37,8 +37,7 @@ class _LoginScreenState extends State<LoginScreen> {
   }
 
   void handleRegister() {
-    Navigator.pushNamed(
-        context, '/register'); // Navigacija na ekran za registraciju
+    Navigator.pushNamed(context, '/register');
   }
 
   @override
@@ -59,9 +58,9 @@ class _LoginScreenState extends State<LoginScreen> {
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
-              Row(
+              const Row(
                 mainAxisAlignment: MainAxisAlignment.center,
-                children: const [
+                children: [
                   Icon(Icons.directions_car, size: 40, color: Colors.blue),
                   SizedBox(width: 8),
                   Text(
@@ -93,7 +92,7 @@ class _LoginScreenState extends State<LoginScreen> {
               TextField(
                 controller: passwordController,
                 style: const TextStyle(color: Colors.white),
-                obscureText: !_isPasswordVisible, // Kontrola prikaza lozinke
+                obscureText: !_isPasswordVisible,
                 decoration: InputDecoration(
                   labelText: "Lozinka",
                   labelStyle: const TextStyle(color: Colors.white70),
@@ -111,8 +110,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     ),
                     onPressed: () {
                       setState(() {
-                        _isPasswordVisible =
-                            !_isPasswordVisible; // Menjanje stanja
+                        _isPasswordVisible = !_isPasswordVisible;
                       });
                     },
                   ),
@@ -122,20 +120,19 @@ class _LoginScreenState extends State<LoginScreen> {
               ElevatedButton(
                 onPressed: handleLogin,
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.blueGrey[900], // Pozadina tamno plava
+                  backgroundColor: Colors.blueGrey[900],
                   padding:
                       const EdgeInsets.symmetric(horizontal: 32, vertical: 12),
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(12),
-                    side: const BorderSide(
-                        color: Colors.blue, width: 2), // Plavi border
+                    side: const BorderSide(color: Colors.blue, width: 2),
                   ),
                 ),
                 child: const Text(
                   "Prijavi se",
                   style: TextStyle(
                     fontSize: 18,
-                    color: Colors.white, // Beli tekst
+                    color: Colors.white,
                   ),
                 ),
               ),
@@ -146,19 +143,19 @@ class _LoginScreenState extends State<LoginScreen> {
                   padding:
                       const EdgeInsets.symmetric(horizontal: 32, vertical: 12),
                 ),
-                child: Text.rich(
+                child: const Text.rich(
                   TextSpan(
-                    text: "Nemate profil? ", // Tekst koji ostaje isti
-                    style: const TextStyle(
+                    text: "Nemate profil? ",
+                    style: TextStyle(
                       fontSize: 16,
-                      color: Colors.white70, // Bele nijanse za "Nemate profil?"
+                      color: Colors.white70,
                     ),
                     children: [
                       TextSpan(
-                        text: "Registrujte se", // Tekst koji postaje plav
-                        style: const TextStyle(
+                        text: "Registrujte se",
+                        style: TextStyle(
                           fontSize: 16,
-                          color: Colors.blue, // Plava boja za "Registrujte se"
+                          color: Colors.blue,
                           fontWeight: FontWeight.bold,
                         ),
                       ),

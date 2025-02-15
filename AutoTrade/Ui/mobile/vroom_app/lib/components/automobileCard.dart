@@ -18,7 +18,7 @@ class AutomobileCard extends StatelessWidget {
   Widget build(BuildContext context) {
     bool isHighlighted = automobileAd.highlightExpiryDate != null &&
         automobileAd.highlightExpiryDate!.isAfter(DateTime.now());
-    bool isDone = automobileAd.status == "Done"; // Check if the status is Done
+    bool isDone = automobileAd.status == "Done";
 
     return GestureDetector(
       onTap: () {
@@ -51,7 +51,6 @@ class AutomobileCard extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              // ----- Image Section -----
               if (automobileAd.images.isNotEmpty)
                 Stack(
                   clipBehavior: Clip.none,
@@ -68,7 +67,7 @@ class AutomobileCard extends StatelessWidget {
                         right: 2,
                         child: _buildHighlightBadge(),
                       ),
-                    if (isDone) // Show "Završen" badge for Done status
+                    if (isDone)
                       Positioned(
                         top: 4,
                         right: 2,
@@ -114,8 +113,6 @@ class AutomobileCard extends StatelessWidget {
                         size: 40, color: Colors.grey),
                   ),
                 ),
-
-              // ----- Rest of the Content -----
               if (isGridView)
                 Expanded(
                   child: _buildCardContent(context, isGridView),
@@ -172,7 +169,7 @@ class AutomobileCard extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 4.0),
       decoration: BoxDecoration(
-        color: Colors.red.withOpacity(0.7), // Semi-transparent red
+        color: Colors.red.withOpacity(0.7),
         borderRadius: BorderRadius.circular(8),
         border: Border.all(
           color: Colors.red,
@@ -186,15 +183,15 @@ class AutomobileCard extends StatelessWidget {
           ),
         ],
       ),
-      child: Row(
+      child: const Row(
         children: [
-          const Icon(
+          Icon(
             Icons.error_outline,
             size: 16,
             color: Colors.white,
           ),
-          const SizedBox(width: 4),
-          const Text(
+          SizedBox(width: 4),
+          Text(
             'Završen',
             style: TextStyle(
               fontSize: 12,
@@ -210,13 +207,11 @@ class AutomobileCard extends StatelessWidget {
   Widget _buildCardContent(BuildContext context, bool isGrid) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 5.0),
-      // Ključ: Column s spaceBetween, da cena ide dole pri Grid
       child: Column(
         mainAxisAlignment:
             isGrid ? MainAxisAlignment.spaceBetween : MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          // Naslov
           SizedBox(
             height: isGrid ? 40 : 60,
             child: Align(
@@ -233,8 +228,6 @@ class AutomobileCard extends StatelessWidget {
             ),
           ),
           const SizedBox(height: 2),
-
-          // Ikonice (gorivo, kilometraža, brand (samo u listu), godina)
           Container(
             decoration: BoxDecoration(
               color: Colors.white70,
@@ -282,7 +275,7 @@ class AutomobileCard extends StatelessWidget {
                 if (!isGrid)
                   Column(
                     children: [
-                      Icon(
+                      const Icon(
                         Icons.branding_watermark_outlined,
                         size: 24,
                         color: Colors.grey,
@@ -316,10 +309,7 @@ class AutomobileCard extends StatelessWidget {
             ),
           ),
           const SizedBox(height: 4),
-
-          // Cena pri dnu
           Text(
-            // Napravi NumberFormat i formatiraj cijenu
             '${NumberFormat('#,##0').format(automobileAd.price)} KM',
             style: TextStyle(
               fontSize: isGrid ? 14 : 18,

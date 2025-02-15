@@ -25,7 +25,7 @@ class _OwnerScreenState extends State<OwnerScreen>
   final PagingController<int, AutomobileAd> _pagingController =
       PagingController(firstPageKey: 0);
 
-  String _selectedTab = 'active'; // Default tab
+  String _selectedTab = 'active';
 
   @override
   void initState() {
@@ -81,21 +81,18 @@ class _OwnerScreenState extends State<OwnerScreen>
       ),
       body: Column(
         children: [
-          // User Information Section
           Container(
             padding: const EdgeInsets.all(16.0),
             color: Colors.blueGrey[50],
             child: Row(
               children: [
-                // Profile Image
                 CircleAvatar(
                   radius: 40,
                   backgroundImage: NetworkImage(
                     '$baseUrl${widget.owner.profilePicture}',
                   ),
                 ),
-                const SizedBox(width: 16), // Space between image and text
-                // User Details
+                const SizedBox(width: 16),
                 Expanded(
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -122,8 +119,7 @@ class _OwnerScreenState extends State<OwnerScreen>
               ],
             ),
           ),
-          const SizedBox(height: 16), // Space below profile section
-          // Additional User Information
+          const SizedBox(height: 16),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 16.0),
             child: Column(
@@ -154,8 +150,6 @@ class _OwnerScreenState extends State<OwnerScreen>
             ),
           ),
           const SizedBox(height: 8),
-
-          // Tab Section for Ads
           Container(
             color: Colors.grey.shade800,
             child: Row(
@@ -167,7 +161,6 @@ class _OwnerScreenState extends State<OwnerScreen>
               ],
             ),
           ),
-          // Tab Content
           Expanded(
             child: Padding(
               padding: const EdgeInsets.all(8.0),
@@ -183,7 +176,7 @@ class _OwnerScreenState extends State<OwnerScreen>
                           backgroundImage: NetworkImage(
                             ad.images.isNotEmpty
                                 ? '$baseUrl${ad.images.first.imageUrl}'
-                                : 'https://via.placeholder.com/150', // Fallback URL
+                                : 'https://via.placeholder.com/150',
                           ),
                           backgroundColor: Colors.grey.shade300,
                         ),
@@ -203,7 +196,6 @@ class _OwnerScreenState extends State<OwnerScreen>
                         ),
                         trailing: const Icon(Icons.arrow_forward),
                         onTap: () {
-                          // Navigate to ad details screen
                           Navigator.push(
                             context,
                             MaterialPageRoute(

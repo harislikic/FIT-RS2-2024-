@@ -19,7 +19,7 @@ class _SearchBarComponentState extends State<SearchBarComponent> {
   @override
   void initState() {
     super.initState();
-    // Kada se UI izgradi, postavi fokus
+
     WidgetsBinding.instance!.addPostFrameCallback((_) {
       _focusNode.requestFocus();
     });
@@ -29,29 +29,28 @@ class _SearchBarComponentState extends State<SearchBarComponent> {
   Widget build(BuildContext context) {
     return Row(
       children: [
-        // "Vroom" tekst kao logo
         const Padding(
           padding: EdgeInsets.only(right: 4.0),
           child: Text(
             "Vroom",
             style: TextStyle(
-              fontSize: 20, // Lagano veći font za bolji izgled
-              fontWeight: FontWeight.w700, // Polu-bold za isticanje
-              color: Colors.blueGrey, // BlueGray boja
-              fontFamily: 'Montserrat', // Stilizovan i moderan font
+              fontSize: 20,
+              fontWeight: FontWeight.w700,
+              color: Colors.blueGrey,
+              fontFamily: 'Montserrat',
             ),
           ),
         ),
-        // Search bar
+
         Expanded(
           child: AnimatedOpacity(
-            opacity: 1.0, // Pretraga je uvek vidljiva dok je SearchBar aktivan
-            duration: const Duration(milliseconds: 300), // Trajanje animacije
+            opacity: 1.0,
+            duration: const Duration(milliseconds: 300),
             child: Container(
-              padding: const EdgeInsets.symmetric(horizontal: 8.0), // Pomeranje
+              padding: const EdgeInsets.symmetric(horizontal: 8.0),
               child: TextField(
                 controller: _controller,
-                focusNode: _focusNode, // Fokus je povezan sa TextField
+                focusNode: _focusNode,
                 onChanged: (value) {
                   if (_debounce?.isActive ?? false) _debounce?.cancel();
                   _debounce = Timer(const Duration(milliseconds: 500), () {
@@ -60,31 +59,27 @@ class _SearchBarComponentState extends State<SearchBarComponent> {
                 },
                 decoration: InputDecoration(
                   labelText: 'Pretraži automobile',
-                  labelStyle: const TextStyle(
-                      fontSize: 16), // Povećanje veličine labela
+                  labelStyle: const TextStyle(fontSize: 16),
                   prefixIcon: const Icon(
                     Icons.search,
-                    // Plava ikona za pretragu
-                    size: 20, // Manja ikona za pretragu
+                    size: 20,
                   ),
                   suffixIcon: _controller.text.isNotEmpty
                       ? IconButton(
                           icon: const Icon(
                             Icons.clear_sharp,
-                            // Plava ikona za brisanje
-                            size: 20, // Manja ikona za brisanje
+                            size: 20,
                           ),
                           onPressed: () {
                             _controller.clear();
-                            widget.onSearch(''); // Čisti pretragu
+                            widget.onSearch('');
                           },
                         )
                       : null,
                   contentPadding: const EdgeInsets.symmetric(
-                      vertical: 8.0, horizontal: 12.0), // Manji razmak
+                      vertical: 8.0, horizontal: 12.0),
                   border: const OutlineInputBorder(
-                    borderSide:
-                        BorderSide(color: Colors.blue), // Plava boja za border
+                    borderSide: BorderSide(color: Colors.blue),
                   ),
                 ),
               ),

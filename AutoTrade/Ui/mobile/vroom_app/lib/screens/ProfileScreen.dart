@@ -76,7 +76,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
       );
     }
 
-    // Ekstrakcija polja
     final String ime = userProfile!["firstName"] ?? '';
     final String prezime = userProfile!["lastName"] ?? '';
     final String userName = userProfile!["userName"] ?? "N/A";
@@ -94,7 +93,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
       body: SingleChildScrollView(
         child: Column(
           children: [
-            // Header sa slikom, Edit i Logout dugmad
             Center(
               child: ProfileHeader(
                 profileImageUrl: userProfile!["profilePicture"] != null
@@ -119,14 +117,14 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   await AuthService.logout();
                   Navigator.pushReplacementNamed(context, '/login');
                 },
-                onReservationsForMe: () { 
+                onReservationsForMe: () {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
                         builder: (context) => const UserReservationsScreen()),
                   );
                 },
-                 onMyReservations: () { 
+                onMyReservations: () {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
@@ -135,8 +133,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 },
               ),
             ),
-
-            // Kartice sa profilnim podacima
             Padding(
               padding: const EdgeInsets.all(16),
               child: Column(

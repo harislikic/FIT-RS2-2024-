@@ -6,16 +6,16 @@ import 'package:vroom_app/services/config.dart';
 
 class ReservationCard extends StatelessWidget {
   final Reservation reservation;
-  final VoidCallback? onApprove; // Optional for delete-only scenarios
-  final VoidCallback? onDecline; // Optional for delete-only scenarios
-  final VoidCallback? onDelete; // New onDelete callback
+  final VoidCallback? onApprove;
+  final VoidCallback? onDecline;
+  final VoidCallback? onDelete;
 
   const ReservationCard({
     Key? key,
     required this.reservation,
-    this.onApprove, // Made optional
-    this.onDecline, // Made optional
-    required this.onDelete, // Required
+    this.onApprove,
+    this.onDecline,
+    required this.onDelete,
   }) : super(key: key);
 
   @override
@@ -26,14 +26,10 @@ class ReservationCard extends StatelessWidget {
       elevation: 3,
       child: Column(
         children: [
-          // Top section with car image and user profile
           Row(
             children: [
-              // Car image
-              // Car image with onTap
               GestureDetector(
                 onTap: () {
-                  // Navigate to ad details screen
                   Navigator.push(
                     context,
                     MaterialPageRoute(
@@ -56,9 +52,7 @@ class ReservationCard extends StatelessWidget {
                   ),
                 ),
               ),
-
               const SizedBox(width: 12),
-              // Reservation details
               Expanded(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -74,13 +68,12 @@ class ReservationCard extends StatelessWidget {
                       "${NumberFormat('#,##0').format(reservation.price ?? 0)} KM",
                       style: const TextStyle(
                         fontSize: 16,
-                        color: Colors.black, // Black text for the price
+                        color: Colors.black,
                       ),
                     ),
                     const SizedBox(height: 4),
                     Row(
                       children: [
-                        // User profile picture
                         CircleAvatar(
                           radius: 20,
                           backgroundImage: reservation.user?.profilePicture !=
@@ -93,7 +86,6 @@ class ReservationCard extends StatelessWidget {
                           backgroundColor: Colors.grey.shade200,
                         ),
                         const SizedBox(width: 8),
-                        // Username
                         Text(
                           reservation.user?.userName ?? "N/A",
                           style: const TextStyle(
@@ -116,50 +108,45 @@ class ReservationCard extends StatelessWidget {
               ),
             ],
           ),
-          // Bottom section with action buttons
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
-              // Prikazuje dugmad "Odobri" i "Odbi" samo za status "Pending"
               if (reservation.status == "Pending") ...[
                 ElevatedButton.icon(
                   onPressed: onApprove,
                   style: ElevatedButton.styleFrom(
                     side: const BorderSide(
-                      color: Colors.green, // Zeleni obrub
-                      width: 2, // Debljina obruba
+                      color: Colors.green,
+                      width: 2,
                     ),
-                    backgroundColor: Colors.white, // Providna pozadina
+                    backgroundColor: Colors.white,
                     padding:
                         const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
                   ),
-                  icon: const Icon(Icons.check, color: Colors.black), // Ikona
+                  icon: const Icon(Icons.check, color: Colors.black),
                   label: const Text(
                     "Odobri",
-                    style: TextStyle(color: Colors.black), // Crni tekst
+                    style: TextStyle(color: Colors.black),
                   ),
                 ),
                 ElevatedButton.icon(
                   onPressed: onDecline,
                   style: ElevatedButton.styleFrom(
                     side: const BorderSide(
-                      color: Colors.red, // Crveni obrub
-                      width: 2, // Debljina obruba
+                      color: Colors.red,
+                      width: 2,
                     ),
-                    backgroundColor: Colors.white, // Providna pozadina
+                    backgroundColor: Colors.white,
                     padding:
                         const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
                   ),
-                  icon: const Icon(Icons.cancel,
-                      color: Colors.red), // Trash can ikona
+                  icon: const Icon(Icons.cancel, color: Colors.red),
                   label: const Text(
                     "Odbi",
-                    style: TextStyle(color: Colors.black), // Crni tekst
+                    style: TextStyle(color: Colors.black),
                   ),
                 ),
               ],
-
-              // Prikazuje dugme "Obriši" za statuse "Approved" i "Declined"
               if (reservation.status == "Approved" ||
                   reservation.status == "Rejected")
                 ElevatedButton.icon(

@@ -33,7 +33,6 @@ class AnotherCarsFromUserCard extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            // Slika automobila sa brojem pregleda
             Stack(
               children: [
                 if (automobileAd.images.isNotEmpty)
@@ -52,7 +51,6 @@ class AnotherCarsFromUserCard extends StatelessWidget {
                           size: 40, color: Colors.grey),
                     ),
                   ),
-                // Broj pregleda (pozadina sa opacitetom)
                 Positioned(
                   bottom: 4,
                   right: 4,
@@ -61,7 +59,7 @@ class AnotherCarsFromUserCard extends StatelessWidget {
                         horizontal: 8.0, vertical: 4.0),
                     decoration: BoxDecoration(
                       color: Colors.black
-                          .withOpacity(0.4), // Pozadina sa opacitetom
+                          .withOpacity(0.4),
                       borderRadius: BorderRadius.circular(8),
                     ),
                     child: Row(
@@ -87,13 +85,11 @@ class AnotherCarsFromUserCard extends StatelessWidget {
               ],
             ),
 
-            // Naslov i dodatne informacije
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  // Naslov
                   Row(
                     children: [
                       const Icon(Icons.title, size: 18, color: Colors.blueGrey),
@@ -113,7 +109,6 @@ class AnotherCarsFromUserCard extends StatelessWidget {
                   ),
                   const SizedBox(height: 4),
 
-                  // Cena
                   Row(
                     children: [
                       const Icon(Icons.attach_money,
@@ -131,7 +126,6 @@ class AnotherCarsFromUserCard extends StatelessWidget {
                   ),
                   const SizedBox(height: 4),
 
-                  // Datum objave
                   Row(
                     children: [
                       const Icon(Icons.date_range,
@@ -150,13 +144,13 @@ class AnotherCarsFromUserCard extends StatelessWidget {
                     children: [
                       const Icon(Icons.speed,
                           size: 18,
-                          color: Colors.blueGrey), // Ikona za kilometražu
-                      const SizedBox(width: 4), // Razmak između ikone i teksta
+                          color: Colors.blueGrey),
+                      const SizedBox(width: 4),
                       Text(
                         '${NumberFormat('###,###', 'en_US').format(automobileAd.mileage).replaceAll(',', '.')} km',
                         style: const TextStyle(
                           fontSize: 12,
-                          color: Colors.black87, // Boja teksta
+                          color: Colors.black87,
                         ),
                       ),
                     ],

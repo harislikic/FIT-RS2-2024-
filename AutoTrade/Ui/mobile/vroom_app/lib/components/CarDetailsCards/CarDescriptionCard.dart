@@ -14,7 +14,7 @@ class CarDescriptionCard extends StatelessWidget {
   ),
   child: Container(
     decoration: BoxDecoration(
-      color: Colors.blue[50], // Svetloplava pozadina
+      color: Colors.blue[50],
       borderRadius: BorderRadius.circular(12),
     ),
     padding: const EdgeInsets.all(16.0),

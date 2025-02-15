@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:fluttertoast/fluttertoast.dart'; // Import the fluttertoast package
+import 'package:fluttertoast/fluttertoast.dart';
 
 class ConfirmationDialog extends StatelessWidget {
   final String title;
@@ -23,21 +23,17 @@ class ConfirmationDialog extends StatelessWidget {
       title: Text(title),
       content: Text(content),
       actions: [
-        // Cancel button
         TextButton(
           onPressed: () {
-            onCancel(); // Call the cancel action
-            Navigator.of(context).pop(); // Close the dialog
+            onCancel();
+            Navigator.of(context).pop();
           },
           child: const Text("Otkaži"),
         ),
-        // Confirm button
         TextButton(
           onPressed: () {
-            onConfirm(); // Call the confirm action
-            Navigator.of(context).pop(); // Close the dialog
-
-            // Show toast message after confirmation
+            onConfirm();
+            Navigator.of(context).pop();
 
             Fluttertoast.showToast(
               msg: successMessage,
@@ -52,20 +48,19 @@ class ConfirmationDialog extends StatelessWidget {
           child: const Text("Potvrdi"),
           style: ElevatedButton.styleFrom(
             foregroundColor: Colors.black,
-            backgroundColor:
-                Colors.white, // Boja teksta i ikone pri interakciji
+            backgroundColor: Colors.white,
             side: const BorderSide(
-              color: Colors.blueGrey, // Boja okvira
-              width: 2, // Debljina okvira
+              color: Colors.blueGrey,
+              width: 2,
             ),
             shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(8), // Zaobljeni uglovi
+              borderRadius: BorderRadius.circular(8),
             ),
             padding: const EdgeInsets.symmetric(
-              horizontal: 16.0, // Horizontalno unutrašnje rastojanje
-              vertical: 12.0, // Vertikalno unutrašnje rastojanje
+              horizontal: 16.0,
+              vertical: 12.0,
             ),
-            elevation: 2, // Lagano izdizanje dugmeta
+            elevation: 2,
           ),
         ),
       ],

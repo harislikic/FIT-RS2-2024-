@@ -17,7 +17,7 @@ class _RecommendedCarouselState extends State<RecommendedCarousel> {
   @override
   void initState() {
     super.initState();
-   _futureRecommendedAds = _fetchRecommendedAds();
+    _futureRecommendedAds = _fetchRecommendedAds();
   }
 
   Future<List<AutomobileAd>> _fetchRecommendedAds() async {
@@ -46,17 +46,17 @@ class _RecommendedCarouselState extends State<RecommendedCarousel> {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     Icon(
-                      Icons.recommend, // Ikona za "Preporučeni oglasi"
-                      color: Colors.grey, // Tamnija siva boja
-                      size: 24, // Veličina ikone
+                      Icons.recommend,
+                      color: Colors.grey,
+                      size: 24,
                     ),
-                    const SizedBox(width: 8), // Razmak između ikone i teksta
+                    SizedBox(width: 8),
                     Text(
                       "Preporučeni oglasi",
                       style: TextStyle(
-                        fontSize: 18, // Malo veći font
-                        fontWeight: FontWeight.w600, // Polu-deblji font
-                        color: Colors.black87, // Tamnija siva boja
+                        fontSize: 18,
+                        fontWeight: FontWeight.w600,
+                        color: Colors.black87,
                       ),
                     ),
                   ],

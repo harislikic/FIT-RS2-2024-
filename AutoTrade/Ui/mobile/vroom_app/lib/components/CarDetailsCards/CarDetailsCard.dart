@@ -29,7 +29,6 @@ class _CarDetailsCardState extends State<CarDetailsCard> {
     _checkIfFavorite();
   }
 
-  // ---------------- FAVORITES LOGIKA ----------------
   Future<void> _checkIfFavorite() async {
     try {
       final userId = await _getUserId();
@@ -56,7 +55,7 @@ class _CarDetailsCardState extends State<CarDetailsCard> {
       await _favoritesService.addFavorite(userId, widget.automobileAd.id);
       setState(() {
         _isFavorite = true;
-        _favoritesService.fetchFavorites(); // osvežavanje
+        _favoritesService.fetchFavorites();
       });
 
       ToastUtils.showToast(message: 'Dodano u favorite.');
@@ -91,8 +90,6 @@ class _CarDetailsCardState extends State<CarDetailsCard> {
     return prefs.getInt('userId');
   }
 
-  // ---------------- STRIPE LOGIKA ----------------
-
   void _showHighlightModal() {
     int highlightDays = 1;
     double amount = 3.0;
@@ -107,22 +104,19 @@ class _CarDetailsCardState extends State<CarDetailsCard> {
     showModalBottomSheet(
       context: context,
       isScrollControlled: true,
-      // Ovde dodajemo shape i backgroundColor
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(16),
         side: const BorderSide(
-          color: Colors.grey, // sivi border
+          color: Colors.grey,
           width: 2,
         ),
       ),
-      backgroundColor: Colors.white, // bela pozadina
+      backgroundColor: Colors.white,
       builder: (BuildContext context) {
         return StatefulBuilder(
           builder: (BuildContext context, StateSetter setModalState) {
             return SingleChildScrollView(
-              // Povećavamo visinu modala:
               child: Container(
-                // Minimalna visina (npr. polovinu ekrana)
                 constraints: BoxConstraints(
                   minHeight: MediaQuery.of(context).size.height * 0.5,
                 ),
@@ -141,12 +135,10 @@ class _CarDetailsCardState extends State<CarDetailsCard> {
                       style: TextStyle(
                         fontSize: 20,
                         fontWeight: FontWeight.bold,
-                        color: Colors.black, // crni tekst
+                        color: Colors.black,
                       ),
                     ),
                     const SizedBox(height: 20),
-
-                    // BROJ DANA
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
@@ -175,8 +167,6 @@ class _CarDetailsCardState extends State<CarDetailsCard> {
                       ],
                     ),
                     const SizedBox(height: 16),
-
-                    // UKUPNA CIJENA
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
@@ -191,12 +181,10 @@ class _CarDetailsCardState extends State<CarDetailsCard> {
                       ],
                     ),
                     const SizedBox(height: 24),
-
-                    // Dugme na sredini
                     Center(
                       child: ElevatedButton.icon(
                         onPressed: () async {
-                          Navigator.pop(context); // Zatvori modal
+                          Navigator.pop(context);
 
                           try {
                             await _stripeService.makePayment(
@@ -219,7 +207,7 @@ class _CarDetailsCardState extends State<CarDetailsCard> {
                           }
                         },
                         icon: const Icon(
-                          Icons.payment, // ikonica za plaćanje
+                          Icons.payment,
                           color: Colors.black,
                         ),
                         label: const Text(
@@ -227,7 +215,7 @@ class _CarDetailsCardState extends State<CarDetailsCard> {
                           style: TextStyle(color: Colors.black),
                         ),
                         style: ElevatedButton.styleFrom(
-                          backgroundColor: Colors.transparent, // transparent
+                          backgroundColor: Colors.transparent,
                           elevation: 0,
                           side: const BorderSide(color: Colors.grey, width: 1),
                           shape: RoundedRectangleBorder(
@@ -261,11 +249,9 @@ class _CarDetailsCardState extends State<CarDetailsCard> {
 
         return Stack(
           children: [
-            // Main content
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                // Title and Favorite Icon Row
                 Row(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -274,7 +260,6 @@ class _CarDetailsCardState extends State<CarDetailsCard> {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          // Glavni naslov
                           Text(
                             widget.automobileAd.title,
                             style: const TextStyle(
@@ -283,7 +268,6 @@ class _CarDetailsCardState extends State<CarDetailsCard> {
                             ),
                           ),
                           const SizedBox(height: 4),
-
                           if (widget.automobileAd.isHighlighted &&
                               userId == widget.automobileAd.user?.id)
                             Row(
@@ -312,12 +296,10 @@ class _CarDetailsCardState extends State<CarDetailsCard> {
                       ),
                     ),
                     const SizedBox(width: 8),
-
-                    // Ostatak tvog koda za "favorite" ikonu:
                     if (userId != null &&
                         widget.automobileAd.user != null &&
                         userId != widget.automobileAd.user?.id &&
-                        !isDone) // Disable favorites for "Done" ads
+                        !isDone)
                       GestureDetector(
                         onTap: () async {
                           if (_isFavorite) {
@@ -348,10 +330,7 @@ class _CarDetailsCardState extends State<CarDetailsCard> {
                       ),
                   ],
                 ),
-
                 const SizedBox(height: 4),
-
-                // Price and Highlight Button Row
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
@@ -376,9 +355,7 @@ class _CarDetailsCardState extends State<CarDetailsCard> {
                         widget.automobileAd.user != null &&
                         userId == widget.automobileAd.user?.id)
                       ElevatedButton.icon(
-                        onPressed: isDone
-                            ? null // Disable the button for "Done" ads
-                            : _showHighlightModal,
+                        onPressed: isDone ? null : _showHighlightModal,
                         icon: Icon(
                           isDone ? Icons.close : Icons.star_border,
                           size: 16,
@@ -416,8 +393,6 @@ class _CarDetailsCardState extends State<CarDetailsCard> {
                 const SizedBox(height: 16),
               ],
             ),
-
-            // Red Overlay for "Done" ads
             if (isDone)
               Positioned.fill(
                 child: Container(

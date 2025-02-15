@@ -11,16 +11,16 @@ class LoginButton extends StatelessWidget {
       onPressed: onPressed,
       style: ElevatedButton.styleFrom(
         padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
-        backgroundColor: Colors.blueGrey[900], // Tamno plava pozadina
+        backgroundColor: Colors.blueGrey[900],
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(12),
-          side: const BorderSide(color: Colors.blue, width: 2), // Plavi okvir
+          side: const BorderSide(color: Colors.blue, width: 2),
         ),
       ),
       child: const Text(
         "Prijavi se",
         style: TextStyle(
-          color: Colors.white, // Crna boja teksta
+          color: Colors.white,
           fontSize: 16,
         ),
       ),

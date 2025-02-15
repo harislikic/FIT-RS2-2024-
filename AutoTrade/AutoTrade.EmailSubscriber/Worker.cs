@@ -21,22 +21,35 @@ namespace AutoTrade.EmailSubscriber
         {
             _logger.LogInformation("EmailSubscriber Worker started. Subscribing to RabbitMQ...");
 
-            await _bus.PubSub.SubscribeAsync<ReservationApproved>("autoTradeEmailSub", async message =>
+            try
             {
-                _logger.LogInformation($"Received message: ReservationId={message.ReservationId}, Email={message.Email}");
+                if (_bus != null)
+                {
+                    await _bus.PubSub.SubscribeAsync<ReservationApproved>("autoTradeEmailSub", async message =>
+                    {
+                        _logger.LogInformation($"Received message: ReservationId={message.ReservationId}, Email={message.Email}");
 
-                using var scope = _scopeFactory.CreateScope();
+                        using var scope = _scopeFactory.CreateScope();
+                        var emailService = scope.ServiceProvider.GetRequiredService<ReservationApprovalEmail>();
 
-                var emailService = scope.ServiceProvider.GetRequiredService<ReservationApprovalEmail>();
-
-                await emailService.SendReservationApprovalEmail(message.ReservationId);
-
-            }, cancellationToken: stoppingToken);
+                        await emailService.SendReservationApprovalEmail(message.ReservationId);
+                    }, cancellationToken: stoppingToken);
+                }
+                else
+                {
+                    _logger.LogWarning("⚠️ RabbitMQ bus is null. Skipping subscription.");
+                }
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "❌ Failed to subscribe to RabbitMQ. The worker will continue running.");
+            }
 
             await Task.Delay(Timeout.Infinite, stoppingToken);
         }
+
     }
-    
+
 
     public class ReservationApproved
     {
