@@ -46,3 +46,25 @@ String formatPhoneNumber(String phoneNumber) {
   }
   return phoneNumber;
 }
+
+
+class TimeHelper {
+  static String timeAgo(DateTime date) {
+    final now = DateTime.now();
+    final difference = now.difference(date);
+
+    if (difference.inDays < 1) {
+      return "Danas";
+    } else if (difference.inDays == 1) {
+      return "Prije 1 dan";
+    } else if (difference.inDays < 30) {
+      return "Prije ${difference.inDays} dana";
+    } else if (difference.inDays < 365) {
+      int months = (difference.inDays / 30).floor();
+      return "Prije $months ${months == 1 ? 'mjesec' : 'mjeseca'}";
+    } else {
+      int years = (difference.inDays / 365).floor();
+      return "Prije $years ${years == 1 ? 'godinu' : 'godine'}";
+    }
+  }
+}

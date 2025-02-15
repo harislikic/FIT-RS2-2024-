@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:vroom_app/services/config.dart';
+import 'package:vroom_app/utils/helpers.dart';
 import '../models/automobileAd.dart';
 import '../screens/automobileDetailsScreen.dart';
 
@@ -227,11 +228,21 @@ class AutomobileCard extends StatelessWidget {
               ),
             ),
           ),
-          const SizedBox(height: 2),
+          Text(
+            TimeHelper.timeAgo(automobileAd.dateOfAdd),
+            style: TextStyle(
+              fontSize: isGrid ? 10 : 12,
+              color: Colors.black45,
+            ),
+          ),
           Container(
             decoration: BoxDecoration(
               color: Colors.white70,
               borderRadius: BorderRadius.circular(10),
+              border: Border.all(
+                color: Colors.grey.shade300,
+                width: 1,
+              ),
             ),
             padding:
                 const EdgeInsets.only(top: 6, left: 8, right: 8, bottom: 2),
@@ -243,7 +254,7 @@ class AutomobileCard extends StatelessWidget {
                     Icon(
                       Icons.local_gas_station,
                       size: isGrid ? 20 : 24,
-                      color: Colors.grey,
+                      color: Colors.redAccent,
                     ),
                     const SizedBox(height: 2),
                     Text(
@@ -278,7 +289,7 @@ class AutomobileCard extends StatelessWidget {
                       const Icon(
                         Icons.branding_watermark_outlined,
                         size: 24,
-                        color: Colors.grey,
+                        color: Colors.blueGrey,
                       ),
                       const SizedBox(height: 2),
                       Text(
@@ -293,7 +304,7 @@ class AutomobileCard extends StatelessWidget {
                     Icon(
                       Icons.calendar_today,
                       size: isGrid ? 20 : 24,
-                      color: Colors.grey,
+                      color: Colors.green.shade900,
                     ),
                     const SizedBox(height: 2),
                     Text(
