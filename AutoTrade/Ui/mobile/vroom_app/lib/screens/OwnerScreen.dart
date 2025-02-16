@@ -113,6 +113,15 @@ class _OwnerScreenState extends State<OwnerScreen>
                           color: Colors.blueGrey[600],
                         ),
                       ),
+                      const SizedBox(width: 8),
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          getAccountAgeBadge(widget.owner.createdAt != null
+                              ? widget.owner.createdAt!.toIso8601String()
+                              : ''),
+                        ],
+                      ),
                     ],
                   ),
                 ),

@@ -11,6 +11,7 @@ class User {
   final String? gender;
   final bool? isAdmin;
   final DateTime? dateOfBirth;
+  final DateTime? createdAt;
   final String? profilePicture;
   final int? cityId;
   final City? city;
@@ -26,6 +27,7 @@ class User {
     this.gender,
     required this.isAdmin,
     required this.dateOfBirth,
+    this.createdAt,
     this.profilePicture,
     this.cityId,
     this.city,
@@ -43,6 +45,7 @@ class User {
       gender: json['gender'] as String?,
       isAdmin: json['isAdmin'] ?? false,
       dateOfBirth: DateTime.parse(json['dateOfBirth']),
+      createdAt: DateTime.parse(json['createdAt']),
       profilePicture: json['profilePicture'] as String?,
       cityId: json['cityId'] as int?,
       city: json['city'] == null

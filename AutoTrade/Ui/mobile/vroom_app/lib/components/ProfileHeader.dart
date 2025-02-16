@@ -25,7 +25,7 @@ class ProfileHeader extends StatelessWidget {
           height: 300,
           decoration: BoxDecoration(
             gradient: LinearGradient(
-              colors: [Colors.teal.shade800, Colors.teal.shade300],
+              colors: [Colors.pink.shade300, Colors.cyan.shade300],
               begin: Alignment.topLeft,
               end: Alignment.bottomRight,
             ),
@@ -54,9 +54,74 @@ class ProfileHeader extends StatelessWidget {
                       : null,
                 ),
               ),
-              const SizedBox(height: 8),
-              ElevatedButton(
+              const SizedBox(height: 12),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 16),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Expanded(
+                      child: ElevatedButton.icon(
+                        onPressed: onReservationsForMe,
+                        icon: const Icon(
+                          Icons.event_available,
+                          color: Colors.white,
+                        ),
+                        label: const Text(
+                          "Za mene",
+                          style: TextStyle(color: Colors.white),
+                        ),
+                        style: ElevatedButton.styleFrom(
+                          side: BorderSide(
+                            color: Colors.teal.shade200,
+                            width: 2,
+                          ),
+                          backgroundColor: Colors.transparent,
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 10, vertical: 12),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(12),
+                          ),
+                        ),
+                      ),
+                    ),
+                    const SizedBox(width: 10),
+                    Expanded(
+                      child: ElevatedButton.icon(
+                        onPressed: onMyReservations,
+                        icon: const Icon(
+                          Icons.event_note,
+                          color: Colors.white,
+                        ),
+                        label: const Text(
+                          "Moje",
+                          style: TextStyle(color: Colors.white),
+                        ),
+                        style: ElevatedButton.styleFrom(
+                          side: BorderSide(
+                            color: Colors.teal.shade200,
+                            width: 2,
+                          ),
+                          backgroundColor: Colors.transparent,
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 10, vertical: 12),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(12),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              const SizedBox(height: 10),
+              ElevatedButton.icon(
                 onPressed: onEdit,
+                icon: const Icon(Icons.edit, color: Colors.white),
+                label: const Text(
+                  "Uredi profil",
+                  style: TextStyle(color: Colors.white),
+                ),
                 style: ElevatedButton.styleFrom(
                   side: BorderSide(
                     color: Colors.teal.shade200,
@@ -70,63 +135,17 @@ class ProfileHeader extends StatelessWidget {
                   ),
                   elevation: 0,
                 ),
-                child: const Text(
-                  "Uredi profil",
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 14,
-                  ),
-                ),
-              ),
-              const SizedBox(height: 8),
-              ElevatedButton.icon(
-                onPressed: onReservationsForMe,
-                icon: const Icon(
-                  Icons.event_available,
-                  color: Colors.white,
-                ),
-                label: const Text(
-                  "Rezervacije za mene",
-                  style: TextStyle(color: Colors.white),
-                ),
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.teal.shade800,
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(12),
-                  ),
-                ),
-              ),
-              const SizedBox(height: 8),
-              ElevatedButton.icon(
-                onPressed: onMyReservations,
-                icon: const Icon(
-                  Icons.event_note,
-                  color: Colors.white,
-                ),
-                label: const Text(
-                  "Moje rezervacije",
-                  style: TextStyle(color: Colors.white),
-                ),
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.teal.shade700,
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(12),
-                  ),
-                ),
               ),
               const SizedBox(height: 8),
             ],
           ),
         ),
+
+        // Logout dugme u gornjem desnom uglu
         Positioned(
           top: 16,
           right: 16,
           child: Row(
-            mainAxisAlignment: MainAxisAlignment.end,
             children: [
               IconButton(
                 icon: const Icon(

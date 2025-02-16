@@ -83,6 +83,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
     final String phone = userProfile!["phoneNumber"] ?? "N/A";
     final String address = userProfile!["adress"] ?? "N/A";
     final String dob = formatDate(userProfile!["dateOfBirth"]);
+    final String createdAt = userProfile!["createdAt"] ?? '';
     final String city = userProfile?["city"]?["title"] ?? "Nepoznat grad";
 
     return Scaffold(
@@ -133,6 +134,14 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 },
               ),
             ),
+            const SizedBox(height: 8),
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                getAccountAgeBadge(createdAt),
+              ],
+            ),
+            const SizedBox(height: 8),
             Padding(
               padding: const EdgeInsets.all(16),
               child: Column(

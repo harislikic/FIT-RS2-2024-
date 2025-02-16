@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
 String formatDate(String? date) {
@@ -47,7 +48,6 @@ String formatPhoneNumber(String phoneNumber) {
   return phoneNumber;
 }
 
-
 class TimeHelper {
   static String timeAgo(DateTime date) {
     final now = DateTime.now();
@@ -67,4 +67,59 @@ class TimeHelper {
       return "Prije $years ${years == 1 ? 'godinu' : 'godine'}";
     }
   }
+}
+
+Widget getAccountAgeBadge(String createdAt) {
+  if (createdAt.isEmpty) return const SizedBox();
+
+  DateTime createdDate = DateTime.parse(createdAt);
+  int yearsActive = DateTime.now().year - createdDate.year;
+
+  if (yearsActive < 1) return const SizedBox();
+
+  IconData icon;
+  Color color;
+  String label;
+
+  if (yearsActive >= 10) {
+    icon = Icons.verified;
+    color = Colors.blueAccent;
+    label = "10+ godina";
+  } else if (yearsActive >= 7) {
+    icon = Icons.star;
+    color = Colors.purple;
+    label = "7+ godina";
+  } else if (yearsActive >= 5) {
+    icon = Icons.workspace_premium;
+    color = Colors.orange;
+    label = "5+ godina";
+  } else if (yearsActive >= 3) {
+    icon = Icons.military_tech;
+    color = Colors.green;
+    label = "3+ godine";
+  } else {
+    icon = Icons.access_time;
+    color = Colors.grey;
+    label = "1+ godina";
+  }
+
+  return Container(
+    padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+    decoration: BoxDecoration(
+      color: color.withOpacity(0.2),
+      borderRadius: BorderRadius.circular(12),
+    ),
+    child: Row(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        Icon(icon, size: 16, color: color),
+        const SizedBox(width: 4),
+        Text(
+          label,
+          style: TextStyle(
+              color: color, fontSize: 12, fontWeight: FontWeight.bold),
+        ),
+      ],
+    ),
+  );
 }
