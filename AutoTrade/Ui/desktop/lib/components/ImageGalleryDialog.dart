@@ -58,7 +58,7 @@ class _ImageGalleryDialogState extends State<ImageGalleryDialog> {
                             height: 500,
                             errorBuilder: (context, error, stackTrace) {
                               return Image.asset(
-                                'assets/fallback.jpg',
+                                'assets/noCarfallback.jpg',
                                 fit: BoxFit.contain,
                                 width: double.infinity,
                                 height: 500,
