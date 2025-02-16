@@ -22,6 +22,7 @@ namespace AutoTrade.Services.Database
                         Gender = "M",
                         IsAdmin = true,
                         DateOfBirth = new DateTime(1990, 5, 15),
+                        CreatedAt = new DateTime(2023, 5, 15),
                         ProfilePicture = "/uploads/profilePictures/harisSlika.jpg",
                         CityId = 83
                     },
@@ -37,6 +38,7 @@ namespace AutoTrade.Services.Database
                         Gender = "M",
                         IsAdmin = true,
                         DateOfBirth = new DateTime(1985, 8, 25),
+                        CreatedAt = new DateTime(2022, 8, 10),
                         ProfilePicture = "/uploads/profilePictures/samirSlika.jpg",
                         CityId = 83
                     },
@@ -52,6 +54,7 @@ namespace AutoTrade.Services.Database
                         Gender = "Z",
                         IsAdmin = false,
                         DateOfBirth = new DateTime(1995, 3, 10),
+                        CreatedAt = new DateTime(2021, 12, 25),
                         ProfilePicture = "/uploads/profilePictures/userSlika.jpg",
                         CityId = 83
                     },
@@ -67,6 +70,7 @@ namespace AutoTrade.Services.Database
                         Gender = "Z",
                         IsAdmin = false,
                         DateOfBirth = new DateTime(1992, 11, 20),
+                        CreatedAt = new DateTime(2020, 3, 5),
                         ProfilePicture = "/uploads/profilePictures/user2Slika.jpg",
                         CityId = 31
                     },
@@ -82,6 +86,7 @@ namespace AutoTrade.Services.Database
                         Gender = "F",
                         IsAdmin = false,
                         DateOfBirth = new DateTime(1998, 7, 5),
+                        CreatedAt = new DateTime(2019, 6, 30),
                         ProfilePicture = "/uploads/profilePictures/user3Slika.jpg",
                         CityId = 50
                     },
@@ -97,6 +102,7 @@ namespace AutoTrade.Services.Database
                         Gender = "M",
                         IsAdmin = false,
                         DateOfBirth = new DateTime(1995, 12, 25),
+                        CreatedAt = new DateTime(2018, 11, 20),
                         ProfilePicture = "/uploads/profilePictures/user4Slika.jpg",
                         CityId = 60
                     },
@@ -112,6 +118,7 @@ namespace AutoTrade.Services.Database
                         Gender = "M",
                         IsAdmin = false,
                         DateOfBirth = new DateTime(1974, 1, 30),
+                        CreatedAt = new DateTime(2017, 4, 18),
                         ProfilePicture = "/uploads/profilePictures/userSlika5.jpg",
                         CityId = 81
                     },
@@ -127,6 +134,7 @@ namespace AutoTrade.Services.Database
                         Gender = "M",
                         IsAdmin = false,
                         DateOfBirth = new DateTime(1935, 11, 8),
+                        CreatedAt = new DateTime(2016, 9, 9),
                         ProfilePicture = "/uploads/profilePictures/userSlika6.jpg",
                         CityId = 77
                     },
@@ -142,6 +150,7 @@ namespace AutoTrade.Services.Database
                         Gender = "M",
                         IsAdmin = false,
                         DateOfBirth = new DateTime(1975, 3, 15),
+                        CreatedAt = new DateTime(2024, 1, 7),
                         ProfilePicture = "/uploads/profilePictures/userSlika7.jpeg",
                         CityId = 31
                     },
@@ -157,6 +166,7 @@ namespace AutoTrade.Services.Database
                         Gender = "M",
                         IsAdmin = false,
                         DateOfBirth = new DateTime(1980, 6, 20),
+                        CreatedAt = new DateTime(2023, 11, 14),
                         ProfilePicture = "/uploads/profilePictures/userSlika8.jpg",
                         CityId = 31
                     },
@@ -172,6 +182,7 @@ namespace AutoTrade.Services.Database
                         Gender = "M",
                         IsAdmin = false,
                         DateOfBirth = new DateTime(2010, 6, 20),
+                        CreatedAt = new DateTime(2022, 7, 23),
                         ProfilePicture = "/uploads/profilePictures/userSlika8.jpg",
                         CityId = 33
                     },
@@ -187,7 +198,8 @@ namespace AutoTrade.Services.Database
                         Gender = "M",
                         IsAdmin = false,
                         DateOfBirth = new DateTime(2002, 2, 20),
-                        ProfilePicture = "/uploads/profilePictures/userSlika7.jpg",
+                        CreatedAt = new DateTime(2021, 5, 1),
+                        ProfilePicture = "/uploads/profilePictures/userSlika8.jpg",
                         CityId = 83
                     },
                     new User
@@ -202,7 +214,8 @@ namespace AutoTrade.Services.Database
                         Gender = "M",
                         IsAdmin = false,
                         DateOfBirth = new DateTime(1998, 5, 10),
-                        ProfilePicture = "/uploads/profilePictures/userSlika7.jpg",
+                        CreatedAt = new DateTime(2020, 10, 12),
+                        ProfilePicture = "/uploads/profilePictures/userSlika7.jpeg",
                         CityId = 83
                     },
                     new User
@@ -217,7 +230,8 @@ namespace AutoTrade.Services.Database
                         Gender = "F",
                         IsAdmin = false,
                         DateOfBirth = new DateTime(2000, 8, 22),
-                        ProfilePicture = "/uploads/profilePictures/userSlika7.jpg",
+                        CreatedAt = new DateTime(2019, 2, 28),
+                        ProfilePicture = "/uploads/profilePictures/userSlika7.jpeg",
                         CityId = 52
                     },
                     new User
@@ -232,7 +246,8 @@ namespace AutoTrade.Services.Database
                         Gender = "F",
                         IsAdmin = false,
                         DateOfBirth = new DateTime(1995, 3, 15),
-                        ProfilePicture = "/uploads/profilePictures/userSlika7.jpg",
+                        CreatedAt = new DateTime(2018, 8, 3),
+                        ProfilePicture = "/uploads/profilePictures/userSlika.jpg",
                         CityId = 33
                     },
                     new User
@@ -247,7 +262,8 @@ namespace AutoTrade.Services.Database
                         Gender = "M",
                         IsAdmin = false,
                         DateOfBirth = new DateTime(1997, 12, 5),
-                        ProfilePicture = "/uploads/profilePictures/userSlika7.jpg",
+                        CreatedAt = new DateTime(2017, 3, 15),
+                        ProfilePicture = "/uploads/profilePictures/user2Slika.jpg",
                         CityId = 83
                     },
                     new User
@@ -262,7 +278,8 @@ namespace AutoTrade.Services.Database
                         Gender = "M",
                         IsAdmin = false,
                         DateOfBirth = new DateTime(1999, 7, 18),
-                        ProfilePicture = "/uploads/profilePictures/userSlika7.jpg",
+                        CreatedAt = new DateTime(2016, 6, 7),
+                        ProfilePicture = "/uploads/profilePictures/user3Slika.jpg",
                         CityId = 31
                     },
                     new User
@@ -277,7 +294,8 @@ namespace AutoTrade.Services.Database
                         Gender = "F",
                         IsAdmin = false,
                         DateOfBirth = new DateTime(1996, 9, 25),
-                        ProfilePicture = "/uploads/profilePictures/userSlika7.jpg",
+                        CreatedAt = new DateTime(2015, 12, 19),
+                        ProfilePicture = "/uploads/profilePictures/userSlika8.jpg",
                         CityId = 61
                     },
                     new User
@@ -292,7 +310,8 @@ namespace AutoTrade.Services.Database
                         Gender = "M",
                         IsAdmin = false,
                         DateOfBirth = new DateTime(1994, 6, 11),
-                        ProfilePicture = "/uploads/profilePictures/userSlika7.jpg",
+                        CreatedAt = new DateTime(2024, 2, 4),
+                        ProfilePicture = "/uploads/profilePictures/user2Slika.jpg",
                         CityId = 83
                     },
                     new User
@@ -307,7 +326,8 @@ namespace AutoTrade.Services.Database
                         Gender = "F",
                         IsAdmin = false,
                         DateOfBirth = new DateTime(2001, 1, 30),
-                        ProfilePicture = "/uploads/profilePictures/userSlika7.jpg",
+                        CreatedAt = new DateTime(2023, 9, 30),
+                        ProfilePicture = "/uploads/profilePictures/user4Slika.jpg",
                         CityId = 31
                     },
                     new User
@@ -322,7 +342,8 @@ namespace AutoTrade.Services.Database
                         Gender = "M",
                         IsAdmin = false,
                         DateOfBirth = new DateTime(1993, 10, 14),
-                        ProfilePicture = "/uploads/profilePictures/userSlika7.jpg",
+                        CreatedAt = new DateTime(2022, 6, 11),
+                        ProfilePicture = "/uploads/profilePictures/user4Slika.jpg",
                         CityId = 61
                     },
                     new User
@@ -337,7 +358,8 @@ namespace AutoTrade.Services.Database
                         Gender = "F",
                         IsAdmin = false,
                         DateOfBirth = new DateTime(1998, 4, 9),
-                        ProfilePicture = "/uploads/profilePictures/userSlika7.jpg",
+                        CreatedAt = new DateTime(2021, 1, 27),
+                        ProfilePicture = "/uploads/profilePictures/user4Slika.jpg",
                         CityId = 83
                     },
                     new User
@@ -352,7 +374,8 @@ namespace AutoTrade.Services.Database
                         Gender = "M",
                         IsAdmin = false,
                         DateOfBirth = new DateTime(2000, 11, 20),
-                        ProfilePicture = "/uploads/profilePictures/userSlika7.jpg",
+                        CreatedAt = new DateTime(2020, 4, 9),
+                         ProfilePicture = "/uploads/profilePictures/user4Slika.jpg",
                         CityId = 31
                     },
                     new User
@@ -367,7 +390,8 @@ namespace AutoTrade.Services.Database
                         Gender = "F",
                         IsAdmin = false,
                         DateOfBirth = new DateTime(1997, 2, 7),
-                        ProfilePicture = "/uploads/profilePictures/userSlika7.jpg",
+                        CreatedAt = new DateTime(2019, 7, 22),
+                       ProfilePicture = "/uploads/profilePictures/user4Slika.jpg",
                         CityId = 61
                     },
                     new User
@@ -382,7 +406,8 @@ namespace AutoTrade.Services.Database
                         Gender = "M",
                         IsAdmin = false,
                         DateOfBirth = new DateTime(1995, 6, 23),
-                        ProfilePicture = "/uploads/profilePictures/userSlika7.jpg",
+                        CreatedAt = new DateTime(2018, 10, 5),
+                        ProfilePicture = "/uploads/profilePictures/user4Slika.jpg",
                         CityId = 83
                     },
                     new User
@@ -397,7 +422,8 @@ namespace AutoTrade.Services.Database
                         Gender = "F",
                         IsAdmin = false,
                         DateOfBirth = new DateTime(2003, 12, 17),
-                        ProfilePicture = "/uploads/profilePictures/userSlika7.jpg",
+                        CreatedAt = new DateTime(2017, 5, 17),
+                        ProfilePicture = "/uploads/profilePictures/user4Slika.jpg",
                         CityId = 61
                     },
                     new User
@@ -412,7 +438,8 @@ namespace AutoTrade.Services.Database
                         Gender = "M",
                         IsAdmin = false,
                         DateOfBirth = new DateTime(1996, 8, 29),
-                        ProfilePicture = "/uploads/profilePictures/userSlika7.jpg",
+                        CreatedAt = new DateTime(2016, 11, 13),
+                        ProfilePicture = "/uploads/profilePictures/user4Slika.jpg",
                         CityId = 31
                     }
                 };

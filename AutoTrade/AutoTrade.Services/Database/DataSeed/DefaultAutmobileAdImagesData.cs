@@ -357,172 +357,173 @@ namespace AutoTrade.Services.Database
                 },
                     new AutomobileAdImage
                 {
-                    Id = 54,
+                    Id = 55,
                     AutomobileAdId = 19,
                     ImageUrl = "/uploads/automobiles/PassatCC/vanjska2.jpg"
                 },
                 //20
                     new AutomobileAdImage
                 {
-                    Id = 55,
+                    Id = 56,
                     AutomobileAdId = 20,
                     ImageUrl = "/uploads/automobiles/Peugeot407/unutrasnja1.jpg"
                 },
                         new AutomobileAdImage
                 {
-                    Id = 56,
+                    Id = 57,
                     AutomobileAdId = 20,
                     ImageUrl = "/uploads/automobiles/Peugeot407/vanjska1.jpg"
                 },
                     new AutomobileAdImage
                 {
-                    Id = 57,
+                    Id = 58,
                     AutomobileAdId = 20,
                     ImageUrl = "/uploads/automobiles/Peugeot407/vanjska2.jpg"
                 },
                   //21
                     new AutomobileAdImage
                 {
-                    Id = 58,
+                    Id = 59,
                     AutomobileAdId = 21,
                     ImageUrl = "/uploads/automobiles/Polo2006/unutrasnja1.jpg"
                 },
                     new AutomobileAdImage
                 {
-                    Id = 59,
+                    Id = 60,
                     AutomobileAdId = 21,
                     ImageUrl = "/uploads/automobiles/Polo2006/vanjska1.jpg"
                 },
                          new AutomobileAdImage
                 {
-                    Id = 60,
+                    Id = 61,
                     AutomobileAdId = 21,
                     ImageUrl = "/uploads/automobiles/Polo2006/vanjska2.jpg"
                 },
                 //22
                     new AutomobileAdImage
                 {
-                    Id = 61,
+                    Id = 62,
                     AutomobileAdId = 22,
                     ImageUrl = "/uploads/automobiles/Quad/vanjska1.jpg"
                 },
                          new AutomobileAdImage
                 {
-                    Id = 62,
+                    Id = 63,
                     AutomobileAdId = 22,
                     ImageUrl = "/uploads/automobiles/Quad/vanjska2.jpg"
                 },
                 //23
                     new AutomobileAdImage
                 {
-                    Id = 63,
+                    Id = 64,
                     AutomobileAdId = 23,
                     ImageUrl = "/uploads/automobiles/RenaultMegan/unutrasnja1.jpg"
                 },
                     new AutomobileAdImage
                 {
-                    Id = 64,
+                    Id = 65,
                     AutomobileAdId = 23,
                     ImageUrl = "/uploads/automobiles/RenaultMegan/unutrasnja2.jpg"
                 },
                         new AutomobileAdImage
                 {
-                    Id = 65,
+                    Id = 66,
                     AutomobileAdId = 23,
                     ImageUrl = "/uploads/automobiles/RenaultMegan/vanjska1.jpg"
                 },
                   //24
                  new AutomobileAdImage
                 {
-                    Id = 66,
+                    Id = 67,
                     AutomobileAdId = 24,
                     ImageUrl = "/uploads/automobiles/RenaultScenic/unutrasnja1.jpg"
                 },
                  new AutomobileAdImage
                 {
-                    Id = 67,
+                    Id = 68,
                     AutomobileAdId = 24,
                     ImageUrl = "/uploads/automobiles/RenaultScenic/vanjska1.jpg"
                 },
                      new AutomobileAdImage
                 {
-                    Id = 68,
+                    Id = 69,
                     AutomobileAdId = 24,
                     ImageUrl = "/uploads/automobiles/RenaultScenic/vanjska2.jpg"
                 },
                 //25
                     new AutomobileAdImage
                 {
-                    Id = 69,
+                    Id = 70,
                     AutomobileAdId = 25,
                     ImageUrl = "/uploads/automobiles/SkodafabiaHTP/vanjska1.jpg"
                 },
                          new AutomobileAdImage
                 {
-                    Id = 70,
+                    Id = 71,
                     AutomobileAdId = 25,
                     ImageUrl = "/uploads/automobiles/SkodafabiaHTP/vanjska2.jpg"
                 },
                 //26
                 new AutomobileAdImage
                 {
-                    Id = 71,
+                    Id = 72,
                     AutomobileAdId = 26,
                     ImageUrl = "/uploads/automobiles/Skodaoctavia/unutrasnja1.jpg"
                 },
                     new AutomobileAdImage
                 {
-                    Id = 72,
+                    Id = 73,
                     AutomobileAdId = 26,
                     ImageUrl = "/uploads/automobiles/Skodaoctavia/vanjska1.jpg"
                 },
                 new AutomobileAdImage
                 {
-                    Id = 73,
+                    Id = 74,
                     AutomobileAdId = 26,
                     ImageUrl = "/uploads/automobiles/Skodaoctavia/vanjska2.jpg"
                 },
                 //27
                 new AutomobileAdImage
                 {
-                    Id = 74,
+                    Id = 75,
                     AutomobileAdId = 27,
                     ImageUrl = "/uploads/automobiles/WVBora/unutrasnja1.jpg"
                 },
                        new AutomobileAdImage
                 {
-                    Id = 75,
+                    Id = 76,
                     AutomobileAdId = 27,
                     ImageUrl = "/uploads/automobiles/WVBora/vanjska1.jpg"
                 },
                         new AutomobileAdImage
                 {
-                    Id = 76,
+                    Id = 77,
                     AutomobileAdId = 27,
                     ImageUrl = "/uploads/automobiles/WVBora/vanjska2.jpg"
                 },
                  //28
                     new AutomobileAdImage
                 {
-                    Id = 77,
+                    Id = 78,
                     AutomobileAdId = 28,
                     ImageUrl = "/uploads/automobiles/WVTiguan/unutrasnja1.jpg"
                 },
                      new AutomobileAdImage
                 {
-                    Id = 78,
+                    Id = 79,
                     AutomobileAdId = 28,
                     ImageUrl = "/uploads/automobiles/WVTiguan/vanjska1.jpg"
                 },
                     new AutomobileAdImage
                 {
-                    Id = 79,
+                    Id = 80,
                     AutomobileAdId = 28,
                     ImageUrl = "/uploads/automobiles/WVTiguan/vanjska2.jpg"
                 },
+                //29
                     new AutomobileAdImage
                 {
-                    Id = 80,
+                    Id = 81,
                     AutomobileAdId = 29,
                     ImageUrl = "/uploads/automobiles/WVTiguan/vanjska2.jpg"
                 },

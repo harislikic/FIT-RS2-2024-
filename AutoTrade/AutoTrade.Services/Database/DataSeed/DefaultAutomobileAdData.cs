@@ -193,7 +193,8 @@ namespace Database
                     HorsePower = 190,
                     Color = "Smedja",
                     VehicleConditionId = 2,
-                    IsHighlighted = false,
+                    IsHighlighted = true,
+                    HighlightExpiryDate = DateTime.Now.AddDays(10)
                 },
                 //7
                 new AutomobileAd
@@ -411,7 +412,8 @@ namespace Database
                     HorsePower = 100,
                     Color = "Crvena",
                     VehicleConditionId = 2,
-                    IsHighlighted = false
+                    IsHighlighted = true,
+                    HighlightExpiryDate = DateTime.Now.AddDays(10)
                 },
                 //14
                     new AutomobileAd
@@ -535,7 +537,8 @@ namespace Database
                     HorsePower = 150,
                     Color = "Plava",
                     VehicleConditionId = 2,
-                    IsHighlighted = false
+                    IsHighlighted = true,
+                    HighlightExpiryDate = DateTime.Now.AddDays(10)
                 },
                     //18
                     new AutomobileAd

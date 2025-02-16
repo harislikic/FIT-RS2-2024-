@@ -484,17 +484,17 @@ namespace AutoTrade.Services
             entity.RegistrationExpirationDate = automobile.RegistrationExpirationDate;
             entity.Last_Small_Service = automobile.Last_Small_Service;
             entity.Last_Big_Service = automobile.Last_Big_Service;
-            entity.CarBrandId = automobile.CarBrandId;
-            entity.CarCategoryId = automobile.CarCategoryId;
-            entity.CarModelId = automobile.CarModelId;
-            entity.FuelTypeId = automobile.FuelTypeId;
-            entity.TransmissionTypeId = automobile.TransmissionTypeId;
-            entity.EnginePower = automobile.EnginePower;
-            entity.NumberOfDoors = automobile.NumberOfDoors;
-            entity.CubicCapacity = automobile.CubicCapacity;
-            entity.HorsePower = automobile.HorsePower;
-            entity.Color = automobile.Color;
-            entity.VehicleConditionId = automobile.VehicleCondtionId;
+            entity.CarBrandId = automobile.CarBrandId.GetValueOrDefault();
+            entity.CarCategoryId = automobile.CarCategoryId.GetValueOrDefault();
+            entity.CarModelId = automobile.CarModelId.GetValueOrDefault();
+            entity.FuelTypeId = automobile.FuelTypeId.GetValueOrDefault();
+            entity.TransmissionTypeId = automobile.TransmissionTypeId.GetValueOrDefault();
+            entity.EnginePower = automobile.EnginePower.GetValueOrDefault();
+            entity.NumberOfDoors = automobile.NumberOfDoors.GetValueOrDefault();
+            entity.CubicCapacity = automobile.CubicCapacity.GetValueOrDefault();
+            entity.HorsePower = automobile.HorsePower.GetValueOrDefault();
+            entity.Color = automobile.Color ?? "-";
+            entity.VehicleConditionId = automobile.VehicleCondtionId.GetValueOrDefault();
 
 
             if (automobile.Images != null && automobile.Images.Any())

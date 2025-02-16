@@ -81,6 +81,8 @@ namespace AutoTrade.Services
             entity.PasswordSalt = PasswordHelper.GenerateSalt();
             entity.PasswordHash = PasswordHelper.GenerateHash(entity.PasswordSalt, request.Password);
 
+            entity.CreatedAt =  DateTime.UtcNow;
+
             entity.ProfilePicture = FileUploadHelper.UploadProfilePicture(request.ProfilePicture);
 
             base.BeforeInsert(request, entity);

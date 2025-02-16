@@ -29,26 +29,26 @@ namespace Database
         public int UserId { get; set; }
         public User User { get; set; }
 
-        public int? CarBrandId { get; set; }
+        public int CarBrandId { get; set; }
 
         public CarBrand CarBrand { get; set; }
 
-        public int? CarCategoryId { get; set; }
+        public int CarCategoryId { get; set; }
         public CarCategory CarCategory { get; set; }
 
-        public int? CarModelId { get; set; }
+        public int CarModelId { get; set; }
 
         public CarModel CarModel { get; set; }
 
         public ICollection<Comment>? Comments { get; set; } = new List<Comment>();
 
-        public int? FuelTypeId { get; set; }
+        public int FuelTypeId { get; set; }
 
         public FuelType FuelType { get; set; }
 
         public ICollection<Reservation> Reservations { get; set; } = new List<Reservation>();
 
-        public int? TransmissionTypeId { get; set; }
+        public int TransmissionTypeId { get; set; }
         public TransmissionType TransmissionType { get; set; }
 
         public ICollection<Favorite> Favorites { get; set; } = new List<Favorite>();
@@ -57,14 +57,14 @@ namespace Database
 
         public ICollection<AutomobileAdEquipment> AutomobileAdEquipments { get; set; } = new List<AutomobileAdEquipment>();
 
-        public int? EnginePower { get; set; }
+        public int EnginePower { get; set; }
         public int? NumberOfDoors { get; set; }
-        public double? CubicCapacity { get; set; }
+        public double CubicCapacity { get; set; }
         
         // set to double cubic capacity
-        public int? HorsePower { get; set; }
+        public int HorsePower { get; set; }
         public string? Color { get; set; }
-        public int? VehicleConditionId { get; set; }
+        public int VehicleConditionId { get; set; }
         public VehicleCondition VehicleCondition { get; set; }
         public bool? IsHighlighted { get; set; }
         public DateTime? HighlightExpiryDate { get; set; }
