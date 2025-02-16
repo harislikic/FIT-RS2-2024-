@@ -125,7 +125,6 @@ class AutomobileAdService {
     final uri = Uri.parse('$baseUrl/AutomobileAd/user-ads/$userId')
         .replace(queryParameters: queryParams);
 
-    print("GOLASI USERA:: ${uri}");
 
     try {
       final response = await http.get(uri);
@@ -362,10 +361,6 @@ class AutomobileAdService {
         headers: headers,
         body: body,
       );
-
-      print('Request Body: $body');
-      print('Response Status Code: ${response.statusCode}');
-      print('Response Body: ${response.body}');
 
       if (response.statusCode == 200) {
         return true;

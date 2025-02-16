@@ -5,6 +5,8 @@ import 'package:flutter_stripe/flutter_stripe.dart';
 import 'package:http/http.dart' as http;
 import 'package:vroom_app/services/config.dart';
 
+import 'AuthService.dart';
+
 class StripeService {
   String stripeSecretKey = dotenv.env['STRIPE_SECRET_KEY'] ?? '';
 
@@ -131,9 +133,10 @@ class StripeService {
     required String status,
   }) async {
     try {
+      final authHeaders = await AuthService.getAuthHeaders();
       final response = await http.post(
         Uri.parse('$baseUrl/AutomobileAd/api/highlight-ad?id=$automobileAdId'),
-        headers: {'Content-Type': 'application/json'},
+        headers: {'Content-Type': 'application/json', ...authHeaders},
         body: jsonEncode({
           'highlightDays': highlightDays,
           'amount': amount,

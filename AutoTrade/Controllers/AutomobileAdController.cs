@@ -56,6 +56,7 @@ namespace Controllers
 
 
         [HttpPost("api/highlight-ad")]
+        [Authorize]
         public async Task<IActionResult> HighlightOglas(int id, [FromBody] HighlightAdRequest request)
         {
             var entity = await _context.AutomobileAds.FindAsync(id);
@@ -181,6 +182,7 @@ namespace Controllers
 
 
         [HttpPatch("{id}")]
+        [Authorize]
         public IActionResult Patch(int id, [FromForm] AutomobileUpdateRequest request)
         {
             // Dohvati automobil iz baze
