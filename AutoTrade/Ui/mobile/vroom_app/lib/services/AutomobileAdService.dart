@@ -164,7 +164,8 @@ class AutomobileAdService {
 
   Future<void> markAsDone(int automobileId) async {
     final uri = Uri.parse('$baseUrl/AutomobileAd/mark-as-done/$automobileId');
-    final headers = {'accept': '*/*'};
+    final authHeaders = await AuthService.getAuthHeaders();
+    final headers = {'accept': '*/*', ...authHeaders};
 
     final response = await http.put(uri, headers: headers);
     if (response.statusCode != 200) {

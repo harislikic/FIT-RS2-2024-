@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'dart:convert';
+import 'package:desktop_app/services/AuthService.dart';
 import 'package:desktop_app/services/config.dart';
 import 'package:http/http.dart' as http;
 import '../models/automobileAd.dart';
@@ -38,7 +39,8 @@ class AutomobileAdService {
 
   Future<void> removeAutomobile(
       int automobileId, Map<String, String> authHeaders) async {
-    authHeaders['accept'] = 'text/plain';
+    final authHeaders = await AuthService.getAuthHeaders();
+    authHeaders['Accept'] = 'text/plain';
 
     final response = await http.delete(
       Uri.parse('$baseUrl/AutomobileAd/$automobileId'),
@@ -51,11 +53,11 @@ class AutomobileAdService {
   }
 
   Future<void> markAsActive(int automobileId) async {
-    final uri = Uri.parse(
-        '$baseUrl/AutomobileAd/mar-as-active/$automobileId');
+    final uri = Uri.parse('$baseUrl/AutomobileAd/mar-as-active/$automobileId');
 
-    final response =
-        await http.put(uri, headers: {'accept': 'application/json'});
+    final authHeaders = await AuthService.getAuthHeaders();
+    final response = await http
+        .put(uri, headers: {'Accept': 'application/json', ...authHeaders});
 
     if (response.statusCode == 200) {
       print('AutomobileAd $automobileId marked as active');

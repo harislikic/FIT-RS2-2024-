@@ -25,6 +25,7 @@ namespace Controllers
         }
 
         [HttpPut("mark-as-done/{id}")]
+        [Authorize]
         public IActionResult MarkAsDone(int id)
         {
             try
@@ -40,6 +41,7 @@ namespace Controllers
 
 
         [HttpPut("mar-as-active/{id}")]
+        [Authorize]
         public IActionResult MarkAsActive(int id)
         {
             try
