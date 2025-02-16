@@ -127,7 +127,7 @@ class ProfileHeader extends StatelessWidget {
                     color: Colors.teal.shade200,
                     width: 2,
                   ),
-                  backgroundColor: Colors.transparent,
+                  backgroundColor: Colors.black.withOpacity(0.2),
                   padding:
                       const EdgeInsets.symmetric(horizontal: 24, vertical: 8),
                   shape: RoundedRectangleBorder(
