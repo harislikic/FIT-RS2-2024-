@@ -35,22 +35,20 @@ class AnotherCarsFromUserCard extends StatelessWidget {
           children: [
             Stack(
               children: [
-                if (automobileAd.images.isNotEmpty)
-                  Image.network(
-                    '$baseUrl${automobileAd.images.first.imageUrl}',
-                    height: 140,
-                    width: double.infinity,
-                    fit: BoxFit.cover,
-                  )
-                else
-                  Container(
-                    height: 140,
-                    color: Colors.grey.shade200,
-                    child: const Center(
-                      child: Icon(Icons.directions_car,
-                          size: 40, color: Colors.grey),
-                    ),
-                  ),
+                Image.network(
+                  '$baseUrl${automobileAd.images.isNotEmpty ? automobileAd.images.first.imageUrl : ''}',
+                  height: 140,
+                  width: double.infinity,
+                  fit: BoxFit.cover,
+                  errorBuilder: (context, error, stackTrace) {
+                    return Image.asset(
+                      'assets/noCarfallback.jpg',
+                      height: 140,
+                      width: double.infinity,
+                      fit: BoxFit.cover,
+                    );
+                  },
+                ),
                 Positioned(
                   bottom: 0,
                   right: 4,
@@ -58,8 +56,7 @@ class AnotherCarsFromUserCard extends StatelessWidget {
                     padding: const EdgeInsets.symmetric(
                         horizontal: 8.0, vertical: 4.0),
                     decoration: BoxDecoration(
-                      color: Colors.black
-                          .withOpacity(0.4),
+                      color: Colors.black.withOpacity(0.4),
                       borderRadius: BorderRadius.circular(8),
                     ),
                     child: Row(
@@ -84,7 +81,6 @@ class AnotherCarsFromUserCard extends StatelessWidget {
                 ),
               ],
             ),
-
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: Column(
@@ -108,7 +104,6 @@ class AnotherCarsFromUserCard extends StatelessWidget {
                     ],
                   ),
                   const SizedBox(height: 4),
-
                   Row(
                     children: [
                       const Icon(Icons.attach_money,
@@ -125,7 +120,6 @@ class AnotherCarsFromUserCard extends StatelessWidget {
                     ],
                   ),
                   const SizedBox(height: 4),
-
                   Row(
                     children: [
                       const Icon(Icons.date_range,
@@ -142,9 +136,7 @@ class AnotherCarsFromUserCard extends StatelessWidget {
                   ),
                   Row(
                     children: [
-                      const Icon(Icons.speed,
-                          size: 18,
-                          color: Colors.blueGrey),
+                      const Icon(Icons.speed, size: 18, color: Colors.blueGrey),
                       const SizedBox(width: 4),
                       Text(
                         '${NumberFormat('###,###', 'en_US').format(automobileAd.mileage).replaceAll(',', '.')} km',

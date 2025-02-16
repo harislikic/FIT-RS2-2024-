@@ -89,7 +89,7 @@ class ReservationCard extends StatelessWidget {
                               ? NetworkImage(
                                   "$baseUrl${reservation.user?.profilePicture}")
                               : const AssetImage(
-                                  'assets/default_profile.png',
+                                  'assets/defaultUser.jpg',
                                 ) as ImageProvider,
                           backgroundColor: Colors.grey.shade200,
                         ),

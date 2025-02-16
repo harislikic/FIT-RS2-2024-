@@ -185,6 +185,23 @@ class _AutomobileDetailsScreenState extends State<AutomobileDetailsScreen> {
                               const SizedBox(height: 8),
                               CarOwnerInfoCard(automobileAd: automobileAd),
                               const SizedBox(height: 16),
+                              const Row(
+                                children: [
+                                  Icon(Icons.calendar_today,
+                                      color: Colors.grey, size: 20),
+                                  SizedBox(
+                                      width: 8),
+                                  Text(
+                                    'Pregled termina\nRezerviši dok nije kasno!',
+                                    style: TextStyle(
+                                      color: Colors.blueGrey,
+                                      fontSize: 14,
+                                      fontWeight: FontWeight.normal,
+                                    ),
+                                    textAlign: TextAlign.left,
+                                  ),
+                                ],
+                              ),
                               ReservationCalendar(
                                 reservations: reservations,
                                 automobileAdId: automobileAd.id,
