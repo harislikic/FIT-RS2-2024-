@@ -49,6 +49,14 @@ class ReservationCard extends StatelessWidget {
                     height: 120,
                     width: 120,
                     fit: BoxFit.cover,
+                    errorBuilder: (context, error, stackTrace) {
+                      return Image.asset(
+                        'assets/noCarfallback.jpg',
+                        height: 120,
+                        width: 120,
+                        fit: BoxFit.cover,
+                      );
+                    },
                   ),
                 ),
               ),

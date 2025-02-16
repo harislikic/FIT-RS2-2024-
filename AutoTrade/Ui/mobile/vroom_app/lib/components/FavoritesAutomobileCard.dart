@@ -58,22 +58,20 @@ class FavoritesAutomobileCard extends StatelessWidget {
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                if (favoritesAutomobile.images.isNotEmpty)
-                  Image.network(
-                    '$baseUrl${favoritesAutomobile.images.first.imageUrl}',
-                    height: 140,
-                    width: double.infinity,
-                    fit: BoxFit.cover,
-                  )
-                else
-                  Container(
-                    height: 140,
-                    color: Colors.grey.shade200,
-                    child: const Center(
-                      child: Icon(Icons.directions_car,
-                          size: 40, color: Colors.grey),
-                    ),
-                  ),
+                Image.network(
+                  '$baseUrl${favoritesAutomobile.images.isNotEmpty ? favoritesAutomobile.images.first.imageUrl : ''}',
+                  height: 140,
+                  width: double.infinity,
+                  fit: BoxFit.cover,
+                  errorBuilder: (context, error, stackTrace) {
+                    return Image.asset(
+                      'assets/noCarfallback.jpg',
+                      height: 140,
+                      width: double.infinity,
+                      fit: BoxFit.cover,
+                    );
+                  },
+                ),
                 Padding(
                   padding: const EdgeInsets.symmetric(
                       horizontal: 8.0, vertical: 5.0),

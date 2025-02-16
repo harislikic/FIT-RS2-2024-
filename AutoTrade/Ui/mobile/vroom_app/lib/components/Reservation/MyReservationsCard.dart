@@ -45,12 +45,18 @@ class MyReservationCard extends StatelessWidget {
                     height: 120,
                     width: 120,
                     fit: BoxFit.cover,
+                    errorBuilder: (context, error, stackTrace) {
+                      return Image.asset(
+                        'assets/noCarfallback.jpg',
+                        height: 120,
+                        width: 120,
+                        fit: BoxFit.cover,
+                      );
+                    },
                   ),
                 ),
               ),
-
               const SizedBox(width: 12),
-
               Expanded(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -84,7 +90,6 @@ class MyReservationCard extends StatelessWidget {
                           backgroundColor: Colors.grey.shade200,
                         ),
                         const SizedBox(width: 8),
-
                         Text(
                           reservation.automobile.user.userName,
                           style: const TextStyle(
@@ -95,7 +100,6 @@ class MyReservationCard extends StatelessWidget {
                       ],
                     ),
                     const SizedBox(height: 4),
-
                     Text(
                       "Napravili ste rezervaciju dana ${DateFormat('dd.MM.yyyy HH:mm').format(DateTime.parse(reservation.reservationDate))}.",
                       style: const TextStyle(
@@ -108,7 +112,6 @@ class MyReservationCard extends StatelessWidget {
               ),
             ],
           ),
-
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
@@ -116,14 +119,14 @@ class MyReservationCard extends StatelessWidget {
                 onPressed: reservation.status == "Pending" ? null : onDelete,
                 style: ElevatedButton.styleFrom(
                   backgroundColor: reservation.status == "Pending"
-                      ? Colors.grey.shade300 
+                      ? Colors.grey.shade300
                       : Colors.white,
                   padding:
                       const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
                 ),
                 icon: Icon(
                   reservation.status == "Pending"
-                      ? Icons.hourglass_empty 
+                      ? Icons.hourglass_empty
                       : Icons.delete,
                   color: reservation.status == "Pending"
                       ? Colors.grey

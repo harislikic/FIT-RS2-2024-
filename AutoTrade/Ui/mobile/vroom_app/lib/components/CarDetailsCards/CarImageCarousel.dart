@@ -41,6 +41,13 @@ class _CarImageCarouselState extends State<CarImageCarousel> {
                           '$baseUrl${image.imageUrl}',
                           fit: BoxFit.cover,
                           width: double.infinity,
+                          errorBuilder: (context, error, stackTrace) {
+                            return Image.asset(
+                              'assets/noCarfallback.jpg',
+                              fit: BoxFit.cover,
+                              width: double.infinity,
+                            );
+                          },
                         ),
                       ),
                       Positioned(
@@ -145,6 +152,15 @@ class _CarImageCarouselState extends State<CarImageCarousel> {
                           fit: BoxFit.contain,
                           width: double.infinity,
                           height: double.infinity,
+                          errorBuilder: (context, error, stackTrace) {
+                            return Image.asset(
+                              'assets/noCarfallback.jpg',
+                              fit:
+                                  BoxFit.contain,
+                              width: double.infinity,
+                              height: double.infinity,
+                            );
+                          },
                         ),
                       );
                     },

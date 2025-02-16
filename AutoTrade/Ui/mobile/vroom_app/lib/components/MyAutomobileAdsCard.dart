@@ -68,10 +68,18 @@ class MyAutomobileAdsCard extends StatelessWidget {
             borderRadius: const BorderRadius.vertical(top: Radius.circular(15)),
             child: automobileAd.images.isNotEmpty
                 ? Image.network(
-                    '$baseUrl${automobileAd.images.first.imageUrl}',
+                    '$baseUrl${automobileAd.images.isNotEmpty ? automobileAd.images.first.imageUrl : ''}',
                     height: 200,
                     width: double.infinity,
                     fit: BoxFit.cover,
+                    errorBuilder: (context, error, stackTrace) {
+                      return Image.asset(
+                        'assets/noCarfallback.jpg',
+                        height: 200,
+                        width: double.infinity,
+                        fit: BoxFit.cover,
+                      );
+                    },
                   )
                 : Container(
                     height: 200,

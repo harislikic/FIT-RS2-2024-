@@ -57,10 +57,18 @@ class AutomobileCard extends StatelessWidget {
                   clipBehavior: Clip.none,
                   children: [
                     Image.network(
-                      '$baseUrl${automobileAd.images.first.imageUrl}',
+                      '$baseUrl${automobileAd.images.isNotEmpty ? automobileAd.images.first.imageUrl : ""}',
                       height: isGridView ? 140 : 200,
                       width: double.infinity,
                       fit: BoxFit.cover,
+                      errorBuilder: (context, error, stackTrace) {
+                        return Image.asset(
+                          'assets/noCarfallback.jpg',
+                          height: isGridView ? 140 : 200,
+                          width: double.infinity,
+                          fit: BoxFit.cover,
+                        );
+                      },
                     ),
                     if (isHighlighted && !isDone)
                       Positioned(
@@ -271,11 +279,12 @@ class AutomobileCard extends StatelessWidget {
                     Icon(
                       Icons.speed_sharp,
                       size: isGrid ? 20 : 24,
-                       color: Colors.blueGrey.shade700,
+                      color: Colors.blueGrey.shade700,
                     ),
                     const SizedBox(height: 2),
                     Text(
-                      NumberFormat.decimalPattern().format(automobileAd.mileage),
+                      NumberFormat.decimalPattern()
+                          .format(automobileAd.mileage),
                       style: TextStyle(
                         fontSize: isGrid ? 10 : 12,
                         color: Colors.black,
