@@ -1,6 +1,9 @@
+import 'package:desktop_app/helpers/DateHelper.dart';
 import 'package:flutter/material.dart';
-import 'package:fl_chart/fl_chart.dart';
 import 'package:desktop_app/services/PaymentService.dart';
+import 'package:syncfusion_flutter_charts/charts.dart';
+import '../components/PieChartComponent.dart';
+import 'package:desktop_app/models/ChartModels.dart';
 
 class StripeTransactionsScreen extends StatefulWidget {
   @override
@@ -42,23 +45,29 @@ class _StripeTransactionsScreenState extends State<StripeTransactionsScreen> {
             }
 
             final transactions = snapshot.data!;
+            print('transactions::: ${transactions}');
             return Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 _buildSummary(transactions),
-                SizedBox(height: 20),
+                const SizedBox(height: 20),
                 Expanded(
                   child: Column(
                     children: [
-                      Expanded(child: _buildLineChart(transactions)),
-                      SizedBox(height: 16),
+                      Expanded(child: _buildColumnChart(transactions)),
+                      const SizedBox(height: 16),
                       Expanded(
                         child: Row(
                           children: [
-                            Expanded(child: _buildPieChart(transactions)),
-                            SizedBox(width: 16),
                             Expanded(
-                                child: _buildCardBrandPieChart(transactions)),
+                                child: PieChartComponent(
+                                    transactions: transactions,
+                                    chartType: 'status')),
+                            const SizedBox(width: 16),
+                            Expanded(
+                                child: PieChartComponent(
+                                    transactions: transactions,
+                                    chartType: 'card_brand')),
                           ],
                         ),
                       ),
@@ -75,13 +84,26 @@ class _StripeTransactionsScreenState extends State<StripeTransactionsScreen> {
 
   Widget _buildSummary(List<dynamic> transactions) {
     int totalTransactions = transactions.length;
-    Map<String, double> currencyTotals = {};
+    Map<String, Map<String, double>> currencyStats = {};
 
     for (var transaction in transactions) {
       String currency = transaction['currency'].toUpperCase();
       double amount = (transaction['amount'] / 100).toDouble();
-      currencyTotals[currency] = (currencyTotals[currency] ?? 0) + amount;
+
+      if (!currencyStats.containsKey(currency)) {
+        currencyStats[currency] = {'amount': 0, 'count': 0};
+      }
+
+      currencyStats[currency]!['amount'] =
+          (currencyStats[currency]!['amount'] ?? 0) + amount;
+      currencyStats[currency]!['count'] =
+          (currencyStats[currency]!['count'] ?? 0) + 1;
     }
+
+    List<StackedChartData> chartData = currencyStats.entries.map((entry) {
+      return StackedChartData(
+          entry.key, entry.value['amount']!, entry.value['count']!);
+    }).toList();
 
     return Card(
       elevation: 4,
@@ -92,231 +114,102 @@ class _StripeTransactionsScreenState extends State<StripeTransactionsScreen> {
           children: [
             Text(
               'Ukupan broj transakcija: $totalTransactions',
-              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+              style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
             ),
-            ...currencyTotals.entries.map((entry) => Text(
-                  '${entry.key}: ${entry.value.toStringAsFixed(2)}',
-                  style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
-                )),
+            const SizedBox(height: 10),
+            SizedBox(
+              height: 250,
+              child: SfCartesianChart(
+                primaryXAxis: CategoryAxis(),
+                title: ChartTitle(text: 'Prihod i broj transakcija po valuti'),
+                legend: const Legend(isVisible: true),
+                series: <ChartSeries>[
+                  StackedColumnSeries<StackedChartData, String>(
+                    dataSource: chartData,
+                    xValueMapper: (StackedChartData data, _) => data.currency,
+                    yValueMapper: (StackedChartData data, _) => data.revenue,
+                    name: 'Prihod',
+                    color: Colors.blueAccent,
+                    dataLabelSettings: const DataLabelSettings(isVisible: true),
+                  ),
+                  StackedColumnSeries<StackedChartData, String>(
+                    dataSource: chartData,
+                    xValueMapper: (StackedChartData data, _) => data.currency,
+                    yValueMapper: (StackedChartData data, _) => data.count,
+                    name: 'Transakcije',
+                    color: Colors.orangeAccent,
+                    dataLabelSettings: const DataLabelSettings(isVisible: true),
+                  ),
+                ],
+              ),
+            ),
           ],
         ),
       ),
     );
   }
 
-  Widget _buildLineChart(List<dynamic> transactions) {
-    Map<int, int> dailyCounts = {};
+  Widget _buildColumnChart(List<dynamic> transactions) {
+    Map<String, Map<String, double>> monthlyStats = {};
 
     for (var transaction in transactions) {
       DateTime date =
           DateTime.fromMillisecondsSinceEpoch(transaction['created'] * 1000);
-      int day = date.day;
-      dailyCounts[day] = (dailyCounts[day] ?? 0) + 1;
+      int month = date.month;
+      int year = date.year;
+      String key = "$month/$year";
+
+      if (!monthlyStats.containsKey(key)) {
+        monthlyStats[key] = {'count': 0, 'totalAmount': 0};
+      }
+
+      monthlyStats[key]!['count'] = monthlyStats[key]!['count']! + 1;
+      monthlyStats[key]!['totalAmount'] =
+          monthlyStats[key]!['totalAmount']! + (transaction['amount'] / 100);
     }
 
-    List<int> sortedDays = dailyCounts.keys.toList()..sort();
-    List<FlSpot> spots = sortedDays.map((day) {
-      return FlSpot(day.toDouble(), dailyCounts[day]!.toDouble());
+    List<ChartData> chartData = monthlyStats.entries.map((entry) {
+      List<String> parts = entry.key.split('/');
+      String month = DateHelper.getMonthName(parts[0]);
+      String year = parts[1];
+
+      return ChartData(
+        "$month $year",
+        entry.value['totalAmount']!,
+        entry.value['count']!.toInt(),
+      );
     }).toList();
 
     return Card(
       elevation: 4,
       child: Padding(
         padding: const EdgeInsets.all(8.0),
-        child: LineChart(
-          LineChartData(
-            lineBarsData: [
-              LineChartBarData(
-                spots: spots,
-                isCurved: true,
-                gradient: LinearGradient(
-                  colors: [Colors.deepPurple, Colors.purpleAccent],
-                  begin: Alignment.centerLeft,
-                  end: Alignment.centerRight,
-                ),
-                barWidth: 3,
-                belowBarData: BarAreaData(
-                  show: true,
-                  gradient: LinearGradient(
-                    colors: [
-                      Colors.deepPurple.withOpacity(0.3),
-                      Colors.purpleAccent.withOpacity(0.1)
-                    ],
-                    begin: Alignment.topCenter,
-                    end: Alignment.bottomCenter,
-                  ),
-                ),
-              ),
-            ],
-            titlesData: FlTitlesData(
-              bottomTitles: AxisTitles(
-                sideTitles: SideTitles(
-                  showTitles: true,
-                  reservedSize: 22,
-                  getTitlesWidget: (value, meta) {
-                    int day = value.toInt();
-                    return _formatDayLabel(day, sortedDays);
-                  },
-                  interval: sortedDays.length > 7
-                      ? (sortedDays.length / 7).floorToDouble()
-                      : 1,
-                ),
-              ),
-              leftTitles: AxisTitles(
-                sideTitles: SideTitles(showTitles: true, reservedSize: 40),
-              ),
+        child: SfCartesianChart(
+          primaryXAxis: CategoryAxis(),
+          title: ChartTitle(text: 'Mjesečne transakcije i prihod'),
+          legend: const Legend(isVisible: true),
+          tooltipBehavior: TooltipBehavior(enable: true),
+          series: <ChartSeries<ChartData, String>>[
+            ColumnSeries<ChartData, String>(
+              name: 'Ukupni prihod',
+              dataSource: chartData,
+              xValueMapper: (ChartData data, _) => data.month,
+              yValueMapper: (ChartData data, _) => data.revenue,
+              dataLabelSettings: const DataLabelSettings(isVisible: true),
+              color: Colors.blueAccent,
             ),
-            borderData: FlBorderData(show: false),
-            gridData: FlGridData(show: true),
-          ),
-        ),
-      ),
-    );
-  }
-
-  Widget _formatDayLabel(int day, List<int> sortedDays) {
-    if (sortedDays.length > 7) {
-      if (sortedDays.indexOf(day) % (sortedDays.length ~/ 7) != 0) {
-        return const SizedBox(); 
-      }
-    }
-    return Text(
-      'Dan $day',
-      style: TextStyle(fontSize: 12, fontWeight: FontWeight.w500),
-    );
-  }
-
-  Widget _buildPieChart(List<dynamic> transactions) {
-    Map<String, double> statusAmounts = {};
-
-    for (var transaction in transactions) {
-      String status = transaction['status'].toLowerCase();
-      double amount = (transaction['amount'] / 100).toDouble();
-      statusAmounts[status] = (statusAmounts[status] ?? 0) + amount;
-    }
-
-    return Card(
-      elevation: 4,
-      child: Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: Column(
-          children: [
-            const Text(
-              'Distribucija iznosa po statusu',
-              style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
-            ),
-            const SizedBox(height: 10),
-            Expanded(
-              child: PieChart(
-                PieChartData(
-                  sections: statusAmounts.entries.map((entry) {
-                    return PieChartSectionData(
-                      title: '${entry.key}\n${entry.value.toStringAsFixed(2)}',
-                      value: entry.value,
-                      radius: 50,
-                      titleStyle: const TextStyle(
-                        fontSize: 12,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.white,
-                      ),
-                      color: _getStatusColor(entry.key),
-                    );
-                  }).toList(),
-                  sectionsSpace: 4,
-                  centerSpaceRadius: 40,
-                ),
-              ),
+            LineSeries<ChartData, String>(
+              name: 'Ukupan broj transakcija',
+              dataSource: chartData,
+              xValueMapper: (ChartData data, _) => data.month,
+              yValueMapper: (ChartData data, _) => data.count,
+              markerSettings: const MarkerSettings(isVisible: true),
+              dataLabelSettings: const DataLabelSettings(isVisible: true),
+              color: Colors.orange,
             ),
           ],
         ),
       ),
     );
-  }
-
-  Widget _buildCardBrandPieChart(List<dynamic> transactions) {
-    Map<String, double> cardBrandCounts = {};
-
-    for (var transaction in transactions) {
-      if (transaction['payment_method_details'] != null &&
-          transaction['payment_method_details']['card'] != null) {
-        String brand = transaction['payment_method_details']['card']['brand']
-            .toString()
-            .toUpperCase();
-        cardBrandCounts[brand] = (cardBrandCounts[brand] ?? 0) + 1;
-      }
-    }
-
-    return Card(
-      elevation: 4,
-      child: Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: Column(
-          children: [
-            const Text(
-              'Distribucija kartičnih brendova',
-              style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
-            ),
-            SizedBox(height: 10),
-            Expanded(
-              child: PieChart(
-                PieChartData(
-                  sections: cardBrandCounts.entries.map((entry) {
-                    return PieChartSectionData(
-                      title: '${entry.key}\n${entry.value.toStringAsFixed(0)}',
-                      value: entry.value,
-                      radius: 50,
-                      titleStyle: const TextStyle(
-                        fontSize: 12,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.white,
-                      ),
-                      color: _getCardBrandColor(entry.key),
-                    );
-                  }).toList(),
-                  sectionsSpace: 4,
-                  centerSpaceRadius: 40,
-                ),
-              ),
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-}
-
-Color _getStatusColor(String status) {
-  switch (status) {
-    case 'succeeded':
-      return Colors.greenAccent.shade700;
-    case 'failed':
-      return Colors.redAccent.shade700;
-    case 'pending':
-      return Colors.orangeAccent.shade700;
-    case 'canceled':
-      return Colors.grey.shade700;
-    case 'requires_action':
-      return Colors.blue.shade700;
-    default:
-      return Colors.blueGrey.shade600;
-  }
-}
-
-Color _getCardBrandColor(String brand) {
-  switch (brand) {
-    case 'VISA':
-      return Colors.blue.shade700;
-    case 'MASTERCARD':
-      return Colors.red.shade700;
-    case 'AMEX':
-      return Colors.cyan.shade700;
-    case 'DISCOVER':
-      return Colors.orange.shade700;
-    case 'JCB':
-      return Colors.purple.shade700;
-    case 'DINERS CLUB':
-      return Colors.green.shade700;
-    default:
-      return Colors.grey.shade700; 
   }
 }
