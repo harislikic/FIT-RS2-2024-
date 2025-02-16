@@ -26,7 +26,8 @@ namespace Controllers
                 .Include(r => r.AutomobileAd)
                 .ThenInclude(a => a.User)
                 .Where(r => r.UserId == userId)
-                .Where(r => r.AutomobileAd.UserId != userId);
+                .Where(r => r.AutomobileAd.UserId != userId)
+                .Where(r => r.ReservationDate > DateTime.UtcNow);
 
             var reservations = await query
                 .Skip((page - 1) * pageSize)
