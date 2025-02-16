@@ -1,10 +1,7 @@
-using AutoTrade.Model;
 using AutoTrade.Services.Database;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace AutoTrade.Controllers
 {
@@ -20,6 +17,7 @@ namespace AutoTrade.Controllers
         }
 
         [HttpDelete("{automobileAdId}")]
+        [Authorize]
         public async Task<IActionResult> RemoveEquipment(int automobileAdId, [FromBody] List<int> equipmentIds)
         {
             if (equipmentIds == null || !equipmentIds.Any())
@@ -44,15 +42,14 @@ namespace AutoTrade.Controllers
         }
 
         [HttpPut("update-automobile")]
+        [Authorize]
         public async Task<IActionResult> UpdateAutomobileForEquipment([FromBody] UpdateAutomobileRequest request)
         {
-            // Validacija ulaznih parametara
             if (request == null || request.EquipmentIds == null || !request.EquipmentIds.Any())
             {
                 return BadRequest("No equipment IDs provided.");
             }
 
-            // Pronađi automobil oglas na osnovu prosleđenog NewAutomobileAdId
             var automobile = await _context.AutomobileAds
                 .Include(a => a.AutomobileAdEquipments)
                 .FirstOrDefaultAsync(a => a.Id == request.NewAutomobileAdId);
@@ -62,17 +59,15 @@ namespace AutoTrade.Controllers
                 return NotFound($"Automobile ad with ID {request.NewAutomobileAdId} not found.");
             }
 
-            // Dodaj novu opremu ako ne postoji
             foreach (var equipmentId in request.EquipmentIds.Distinct())
             {
-                // Proveri da li oprema postoji
+
                 var equipmentExists = _context.Equipments.Any(e => e.Id == equipmentId);
                 if (!equipmentExists)
                 {
                     throw new ArgumentException($"Equipment with ID {equipmentId} does not exist.");
                 }
 
-                // Proveri da li entitet već postoji u bazi
                 var existingAdEquipment = _context.AutomobileAdEquipments
                     .FirstOrDefault(ae => ae.AutomobileAdId == automobile.Id && ae.EquipmentId == equipmentId);
 
@@ -86,14 +81,11 @@ namespace AutoTrade.Controllers
                 }
             }
 
-            // Sačuvaj izmene u bazi
             await _context.SaveChangesAsync();
 
             return Ok(new { message = "Automobile ID and equipment updated successfully.", updatedEquipmentIds = request.EquipmentIds });
         }
 
-
-        // DTO klasa za ulazne podatke
         public class UpdateAutomobileRequest
         {
             public int NewAutomobileAdId { get; set; }

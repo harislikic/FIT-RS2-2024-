@@ -1,7 +1,6 @@
 import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:intl/intl.dart';
 import 'package:vroom_app/components/ImageGalleryEditAutomobile.dart';
 import 'package:vroom_app/components/shared/ToastUtils.dart';
 import 'package:vroom_app/models/automobileAd.dart';
@@ -231,7 +230,6 @@ class _EditAutomobileScreenState extends State<EditAutomobileScreen> {
           newImages: _newImages,
           removedImageIds: _removedImageIds,
         );
-
         if (success) {
           ToastUtils.showToast(message: 'Uspješno editovano');
           Navigator.pushReplacement(

@@ -330,8 +330,6 @@ class _AddAutomobileScreenState extends State<AddAutomobileScreen> {
               TextFormField(
                 decoration: const InputDecoration(labelText: 'Broj vrata'),
                 onSaved: (value) => _numberOfDoors = int.tryParse(value ?? ''),
-                validator: (value) =>
-                    value?.isEmpty ?? true ? 'Unesi broj vrata' : null,
                 keyboardType: TextInputType.number,
               ),
               TextFormField(

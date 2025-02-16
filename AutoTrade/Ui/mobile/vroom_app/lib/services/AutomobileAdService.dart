@@ -285,6 +285,8 @@ class AutomobileAdService {
       final uri =
           Uri.parse('$baseUrl/api/AutomobileAdEquipment/update-automobile');
 
+      final authHeaders = await AuthService.getAuthHeaders();
+
       final body = json.encode({
         'newAutomobileAdId': automobileAdId,
         'equipmentIds': equipmentIds,
@@ -293,6 +295,7 @@ class AutomobileAdService {
       final headers = {
         'Content-Type': 'application/json',
         'accept': '*/*',
+        ...authHeaders
       };
 
       final response = await http.put(uri, headers: headers, body: body);
@@ -315,9 +318,12 @@ class AutomobileAdService {
     try {
       final uri =
           Uri.parse('$baseUrl/api/AutomobileAdEquipment/$automobileAdId');
+
+      final authHeaders = await AuthService.getAuthHeaders();
       final headers = {
         'Content-Type': 'application/json',
         'accept': '*/*',
+        ...authHeaders
       };
 
       final body = json.encode(equipmentIds);
@@ -327,8 +333,6 @@ class AutomobileAdService {
         headers: headers,
         body: body,
       );
-
-      print('response: ${response.body}');
 
       if (response.statusCode == 200) {
         return true;

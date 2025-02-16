@@ -494,17 +494,15 @@ namespace AutoTrade.Services
             entity.CubicCapacity = automobile.CubicCapacity.GetValueOrDefault();
             entity.HorsePower = automobile.HorsePower.GetValueOrDefault();
             entity.Color = automobile.Color ?? "-";
-            entity.VehicleConditionId = automobile.VehicleCondtionId.GetValueOrDefault();
+            entity.VehicleConditionId = automobile.VehicleCondtionId ?? entity.VehicleConditionId;
 
 
             if (automobile.Images != null && automobile.Images.Any())
             {
-                // Očistite slike koje nisu prisutne u trenutnoj kolekciji
                 entity.Images.Clear();
 
                 foreach (var image in automobile.Images)
                 {
-                    // Proverite da li slika već postoji pre dodavanja
                     if (!entity.Images.Any(img => img.ImageUrl == image.ImageUrl))
                     {
                         var databaseImage = new AutomobileAdImage
