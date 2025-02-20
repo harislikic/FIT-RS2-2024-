@@ -34,24 +34,34 @@ class ProfileHeader extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Container(
-                padding: const EdgeInsets.all(4),
-                decoration: const BoxDecoration(
-                  color: Colors.white,
+                decoration: BoxDecoration(
                   shape: BoxShape.circle,
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.black.withOpacity(0.2),
+                      blurRadius: 8,
+                      spreadRadius: 2,
+                      offset: Offset(0, 4),
+                    ),
+                  ],
                 ),
                 child: CircleAvatar(
-                  radius: 50,
-                  backgroundImage: profileImageUrl != null
-                      ? NetworkImage(profileImageUrl!)
-                      : null,
-                  backgroundColor: Colors.grey[300],
-                  child: profileImageUrl == null
-                      ? const Icon(
-                          Icons.person,
-                          size: 50,
-                          color: Colors.white,
-                        )
-                      : null,
+                  radius: 55,
+                  backgroundColor: Colors.white,
+                  child: CircleAvatar(
+                    radius: 50,
+                    backgroundImage: profileImageUrl != null
+                        ? NetworkImage(profileImageUrl!)
+                        : null,
+                    backgroundColor: Colors.grey[300],
+                    child: profileImageUrl == null
+                        ? Icon(
+                            Icons.person,
+                            size: 50,
+                            color: Colors.grey[700],
+                          )
+                        : null,
+                  ),
                 ),
               ),
               const SizedBox(height: 12),
@@ -140,8 +150,6 @@ class ProfileHeader extends StatelessWidget {
             ],
           ),
         ),
-
-        // Logout dugme u gornjem desnom uglu
         Positioned(
           top: 16,
           right: 16,
@@ -155,12 +163,19 @@ class ProfileHeader extends StatelessWidget {
                 ),
                 onPressed: onLogout,
               ),
-              const Text(
-                'Odjava',
-                style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 16,
-                  fontWeight: FontWeight.w600,
+              Container(
+                padding: EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+                decoration: BoxDecoration(
+                  color: Colors.black.withOpacity(0.4),
+                  borderRadius: BorderRadius.circular(8),
+                ),
+                child: const Text(
+                  'Odjava',
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 16,
+                    fontWeight: FontWeight.w600,
+                  ),
                 ),
               ),
             ],
