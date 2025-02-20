@@ -18,12 +18,13 @@ namespace AutoTrade.Controllers
         [HttpGet]
         public async Task<IActionResult> GetStatistics()
         {
-            var totalAutomobileAds = await _context.AutomobileAds.CountAsync();
-            var totalUsers = await _context.Users
-            .Where(u => !u.IsAdmin)
-            .CountAsync();
+            var fiveYearsAgo = DateTime.UtcNow.AddYears(-10);
 
+            var totalAutomobileAds = await _context.AutomobileAds.CountAsync();
+            var totalUsers = await _context.Users.CountAsync(u => !u.IsAdmin);
+            var usersRegisteredLastFiveYear = await _context.Users.CountAsync(u => u.CreatedAt >= fiveYearsAgo && !u.IsAdmin);
             var totalComments = await _context.Comments.CountAsync();
+
 
             var automobilesPerCity = await _context.AutomobileAds
                 .GroupBy(a => a.User.City.Title)
@@ -34,7 +35,8 @@ namespace AutoTrade.Controllers
                 })
                 .ToListAsync();
 
-            var mostFavoritedCar = await _context.Favorites
+
+            var mostFavoritedCars = await _context.Favorites
                 .GroupBy(f => f.AutomobileAdId)
                 .Select(g => new
                 {
@@ -42,41 +44,43 @@ namespace AutoTrade.Controllers
                     FavoriteCount = g.Count()
                 })
                 .OrderByDescending(g => g.FavoriteCount)
-                .FirstOrDefaultAsync();
+                .Take(10)
+                .ToListAsync();
 
-            var mostFavoritedCarDetails = mostFavoritedCar != null
-                ? await _context.AutomobileAds
-                    .Where(a => a.Id == mostFavoritedCar.AutomobileAdId)
-                    .Select(a => new { a.Title, a.Price })
-                    .FirstOrDefaultAsync()
-                : null;
-
-            var commentPerAutomobileAd = await _context.Comments
-                .GroupBy(c => c.AutomobileAdId)
-                .Select(g => new
+            var mostFavoritedCarDetails = await _context.AutomobileAds
+                .Where(a => mostFavoritedCars.Select(m => m.AutomobileAdId).Contains(a.Id))
+                .Select(a => new
                 {
-                    AutomobileAdId = g.Key,
-                    CommentCount = g.Count()
+                    a.Id,
+                    a.Title,
+                    a.Price,
+                    a.CarBrand
                 })
                 .ToListAsync();
 
+            var favoriteCarsWithDetails = mostFavoritedCars
+                .Select(f => new
+                {
+                    f.AutomobileAdId,
+                    f.FavoriteCount,
+                    Details = mostFavoritedCarDetails.FirstOrDefault(a => a.Id == f.AutomobileAdId)
+                });
+
+         
+            var totalAutomobileViews = await _context.AutomobileAds.SumAsync(a => (int?)a.ViewsCount) ?? 0;
+
+         
             var highlightedCars = await _context.AutomobileAds.CountAsync(a => a.IsHighlighted == true);
-
-
-
 
             var statistics = new
             {
                 TotalAutomobileAds = totalAutomobileAds,
                 TotalUsers = totalUsers,
+                UsersRegisteredLastFiveYear = usersRegisteredLastFiveYear,
                 TotalComments = totalComments,
                 AutomobilesPerCity = automobilesPerCity,
-                MostFavoritedCar = new
-                {
-                    mostFavoritedCar?.AutomobileAdId,
-                    mostFavoritedCar?.FavoriteCount,
-                    mostFavoritedCarDetails
-                },
+                MostFavoritedCars = favoriteCarsWithDetails,
+                TotalAutomobileViews = totalAutomobileViews,
                 HighlightedCars = highlightedCars
             };
 
