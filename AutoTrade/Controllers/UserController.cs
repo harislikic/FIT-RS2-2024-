@@ -67,14 +67,13 @@ public class UserController : BaseCRUDController<User, UserSearchObject, UserIns
     [HttpPatch("{id}")]
     public IActionResult Patch(int id, [FromForm] UserUpdateRequest request)
     {
-        // Dohvati korisnika iz baze
+
         var user = _service.GetById(id);
         if (user == null)
         {
             return NotFound("User not found.");
         }
 
-        // Ažuriraj samo polja koja su poslana u zahtevu
         if (!string.IsNullOrWhiteSpace(request.FirstName))
             user.FirstName = request.FirstName;
 

@@ -148,7 +148,7 @@ namespace Controllers
                     .Take(pageSize)
                     .ToListAsync();
 
-                // Provera za prazne podatke
+            
                 if (!paginatedAds.Any())
                 {
                     return Ok(new
@@ -158,7 +158,7 @@ namespace Controllers
                     });
                 }
 
-                // Vraćanje rezultata
+ 
                 return Ok(new
                 {
                     count = totalCount,
@@ -167,7 +167,6 @@ namespace Controllers
             }
             catch (Exception ex)
             {
-                // Vraćanje greške sa statusom 500
                 return StatusCode(500, ex.Message);
             }
         }
@@ -187,14 +186,14 @@ namespace Controllers
         [Authorize]
         public IActionResult Patch(int id, [FromForm] AutomobileUpdateRequest request)
         {
-            // Dohvati automobil iz baze
+           
             var automobile = _service.GetById(id);
             if (automobile == null)
             {
                 return NotFound("Automobile not found.");
             }
 
-            // Ažuriraj samo polja koja su poslana u zahtevu
+        
             if (!string.IsNullOrWhiteSpace(request.Title))
                 automobile.Title = request.Title;
 
@@ -264,10 +263,10 @@ namespace Controllers
             {
                 foreach (var image in request.Images)
                 {
-                    // Prenesite sliku i dobijte njen URL
+                   
                     var imagePath = FileUploadHelper.UploadProfilePicture(image);
 
-                    // Proverite da li je URL već u kolekciji pre dodavanja
+                   
                     if (!automobile.Images.Any(img => img.ImageUrl == imagePath))
                     {
                         var automobileAdImage = new AutoTrade.Model.AutomobileAdImage
@@ -281,9 +280,6 @@ namespace Controllers
                 }
             }
 
-
-
-            // Ažuriraj automobil u bazi
             _automobileAdService.Update(id, automobile);
 
             return Ok(automobile);
