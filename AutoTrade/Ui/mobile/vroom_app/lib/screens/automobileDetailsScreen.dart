@@ -228,12 +228,12 @@ class _AutomobileDetailsScreenState extends State<AutomobileDetailsScreen> {
                     ),
                   );
                 } else {
-                  return const Center(child: Text('No data available'));
+                  return const Center(child: Text('Nema dostupnih podataka'));
                 }
               },
             );
           } else {
-            return const Center(child: Text('No data available'));
+            return const Center(child: Text('Nema dostupnih podataka'));
           }
         },
       ),
