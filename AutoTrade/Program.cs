@@ -28,20 +28,6 @@ builder.Services.AddCors(options =>
 });
 
 
-// Add services to the container.
-
-
-
-// builder.Services.AddScoped<EmailService>();  // EmailService
-// builder.Services.AddScoped<RabbitMqListener>();   // RabbitMqListener
-// builder.Services.AddTransient<ReservationApprovalEmail>();
-
-// builder.Services.AddSingleton<IBus>(provider =>
-//     RabbitHutch.CreateBus("host=localhost"));
-
-
-
-// Dio koji rjesava kad ima poveznica u tabelama za dupliranje objekata IgnoreCycles
 builder.Services.AddControllers().AddJsonOptions(options =>
 {
     options.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles;
@@ -149,15 +135,5 @@ using (var scope = app.Services.CreateScope())
         dbContext.SaveChanges();
     }
 }
-
-
-// RabitMQ scope
-// using (var scope = app.Services.CreateScope())
-// {
-//     var listener = scope.ServiceProvider.GetRequiredService<RabbitMqListener>();
-//     listener.StartListening();  // Start listening for RabbitMQ messages
-
-// context.Database.Migrate(); // ✅ Automatski izvršava migracije
-// }
 
 app.Run();
