@@ -1,0 +1,54 @@
+version: '3.4'
+
+services:
+  rabbitmq:
+    image: rabbitmq:management
+    restart: on-failure
+    ports:
+      - "15672:15672"
+      - "5672:5672"
+    volumes:
+      - rabbitmq_data:/var/lib/rabbitmq
+    networks:
+      - autotrade
+
+  autotrade-sql:
+    image: mcr.microsoft.com/azure-sql-edge:latest
+    restart: unless-stopped
+    environment:
+      - ACCEPT_EULA=Y
+      - SA_PASSWORD=Password1234!
+      - MSSQL_PID=Developer
+    ports:
+      - "1401:1433"
+    networks:
+      - autotrade
+
+  autotrade-api:
+    restart: unless-stopped
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "0.0.0.0:5194:5194"
+    volumes:
+      - ./uploads:/app/uploads
+    environment:
+      - ConnectionStrings__DefaultConnection=Server=autotrade-sql,1433;Database=160120;User=SA;Password=Password1234!;ConnectRetryCount=0;TrustServerCertificate=True
+      - ASPNETCORE_ENVIRONMENT=Development
+      - RabbitMQ__Host=rabbitmq
+      - RabbitMQ__Username=guest
+      - RabbitMQ__Password=guest
+      - RABBITMQ_VIRTUALHOST=/
+    networks:
+      - autotrade
+    depends_on:
+      - autotrade-sql
+      - rabbitmq
+
+networks:
+  autotrade:
+    driver: bridge
+
+volumes:
+  rabbitmq_data:

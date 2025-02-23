@@ -62,11 +62,6 @@ namespace AutoTrade.Services.Database
         public DbSet<PaymentTransaction> PaymentTransactions { get; set; }
 
 
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        {
-            optionsBuilder.UseSqlServer("Data Source=127.0.0.1;Initial Catalog=AutoTrade; user=SA; Password=MyPass@word; TrustServerCertificate=True;");
-        }
-
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<User>()
@@ -169,6 +164,7 @@ namespace AutoTrade.Services.Database
             modelBuilder.Entity<Favorite>().HasData(DefaultFavoriteData.Favorites);
              modelBuilder.Entity<Comment>().HasData(DefaultCommentData.Comments);
             modelBuilder.Entity<Reservation>().HasData(DefaultReservationData.Reservations);
+
          
 
             // #endregion

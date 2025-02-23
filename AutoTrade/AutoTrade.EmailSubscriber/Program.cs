@@ -18,19 +18,20 @@ namespace AutoTrade.EmailSubscriber
                     options.UseSqlServer(connectionString);
                 });
 
-                    services.AddSingleton<IBus>(_ =>
-                    {
-                        var rabbitHost = Environment.GetEnvironmentVariable("RABBITMQ_HOST") ?? "localhost";
-                        var username = Environment.GetEnvironmentVariable("RABBITMQ_USERNAME") ?? "guest";
-                        var password = Environment.GetEnvironmentVariable("RABBITMQ_PASSWORD") ?? "guest";
-                        var virtualHost = Environment.GetEnvironmentVariable("RABBITMQ_VIRTUALHOST") ?? "/";
+                    services.AddSingleton<IBus>(sp =>
+                     {
+                         var config = hostContext.Configuration;
+                         var rabbitHost = config["RabbitMQ:Host"] ?? "rabbitmq";
+                         var username = config["RabbitMQ:Username"] ?? "guest";
+                         var password = config["RabbitMQ:Password"] ?? "guest";
+                         var virtualHost = config["RabbitMQ:VirtualHost"] ?? "/";
+                    
+                         var connString = $"host={rabbitHost};virtualHost={virtualHost};username={username};password={password}" +
+                                          ";requestedHeartbeat=60;timeout=60;publisherConfirms=true;persistentMessages=true;prefetchcount=1";
+                    
+                         return RabbitHutch.CreateBus(connString);
+                     });
 
-                        var connString =
-                            $"host={rabbitHost};virtualHost={virtualHost};username={username};password={password}" +
-                            ";requestedHeartbeat=60;timeout=60;publisherConfirms=true;persistentMessages=true;prefetchcount=1";
-
-                        return RabbitHutch.CreateBus(connString);
-                    });
 
                     services.AddScoped<ReservationApprovalEmail>();
 
