@@ -1,8 +1,10 @@
+import 'package:desktop_app/helpers/PdfHelper.dart';
 import 'package:desktop_app/helpers/PriceHelper.dart';
 import 'package:desktop_app/services/Statistics.dart';
 import 'package:flutter/material.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:desktop_app/models/statistics.dart';
+import 'package:open_file/open_file.dart';
 
 class StatisticsScreen extends StatefulWidget {
   @override
@@ -22,7 +24,9 @@ class _StatisticsScreenState extends State<StatisticsScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text("Statistika aplikacije")),
+      appBar: AppBar(
+        title: Text("Statistika aplikacije"),
+      ),
       body: FutureBuilder<Statistics>(
         future: _statisticsFuture,
         builder: (context, snapshot) {
@@ -59,24 +63,65 @@ class _StatisticsScreenState extends State<StatisticsScreen> {
   }
 
   Widget _buildSummaryCards(Statistics statistics) {
-    return SingleChildScrollView(
-      scrollDirection: Axis.horizontal,
-      child: Wrap(
-        spacing: 10,
-        runSpacing: 10,
-        alignment: WrapAlignment.center,
-        children: [
-          _buildCard("Ukupno oglasa", statistics.totalAutomobileAds.toString()),
-          _buildCard("Ukupno korisnika", statistics.totalUsers.toString()),
-          _buildCard("Registrovanih u zadnjih 5 godina",
-              statistics.usersRegisteredLastFiveYear.toString()),
-          _buildCard("Ukupno komentara", statistics.totalComments.toString()),
-          _buildCard("Ukupno pregleda oglasa",
-              statistics.totalAutomobileViews.toString()),
-          _buildCard(
-              "Izdvojenih oglasa", statistics.highlightedCars.toString()),
-        ],
-      ),
+    return Row(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Expanded(
+          child: SingleChildScrollView(
+            scrollDirection: Axis.horizontal,
+            child: Wrap(
+              spacing: 10,
+              runSpacing: 10,
+              alignment: WrapAlignment.center,
+              children: [
+                _buildCard(
+                    "Ukupno oglasa", statistics.totalAutomobileAds.toString()),
+                _buildCard(
+                    "Ukupno korisnika", statistics.totalUsers.toString()),
+                _buildCard("Registrovanih u zadnjih 5 godina",
+                    statistics.usersRegisteredLastFiveYear.toString()),
+                _buildCard(
+                    "Ukupno komentara", statistics.totalComments.toString()),
+                _buildCard("Ukupno pregleda oglasa",
+                    statistics.totalAutomobileViews.toString()),
+                _buildCard(
+                    "Izdvojenih oglasa", statistics.highlightedCars.toString()),
+              ],
+            ),
+          ),
+        ),
+        const SizedBox(width: 10),
+        Tooltip(
+          message: "Kliknite za preuzimanje izvjestaja",
+          child: ElevatedButton.icon(
+            icon: Icon(Icons.download),
+            label: Text("Skini PDF"),
+            onPressed: () async {
+              final pdfPath = await PdfHelper.generateStatisticsPdf(statistics);
+
+              if (!mounted) return;
+              showDialog(
+                context: context,
+                builder: (context) => AlertDialog(
+                  title: Text("PDF generisan!"),
+                  content: SelectableText(
+                      "PDF izvještaj je sačuvan na lokaciji:\n$pdfPath"),
+                  actions: [
+                    TextButton(
+                      onPressed: () => Navigator.pop(context),
+                      child: Text("Zatvori"),
+                    ),
+                    TextButton(
+                      onPressed: () => OpenFile.open(pdfPath),
+                      child: Text("Otvori PDF"),
+                    ),
+                  ],
+                ),
+              );
+            },
+          ),
+        ),
+      ],
     );
   }
 
