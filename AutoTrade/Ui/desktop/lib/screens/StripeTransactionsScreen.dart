@@ -1,9 +1,13 @@
-import 'package:desktop_app/helpers/DateHelper.dart';
+import 'package:desktop_app/helpers/StripePdfHelper.dart';
 import 'package:flutter/material.dart';
-import 'package:desktop_app/services/PaymentService.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
+import 'package:open_file/open_file.dart';
+
 import '../components/PieChartComponent.dart';
 import 'package:desktop_app/models/ChartModels.dart';
+import 'package:desktop_app/services/PaymentService.dart';
+
+import 'package:desktop_app/helpers/DateHelper.dart';
 
 class StripeTransactionsScreen extends StatefulWidget {
   @override
@@ -27,10 +31,47 @@ class _StripeTransactionsScreenState extends State<StripeTransactionsScreen> {
     });
   }
 
+  Future<void> _generateAndShowPdf(List<dynamic> transactions) async {
+    try {
+      final pdfPath =
+          await StripePdfHelper.generateStripeTransactionsPdf(transactions);
+
+      if (!mounted) return;
+
+      showDialog(
+        context: context,
+        builder: (context) => AlertDialog(
+          title: const Text("PDF generisan!"),
+          content:
+              SelectableText("PDF izvještaj je sačuvan na lokaciji:\n$pdfPath"),
+          actions: [
+            TextButton(
+              onPressed: () => Navigator.pop(context),
+              child: const Text("Zatvori"),
+            ),
+            TextButton(
+              onPressed: () {
+                OpenFile.open(pdfPath);
+              },
+              child: const Text("Otvori PDF"),
+            ),
+          ],
+        ),
+      );
+    } catch (e) {
+      print("Greška prilikom kreiranja PDF-a: $e");
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text("Neuspješno kreiranje PDF-a: $e")),
+      );
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('Stripe Analitika')),
+      appBar: AppBar(
+        title: Text('Stripe Analitika'),
+      ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: FutureBuilder<List<dynamic>>(
@@ -45,10 +86,21 @@ class _StripeTransactionsScreenState extends State<StripeTransactionsScreen> {
             }
 
             final transactions = snapshot.data!;
-            print('transactions::: ${transactions}');
             return Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
+                Tooltip(
+                  message: "Kliknite za preuzimanje izvještaja",
+                  child: ElevatedButton.icon(
+                    icon: Icon(Icons.download),
+                    label: Text("Skini PDF"),
+                    onPressed: () async {
+                      // Just call the helper function
+                      _generateAndShowPdf(transactions);
+                    },
+                  ),
+                ),
+                const SizedBox(height: 20),
                 _buildSummary(transactions),
                 const SizedBox(height: 20),
                 Expanded(
