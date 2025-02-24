@@ -38,7 +38,7 @@ class ConfirmationDialog extends StatelessWidget {
             Fluttertoast.showToast(
               msg: successMessage,
               toastLength: Toast.LENGTH_SHORT,
-              gravity: ToastGravity.BOTTOM,
+              gravity: ToastGravity.CENTER,
               timeInSecForIosWeb: 3,
               backgroundColor: Colors.green,
               textColor: Colors.white,
