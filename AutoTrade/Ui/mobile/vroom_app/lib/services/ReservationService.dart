@@ -137,7 +137,6 @@ class ReservationService {
       queryParameters: queryParams,
     );
 
-
     final headers = await AuthService.getAuthHeaders();
 
     final response = await http.get(uri, headers: headers);
@@ -188,15 +187,44 @@ class ReservationService {
       headers: headers,
     );
 
-    print('rul ${url}');
-
-    print('reservationId ${reservationId}');
-
     if (response.statusCode == 200) {
       print('Reservation rejected successfully.');
     } else {
       throw Exception(
           'Failed to reject reservation. Status Code: ${response.statusCode}');
+    }
+  }
+
+  Future<void> updateReservation({
+    required int reservationId,
+    required DateTime newReservationDate,
+    required int userId,
+    required int automobileAdId,
+  }) async {
+    final url = Uri.parse('$baseUrl/Reservation/$reservationId');
+    final body = {
+      "reservationDate": newReservationDate.toIso8601String(),
+      "userId": userId,
+      "automobileAdId": automobileAdId,
+    };
+
+    final headers = await AuthService.getAuthHeaders();
+    final mergedHeaders = {
+      ...headers,
+      'Content-Type': 'application/json',
+      'Accept': 'text/plain',
+    };
+
+    final response = await http.put(
+      url,
+      headers: mergedHeaders,
+      body: jsonEncode(body),
+    );
+
+    if (response.statusCode >= 200 && response.statusCode < 300) {
+      print("Reservation updated successfully.");
+    } else {
+      throw Exception("Update reservation failed");
     }
   }
 }
