@@ -364,7 +364,7 @@ namespace AutoTrade.Services
                                 Price = (float)automobile.Price,
                                 YearOfManufacture = automobile.YearOfManufacture,
                                 Milage = (float)automobile.Milage,
-                                FuelType = automobile.FuelType?.Name ?? "Unknown",
+                                FuelType = automobile.FuelType?.Name ?? "",
                                 ViewsCount = automobile.ViewsCount,
                                 IsHighlighted = automobile.IsHighlighted ?? false
                             });
@@ -428,7 +428,7 @@ namespace AutoTrade.Services
                         Price = (float)automobile.Price,
                         YearOfManufacture = automobile.YearOfManufacture,
                         Milage = (float)automobile.Milage,
-                        FuelType = automobile.FuelType?.Name ?? "Unknown",
+                        FuelType = automobile.FuelType?.Name ?? "",
                         ViewsCount = automobile.ViewsCount,
                         IsHighlighted = automobile.IsHighlighted ?? false
                     });
