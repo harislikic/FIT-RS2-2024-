@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:vroom_app/components/Reservation/ReservationCalendarView.dart';
 import 'package:vroom_app/components/Reservation/ReservationModal.dart';
-import 'package:vroom_app/components/Reservation/EditReservationModal.dart'; // <--- We'll create this new widget below
+import 'package:vroom_app/components/Reservation/EditReservationModal.dart';
 import 'package:vroom_app/components/shared/ToastUtils.dart';
 import 'package:vroom_app/models/reservation.dart';
 import 'package:vroom_app/services/AuthService.dart';
@@ -143,8 +143,6 @@ class _ReservationCalendarState extends State<ReservationCalendar> {
     try {
       final reservationService = ReservationService();
       await reservationService.deleteReservation(reservationId: reservationId);
-
-      ToastUtils.showToast(message: 'Rezervacija uspješno obrisana.');
 
       final updatedReservations = await reservationService
           .getReservationsByAutomobileId(automobileAdId: widget.automobileAdId);

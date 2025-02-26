@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:vroom_app/components/ConfirmationDialog.dart';
 import 'package:vroom_app/models/reservation.dart';
 import 'package:intl/intl.dart';
 
@@ -66,18 +67,13 @@ class _EditReservationModalState extends State<EditReservationModal> {
                       }
                     : null,
               ),
-
-              // Delete
               ElevatedButton.icon(
                 icon: const Icon(Icons.delete, color: Colors.red),
                 style: ElevatedButton.styleFrom(
                   backgroundColor: Colors.white,
                 ),
                 label: const Text('Obriši'),
-                onPressed: () {
-                  widget.onDelete();
-                  Navigator.pop(context);
-                },
+                onPressed: _showDeleteConfirmation,
               ),
             ],
           ),
@@ -113,5 +109,21 @@ class _EditReservationModalState extends State<EditReservationModal> {
         a.day == b.day &&
         a.hour == b.hour &&
         a.minute == b.minute;
+  }
+
+  void _showDeleteConfirmation() {
+    showDialog(
+      context: context,
+      builder: (context) => ConfirmationDialog(
+        title: "Potvrda brisanja",
+        content: "Da li ste sigurni da želite obrisati ovu rezervaciju?",
+        onConfirm: () {
+          widget.onDelete();
+          Navigator.of(context).pop(); 
+        },
+        onCancel: () {},
+        successMessage: "Rezervacija je uspješno obrisana!",
+      ),
+    );
   }
 }

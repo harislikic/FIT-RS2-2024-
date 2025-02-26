@@ -22,7 +22,7 @@ class ToastUtils {
 
   static void showErrorToast({
     required String message,
-    ToastGravity gravity = ToastGravity.CENTER,
+    ToastGravity gravity = ToastGravity.BOTTOM,
     double fontSize = 16.0,
   }) {
     showToast(
