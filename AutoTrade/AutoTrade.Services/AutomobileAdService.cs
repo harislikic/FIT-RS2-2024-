@@ -410,7 +410,7 @@ namespace AutoTrade.Services
             var excludedIds = userFavorites.Concat(userReservations).Distinct();
 
             var automobiles = Context.AutomobileAds
-                .Where(ad => !excludedIds.Contains(ad.Id))
+               .Where(ad => !excludedIds.Contains(ad.Id) && ad.Status != "Pending" && ad.Status != "Done")
                   .AsNoTracking()
                 .Include(x => x.Images)
                 .ToList();
@@ -437,7 +437,6 @@ namespace AutoTrade.Services
             }
 
             var finalResult = predictionResult
-              .OrderByDescending(x => x.Item2)
               .Select(x => x.Item1)
               .Take(8)
               .ToList();

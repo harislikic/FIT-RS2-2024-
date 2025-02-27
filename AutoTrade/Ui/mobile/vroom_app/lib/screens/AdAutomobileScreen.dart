@@ -334,23 +334,25 @@ class _AddAutomobileScreenState extends State<AddAutomobileScreen> {
               ),
               TextFormField(
                 decoration: const InputDecoration(labelText: 'Kubikaža'),
-                onSaved: (value) => _cubicCapacity =
-                    double.tryParse(value?.replaceAll(',', '.') ?? '0'),
+                onSaved: (value) {
+                  if (value != null) {
+                    _cubicCapacity = double.tryParse(value) ?? 0.0;
+                  }
+                },
                 validator: (value) {
                   if (value == null || value.isEmpty) {
                     return 'Unesi kubikažu';
                   }
 
-                  // RegExp koji dozvoljava brojeve sa decimalnim zarezom (npr. "1,9")
-                  final regExp = RegExp(r'^\d+,\d+$');
+                  final regExp = RegExp(r'^\d+(\.\d+)?$');
 
                   if (!regExp.hasMatch(value)) {
-                    return 'Kubikaža mora biti u formatu X,Y (npr. 1,9)';
+                    return 'Kubikaža mora biti u formatu X.Y (npr. 1.9)';
                   }
 
-                  return null; // Validan unos
+                  return null;
                 },
-                keyboardType: TextInputType.number,
+                keyboardType: TextInputType.numberWithOptions(decimal: true),
               ),
               TextFormField(
                 decoration: const InputDecoration(labelText: 'Konjskih snaga'),

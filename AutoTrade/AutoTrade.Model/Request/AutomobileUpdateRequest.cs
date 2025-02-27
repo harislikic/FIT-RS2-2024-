@@ -24,7 +24,7 @@ namespace Request
         public List<int>? EquipmentIds { get; set; } = new List<int>();
         public int? EnginePower { get; set; }
         public int? NumberOfDoors { get; set; }
-        public int? CubicCapacity { get; set; }
+        public double? CubicCapacity { get; set; }
         public int? HorsePower { get; set; }
         public string? Color { get; set; }
         public int? VehicleConditionId { get; set; }
