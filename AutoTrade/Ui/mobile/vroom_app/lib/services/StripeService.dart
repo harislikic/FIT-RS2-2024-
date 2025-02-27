@@ -8,7 +8,12 @@ import 'package:vroom_app/services/config.dart';
 import 'AuthService.dart';
 
 class StripeService {
-  String stripeSecretKey = dotenv.env['STRIPE_SECRET_KEY'] ?? '';
+  String stripeSecretKey =
+      const String.fromEnvironment('STRIPE_SECRET_KEY', defaultValue: '')
+              .isNotEmpty
+          ? const String.fromEnvironment('STRIPE_SECRET_KEY')
+          : dotenv.env['STRIPE_SECRET_KEY'] ?? '';
+  // String stripeSecretKey = dotenv.env['STRIPE_SECRET_KEY'] ?? '';
 
   Future<void> makePayment({
     required double amount,

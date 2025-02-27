@@ -19,6 +19,10 @@ void printConfig() {
 //   --dart-define=API_HOST_IOS=http://localhost \
 //   --dart-define=API_PORT=5194
 
+
+//  --dart-define=STRIPE_SECRET_KEY=sk_test_... \
+//   --dart-define=STRIPE_PUBLISHABLE_KEY=pk_test_...
+
 //Gradnja za Android
 
 // flutter run \

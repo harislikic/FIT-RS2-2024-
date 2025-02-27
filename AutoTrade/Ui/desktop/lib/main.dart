@@ -8,16 +8,20 @@ import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_stripe/flutter_stripe.dart';
 
 void main() async {
-  WidgetsFlutterBinding
-      .ensureInitialized();
+  WidgetsFlutterBinding.ensureInitialized();
 
   try {
     await dotenv.load(fileName: ".env");
   } catch (e) {
     print("⚠️ Greška pri učitavanju `.env`: $e");
   }
+  const stripePublishableKeyFromDefine =
+      String.fromEnvironment('STRIPE_PUBLISHABLE_KEY');
+  final stripePublishableKey = stripePublishableKeyFromDefine.isNotEmpty
+      ? stripePublishableKeyFromDefine
+      : dotenv.env['STRIPE_PUBLISHABLE_KEY'] ?? '';
 
-  String stripePublishableKey = dotenv.env['STRIPE_PUBLISHABLE_KEY'] ?? '';
+  // String stripePublishableKey = dotenv.env['STRIPE_PUBLISHABLE_KEY'] ?? '';
   if (stripePublishableKey.isEmpty) {
     print("⚠️ Upozorenje: `STRIPE_PUBLISHABLE_KEY` nije pronađen!");
   } else {
@@ -40,9 +44,8 @@ class MyApp extends StatelessWidget {
       ),
       home: const SplashScreen(),
       routes: {
-        '/admin-panel': (context) =>
-            const AdminPanelScreen(),
-        '/login': (context) => const LoginScreen(), 
+        '/admin-panel': (context) => const AdminPanelScreen(),
+        '/login': (context) => const LoginScreen(),
       },
     );
   }
@@ -54,23 +57,19 @@ class InitialScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return FutureBuilder<bool>(
-      future: AuthService
-          .checkIfUserIsLoggedIn(),
+      future: AuthService.checkIfUserIsLoggedIn(),
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
-         
           return const Scaffold(
             body: Center(
               child: CircularProgressIndicator(),
             ),
           );
         } else if (snapshot.hasData && snapshot.data == true) {
-          
           Future.microtask(() {
             Navigator.pushReplacementNamed(context, '/admin-panel');
           });
         } else {
-         
           Future.microtask(() {
             Navigator.pushReplacementNamed(context, '/login');
           });

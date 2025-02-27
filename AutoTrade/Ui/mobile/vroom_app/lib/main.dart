@@ -21,9 +21,15 @@ void main() async {
     print("⚠️ Greška pri učitavanju `.env`: $e");
   }
 
-  printConfig(); // Proveri da li je API i Stripe podešen ispravno
+  printConfig();
 
-  String stripePublishableKey = dotenv.env['STRIPE_PUBLISHABLE_KEY'] ?? '';
+  const stripePublishableKeyFromDefine =
+      String.fromEnvironment('STRIPE_PUBLISHABLE_KEY');
+  final stripePublishableKey = stripePublishableKeyFromDefine.isNotEmpty
+      ? stripePublishableKeyFromDefine
+      : dotenv.env['STRIPE_PUBLISHABLE_KEY'] ?? '';
+
+  // String stripePublishableKey = dotenv.env['STRIPE_PUBLISHABLE_KEY'] ?? '';
   Stripe.publishableKey = stripePublishableKey;
   //Stripe.publishableKey = ApiConfig.publishableKey;
   runApp(const MyApp());
@@ -50,10 +56,7 @@ class MyApp extends StatelessWidget {
           ),
         ),
       ),
-
-      // 2. Dodajemo routeObserver u navigatorObservers
       navigatorObservers: [routeObserver],
-
       initialRoute: '/',
       routes: {
         '/': (context) => const MainScreen(),
