@@ -8,8 +8,7 @@ To set up the project using Docker, follow these steps:
 1. Open a terminal inside the solution folder.
 2. Run the following commands:
    ```sh
-   docker-compose build
-   docker-compose up
+   docker-compose -d --build up
    ```
 
 ---
