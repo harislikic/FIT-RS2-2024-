@@ -37,8 +37,6 @@ class PaymentService {
           ? const String.fromEnvironment('STRIPE_SECRET_KEY')
           : dotenv.env['STRIPE_SECRET_KEY'] ?? '';
 
-  // final String _stripeSecretKey = dotenv.env['STRIPE_SECRET_KEY']!;
-
   Future<List<dynamic>> getStripeTransactions() async {
     const String url = 'https://api.stripe.com/v1/charges?limit=300';
 

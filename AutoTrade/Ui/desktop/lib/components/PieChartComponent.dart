@@ -36,7 +36,6 @@ class PieChartComponent extends StatelessWidget {
               style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
             ),
             const SizedBox(height: 8),
-            // Dodan prikaz ukupnog broja i uspješnih transakcija
             if (chartType == 'status') ...[
               Text(
                 'Ukupno transakcija: $totalTransactions',

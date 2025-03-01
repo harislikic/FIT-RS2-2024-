@@ -19,7 +19,7 @@ void printConfig() {
 //   --dart-define=API_HOST_IOS=http://localhost \
 //   --dart-define=API_PORT=5194
 
-
+// Stripe keys
 //  --dart-define=STRIPE_SECRET_KEY=sk_test_... \
 //   --dart-define=STRIPE_PUBLISHABLE_KEY=pk_test_...
 
@@ -40,3 +40,9 @@ void printConfig() {
 // flutter run \
 //   --dart-define=API_HOST_ANDROID=http://192.168.1.24 \
 //   --dart-define=API_PORT=5194
+
+// flutter build apk \
+//   --dart-define=API_HOST_IOS=http://localhost \
+//   --dart-define=API_PORT=5194 \
+//   --dart-define=STRIPE_SECRET_KEY=sk_test_... \
+//   --dart-define=STRIPE_PUBLISHABLE_KEY=pk_test_...

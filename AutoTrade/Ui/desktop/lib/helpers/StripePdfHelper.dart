@@ -19,7 +19,6 @@ class StripePdfHelper {
     Map<String, int> brandStats = {};
 
     for (var transaction in transactions) {
-      // Amount & currency
       String currency = transaction['currency'].toUpperCase();
       double amount = (transaction['amount'] / 100).toDouble();
       currencyStats.putIfAbsent(currency, () => {'amount': 0, 'count': 0});

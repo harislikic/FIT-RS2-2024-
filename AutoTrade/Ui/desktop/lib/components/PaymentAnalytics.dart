@@ -102,12 +102,12 @@ class _PaymentAnalyticsState extends State<PaymentAnalytics> {
               future: _paymentData,
               builder: (context, snapshot) {
                 if (snapshot.connectionState == ConnectionState.waiting) {
-                  return Center(child: CircularProgressIndicator());
+                  return const Center(child: CircularProgressIndicator());
                 } else if (snapshot.hasError) {
                   return Center(child: Text('Greška: ${snapshot.error}'));
                 } else if (!snapshot.hasData ||
                     snapshot.data!.transactions.isEmpty) {
-                  return Center(child: Text('Nema pronađenih transakcija'));
+                  return const Center(child: Text('Nema pronađenih transakcija'));
                 }
 
                 final data = snapshot.data!;
@@ -116,26 +116,26 @@ class _PaymentAnalyticsState extends State<PaymentAnalytics> {
                     children: [
                       Text(
                         'Ukupan broj transakcija: ${data.totalRecords}',
-                        style: TextStyle(
+                        style: const TextStyle(
                             fontSize: 18, fontWeight: FontWeight.bold),
                       ),
                       Text(
                         'Ukupan iznos: ${data.totalAmount.toStringAsFixed(2)}',
-                        style: TextStyle(
+                        style: const TextStyle(
                             fontSize: 18, fontWeight: FontWeight.bold),
                       ),
 
-                      SizedBox(height: 20),
+                      const SizedBox(height: 20),
 
                       _buildCurrencyTotals(data),
 
-                      SizedBox(height: 20),
+                      const SizedBox(height: 20),
 
                       Expanded(
                         child: Row(
                           children: [
                             Expanded(child: _buildBarChart(data)),
-                            SizedBox(width: 16),
+                            const SizedBox(width: 16),
                             Expanded(child: _buildPieChart(data)),
                           ],
                         ),
@@ -169,7 +169,7 @@ class _PaymentAnalyticsState extends State<PaymentAnalytics> {
           children: currencyTotals.entries.map((entry) {
             return Text(
               '${entry.key}: ${entry.value.toStringAsFixed(2)}',
-              style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+              style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
             );
           }).toList(),
         ),

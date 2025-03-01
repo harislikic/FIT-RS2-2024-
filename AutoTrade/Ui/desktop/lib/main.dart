@@ -21,7 +21,6 @@ void main() async {
       ? stripePublishableKeyFromDefine
       : dotenv.env['STRIPE_PUBLISHABLE_KEY'] ?? '';
 
-  // String stripePublishableKey = dotenv.env['STRIPE_PUBLISHABLE_KEY'] ?? '';
   if (stripePublishableKey.isEmpty) {
     print("⚠️ Upozorenje: `STRIPE_PUBLISHABLE_KEY` nije pronađen!");
   } else {
