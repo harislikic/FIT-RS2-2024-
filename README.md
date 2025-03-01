@@ -26,6 +26,14 @@ To set up and run the Flutter desktop application, execute the following command
 flutter pub get
 flutter run
 ```
+Building the Windows Application
+```sh
+flutter build windows --debug
+```
+- Once the build is complete, the EXE file and required resources will be located in:
+folder-desktop-app/build/windows/x64/runner/Debug/
+
+Double-click the EXE file in the above folder to launch the application.
 
 **Note:** When prompted, choose option **1 (Windows)**.
 
@@ -84,9 +92,8 @@ To test sending email notifications via RabbitMQ:
 ---
 
 ## Additional Notes
-- Ensure RabbitMQ is running before testing email notifications.
-- Use **Docker** for setting up the backend services.
 - **Stripe test cards** can be used for payment testing without actual transactions.
+- Environment configuration files (.env) for both desktop and mobile applications are stored in a ZIP archive, protected with the password "fit". To extract and use them, run:
 
 Feel free to contribute or report issues via the repository's issue tracker!
 
