@@ -220,7 +220,7 @@ namespace AutoTrade.Services
         public City GetCityById(int cityId)
         {
             return Context.Cities
-                .Include(c => c.Canton) // Ako je potrebno učitati i Canton
+                .Include(c => c.Canton)
                 .FirstOrDefault(c => c.Id == cityId);
         }
 

@@ -42,7 +42,7 @@ namespace Helpers
                            "AutoTrade Tim"
                 };
 
-                // Pošalji email koristeći SMTP klijent
+            
                 using (var client = new MailKit.Net.Smtp.SmtpClient())
                 {
                     await client.ConnectAsync("smtp.gmail.com", 587, MailKit.Security.SecureSocketOptions.StartTls);
