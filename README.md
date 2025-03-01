@@ -75,7 +75,7 @@ To test sending email notifications via RabbitMQ:
 1. **Create a profile** with your email address.
 2. **Search for a car** in the system, e.g., `'Audi A3 2018'`.
 3. **Make a reservation** for the selected car.
-4. **Log in** to the admin account:
+4. **Log in** to the admin account on mobile app:
    - **Username:** `admin`
    - **Password:** `password123`
 5. **Go to the "My Profile" section**, find your reservation, and approve it.
