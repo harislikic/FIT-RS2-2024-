@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:vroom_app/components/shared/ToastUtils.dart';
@@ -27,6 +28,9 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
   bool isLoadingCities = true;
   String? profileImagePath;
   bool isLocalImage = false;
+  final _formKey = GlobalKey<FormState>();
+
+  bool isSaveButtonDisabled = true;
 
   @override
   void initState() {
@@ -34,6 +38,14 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
     editedProfile = Map.from(widget.userProfile);
     profileImagePath = widget.userProfile["profilePicture"];
     fetchCities();
+  }
+
+  void _checkIfChangesMade() {
+    bool changesMade =
+        !mapEquals(editedProfile, widget.userProfile) || isLocalImage;
+    setState(() {
+      isSaveButtonDisabled = !changesMade;
+    });
   }
 
   Future<void> fetchCities() async {
@@ -74,15 +86,18 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
         profileImagePath = image.path;
         isLocalImage = true;
         editedProfile["profilePicture"] = image.path;
+        _checkIfChangesMade();
       });
-      print("Selected image path: $profileImagePath");
     }
   }
 
   void _saveChanges() async {
+    if (!_formKey.currentState!.validate()) {
+      return;
+    }
+
     try {
       editedProfile["cityId"] = selectedCity?.id;
-
       editedProfile.remove("city");
 
       File? profilePictureFile;
@@ -150,45 +165,54 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text("Uredi profil"),
-        backgroundColor: Colors.blueGrey[900],
-        iconTheme: const IconThemeData(
-          color: Colors.blueAccent,
-        ),
-        actions: [
-          TextButton.icon(
-            icon: const Icon(
-              Icons.save,
-              color: Colors.blueAccent,
-            ),
-            label: const Text(
-              'Sačuvaj',
-              style: TextStyle(color: Colors.blueAccent),
-            ),
-            onPressed: _saveChanges,
+        appBar: AppBar(
+          title: const Text("Uredi profil"),
+          backgroundColor: Colors.blueGrey[900],
+          iconTheme: const IconThemeData(
+            color: Colors.blueAccent,
           ),
-        ],
-      ),
-      body: isLoadingCities
-          ? const Center(child: CircularProgressIndicator())
-          : SingleChildScrollView(
-              padding: const EdgeInsets.all(16.0),
-              child: Column(
-                children: [
-                  _buildProfileImage(),
-                  _buildEditableField("Ime", "firstName"),
-                  _buildEditableField("Prezime", "lastName"),
-                  _buildEditableField("Email", "email"),
-                  _buildEditableField("Telefon", "phoneNumber"),
-                  _buildEditableField("Adresa", "adress"),
-                  _buildDatePickerField("Datum rođenja", "dateOfBirth"),
-                  const SizedBox(height: 16),
-                  _buildCityDropdown(),
-                ],
+          actions: [
+            TextButton.icon(
+              icon: Icon(
+                Icons.save,
+                color: isSaveButtonDisabled
+                    ? Colors.grey
+                    : Colors.blueAccent, // Siva ako je disabled
               ),
+              label: Text(
+                'Sačuvaj',
+                style: TextStyle(
+                  color: isSaveButtonDisabled
+                      ? Colors.grey
+                      : Colors.blueAccent, // Siva ako je disabled
+                ),
+              ),
+              onPressed: isSaveButtonDisabled ? null : _saveChanges,
             ),
-    );
+          ],
+        ),
+        body: isLoadingCities
+            ? const Center(child: CircularProgressIndicator())
+            : SingleChildScrollView(
+                padding: const EdgeInsets.all(16.0),
+                child: Form(
+                  key: _formKey,
+                  child: Column(
+                    children: [
+                      _buildProfileImage(),
+                      _buildEditableField("Ime", "firstName"),
+                      _buildEditableField("Prezime", "lastName"),
+                      _buildEditableField("Email", "email", isEmail: true),
+                      _buildEditableField("Telefon", "phoneNumber",
+                          isPhone: true),
+                      _buildEditableField("Adresa", "adress"),
+                      _buildDatePickerField("Datum rođenja", "dateOfBirth"),
+                      const SizedBox(height: 16),
+                      _buildCityDropdown(),
+                    ],
+                  ),
+                ),
+              ));
   }
 
   Widget _buildProfileImage() {
@@ -215,17 +239,33 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
     );
   }
 
-  Widget _buildEditableField(String label, String key) {
+  Widget _buildEditableField(String label, String key,
+      {bool isEmail = false, bool isPhone = false}) {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 8.0),
-      child: TextField(
+      child: TextFormField(
         decoration: InputDecoration(
           labelText: label,
           border: const OutlineInputBorder(),
         ),
-        controller: TextEditingController(text: editedProfile[key]),
+        initialValue: editedProfile[key],
+        validator: (value) {
+          if (value == null || value.isEmpty) {
+            return '$label je obavezno polje';
+          }
+          if (isEmail &&
+              !RegExp(r'^[^@\s]+@[^@\s]+\.[^@\s]+').hasMatch(value)) {
+            return 'Unesite validan email';
+          }
+          if (isPhone && !RegExp(r'^[0-9]{9,12}$').hasMatch(value)) {
+            return 'Unesite validan broj telefona\n(Min 8 - Max 12 cifara)';
+          }
+
+          return null;
+        },
         onChanged: (value) {
           editedProfile[key] = value;
+          _checkIfChangesMade();
         },
       ),
     );
@@ -234,24 +274,30 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
   Widget _buildCityDropdown() {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 8.0),
-      child: DropdownButtonFormField<City>(
-        value: selectedCity,
-        isExpanded: true,
-        decoration: const InputDecoration(
-          labelText: "Grad",
-          border: OutlineInputBorder(),
+      child: DropdownButtonHideUnderline(
+        // Hides the default underline
+        child: DropdownButtonFormField<City>(
+          value: selectedCity,
+          isExpanded: true,
+          decoration: const InputDecoration(
+            labelText: "Grad",
+            border: OutlineInputBorder(),
+          ),
+          items: cities.map((city) {
+            return DropdownMenuItem<City>(
+              value: city,
+              child: Text(city.title),
+            );
+          }).toList(),
+          onChanged: (City? newCity) {
+            setState(() {
+              selectedCity = newCity;
+              _checkIfChangesMade();
+            });
+          },
+          validator: (value) => value == null ? "Grad je obavezan" : null,
+          menuMaxHeight: 400, // Limits the dropdown menu height
         ),
-        items: cities.map((city) {
-          return DropdownMenuItem<City>(
-            value: city,
-            child: Text(city.title),
-          );
-        }).toList(),
-        onChanged: (City? newCity) {
-          setState(() {
-            selectedCity = newCity;
-          });
-        },
       ),
     );
   }

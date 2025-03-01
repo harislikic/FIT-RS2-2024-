@@ -209,8 +209,13 @@ class _MyAutomobileAdsScreenState extends State<MyAutomobileAdsScreen>
                         padding: EdgeInsets.all(12.0),
                         child: Center(child: CircularProgressIndicator()),
                       ),
-                      noItemsFoundIndicatorBuilder: (context) => const Center(
-                        child: Text('Nemate nijedan oglasa.'),
+                      noItemsFoundIndicatorBuilder: (context) => Center(
+                        child: Text(
+                          _selectedTab == "active"
+                              ? "Trenutno nemate nijedan aktivan oglas.\nAko ste kreirali oglas, on je u procesu pregleda."
+                              : "Nemate nijedan oglas.",
+                          textAlign: TextAlign.center,
+                        ),
                       ),
                     ),
                   ),
