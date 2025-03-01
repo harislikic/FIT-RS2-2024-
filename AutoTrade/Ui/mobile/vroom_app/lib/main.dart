@@ -29,9 +29,8 @@ void main() async {
       ? stripePublishableKeyFromDefine
       : dotenv.env['STRIPE_PUBLISHABLE_KEY'] ?? '';
 
-  // String stripePublishableKey = dotenv.env['STRIPE_PUBLISHABLE_KEY'] ?? '';
   Stripe.publishableKey = stripePublishableKey;
-  //Stripe.publishableKey = ApiConfig.publishableKey;
+
   runApp(const MyApp());
 }
 

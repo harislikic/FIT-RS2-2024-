@@ -13,7 +13,6 @@ class StripeService {
               .isNotEmpty
           ? const String.fromEnvironment('STRIPE_SECRET_KEY')
           : dotenv.env['STRIPE_SECRET_KEY'] ?? '';
-  // String stripeSecretKey = dotenv.env['STRIPE_SECRET_KEY'] ?? '';
 
   Future<void> makePayment({
     required double amount,
