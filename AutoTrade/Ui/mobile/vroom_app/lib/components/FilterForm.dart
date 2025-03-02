@@ -108,7 +108,6 @@ class _FilterFormState extends State<FilterForm> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-
           Row(
             children: [
               Expanded(
@@ -129,8 +128,6 @@ class _FilterFormState extends State<FilterForm> {
             ],
           ),
           const SizedBox(height: 10),
-
-
           Row(
             children: [
               Expanded(
@@ -153,16 +150,12 @@ class _FilterFormState extends State<FilterForm> {
             ],
           ),
           const SizedBox(height: 10),
-
-   
           TextFormField(
             controller: _yearOfManufactureController,
             keyboardType: TextInputType.number,
             decoration: const InputDecoration(labelText: 'Godina Proizvodnje'),
           ),
           const SizedBox(height: 10),
-
-
           Row(
             children: [
               Checkbox(
@@ -177,8 +170,6 @@ class _FilterFormState extends State<FilterForm> {
             ],
           ),
           const SizedBox(height: 10),
-
-  
           Column(
             children: [
               Row(
@@ -310,15 +301,15 @@ class _FilterFormState extends State<FilterForm> {
               ),
             ],
           ),
-
           const SizedBox(height: 20),
-
-
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
               ElevatedButton(
-                onPressed: _applyFilters,
+                onPressed: () {
+                  _applyFilters(); // Primeni filtere
+                  Navigator.pop(context, true); // Vrati se na prethodni ekran
+                },
                 child: const Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
@@ -344,7 +335,7 @@ class _FilterFormState extends State<FilterForm> {
                 ),
               ),
             ],
-          ),
+          )
         ],
       ),
     );

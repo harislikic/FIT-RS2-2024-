@@ -2,11 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 import 'package:vroom_app/components/RecommendedCarousel.dart';
 import 'package:vroom_app/main.dart';
+import 'package:vroom_app/screens/filterScreen.dart';
 import 'package:vroom_app/services/AuthService.dart';
 import '../models/automobileAd.dart';
 import '../services/AutomobileAdService.dart';
 import '../components/automobileCard.dart';
-import '../components/FilterForm.dart';
 import '../components/SearchBarComponent.dart';
 
 class AutomobileListScreen extends StatefulWidget {
@@ -224,15 +224,25 @@ class _AutomobileListScreenState extends State<AutomobileListScreen>
               },
             ),
             IconButton(
-              icon: Icon(
+              icon: const Icon(
                 Icons.filter_list,
-                color: _isFilterVisible ? Colors.lightBlueAccent : Colors.blue,
+                color: Colors.blue,
                 size: 30.0,
               ),
-              onPressed: () {
-                setState(() {
-                  _isFilterVisible = !_isFilterVisible;
-                });
+              onPressed: () async {
+                final result = await Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => FilterScreen(
+                      onApplyFilters: _applyFilters,
+                      onResetFilters: _resetFilters,
+                    ),
+                  ),
+                );
+
+                if (result == true) {
+                  setState(() {});
+                }
               },
             ),
           ],
@@ -252,16 +262,6 @@ class _AutomobileListScreenState extends State<AutomobileListScreen>
                 child: Padding(
                   padding: const EdgeInsets.all(12.0),
                   child: SearchBarComponent(onSearch: _onSearch),
-                ),
-              ),
-            ),
-            Offstage(
-              offstage: !_isFilterVisible,
-              child: Padding(
-                padding: const EdgeInsets.all(12.0),
-                child: FilterForm(
-                  onApplyFilters: _applyFilters,
-                  onResetFilters: _resetFilters,
                 ),
               ),
             ),
