@@ -5,11 +5,13 @@ class FilterScreen extends StatelessWidget {
   final Function(String, String, String, String, String, bool, String, String,
       String, String) onApplyFilters;
   final Function() onResetFilters;
+  final Map<String, dynamic> currentFilters;
 
   const FilterScreen({
     Key? key,
     required this.onApplyFilters,
     required this.onResetFilters,
+    required this.currentFilters,
   }) : super(key: key);
 
   @override
@@ -30,6 +32,7 @@ class FilterScreen extends StatelessWidget {
       body: FilterForm(
         onApplyFilters: onApplyFilters,
         onResetFilters: onResetFilters,
+        initialFilters: currentFilters,
       ),
     );
   }

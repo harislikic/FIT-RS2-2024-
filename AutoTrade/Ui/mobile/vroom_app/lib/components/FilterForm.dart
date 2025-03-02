@@ -11,11 +11,13 @@ class FilterForm extends StatefulWidget {
   final Function(String, String, String, String, String, bool, String, String,
       String, String) onApplyFilters;
   final Function() onResetFilters;
+  final Map<String, dynamic> initialFilters;
 
   const FilterForm({
     Key? key,
     required this.onApplyFilters,
     required this.onResetFilters,
+    required this.initialFilters,
   }) : super(key: key);
 
   @override
@@ -67,6 +69,17 @@ class _FilterFormState extends State<FilterForm> {
   @override
   void initState() {
     super.initState();
+    _minPriceController.text = widget.initialFilters['minPrice'] ?? '';
+    _maxPriceController.text = widget.initialFilters['maxPrice'] ?? '';
+    _minMileageController.text = widget.initialFilters['minMileage'] ?? '';
+    _maxMileageController.text = widget.initialFilters['maxMileage'] ?? '';
+    _yearOfManufactureController.text =
+        widget.initialFilters['yearOfManufacture'] ?? '';
+    _isRegistered = widget.initialFilters['registered'] ?? false;
+    _selectedCarBrandId = widget.initialFilters['carBrandId'];
+    _selectedCarCategoryId = widget.initialFilters['carCategoryId'];
+    _selectedCarModelId = widget.initialFilters['carModelId'];
+    _selectedCityId = widget.initialFilters['cityId'];
     _fetchAutomobileDropDownData();
   }
 
@@ -176,7 +189,10 @@ class _FilterFormState extends State<FilterForm> {
                 children: [
                   Expanded(
                     child: DropdownButtonFormField<String>(
-                      value: _selectedCarBrandId,
+                      value: _carBrands.any((brand) =>
+                              brand.id.toString() == _selectedCarBrandId)
+                          ? _selectedCarBrandId
+                          : null,
                       items: _carBrands
                           .map((brand) => DropdownMenuItem(
                                 value: brand.id.toString(),
@@ -206,7 +222,10 @@ class _FilterFormState extends State<FilterForm> {
                   const SizedBox(width: 10),
                   Expanded(
                     child: DropdownButtonFormField<String>(
-                      value: _selectedCarCategoryId,
+                      value: _carCategories.any((category) =>
+                              category.id.toString() == _selectedCarCategoryId)
+                          ? _selectedCarCategoryId
+                          : null,
                       items: _carCategories
                           .map((category) => DropdownMenuItem(
                                 value: category.id.toString(),
@@ -240,7 +259,10 @@ class _FilterFormState extends State<FilterForm> {
                 children: [
                   Expanded(
                     child: DropdownButtonFormField<String>(
-                      value: _selectedCarModelId,
+                      value: _carModels.any((model) =>
+                              model.id.toString() == _selectedCarModelId)
+                          ? _selectedCarModelId
+                          : null,
                       items: _carModels
                           .map((model) => DropdownMenuItem(
                                 value: model.id.toString(),
@@ -270,7 +292,10 @@ class _FilterFormState extends State<FilterForm> {
                   const SizedBox(width: 10),
                   Expanded(
                     child: DropdownButtonFormField<String>(
-                      value: _selectedCityId,
+                      value: _cities.any(
+                              (city) => city.id.toString() == _selectedCityId)
+                          ? _selectedCityId
+                          : null,
                       items: _cities
                           .map((city) => DropdownMenuItem(
                                 value: city.id.toString(),
@@ -307,8 +332,8 @@ class _FilterFormState extends State<FilterForm> {
             children: [
               ElevatedButton(
                 onPressed: () {
-                  _applyFilters(); // Primeni filtere
-                  Navigator.pop(context, true); // Vrati se na prethodni ekran
+                  _applyFilters();
+                  Navigator.pop(context, true);
                 },
                 child: const Row(
                   mainAxisAlignment: MainAxisAlignment.center,

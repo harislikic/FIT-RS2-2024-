@@ -224,27 +224,38 @@ class _AutomobileListScreenState extends State<AutomobileListScreen>
               },
             ),
             IconButton(
-              icon: const Icon(
-                Icons.filter_list,
-                color: Colors.blue,
-                size: 30.0,
-              ),
-              onPressed: () async {
-                final result = await Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => FilterScreen(
-                      onApplyFilters: _applyFilters,
-                      onResetFilters: _resetFilters,
+                icon: const Icon(
+                  Icons.filter_list,
+                  color: Colors.blue,
+                  size: 30.0,
+                ),
+                onPressed: () async {
+                  final result = await Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => FilterScreen(
+                        onApplyFilters: _applyFilters,
+                        onResetFilters: _resetFilters,
+                        currentFilters: {
+                          'minPrice': _minPrice,
+                          'maxPrice': _maxPrice,
+                          'minMileage': _minMileage,
+                          'maxMileage': _maxMileage,
+                          'yearOfManufacture': _yearOfManufacture,
+                          'registered': _registered,
+                          'carBrandId': _carBrandId,
+                          'carCategoryId': _carCategoryId,
+                          'carModelId': _carModelId,
+                          'cityId': _cityId,
+                        },
+                      ),
                     ),
-                  ),
-                );
+                  );
 
-                if (result == true) {
-                  setState(() {});
-                }
-              },
-            ),
+                  if (result == true) {
+                    setState(() {});
+                  }
+                }),
           ],
         ),
       ),
