@@ -11,5 +11,10 @@ namespace AutoTrade.Services
         public CarCategoryService(AutoTradeContext context, IMapper mapper) : base(context, mapper)
         {
         }
+
+        public override IQueryable<CarCategory> AddInclude(IQueryable<CarCategory> query, BaseSerachObject? search = null, bool includeDetails = false, bool includeDoneAds = false)
+        {
+            return query.OrderBy(x => x.Name);
+        }
     }
 }

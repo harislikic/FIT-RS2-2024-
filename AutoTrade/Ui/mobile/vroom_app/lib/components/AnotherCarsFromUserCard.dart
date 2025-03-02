@@ -126,7 +126,7 @@ class AnotherCarsFromUserCard extends StatelessWidget {
                           size: 18, color: Colors.blueGrey),
                       const SizedBox(width: 4),
                       Text(
-                        'Datum: ${DateFormat('dd.MM.yyyy').format(automobileAd.dateOfAdd)}',
+                        '${DateFormat('dd.MM.yyyy').format(automobileAd.dateOfAdd)}',
                         style: const TextStyle(
                           fontSize: 12,
                           color: Colors.black54,
