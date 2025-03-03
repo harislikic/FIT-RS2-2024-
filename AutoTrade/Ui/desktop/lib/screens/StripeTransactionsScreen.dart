@@ -6,7 +6,6 @@ import 'package:open_file/open_file.dart';
 import '../components/PieChartComponent.dart';
 import 'package:desktop_app/models/ChartModels.dart';
 import 'package:desktop_app/services/PaymentService.dart';
-
 import 'package:desktop_app/helpers/DateHelper.dart';
 
 class StripeTransactionsScreen extends StatefulWidget {
@@ -70,65 +69,74 @@ class _StripeTransactionsScreenState extends State<StripeTransactionsScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Stripe Analitika'),
+        title: const Text('Stripe Analitika'),
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: FutureBuilder<List<dynamic>>(
-          future: _stripeData,
-          builder: (context, snapshot) {
-            if (snapshot.connectionState == ConnectionState.waiting) {
-              return Center(child: CircularProgressIndicator());
-            } else if (snapshot.hasError) {
-              return Center(child: Text('Greška: ${snapshot.error}'));
-            } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
-              return Center(child: Text('Nema pronađenih transakcija'));
-            }
+      body: SingleChildScrollView(
+        child: Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: FutureBuilder<List<dynamic>>(
+            future: _stripeData,
+            builder: (context, snapshot) {
+              if (snapshot.connectionState == ConnectionState.waiting) {
+                return const Center(child: CircularProgressIndicator());
+              } else if (snapshot.hasError) {
+                return Center(child: Text('Greška: ${snapshot.error}'));
+              } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
+                return const Center(child: Text('Nema pronađenih transakcija'));
+              }
 
-            final transactions = snapshot.data!;
-            return Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Tooltip(
-                  message: "Kliknite za preuzimanje izvještaja",
-                  child: ElevatedButton.icon(
-                    icon: Icon(Icons.download),
-                    label: Text("Skini PDF"),
-                    onPressed: () async {
-                      // Just call the helper function
-                      _generateAndShowPdf(transactions);
-                    },
+              final transactions = snapshot.data!;
+              return Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Tooltip(
+                    message: "Kliknite za preuzimanje izvještaja",
+                    child: ElevatedButton.icon(
+                      icon: const Icon(Icons.download),
+                      label: const Text("Skini PDF"),
+                      onPressed: () => _generateAndShowPdf(transactions),
+                    ),
                   ),
-                ),
-                const SizedBox(height: 20),
-                _buildSummary(transactions),
-                const SizedBox(height: 20),
-                Expanded(
-                  child: Column(
-                    children: [
-                      Expanded(child: _buildColumnChart(transactions)),
-                      const SizedBox(height: 16),
-                      Expanded(
-                        child: Row(
-                          children: [
-                            Expanded(
-                                child: PieChartComponent(
-                                    transactions: transactions,
-                                    chartType: 'status')),
-                            const SizedBox(width: 16),
-                            Expanded(
-                                child: PieChartComponent(
-                                    transactions: transactions,
-                                    chartType: 'card_brand')),
-                          ],
+                  const SizedBox(height: 20),
+                  _buildSummary(transactions),
+                  const SizedBox(height: 20),
+                  SingleChildScrollView(
+                    scrollDirection: Axis.horizontal,
+                    child: SizedBox(
+                      width: 800,
+                      height: 400,
+                      child: _buildColumnChart(transactions),
+                    ),
+                  ),
+                  const SizedBox(height: 20),
+                  SingleChildScrollView(
+                    scrollDirection: Axis.horizontal,
+                    child: Row(
+                      children: [
+                        SizedBox(
+                          width: 400,
+                          height: 400,
+                          child: PieChartComponent(
+                            transactions: transactions,
+                            chartType: 'status',
+                          ),
                         ),
-                      ),
-                    ],
+                        const SizedBox(width: 16),
+                        SizedBox(
+                          width: 400,
+                          height: 400,
+                          child: PieChartComponent(
+                            transactions: transactions,
+                            chartType: 'card_brand',
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
-                ),
-              ],
-            );
-          },
+                ],
+              );
+            },
+          ),
         ),
       ),
     );
@@ -154,7 +162,10 @@ class _StripeTransactionsScreenState extends State<StripeTransactionsScreen> {
 
     List<StackedChartData> chartData = currencyStats.entries.map((entry) {
       return StackedChartData(
-          entry.key, entry.value['amount']!, entry.value['count']!);
+        entry.key,
+        entry.value['amount']!,
+        entry.value['count']!,
+      );
     }).toList();
 
     return Card(
@@ -214,7 +225,6 @@ class _StripeTransactionsScreenState extends State<StripeTransactionsScreen> {
       if (!monthlyStats.containsKey(key)) {
         monthlyStats[key] = {'count': 0, 'totalAmount': 0};
       }
-
       monthlyStats[key]!['count'] = monthlyStats[key]!['count']! + 1;
       monthlyStats[key]!['totalAmount'] =
           monthlyStats[key]!['totalAmount']! + (transaction['amount'] / 100);
