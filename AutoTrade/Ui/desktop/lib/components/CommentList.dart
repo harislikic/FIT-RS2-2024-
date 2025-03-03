@@ -175,10 +175,15 @@ class _CommentListState extends State<CommentList> {
         title: const Text('Pregled komentara'),
       ),
       body: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Padding(
             padding: const EdgeInsets.all(8.0),
-            child: Row(
+            child: Wrap(
+              alignment: WrapAlignment.start,
+              crossAxisAlignment: WrapCrossAlignment.center,
+              spacing: 16.0,
+              runSpacing: 8.0,
               children: [
                 SizedBox(
                   width: 200,
@@ -201,12 +206,10 @@ class _CommentListState extends State<CommentList> {
                             )
                           : null,
                     ),
-                    onChanged: (value) =>
-                        setState(() {}),
+                    onChanged: (value) => setState(() {}),
                     onSubmitted: (_) => _onSearch(),
                   ),
                 ),
-                const SizedBox(width: 8),
                 SizedBox(
                   width: 200,
                   child: TextField(
@@ -220,7 +223,7 @@ class _CommentListState extends State<CommentList> {
                               onPressed: () {
                                 setState(() {
                                   _automobileIdController.clear();
-                                  _currentPage = 0; 
+                                  _currentPage = 0;
                                   _tablePage = 0;
                                   _fetchComments();
                                 });
@@ -228,21 +231,20 @@ class _CommentListState extends State<CommentList> {
                             )
                           : null,
                     ),
-                    onChanged: (value) =>
-                        setState(() {}), 
+                    onChanged: (value) => setState(() {}),
                     onSubmitted: (_) => _onSearch(),
                   ),
                 ),
-                const SizedBox(width: 8),
                 ElevatedButton(
                   onPressed: _onSearch,
                   child: const Text('Traži'),
                 ),
-                const SizedBox(width: 16),
                 Text(
                   'Ukupan broj komentara: $_count',
                   style: const TextStyle(
-                      fontSize: 16, fontWeight: FontWeight.bold),
+                    fontSize: 16,
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
               ],
             ),
@@ -311,32 +313,35 @@ class _CommentListState extends State<CommentList> {
               ),
             ),
           ),
-          Row(
+          Column(
             mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              ElevatedButton(
-                onPressed: canGoPrev ? _prevPage : null,
-                child: const Icon(Icons.arrow_back),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  ElevatedButton(
+                    onPressed: canGoPrev ? _prevPage : null,
+                    child: const Icon(Icons.arrow_back),
+                  ),
+                  const SizedBox(width: 16),
+                  ElevatedButton(
+                    onPressed: canGoNext ? _nextPage : null,
+                    child: const Icon(Icons.arrow_forward),
+                  ),
+                ],
               ),
-              const SizedBox(width: 16),
-              ElevatedButton(
-                onPressed: canGoNext ? _nextPage : null,
-                child: const Icon(Icons.arrow_forward),
+              const SizedBox(height: 8),
+              Text(
+                'Prikaz: $startDisplay - $endDisplay (od $_count)',
+                style: const TextStyle(fontSize: 15),
               ),
+              if (_isLoading) ...[
+                const SizedBox(height: 8),
+                const CircularProgressIndicator(),
+              ],
             ],
-          ),
-          const SizedBox(height: 8),
-
-          Text(
-            'Prikaz: $startDisplay - $endDisplay (od $_count)',
-            style: const TextStyle(fontSize: 15),
-          ),
-
-          if (_isLoading)
-            const Padding(
-              padding: EdgeInsets.all(8.0),
-              child: CircularProgressIndicator(),
-            ),
+          )
         ],
       ),
     );

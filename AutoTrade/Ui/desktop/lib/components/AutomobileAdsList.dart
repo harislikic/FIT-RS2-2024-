@@ -204,10 +204,15 @@ class _AutomobileAdsListState extends State<AutomobileAdsList> {
     return Scaffold(
       appBar: AppBar(title: const Text('Lista oglasa')),
       body: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Padding(
             padding: const EdgeInsets.all(8.0),
-            child: Row(
+            child: Wrap(
+              alignment: WrapAlignment.start,
+              spacing: 8.0,
+              runSpacing: 8.0,
+              crossAxisAlignment: WrapCrossAlignment.start,
               children: [
                 SizedBox(
                   width: 400,
@@ -230,8 +235,8 @@ class _AutomobileAdsListState extends State<AutomobileAdsList> {
                     onSubmitted: (_) => _onSearch(),
                   ),
                 ),
-                const SizedBox(width: 8),
                 Row(
+                  mainAxisSize: MainAxisSize.min,
                   children: [
                     Radio<String>(
                       value: "Active",
@@ -247,12 +252,10 @@ class _AutomobileAdsListState extends State<AutomobileAdsList> {
                     const Text("Na obradi"),
                   ],
                 ),
-                const SizedBox(width: 8),
                 ElevatedButton(
                   onPressed: _onSearch,
                   child: const Text('Traži'),
                 ),
-                const SizedBox(width: 16),
                 Text(
                   'Ukupan broj oglasa: $_count',
                   style: const TextStyle(

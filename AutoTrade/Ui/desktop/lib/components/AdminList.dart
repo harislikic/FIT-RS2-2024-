@@ -135,7 +135,6 @@ class _AdminListState extends State<AdminList> {
   }
 
   bool get canGoNext {
-
     final nextPage = _tablePage + 1;
     final nextStartIndex = nextPage * _pageSize;
 
@@ -190,10 +189,15 @@ class _AdminListState extends State<AdminList> {
       body: SingleChildScrollView(
         scrollDirection: Axis.vertical,
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Padding(
               padding: const EdgeInsets.all(8.0),
-              child: Row(
+              child: Wrap(
+                alignment: WrapAlignment.center,
+                crossAxisAlignment: WrapCrossAlignment.center,
+                spacing: 16.0,
+                runSpacing: 8.0,
                 children: [
                   SizedBox(
                     width: 400,
@@ -217,13 +221,11 @@ class _AdminListState extends State<AdminList> {
                           _fetchAdmins(query: _searchController.text),
                     ),
                   ),
-                  const SizedBox(width: 8),
                   ElevatedButton(
                     onPressed: () =>
                         _fetchAdmins(query: _searchController.text),
                     child: const Text('Traži'),
                   ),
-                  const SizedBox(width: 16),
                   Text(
                     'Ukupan broj Admina: $_count',
                     style: const TextStyle(
@@ -232,7 +234,6 @@ class _AdminListState extends State<AdminList> {
                 ],
               ),
             ),
-
             SingleChildScrollView(
               scrollDirection: Axis.horizontal,
               child: ConstrainedBox(
@@ -316,36 +317,36 @@ class _AdminListState extends State<AdminList> {
                 ),
               ),
             ),
-
             const SizedBox(height: 8),
-
-            Row(
+            Column(
               mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                ElevatedButton(
-                  onPressed: canGoPrev ? _prevPage : null,
-                  child: const Icon(Icons.arrow_back),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    ElevatedButton(
+                      onPressed: canGoPrev ? _prevPage : null,
+                      child: const Icon(Icons.arrow_back),
+                    ),
+                    const SizedBox(width: 16),
+                    ElevatedButton(
+                      onPressed: canGoNext ? _nextPage : null,
+                      child: const Icon(Icons.arrow_forward),
+                    ),
+                  ],
                 ),
-                const SizedBox(width: 16),
-                ElevatedButton(
-                  onPressed: canGoNext ? _nextPage : null,
-                  child: const Icon(Icons.arrow_forward),
+                const SizedBox(height: 8),
+                Text(
+                  'Prikaz: $startDisplay - $endDisplay (od $_count)',
+                  style: const TextStyle(fontSize: 15),
                 ),
+                if (_isLoading) ...[
+                  const SizedBox(height: 8),
+                  const CircularProgressIndicator(),
+                ],
               ],
-            ),
-
-            const SizedBox(height: 8),
-
-            Text(
-              'Prikaz: $startDisplay - $endDisplay (od $_count)',
-              style: const TextStyle(fontSize: 15),
-            ),
-
-            if (_isLoading)
-              const Padding(
-                padding: EdgeInsets.all(8.0),
-                child: CircularProgressIndicator(),
-              ),
+            )
           ],
         ),
       ),

@@ -171,10 +171,15 @@ class _UsersListState extends State<UsersList> {
         title: const Text('Pregled korisnika'),
       ),
       body: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Padding(
             padding: const EdgeInsets.all(8.0),
-            child: Row(
+            child: Wrap(
+              alignment: WrapAlignment.start,
+              crossAxisAlignment: WrapCrossAlignment.center,
+              spacing: 16.0,
+              runSpacing: 8.0,
               children: [
                 SizedBox(
                   width: 400,
@@ -197,12 +202,10 @@ class _UsersListState extends State<UsersList> {
                     onSubmitted: (_) => _onSearch(),
                   ),
                 ),
-                const SizedBox(width: 8),
                 ElevatedButton(
                   onPressed: _onSearch,
                   child: const Text('Traži'),
                 ),
-                const SizedBox(width: 16),
                 Text(
                   'Ukupan broj registrovanih korisnika: $_count',
                   style: const TextStyle(

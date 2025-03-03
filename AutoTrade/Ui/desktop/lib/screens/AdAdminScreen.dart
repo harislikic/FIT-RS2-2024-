@@ -80,9 +80,9 @@ class _AddAdminScreenState extends State<AddAdminScreen> {
     if (value == null || value.isEmpty) {
       return 'Broj telefona je obavezan.';
     }
-    final phoneRegex = RegExp(r'^\+387\d{8,9}$');
+    final phoneRegex = RegExp(r'^\+387\d{8,12}$');
     if (!phoneRegex.hasMatch(value)) {
-      return 'Format: +387XXXXXXXX (8-9 brojeva).';
+      return 'Format: +387XXXXXXXX (8-12 brojeva).';
     }
     return null;
   }
