@@ -311,7 +311,7 @@ namespace AutoTrade.Services
 
         public List<Model.AutomobileAd> Recommend(int userId)
         {
-            const string modelPath = "recommendation_model.zip";
+            const string modelPath = "recommendationModel.zip";
 
             lock (isLocked)
             {
