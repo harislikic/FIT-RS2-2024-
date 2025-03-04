@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:vroom_app/components/ImagePicker.dart';
 import 'package:vroom_app/components/LoginButton.dart';
@@ -313,12 +314,22 @@ class _AddAutomobileScreenState extends State<AddAutomobileScreen> {
               TextFormField(
                 decoration:
                     const InputDecoration(labelText: 'Godina proizvodnje'),
+                keyboardType: TextInputType.number,
+                inputFormatters: [
+                  FilteringTextInputFormatter.digitsOnly,
+                  LengthLimitingTextInputFormatter(4),
+                ],
                 onSaved: (value) =>
                     _yearOfManufacture = int.tryParse(value ?? ''),
-                validator: (value) => value?.isEmpty ?? true
-                    ? 'Unesite godinu proizvodnje'
-                    : null,
-                keyboardType: TextInputType.number,
+                validator: (value) {
+                  if (value == null || value.isEmpty) {
+                    return 'Unesite godinu proizvodnje';
+                  }
+                  if (int.tryParse(value) == null) {
+                    return 'Unesite ispravan broj';
+                  }
+                  return null;
+                },
               ),
               TextFormField(
                 decoration: const InputDecoration(labelText: 'Snaga motora'),

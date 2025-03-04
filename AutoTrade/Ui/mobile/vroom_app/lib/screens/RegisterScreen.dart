@@ -86,9 +86,9 @@ class _RegisterScreenState extends State<RegisterScreen> {
 
     final fullNumber = '+387$value';
 
-    final phoneRegex = RegExp(r'^\+387\d{8,9}$');
+    final phoneRegex = RegExp(r'^\+387\d{8,12}$');
     if (!phoneRegex.hasMatch(fullNumber)) {
-      return 'Format: +387XXXXXXXX (8-9 brojeva).';
+      return 'Format: +387XXXXXXXX (8-12 brojeva).';
     }
     return null;
   }

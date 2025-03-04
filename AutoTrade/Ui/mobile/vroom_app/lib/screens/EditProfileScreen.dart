@@ -257,8 +257,8 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
               !RegExp(r'^[^@\s]+@[^@\s]+\.[^@\s]+').hasMatch(value)) {
             return 'Unesite validan email';
           }
-          if (isPhone && !RegExp(r'^[0-9]{9,12}$').hasMatch(value)) {
-            return 'Unesite validan broj telefona\n(Min 8 - Max 12 cifara)';
+          if (isPhone && !RegExp(r'^\+387[0-9]{8,12}$').hasMatch(value)) {
+            return 'Unesite validan broj telefona u formatu +387XXXXXXXX\n(Min 8 - Max 12 cifara nakon +387)';
           }
 
           return null;
