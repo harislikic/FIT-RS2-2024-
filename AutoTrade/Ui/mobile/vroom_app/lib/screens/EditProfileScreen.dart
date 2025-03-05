@@ -116,7 +116,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
       );
 
       if (response != null) {
-        ToastUtils.showToast(message: "Profil uspešno ažuriran!");
+        ToastUtils.showToast(message: "Profil uspješno ažuriran!");
         Navigator.pop(context, response);
       } else {
         ToastUtils.showErrorToast(message: "Profil nije ažuriran!");
