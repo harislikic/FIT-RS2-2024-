@@ -14,6 +14,10 @@ To set up the project using Docker, follow these steps:
 ---
 
 ## Flutter Desktop
+### Note:
+Since I am using macOS, I was not able to build the Windows version of the application.  
+As per your instruction on email, I have skipped the `.exe` build and included this note instead.  
+
 
 ### Desktop Credentials
 - **Username:** `admin`
