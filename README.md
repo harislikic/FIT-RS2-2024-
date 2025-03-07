@@ -85,19 +85,18 @@ AutoTrade Email Subscriber is a backend service that uses **RabbitMQ** to asynch
 To test sending email notifications via RabbitMQ:
 
 1. **Create a profile** with your email address.
-2. **Search for a car** in the system, e.g., `'Audi A3 2018'`.
+2. **Search for a car** in the system, e.g., `'Audi A6'`.
 3. **Make a reservation** for the selected car.
-4. **Log in** to the admin account on mobile app:
-   - **Username:** `admin`
+4. **Log in** to the account on mobile app with owner of that car that you previously reserved:
+   - **Username:** `user3`
    - **Password:** `password123`
-5. **Go to the "My Profile" section**, find your reservation, and approve it.
+5. **Go to the "My Profile" section**, "reservations for me" find your reservation, and approve it.
 6. After approval, you should receive a **confirmation email** for the reservation you made.
 
 ---
 
 ## Additional Notes
 - **Stripe test cards** can be used for payment testing without actual transactions.
-- Environment configuration files (.env) for both desktop and mobile applications are stored in a ZIP archive, protected with the password "fit". To extract and use them, run:
+- Environment configuration files (.env) for desktop and mobile applications are stored in a ZIP archive, protected with the password "fit". Non-zipped .env files are also included.
 
-Feel free to contribute or report issues via the repository's issue tracker!
 
