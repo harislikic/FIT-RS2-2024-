@@ -5,6 +5,7 @@ import 'package:vroom_app/components/ImagePicker.dart';
 import 'package:vroom_app/components/LoginButton.dart';
 import 'package:vroom_app/components/shared/DatePicker.dart';
 import 'package:vroom_app/components/shared/ToastUtils.dart';
+import 'package:vroom_app/screens/MyAutomobileAdsScreen.dart';
 import 'package:vroom_app/services/AutmobileDropDownService.dart';
 import 'package:vroom_app/services/AutomobileAdService.dart';
 import 'package:vroom_app/models/carBrand.dart';
@@ -164,9 +165,14 @@ class _AddAutomobileScreenState extends State<AddAutomobileScreen> {
             .createAutomobileAd(adData, authHeaders, _imageFiles);
 
         if (success) {
-          ToastUtils.showToast(message: "Uspješno ste kreirali oglas");
+          ToastUtils.showToast(
+              message:
+                  "Vaš oglas je uspješno kreiran i poslan na pregled. Administratori će ga pregledati i odobriti prije objave.");
 
-          Navigator.of(context).pop();
+          Navigator.pushReplacement(
+            context,
+            MaterialPageRoute(builder: (context) => MyAutomobileAdsScreen()),
+          );
         } else {
           ToastUtils.showErrorToast(
               message: "Greška prilikom kreiranja oglasa:");

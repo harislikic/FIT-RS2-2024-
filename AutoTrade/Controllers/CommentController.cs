@@ -40,12 +40,6 @@ namespace Controllers
                     }
                 })
                 .ToListAsync();
-
-            if (comments == null || comments.Count == 0)
-            {
-                return NotFound("No comments found for this automobile.");
-            }
-
             return Ok(comments);
         }
 
