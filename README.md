@@ -58,6 +58,9 @@ flutter pub get
 flutter run
 ```
 
+Adding images in the simulator
+If you want to upload images when creating your ad, add images in the simulator
+
 ### Using Stripe Keys
 If you want to use your own Stripe keys, run the following command:
 ```sh
