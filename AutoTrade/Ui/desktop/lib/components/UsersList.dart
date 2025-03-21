@@ -1,4 +1,5 @@
 import 'package:desktop_app/components/shared/SnackbarHelper.dart';
+import 'package:desktop_app/screens/AdAdminScreen.dart';
 import 'package:desktop_app/services/UserService.dart';
 import 'package:desktop_app/services/config.dart';
 import 'package:flutter/material.dart';
@@ -176,40 +177,68 @@ class _UsersListState extends State<UsersList> {
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: Wrap(
-              alignment: WrapAlignment.start,
+              alignment:
+                  WrapAlignment.spaceBetween, // Pomeranje krajnjih elemenata
               crossAxisAlignment: WrapCrossAlignment.center,
               spacing: 16.0,
               runSpacing: 8.0,
               children: [
-                SizedBox(
-                  width: 400,
-                  child: TextField(
-                    controller: _searchController,
-                    decoration: InputDecoration(
-                      labelText: 'Pretraga',
-                      border: const OutlineInputBorder(),
-                      isDense: true,
-                      suffixIcon: _searchController.text.isNotEmpty
-                          ? IconButton(
-                              icon: const Icon(Icons.clear),
-                              onPressed: () {
-                                _searchController.clear();
-                                _onSearch();
-                              },
-                            )
-                          : null,
+                Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    SizedBox(
+                      width: 400,
+                      child: TextField(
+                        controller: _searchController,
+                        decoration: InputDecoration(
+                          labelText: 'Pretraga',
+                          border: const OutlineInputBorder(),
+                          isDense: true,
+                          suffixIcon: _searchController.text.isNotEmpty
+                              ? IconButton(
+                                  icon: const Icon(Icons.clear),
+                                  onPressed: () {
+                                    _searchController.clear();
+                                    _onSearch();
+                                  },
+                                )
+                              : null,
+                        ),
+                        onSubmitted: (_) => _onSearch(),
+                      ),
                     ),
-                    onSubmitted: (_) => _onSearch(),
-                  ),
+                    const SizedBox(width: 16),
+                    ElevatedButton(
+                      onPressed: _onSearch,
+                      child: const Text('Traži'),
+                    ),
+                  ],
                 ),
-                ElevatedButton(
-                  onPressed: _onSearch,
-                  child: const Text('Traži'),
-                ),
-                Text(
-                  'Ukupan broj registrovanih korisnika: $_count',
-                  style: const TextStyle(
-                      fontSize: 16, fontWeight: FontWeight.bold),
+                Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Text(
+                      'Ukupan broj registrovanih korisnika: $_count',
+                      style: const TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    const SizedBox(width: 16),
+                    ElevatedButton.icon(
+                      onPressed: () {
+                        Navigator.of(context).push(
+                          MaterialPageRoute(
+                            builder: (context) =>
+                                const AddAdminScreen(isAdmin: false),
+                          ),
+                        );
+                      },
+                      icon: const Icon(Icons.person_add_alt),
+                      label: const Text('Dodaj korisnika'),
+                    
+                    ),
+                  ],
                 ),
               ],
             ),

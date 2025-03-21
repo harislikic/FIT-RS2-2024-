@@ -11,7 +11,8 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:http/http.dart' as http;
 
 class AddAdminScreen extends StatefulWidget {
-  const AddAdminScreen({Key? key}) : super(key: key);
+  final bool isAdmin;
+  const AddAdminScreen({Key? key, this.isAdmin = true}) : super(key: key);
 
   @override
   State<AddAdminScreen> createState() => _AddAdminScreenState();
@@ -154,7 +155,9 @@ class _AddAdminScreenState extends State<AddAdminScreen> {
     }
 
     try {
-      final url = Uri.parse('$baseUrl/User/admin');
+      final url =
+          Uri.parse(widget.isAdmin ? '$baseUrl/User/admin' : '$baseUrl/User');
+      // final url = Uri.parse('$baseUrl/User/admin');
       final request = http.MultipartRequest('POST', url);
       request.headers['Content-Type'] = 'multipart/form-data';
 
@@ -185,9 +188,9 @@ class _AddAdminScreenState extends State<AddAdminScreen> {
       final response = await http.Response.fromStream(responseStream);
 
       if (response.statusCode == 200 || response.statusCode == 201) {
-        SnackbarHelper.showSnackbar(context, 'Uspešno kreiran Admin!',
+        final userType = widget.isAdmin ? 'Admin' : 'Korisnik';
+        SnackbarHelper.showSnackbar(context, 'Uspešno kreiran $userType!',
             backgroundColor: Colors.green);
-    
 
         Navigator.pushReplacementNamed(context, '/');
       } else {
@@ -238,9 +241,9 @@ class _AddAdminScreenState extends State<AddAdminScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text(
-          "Dodaj Admina",
-          style: TextStyle(color: Colors.white),
+        title: Text(
+          widget.isAdmin ? "Dodaj Admina" : "Dodaj Korisnika",
+          style: const TextStyle(color: Colors.white),
         ),
         backgroundColor: Colors.blueGrey[900],
         iconTheme: const IconThemeData(
@@ -249,8 +252,7 @@ class _AddAdminScreenState extends State<AddAdminScreen> {
       ),
       body: Center(
         child: ConstrainedBox(
-          constraints:
-              const BoxConstraints(maxWidth: 600),
+          constraints: const BoxConstraints(maxWidth: 600),
           child: Card(
             elevation: 4,
             margin: const EdgeInsets.all(16),
@@ -299,12 +301,39 @@ class _AddAdminScreenState extends State<AddAdminScreen> {
                       decoration: const InputDecoration(labelText: 'Adresa'),
                       validator: (value) => _validateField(value, 'Adresa'),
                     ),
-                    GenderSelector(
-                      selectedGender: _selectedGender,
-                      onGenderSelected: (gender) {
-                        setState(() {
-                          _selectedGender = gender;
-                        });
+                    FormField<String>(
+                      validator: (value) {
+                        if (_selectedGender == null) {
+                          return 'Pol je obavezan.';
+                        }
+                        return null;
+                      },
+                      builder: (FormFieldState<String> field) {
+                        return Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            GenderSelector(
+                              selectedGender: _selectedGender,
+                              onGenderSelected: (gender) {
+                                setState(() {
+                                  _selectedGender = gender;
+                                  field.didChange(
+                                      gender); // neophodno za validaciju
+                                });
+                              },
+                            ),
+                            if (field.hasError)
+                              Padding(
+                                padding:
+                                    const EdgeInsets.only(top: 5, left: 12),
+                                child: Text(
+                                  field.errorText!,
+                                  style: const TextStyle(
+                                      color: Colors.red, fontSize: 12),
+                                ),
+                              ),
+                          ],
+                        );
                       },
                     ),
                     TextFormField(
@@ -367,7 +396,8 @@ class _AddAdminScreenState extends State<AddAdminScreen> {
                     const SizedBox(height: 16),
                     ElevatedButton(
                       onPressed: _registerUser,
-                      child: const Text('Dodaj Admina'),
+                      child: Text(
+                          widget.isAdmin ? 'Dodaj Admina' : 'Dodaj Korisnika'),
                     ),
                   ],
                 ),

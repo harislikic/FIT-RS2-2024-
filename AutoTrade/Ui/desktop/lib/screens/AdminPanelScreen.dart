@@ -1,6 +1,10 @@
 import 'package:desktop_app/components/AdminList.dart';
 import 'package:desktop_app/components/AutomobileAdsList.dart';
+import 'package:desktop_app/components/CarBrandList.dart';
+import 'package:desktop_app/components/CarCategoryList.dart';
+import 'package:desktop_app/components/CarModelList.dart';
 import 'package:desktop_app/components/CommentList.dart';
+import 'package:desktop_app/components/EquipmentList.dart';
 import 'package:desktop_app/components/UsersList.dart';
 import 'package:desktop_app/components/shared/TooltipIconButton.dart';
 import 'package:desktop_app/screens/ LoginScreen.dart';
@@ -59,7 +63,7 @@ class AdminPanelScreen extends StatelessWidget {
               onTap: () {
                 Navigator.of(context).push(
                   MaterialPageRoute(
-                    builder: (context) => const AddAdminScreen(),
+                    builder: (context) => const AddAdminScreen(isAdmin: true,),
                   ),
                 );
               },
@@ -82,6 +86,53 @@ class AdminPanelScreen extends StatelessWidget {
                 Navigator.of(context).push(
                   MaterialPageRoute(
                     builder: (context) => const AutomobileAdsList(),
+                  ),
+                );
+              },
+            ),
+            ListTile(
+              leading: const Icon(Icons.branding_watermark_outlined,
+                  color: Colors.purpleAccent),
+              title: const Text('Brendovi automobila'),
+              onTap: () {
+                Navigator.of(context).push(
+                  MaterialPageRoute(
+                    builder: (context) => const CarBrandList(),
+                  ),
+                );
+              },
+            ),
+            ListTile(
+              leading: const Icon(Icons.category, color: Colors.purpleAccent),
+              title: const Text('Kategorije automobila'),
+              onTap: () {
+                Navigator.of(context).push(
+                  MaterialPageRoute(
+                    builder: (context) => const CarCategoryList(),
+                  ),
+                );
+              },
+            ),
+            ListTile(
+              leading:
+                  const Icon(Icons.model_training, color: Colors.purpleAccent),
+              title: const Text('Modeli automobila'),
+              onTap: () {
+                Navigator.of(context).push(
+                  MaterialPageRoute(
+                    builder: (context) => const CarModelList(),
+                  ),
+                );
+              },
+            ),
+            ListTile(
+              leading:
+                  const Icon(Icons.garage_rounded, color: Colors.purpleAccent),
+              title: const Text('Dodatna oprema automobila'),
+              onTap: () {
+                Navigator.of(context).push(
+                  MaterialPageRoute(
+                    builder: (context) => const EquipmentList(),
                   ),
                 );
               },
