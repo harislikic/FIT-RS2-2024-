@@ -98,6 +98,50 @@ class _EquipmentListState extends State<EquipmentList> {
     }
   }
 
+  Future<void> _deleteEquipment(int equipmentId) async {
+    try {
+      await _equipmentService.deleteEquipment(equipmentId);
+      _newEquipmentController.clear();
+      _newEquipmentError = null;
+      _loadEquipments();
+      SnackbarHelper.showSnackbar(
+        context,
+        'Oprema obrisana!',
+        backgroundColor: Colors.green,
+      );
+    } catch (e) {
+      SnackbarHelper.showSnackbar(context, 'Greška: $e');
+    }
+  }
+
+  Future<void> _showDeleteConfirmationDialog(int equipmentId) async {
+    final shouldDelete = await showDialog<bool>(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: const Text('Potvrda brisanja'),
+        content:
+            const Text('Da li ste sigurni da želite da obrišete ovu opremu?'),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.of(context).pop(false),
+            child: const Text('Otkaži'),
+          ),
+          ElevatedButton(
+            style: ElevatedButton.styleFrom(
+              backgroundColor: Colors.white,
+            ),
+            onPressed: () => Navigator.of(context).pop(true),
+            child: const Text('Obriši'),
+          ),
+        ],
+      ),
+    );
+
+    if (shouldDelete == true) {
+      _deleteEquipment(equipmentId);
+    }
+  }
+
   void _cancelEdit(int id) {
     final original = _equipments.firstWhere((e) => e.id == id).name;
     _editControllers[id]?.text = original;
@@ -224,12 +268,13 @@ class _EquipmentListState extends State<EquipmentList> {
                                           _cancelEdit(equipment.id),
                                     ),
                                   ],
-                                  // IconButton(
-                                  //   icon: const Icon(Icons.delete,
-                                  //       color: Colors.red),
-                                  //   onPressed: () =>
-                                  //       _deleteEquipment(equipment.id),
-                                  // ),
+                                  IconButton(
+                                    icon: const Icon(Icons.delete,
+                                        color: Colors.red),
+                                    onPressed: () =>
+                                        _showDeleteConfirmationDialog(
+                                            equipment.id),
+                                  ),
                                 ],
                               ),
                             );
