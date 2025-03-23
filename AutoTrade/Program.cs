@@ -61,6 +61,7 @@ builder.Services.AddTransient<ITransmissionTypeService, TransmissionTypeService>
 builder.Services.AddTransient<IVehicleConditionService, VehicleConditionService>();
 builder.Services.AddTransient<IAutomobileAdService, AutomobileAdService>();
 builder.Services.AddTransient<IEquipmentService, EquipmentService>();
+builder.Services.AddTransient<IMoodTrackerService, MoodTrackerService>();
 builder.Services.AddHostedService<ExpiredHighlightsService>();
 builder.Services.AddTransient<ReservationApprovalEmail>();
 builder.Services.AddHostedService<Worker>();

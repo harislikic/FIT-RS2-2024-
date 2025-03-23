@@ -5,6 +5,8 @@ import 'package:http_parser/http_parser.dart';
 import 'package:vroom_app/services/AuthService.dart';
 import 'package:vroom_app/services/config.dart';
 
+import '../models/user.dart';
+
 class UserService {
   static Future<Map<String, dynamic>?> getUserProfile() async {
     try {
@@ -67,6 +69,31 @@ class UserService {
       }
     } catch (e) {
       throw Exception('Error while updating user profile: $e');
+    }
+  }
+
+  static Future<List<User>> getUsers() async {
+    try {
+      final headers = await AuthService.getAuthHeaders();
+      final response = await http.get(
+        Uri.parse('$baseUrl/User/'),
+        headers: headers,
+      );
+
+      if (response.statusCode == 200) {
+        final data = json.decode(response.body);
+        if (data['data'] != null && data['data'] is List) {
+          final List<dynamic> items = data['data'];
+          return items.map((json) => User.fromJson(json)).toList();
+        } else {
+          return [];
+        }
+      } else {
+        throw Exception(
+            'Failed to fetch mood trackers: ${response.statusCode}');
+      }
+    } catch (e) {
+      throw Exception('Error while fetching user profile: $e');
     }
   }
 }

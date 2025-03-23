@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_stripe/flutter_stripe.dart';
+import 'package:vroom_app/components/FrmMoodTracker.dart';
 import 'package:vroom_app/screens/AutomobileListScreen.dart';
 import 'package:vroom_app/screens/AdAutomobileScreen.dart';
 import 'package:vroom_app/screens/FavoritesScreen.dart';
