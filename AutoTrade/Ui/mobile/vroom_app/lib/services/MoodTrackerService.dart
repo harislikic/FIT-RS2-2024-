@@ -62,13 +62,11 @@ class MoodTrackerService {
       }),
     );
 
+    print("📤 json ${response.body}");
+
     if (response.statusCode != 200 && response.statusCode != 201) {
-      try {
-        final body = jsonDecode(response.body);
-        throw Exception(body['message'] ?? 'Greška pri dodavanju.');
-      } catch (_) {
-        throw Exception('Greška pri dodavanju (nevažeći odgovor sa servera)');
-      }
+      final message = response.body;
+      throw Exception(message.isNotEmpty ? message : 'Greška pri dodavanju.');
     }
   }
 }

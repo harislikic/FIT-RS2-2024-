@@ -4,6 +4,8 @@ import 'package:vroom_app/models/user.dart';
 import 'package:vroom_app/services/UserService.dart';
 import 'package:vroom_app/services/MoodTrackerService.dart';
 
+import 'shared/ToastUtils.dart';
+
 class FrmMoodTrackerNew extends StatefulWidget {
   const FrmMoodTrackerNew({super.key});
 
@@ -60,10 +62,17 @@ class _FrmMoodTrackerNewState extends State<FrmMoodTrackerNew> {
         moodDate: _selectedDate,
       );
 
+      ToastUtils.showToast(message: "Raspolozenje dodano");
       Navigator.pop(context, true); // osveži listu na frmMoodTracker
     } catch (e) {
-      ScaffoldMessenger.of(context)
-          .showSnackBar(SnackBar(content: Text(e.toString())));
+      final error = e.toString();
+
+      if (error.contains(' Korisnik je već unio 2 raspoloženja za taj dan.')) {
+        ToastUtils.showErrorToast(
+            message: 'Ograničenje: Maksimalno 2 raspoloženja dnevno.');
+      } else {
+        ToastUtils.showErrorToast(message: "${e}");
+      }
     } finally {
       setState(() => _isSubmitting = false);
     }

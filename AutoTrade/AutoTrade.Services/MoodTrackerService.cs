@@ -2,6 +2,7 @@ using System.Globalization;
 using AutoTrade.Services.Database;
 using Database;
 using MapsterMapper;
+using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.EntityFrameworkCore;
 using Request;
 using SearchObject;
@@ -59,6 +60,20 @@ namespace AutoTrade.Services
 
 
             return base.AddFilter(search, query);
+        }
+
+        public override void BeforeInsert(MoodTrackerUpsertRequest request, MoodTracker entity)
+        {
+            var userMoodCountDate = Context.MoodTrackers.Where(x => x.User.Id == request.UserId && x.MoodDate.Date == request.MoodDate.Date).Count();
+
+            var canAdd = userMoodCountDate < 2;
+
+            if (!canAdd)
+            {
+                throw new Exception("Korisnik je već unio 2 raspoloženja za taj dan.");
+            }
+
+            base.BeforeInsert(request, entity);
         }
 
     }
