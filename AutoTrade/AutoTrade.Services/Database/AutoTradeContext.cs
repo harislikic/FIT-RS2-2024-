@@ -14,7 +14,6 @@ using AutomobileAd = Database.AutomobileAd;
 using AutomobileAdImage = Database.AutomobileAdImage;
 using Equipment = Database.Equipment;
 using AutomobileAdEquipment = Database.AutomobileAdEquipment;
-using MoodTracker = Database.MoodTracker;
 
 namespace AutoTrade.Services.Database
 {
@@ -61,8 +60,6 @@ namespace AutoTrade.Services.Database
         public DbSet<AutomobileAdEquipment> AutomobileAdEquipments { get; set; }
 
         public DbSet<PaymentTransaction> PaymentTransactions { get; set; }
-
-        public DbSet<MoodTracker> MoodTrackers { get; set; }
 
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)

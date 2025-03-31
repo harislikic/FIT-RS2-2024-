@@ -25,7 +25,4 @@ public partial class User
 
     public ICollection<Favorite> Favorites { get; set; } = new List<Favorite>();
     public ICollection<AutomobileAd> AutomobileAds { get; set; } = new List<AutomobileAd>();
-    public ICollection<MoodTracker> MoodTrackings { get; set; } = new List<MoodTracker>();
-
-
 }
