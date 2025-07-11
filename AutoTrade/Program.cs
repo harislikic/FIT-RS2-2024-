@@ -65,6 +65,10 @@ builder.Services.AddHostedService<ExpiredHighlightsService>();
 builder.Services.AddTransient<ReservationApprovalEmail>();
 builder.Services.AddHostedService<Worker>();
 
+// vjezba1
+
+//
+
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
