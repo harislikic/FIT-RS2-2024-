@@ -726,8 +726,8 @@ namespace AutoTrade.Migrations
                             Gender = "M",
                             IsAdmin = true,
                             LastName = "admin",
-                            PasswordHash = "Qe4l3WUfL7BKzt9mdPcRhyBWH4I=",
-                            PasswordSalt = "vuput3WtSA4Izcb217+xcw==",
+                            PasswordHash = "9tlDNBt5+rnml6gPGcLeH5wgoaU=",
+                            PasswordSalt = "UszNFimB/NuFE/2CeyQY4Q==",
                             PhoneNumber = "+38762123456",
                             ProfilePicture = "/uploads/profilePictures/harisSlika.jpg",
                             UserName = "admin"
@@ -744,8 +744,8 @@ namespace AutoTrade.Migrations
                             Gender = "M",
                             IsAdmin = true,
                             LastName = "likic",
-                            PasswordHash = "JDs8PE6Z0E915qX7kbdxtUI2Z9A=",
-                            PasswordSalt = "YCO+RiMlrA6ju5mflf9inA==",
+                            PasswordHash = "qk9761HVv2QN91cyZWSmlIEPcRM=",
+                            PasswordSalt = "jom9C1cd7qu7mklvmx6M+A==",
                             PhoneNumber = "+38763654321",
                             ProfilePicture = "/uploads/profilePictures/samirSlika.jpg",
                             UserName = "haris"
@@ -762,8 +762,8 @@ namespace AutoTrade.Migrations
                             Gender = "Z",
                             IsAdmin = false,
                             LastName = "Hodžić",
-                            PasswordHash = "vdd0qHNUavz79jkjXDk8YH0lTVQ=",
-                            PasswordSalt = "c2BPNMA436Htv9XejusO2Q==",
+                            PasswordHash = "9F1DG+ar6UQxcHqUhJnVypum79s=",
+                            PasswordSalt = "w3D6B1pATooXK2rf2RTNNA==",
                             PhoneNumber = "+38761987654",
                             ProfilePicture = "/uploads/profilePictures/userSlika.jpg",
                             UserName = "user123"
@@ -780,8 +780,8 @@ namespace AutoTrade.Migrations
                             Gender = "Z",
                             IsAdmin = false,
                             LastName = "Šarić",
-                            PasswordHash = "KNHHBGro151aQSLpzmGAUZyoLkM=",
-                            PasswordSalt = "ZinL4WmZmnIdNqqY+WaHjg==",
+                            PasswordHash = "y00C9YMuyF/hJnrkhiLLvYP0zio=",
+                            PasswordSalt = "GnMabxaETOnCVNnLDdWVMA==",
                             PhoneNumber = "+38764112233",
                             ProfilePicture = "/uploads/profilePictures/user2Slika.jpg",
                             UserName = "user2"
@@ -798,8 +798,8 @@ namespace AutoTrade.Migrations
                             Gender = "F",
                             IsAdmin = false,
                             LastName = "Halilović",
-                            PasswordHash = "lp6/yjEIAedvkvHkVL33fLQD4Bs=",
-                            PasswordSalt = "iyy9CVaVeG4jKEDny+sDMA==",
+                            PasswordHash = "PIuvrka/PJqJGftoDmlPCfFHt1A=",
+                            PasswordSalt = "lP5QO7b4jjxiOlxOrmY1Zg==",
                             PhoneNumber = "+38765223344",
                             ProfilePicture = "/uploads/profilePictures/user3Slika.jpg",
                             UserName = "user3"
@@ -816,8 +816,8 @@ namespace AutoTrade.Migrations
                             Gender = "M",
                             IsAdmin = false,
                             LastName = "Test",
-                            PasswordHash = "D6oAnMW0J4GKTdDnHmGBzEUCQlg=",
-                            PasswordSalt = "iIh12zV7IzNA5eDd5WQ63A==",
+                            PasswordHash = "PmFIuilb26uvPgUim5H57dyY2VY=",
+                            PasswordSalt = "EUTRFcGUI68JXBbCOwUirQ==",
                             PhoneNumber = "+38760112233",
                             ProfilePicture = "/uploads/profilePictures/user4Slika.jpg",
                             UserName = "user4"
@@ -834,8 +834,8 @@ namespace AutoTrade.Migrations
                             Gender = "M",
                             IsAdmin = false,
                             LastName = "Bale",
-                            PasswordHash = "9HL0sEWGlfl8fWYbHneTyRwCC8E=",
-                            PasswordSalt = "Rd8kaGwovd5yAm2+YYrhJA==",
+                            PasswordHash = "veUfJmN/atWbWmQia8epAIINOuo=",
+                            PasswordSalt = "YVImc5G1IdwPJ0x9tpRgzQ==",
                             PhoneNumber = "+38760445566",
                             ProfilePicture = "/uploads/profilePictures/userSlika5.jpg",
                             UserName = "cbale"
@@ -852,8 +852,8 @@ namespace AutoTrade.Migrations
                             Gender = "M",
                             IsAdmin = false,
                             LastName = "Delon",
-                            PasswordHash = "MOCiKBxm+B0WECqRgKwIo/xk7Q4=",
-                            PasswordSalt = "ue1GS5aOOwFt7OSjyDyCLw==",
+                            PasswordHash = "pck7IwKdam5eiMr+6Wg2nowPZow=",
+                            PasswordSalt = "WTRP9UiKILtJ+v4jK1Atzw==",
                             PhoneNumber = "+38760778899",
                             ProfilePicture = "/uploads/profilePictures/userSlika6.jpg",
                             UserName = "adelon"
@@ -870,8 +870,8 @@ namespace AutoTrade.Migrations
                             Gender = "M",
                             IsAdmin = false,
                             LastName = "Sreckovic",
-                            PasswordHash = "5Zk3qva+YPbt6fcjqefwHG0I8kg=",
-                            PasswordSalt = "2pl74wekEih4exjybO9afQ==",
+                            PasswordHash = "kmgDiUoIm1w0bCJluRimV4hizXA=",
+                            PasswordSalt = "nVAjgp0exmv/0tHBTYHtwQ==",
                             PhoneNumber = "+3876088990",
                             ProfilePicture = "/uploads/profilePictures/userSlika7.jpeg",
                             UserName = "csreckovic"
@@ -888,8 +888,8 @@ namespace AutoTrade.Migrations
                             Gender = "M",
                             IsAdmin = false,
                             LastName = "Kicanski",
-                            PasswordHash = "UkZ8ScGHvwXGYZt/2FDspR5WPCI=",
-                            PasswordSalt = "agZfETyFZ0E6c+rv6maZPA==",
+                            PasswordHash = "cAIMAoFbsv+l6KZzku8TmhIczZ0=",
+                            PasswordSalt = "WHfyN+MbLORv09/FoqkcWw==",
                             PhoneNumber = "+3876199001",
                             ProfilePicture = "/uploads/profilePictures/userSlika8.jpg",
                             UserName = "akicanski"
@@ -906,8 +906,8 @@ namespace AutoTrade.Migrations
                             Gender = "M",
                             IsAdmin = false,
                             LastName = "Muratshpaic",
-                            PasswordHash = "apzLjz0kkDcptI65cG6M8aI2ylM=",
-                            PasswordSalt = "mri8aPWEUke6dlB/4QF1kA==",
+                            PasswordHash = "Zwjg09189bU9zsvQjeV9ebboRSg=",
+                            PasswordSalt = "BBfDAULRugakgazRCbIxqQ==",
                             PhoneNumber = "+38761990011",
                             ProfilePicture = "/uploads/profilePictures/userSlika8.jpg",
                             UserName = "Almin123"
@@ -924,8 +924,8 @@ namespace AutoTrade.Migrations
                             Gender = "M",
                             IsAdmin = false,
                             LastName = "Aliman",
-                            PasswordHash = "Hi2/+deDNh0Z0FBJ8UZaPB0avps=",
-                            PasswordSalt = "/YBC4vvFD5GrqkajEwIOPw==",
+                            PasswordHash = "h+9/Zh58GFxgbEtUlMQa3BcDSEI=",
+                            PasswordSalt = "lZz+9DmK2NNudAfKL97bdA==",
                             PhoneNumber = "+3876199001",
                             ProfilePicture = "/uploads/profilePictures/userSlika8.jpg",
                             UserName = "Selman"
@@ -942,8 +942,8 @@ namespace AutoTrade.Migrations
                             Gender = "M",
                             IsAdmin = false,
                             LastName = "Mehic",
-                            PasswordHash = "HBI4ZgeeadNAUxII/AD8piIQuqg=",
-                            PasswordSalt = "8Nwr2Dtbw6Z6Elv/ywwTPw==",
+                            PasswordHash = "U/M3QR06rYb6Wyq+G5IVBjFTWOk=",
+                            PasswordSalt = "lbkDTg07idUsIaLxgIr8cQ==",
                             PhoneNumber = "+38762345678",
                             ProfilePicture = "/uploads/profilePictures/userSlika7.jpeg",
                             UserName = "Amar123"
@@ -960,8 +960,8 @@ namespace AutoTrade.Migrations
                             Gender = "F",
                             IsAdmin = false,
                             LastName = "Hadzic",
-                            PasswordHash = "FA1i6PhYkG9AbHkYtnaS5upnp3E=",
-                            PasswordSalt = "JHidakvXxW14PjL6/MpOWQ==",
+                            PasswordHash = "Grzo8SSghSchM7P8YIZXKNeY/Dk=",
+                            PasswordSalt = "pjZh9rzHDovxzqLniQGSfA==",
                             PhoneNumber = "+38763567890",
                             ProfilePicture = "/uploads/profilePictures/userSlika7.jpeg",
                             UserName = "Lana987"
@@ -978,8 +978,8 @@ namespace AutoTrade.Migrations
                             Gender = "Z",
                             IsAdmin = false,
                             LastName = "Kovac",
-                            PasswordHash = "ZkXbNd5DVHT4kmArQi2x34dkHzQ=",
-                            PasswordSalt = "1gpAJC8sccI7Dje5/Za0DA==",
+                            PasswordHash = "qHIhOoKejmS33aOkANjHZ9GuecY=",
+                            PasswordSalt = "0JWUTOVaeXkMeuQaVki//Q==",
                             PhoneNumber = "+3876112345",
                             ProfilePicture = "/uploads/profilePictures/userSlika.jpg",
                             UserName = "EminaK"
@@ -996,8 +996,8 @@ namespace AutoTrade.Migrations
                             Gender = "M",
                             IsAdmin = false,
                             LastName = "Basic",
-                            PasswordHash = "Aa2UVT+ipfurSt+S8KHm4770omI=",
-                            PasswordSalt = "tYh6vqwpq1riuOb5J8pCLQ==",
+                            PasswordHash = "GHRxjJhiIK7bChcKI/do9bVEPgs=",
+                            PasswordSalt = "jYs2LCkr2v+gMsxcJVynbg==",
                             PhoneNumber = "+38760998877",
                             ProfilePicture = "/uploads/profilePictures/user2Slika.jpg",
                             UserName = "Tarik77"
@@ -1014,8 +1014,8 @@ namespace AutoTrade.Migrations
                             Gender = "M",
                             IsAdmin = false,
                             LastName = "Smajic",
-                            PasswordHash = "ajfiPAyH/+cjrsMHjLTi2OKhNxE=",
-                            PasswordSalt = "VnkepXdg9YN+Kv+mmIHOCA==",
+                            PasswordHash = "NzD0GuK89TMIrmlpf9tetT73Xw8=",
+                            PasswordSalt = "lgPFFTHvJFQUWgzCwL5w6A==",
                             PhoneNumber = "+38761789012",
                             ProfilePicture = "/uploads/profilePictures/user3Slika.jpg",
                             UserName = "Adnan2023"
@@ -1032,8 +1032,8 @@ namespace AutoTrade.Migrations
                             Gender = "Z",
                             IsAdmin = false,
                             LastName = "Stanic",
-                            PasswordHash = "ht1nO/VB8JaAoFjUGFzNfI+hO8I=",
-                            PasswordSalt = "VQ7qsy3KpX88ZdZbAUUQKQ==",
+                            PasswordHash = "hotgI5pcpqftRzY/gCbxxuDNo+k=",
+                            PasswordSalt = "MOHiyB9+JpIChr2tgbASYA==",
                             PhoneNumber = "+38762555666",
                             ProfilePicture = "/uploads/profilePictures/userSlika8.jpg",
                             UserName = "Ivana_S"
@@ -1050,8 +1050,8 @@ namespace AutoTrade.Migrations
                             Gender = "M",
                             IsAdmin = false,
                             LastName = "Hadžić",
-                            PasswordHash = "Kh8yFBmcmqS0P5YrJzZ6X5s5TRk=",
-                            PasswordSalt = "zOC1ydzr9JfZUt6dMoah0A==",
+                            PasswordHash = "EfGvpFwDn/7Lg6eSfj5cmRPDPAM=",
+                            PasswordSalt = "bU3lrA/YVyouZ8R17P+hjQ==",
                             PhoneNumber = "+38763777888",
                             ProfilePicture = "/uploads/profilePictures/user2Slika.jpg",
                             UserName = "KenanPro"
@@ -1068,8 +1068,8 @@ namespace AutoTrade.Migrations
                             Gender = "Z",
                             IsAdmin = false,
                             LastName = "Radončić",
-                            PasswordHash = "kSr4alsPz9LO9F/9PI7flB4/fW0=",
-                            PasswordSalt = "ZiYWOQ/ucpYJHgA2j2FBpg==",
+                            PasswordHash = "mShzBbVeW6r4/vZMQtpZ7unMrj0=",
+                            PasswordSalt = "QOuivFQSzRpYeR6aKFaIQA==",
                             PhoneNumber = "+3876033344",
                             ProfilePicture = "/uploads/profilePictures/user4Slika.jpg",
                             UserName = "Dina_R"
@@ -1086,8 +1086,8 @@ namespace AutoTrade.Migrations
                             Gender = "M",
                             IsAdmin = false,
                             LastName = "Čaušević",
-                            PasswordHash = "/oM8KfaM2O8hiWzxPm8qB7RJDlI=",
-                            PasswordSalt = "f7QtdYNX5e+B3Zo/rosNIA==",
+                            PasswordHash = "jHwnqFxC3BMZ+pKpzYmTz/ICVmk=",
+                            PasswordSalt = "w0q44AiDa70RjH8zO5pUcA==",
                             PhoneNumber = "+38761666777",
                             ProfilePicture = "/uploads/profilePictures/user4Slika.jpg",
                             UserName = "MirzaC"
@@ -1104,8 +1104,8 @@ namespace AutoTrade.Migrations
                             Gender = "Z",
                             IsAdmin = false,
                             LastName = "Pirić",
-                            PasswordHash = "k+m7ThUVaCY7x9SWLrFdIF4tcYc=",
-                            PasswordSalt = "gFGtZ8hFi5Yh8sPiO9c+uw==",
+                            PasswordHash = "zStO7pqMFfm50J7aW2mODqjItDg=",
+                            PasswordSalt = "xQKotGLyONNiQTV0EmvnZw==",
                             PhoneNumber = "+38762222333",
                             ProfilePicture = "/uploads/profilePictures/user4Slika.jpg",
                             UserName = "Selma88"
@@ -1122,8 +1122,8 @@ namespace AutoTrade.Migrations
                             Gender = "M",
                             IsAdmin = false,
                             LastName = "Beširović",
-                            PasswordHash = "RA56gz4cPD7NWsn6F2pJOpBqR8s=",
-                            PasswordSalt = "YskIBiox69xlPUcZlfyF/w==",
+                            PasswordHash = "lrMFBC9YB46rINDXs0zRWoNWYG0=",
+                            PasswordSalt = "gC3ozus74rwrYbepT+P9nA==",
                             PhoneNumber = "+3876012378",
                             ProfilePicture = "/uploads/profilePictures/user4Slika.jpg",
                             UserName = "ArminB"
@@ -1140,8 +1140,8 @@ namespace AutoTrade.Migrations
                             Gender = "Z",
                             IsAdmin = false,
                             LastName = "Avdić",
-                            PasswordHash = "2TqvBfxPNP5cTYXb6mUUvEma6rM=",
-                            PasswordSalt = "o+p2C87/AbiLHC+Ga/CgcQ==",
+                            PasswordHash = "nTwSSk2E9UBxz5fJ6GSPWsbnUtw=",
+                            PasswordSalt = "qFSI66VJfXjMgDgG8T4V5g==",
                             PhoneNumber = "+38763987654",
                             ProfilePicture = "/uploads/profilePictures/user4Slika.jpg",
                             UserName = "LejlaA"
@@ -1158,8 +1158,8 @@ namespace AutoTrade.Migrations
                             Gender = "M",
                             IsAdmin = false,
                             LastName = "Mujkanović",
-                            PasswordHash = "+mPsDqj26Qn2sBV9rTOuyWlgYao=",
-                            PasswordSalt = "IxdkKadDHIzL5qf9y1qxKg==",
+                            PasswordHash = "UJqxK3Z+pazLdMZxOLuJlnEzfzQ=",
+                            PasswordSalt = "C4Hgu7SKtWcGYbjYOnYziw==",
                             PhoneNumber = "+38761654321",
                             ProfilePicture = "/uploads/profilePictures/user4Slika.jpg",
                             UserName = "BenjaminM"
@@ -1176,8 +1176,8 @@ namespace AutoTrade.Migrations
                             Gender = "Z",
                             IsAdmin = false,
                             LastName = "Gavran",
-                            PasswordHash = "RuX9+aSPt3Lro+z0smWZTufgyUs=",
-                            PasswordSalt = "rhy8Mw8L9Z0B5zut/BhYyw==",
+                            PasswordHash = "dtHPcDaLxpkEqzcWpftauvSpHWo=",
+                            PasswordSalt = "SBB5hDeiM3CfW2qAojqOEQ==",
                             PhoneNumber = "+38762111222",
                             ProfilePicture = "/uploads/profilePictures/user4Slika.jpg",
                             UserName = "HanaG"
@@ -1194,8 +1194,8 @@ namespace AutoTrade.Migrations
                             Gender = "M",
                             IsAdmin = false,
                             LastName = "Hadžović",
-                            PasswordHash = "jE4c0TFGSP9+fnsy8U6D+whm22g=",
-                            PasswordSalt = "3sO/0IxvzjjG1xb8v8JVpA==",
+                            PasswordHash = "1dJSBYsYk7U3eQThZr2poHGKzSk=",
+                            PasswordSalt = "wRzy6Qw6o2SsOE1W0MfVnA==",
                             PhoneNumber = "+38760432678",
                             ProfilePicture = "/uploads/profilePictures/user4Slika.jpg",
                             UserName = "DamirH"
@@ -1328,11 +1328,11 @@ namespace AutoTrade.Migrations
                             CarModelId = 1,
                             Color = "Crna",
                             CubicCapacity = 2000.0,
-                            DateOFadd = new DateTime(2025, 7, 11, 11, 3, 52, 895, DateTimeKind.Local).AddTicks(8280),
+                            DateOFadd = new DateTime(2025, 7, 13, 14, 36, 47, 914, DateTimeKind.Local).AddTicks(3120),
                             Description = "Audi A3 u odličnom stanju, dobro održavan, prvi vlasnik.",
                             EnginePower = 140,
                             FuelTypeId = 1,
-                            HighlightExpiryDate = new DateTime(2025, 7, 13, 11, 3, 52, 895, DateTimeKind.Local).AddTicks(8330),
+                            HighlightExpiryDate = new DateTime(2025, 7, 15, 14, 36, 47, 914, DateTimeKind.Local).AddTicks(3180),
                             HorsePower = 190,
                             IsHighlighted = true,
                             Milage = 75000.0,
@@ -1356,7 +1356,7 @@ namespace AutoTrade.Migrations
                             CarModelId = 33,
                             Color = "Bijela",
                             CubicCapacity = 1.0,
-                            DateOFadd = new DateTime(2025, 7, 11, 11, 3, 52, 895, DateTimeKind.Local).AddTicks(8340),
+                            DateOFadd = new DateTime(2025, 7, 13, 14, 36, 47, 914, DateTimeKind.Local).AddTicks(3200),
                             Description = "audi a3 sa odličnim performansama, drugi vlasnik. S line oprema sve u fullu uradjeno. Crno nebo",
                             EnginePower = 120,
                             FeaturedExpiryDate = new DateTime(2025, 1, 20, 0, 0, 0, 0, DateTimeKind.Unspecified),
@@ -1386,7 +1386,7 @@ namespace AutoTrade.Migrations
                             CarModelId = 32,
                             Color = "Crna",
                             CubicCapacity = 2.0,
-                            DateOFadd = new DateTime(2025, 7, 11, 11, 3, 52, 895, DateTimeKind.Local).AddTicks(8350),
+                            DateOFadd = new DateTime(2025, 7, 13, 14, 36, 47, 914, DateTimeKind.Local).AddTicks(3200),
                             Description = "Audi A4 u odličnom stanju, dobro održavan, drugo vlasnik. Karavan jako ocuvan sa puno dodatne opreme",
                             EnginePower = 140,
                             FeaturedExpiryDate = new DateTime(2025, 1, 20, 0, 0, 0, 0, DateTimeKind.Unspecified),
@@ -1416,7 +1416,7 @@ namespace AutoTrade.Migrations
                             CarModelId = 31,
                             Color = "Bijela",
                             CubicCapacity = 2.0,
-                            DateOFadd = new DateTime(2025, 7, 11, 11, 3, 52, 895, DateTimeKind.Local).AddTicks(8360),
+                            DateOFadd = new DateTime(2025, 7, 13, 14, 36, 47, 914, DateTimeKind.Local).AddTicks(3210),
                             Description = "Audi A5 u odličnom stanju, dobro održavan nove 4 gume zimske i ljetne, drugi vlasnik.Jako ocuvan sa puno dodatne opreme auto bez packe sjedi i vozi",
                             EnginePower = 140,
                             FeaturedExpiryDate = new DateTime(2025, 1, 20, 0, 0, 0, 0, DateTimeKind.Unspecified),
@@ -1446,12 +1446,12 @@ namespace AutoTrade.Migrations
                             CarModelId = 33,
                             Color = "Siva",
                             CubicCapacity = 2.0,
-                            DateOFadd = new DateTime(2025, 7, 11, 11, 3, 52, 895, DateTimeKind.Local).AddTicks(8360),
+                            DateOFadd = new DateTime(2025, 7, 13, 14, 36, 47, 914, DateTimeKind.Local).AddTicks(3220),
                             Description = "Audi A6 u odličnom stanju, dobro održavan nove 4 gume zimske i ljetne, drugi vlasnik.Jako ocuvan sa puno dodatne opreme auto bez packe sjedi i vozi. Najbolje doci i pogledati auto. Vozeno na posao i nazad. Nov akumulator i set kvacila odradjen nedavno.!!!PRODAJA SAMO",
                             EnginePower = 140,
                             FeaturedExpiryDate = new DateTime(2025, 1, 20, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             FuelTypeId = 2,
-                            HighlightExpiryDate = new DateTime(2025, 7, 31, 11, 3, 52, 895, DateTimeKind.Local).AddTicks(8370),
+                            HighlightExpiryDate = new DateTime(2025, 8, 2, 14, 36, 47, 914, DateTimeKind.Local).AddTicks(3220),
                             HorsePower = 190,
                             IsHighlighted = true,
                             LastBigService = new DateTime(2024, 11, 11, 0, 0, 0, 0, DateTimeKind.Unspecified),
@@ -1477,12 +1477,12 @@ namespace AutoTrade.Migrations
                             CarModelId = 24,
                             Color = "Smedja",
                             CubicCapacity = 2.0,
-                            DateOFadd = new DateTime(2025, 7, 11, 11, 3, 52, 895, DateTimeKind.Local).AddTicks(8370),
+                            DateOFadd = new DateTime(2025, 7, 13, 14, 36, 47, 914, DateTimeKind.Local).AddTicks(3220),
                             Description = "BMW E60 u odličnom stanju, dobro održavan nove 4 gume zimske i ljetne, drugi vlasnik.Jako ocuvan sa puno dodatne opreme auto bez packe sjedi i vozi. Najbolje doci i pogledati auto. Vozeno na posao i nazad. Nov akumulator i set kvacila odradjen nedavno.!!!PRODAJA SAMO",
                             EnginePower = 88,
                             FeaturedExpiryDate = new DateTime(2025, 1, 20, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             FuelTypeId = 1,
-                            HighlightExpiryDate = new DateTime(2025, 7, 21, 11, 3, 52, 895, DateTimeKind.Local).AddTicks(8380),
+                            HighlightExpiryDate = new DateTime(2025, 7, 23, 14, 36, 47, 914, DateTimeKind.Local).AddTicks(3230),
                             HorsePower = 190,
                             IsHighlighted = true,
                             LastBigService = new DateTime(2024, 11, 11, 0, 0, 0, 0, DateTimeKind.Unspecified),
@@ -1508,7 +1508,7 @@ namespace AutoTrade.Migrations
                             CarModelId = 16,
                             Color = "Plava",
                             CubicCapacity = 2.0,
-                            DateOFadd = new DateTime(2025, 7, 11, 11, 3, 52, 895, DateTimeKind.Local).AddTicks(8380),
+                            DateOFadd = new DateTime(2025, 7, 13, 14, 36, 47, 914, DateTimeKind.Local).AddTicks(3230),
                             Description = "Citroen ds 6 u odličnom stanju, dobro održavan nove 4 gume zimske i ljetne, drugi vlasnik.Jako ocuvan sa puno dodatne opreme auto bez packe sjedi i vozi. Najbolje doci i pogledati auto. Vozeno na posao i nazad. Nov akumulator i set kvacila odradjen nedavno.!!!PRODAJA SAMO",
                             EnginePower = 104,
                             FeaturedExpiryDate = new DateTime(2025, 1, 20, 0, 0, 0, 0, DateTimeKind.Unspecified),
@@ -1538,7 +1538,7 @@ namespace AutoTrade.Migrations
                             CarModelId = 48,
                             Color = "Crna",
                             CubicCapacity = 2.0,
-                            DateOFadd = new DateTime(2025, 7, 11, 11, 3, 52, 895, DateTimeKind.Local).AddTicks(8390),
+                            DateOFadd = new DateTime(2025, 7, 13, 14, 36, 47, 914, DateTimeKind.Local).AddTicks(3250),
                             Description = "Fiat punto u odličnom stanju, dobro održavan nove 4 gume zimske i ljetne, drugi vlasnik.Jako ocuvan sa puno dodatne opreme auto bez packe sjedi i vozi. Najbolje doci i pogledati auto. Vozeno na posao i nazad. Nov akumulator i set kvacila odradjen nedavno.!!!PRODAJA SAMO",
                             EnginePower = 44,
                             FeaturedExpiryDate = new DateTime(2025, 1, 20, 0, 0, 0, 0, DateTimeKind.Unspecified),
@@ -1568,7 +1568,7 @@ namespace AutoTrade.Migrations
                             CarModelId = 6,
                             Color = "Siva",
                             CubicCapacity = 2.0,
-                            DateOFadd = new DateTime(2025, 7, 11, 11, 3, 52, 895, DateTimeKind.Local).AddTicks(8400),
+                            DateOFadd = new DateTime(2025, 7, 13, 14, 36, 47, 914, DateTimeKind.Local).AddTicks(3260),
                             Description = "Golf 4 u perfektnom stanju, dobro održavan nove 4 gume zimske i ljetne, drugi vlasnik.Jako ocuvan sa puno dodatne opreme auto bez packe sjedi i vozi. Najbolje doci i pogledati auto. Vozeno na posao i nazad. Nov akumulator i set kvacila odradjen nedavno.!!!PRODAJA SAMO",
                             EnginePower = 88,
                             FeaturedExpiryDate = new DateTime(2025, 1, 20, 0, 0, 0, 0, DateTimeKind.Unspecified),
@@ -1598,7 +1598,7 @@ namespace AutoTrade.Migrations
                             CarModelId = 6,
                             Color = "Crna",
                             CubicCapacity = 2.0,
-                            DateOFadd = new DateTime(2025, 7, 11, 11, 3, 52, 895, DateTimeKind.Local).AddTicks(8410),
+                            DateOFadd = new DateTime(2025, 7, 13, 14, 36, 47, 914, DateTimeKind.Local).AddTicks(3260),
                             Description = "Golf 6 GTD u perfektnom stanju, Auto koje puno trosi al se zna za sta se placa, VR 6 motor,dobro održavan nove 4 gume zimske i ljetne, drugi vlasnik.Jako ocuvan sa puno dodatne opreme auto bez packe sjedi i vozi. Najbolje doci i pogledati auto. Vozeno na posao i nazad. Nov akumulator i set kvacila odradjen nedavno.!!!PRODAJA SAMO",
                             EnginePower = 180,
                             FeaturedExpiryDate = new DateTime(2025, 1, 20, 0, 0, 0, 0, DateTimeKind.Unspecified),
@@ -1628,12 +1628,12 @@ namespace AutoTrade.Migrations
                             CarModelId = 6,
                             Color = "Crna",
                             CubicCapacity = 2.0,
-                            DateOFadd = new DateTime(2025, 7, 11, 11, 3, 52, 895, DateTimeKind.Local).AddTicks(8410),
+                            DateOFadd = new DateTime(2025, 7, 13, 14, 36, 47, 914, DateTimeKind.Local).AddTicks(3270),
                             Description = "Golf 7 u perfektnom stanju, Auto koje puno trosi al se zna za sta se placa, VR 6 motor,dobro održavan nove 4 gume zimske i ljetne, drugi vlasnik.Jako ocuvan sa puno dodatne opreme auto bez packe sjedi i vozi. Najbolje doci i pogledati auto. Vozeno na posao i nazad. Nov akumulator i set kvacila odradjen nedavno.!!!PRODAJA SAMO",
                             EnginePower = 180,
                             FeaturedExpiryDate = new DateTime(2025, 1, 20, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             FuelTypeId = 1,
-                            HighlightExpiryDate = new DateTime(2025, 7, 31, 11, 3, 52, 895, DateTimeKind.Local).AddTicks(8420),
+                            HighlightExpiryDate = new DateTime(2025, 8, 2, 14, 36, 47, 914, DateTimeKind.Local).AddTicks(3280),
                             HorsePower = 210,
                             IsHighlighted = true,
                             LastBigService = new DateTime(2024, 11, 11, 0, 0, 0, 0, DateTimeKind.Unspecified),
@@ -1659,7 +1659,7 @@ namespace AutoTrade.Migrations
                             CarModelId = 6,
                             Color = "Siva",
                             CubicCapacity = 2.0,
-                            DateOFadd = new DateTime(2025, 7, 11, 11, 3, 52, 895, DateTimeKind.Local).AddTicks(8420),
+                            DateOFadd = new DateTime(2025, 7, 13, 14, 36, 47, 914, DateTimeKind.Local).AddTicks(3280),
                             Description = "Golf 7 TDI u perfektnom stanju, Auto koje puno trosi al se zna za sta se placa, VR 6 motor,dobro održavan nove 4 gume zimske i ljetne, drugi vlasnik.Jako ocuvan sa puno dodatne opreme auto bez packe sjedi i vozi. Najbolje doci i pogledati auto. Vozeno na posao i nazad. Nov akumulator i set kvacila odradjen nedavno.!!!PRODAJA SAMO",
                             EnginePower = 180,
                             FeaturedExpiryDate = new DateTime(2025, 1, 20, 0, 0, 0, 0, DateTimeKind.Unspecified),
@@ -1689,12 +1689,12 @@ namespace AutoTrade.Migrations
                             CarModelId = 36,
                             Color = "Crvena",
                             CubicCapacity = 2.0,
-                            DateOFadd = new DateTime(2025, 7, 11, 11, 3, 52, 895, DateTimeKind.Local).AddTicks(8430),
+                            DateOFadd = new DateTime(2025, 7, 13, 14, 36, 47, 914, DateTimeKind.Local).AddTicks(3280),
                             Description = "Hyundai Kona TDI u perfektnom stanju, Auto koje puno trosi al se zna za sta se placa, VR 6 motor,dobro održavan nove 4 gume zimske i ljetne, drugi vlasnik.Jako ocuvan sa puno dodatne opreme auto bez packe sjedi i vozi. Najbolje doci i pogledati auto. Vozeno na posao i nazad. Nov akumulator i set kvacila odradjen nedavno.!!!PRODAJA SAMO",
                             EnginePower = 100,
                             FeaturedExpiryDate = new DateTime(2025, 1, 20, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             FuelTypeId = 2,
-                            HighlightExpiryDate = new DateTime(2025, 7, 21, 11, 3, 52, 895, DateTimeKind.Local).AddTicks(8430),
+                            HighlightExpiryDate = new DateTime(2025, 7, 23, 14, 36, 47, 914, DateTimeKind.Local).AddTicks(3290),
                             HorsePower = 100,
                             IsHighlighted = true,
                             LastBigService = new DateTime(2024, 11, 11, 0, 0, 0, 0, DateTimeKind.Unspecified),
@@ -1720,7 +1720,7 @@ namespace AutoTrade.Migrations
                             CarModelId = 47,
                             Color = "Bež",
                             CubicCapacity = 2.0,
-                            DateOFadd = new DateTime(2025, 7, 11, 11, 3, 52, 895, DateTimeKind.Local).AddTicks(8440),
+                            DateOFadd = new DateTime(2025, 7, 13, 14, 36, 47, 914, DateTimeKind.Local).AddTicks(3290),
                             Description = "Land Roveru perfektnom stanju, Auto koje puno trosi al se zna za sta se placa, VR 6 motor,dobro održavan nove 4 gume zimske i ljetne, drugi vlasnik.Jako ocuvan sa puno dodatne opreme auto bez packe sjedi i vozi. Najbolje doci i pogledati auto. Vozeno na posao i nazad. Nov akumulator i set kvacila odradjen nedavno.!!!PRODAJA SAMO",
                             EnginePower = 150,
                             FeaturedExpiryDate = new DateTime(2025, 1, 20, 0, 0, 0, 0, DateTimeKind.Unspecified),
@@ -1750,7 +1750,7 @@ namespace AutoTrade.Migrations
                             CarModelId = 36,
                             Color = "Bijela",
                             CubicCapacity = 2.0,
-                            DateOFadd = new DateTime(2025, 7, 11, 11, 3, 52, 895, DateTimeKind.Local).AddTicks(8440),
+                            DateOFadd = new DateTime(2025, 7, 13, 14, 36, 47, 914, DateTimeKind.Local).AddTicks(3300),
                             Description = "Mazda cx7 u perfektnom stanju, Auto koje puno trosi al se zna za sta se placa, VR 6 motor,dobro održavan nove 4 gume zimske i ljetne, drugi vlasnik.Jako ocuvan sa puno dodatne opreme auto bez packe sjedi i vozi. Najbolje doci i pogledati auto. Vozeno na posao i nazad. Nov akumulator i set kvacila odradjen nedavno.!!!PRODAJA SAMO",
                             EnginePower = 150,
                             FeaturedExpiryDate = new DateTime(2025, 1, 20, 0, 0, 0, 0, DateTimeKind.Unspecified),
@@ -1780,7 +1780,7 @@ namespace AutoTrade.Migrations
                             CarModelId = 26,
                             Color = "Siva",
                             CubicCapacity = 2.0,
-                            DateOFadd = new DateTime(2025, 7, 11, 11, 3, 52, 895, DateTimeKind.Local).AddTicks(8450),
+                            DateOFadd = new DateTime(2025, 7, 13, 14, 36, 47, 914, DateTimeKind.Local).AddTicks(3300),
                             Description = "Mercedes ML 350 u perfektnom stanju, Auto koje puno trosi al se zna za sta se placa, VR 6 motor,dobro održavan nove 4 gume zimske i ljetne, drugi vlasnik.Jako ocuvan sa puno dodatne opreme auto bez packe sjedi i vozi. Najbolje doci i pogledati auto. Vozeno na posao i nazad. Nov akumulator i set kvacila odradjen nedavno.!!!PRODAJA SAMO",
                             EnginePower = 150,
                             FeaturedExpiryDate = new DateTime(2025, 1, 20, 0, 0, 0, 0, DateTimeKind.Unspecified),
@@ -1810,12 +1810,12 @@ namespace AutoTrade.Migrations
                             CarModelId = 2,
                             Color = "Plava",
                             CubicCapacity = 2.0,
-                            DateOFadd = new DateTime(2025, 7, 11, 11, 3, 52, 895, DateTimeKind.Local).AddTicks(8460),
+                            DateOFadd = new DateTime(2025, 7, 13, 14, 36, 47, 914, DateTimeKind.Local).AddTicks(3320),
                             Description = "Open Corsa 1.2 u dobrom stanju, Auto koje puno trosi al se zna za sta se placa, VR 6 motor,dobro održavan nove 4 gume zimske i ljetne, drugi vlasnik.Jako ocuvan sa puno dodatne opreme auto bez packe sjedi i vozi. Najbolje doci i pogledati auto. Vozeno na posao i nazad. Nov akumulator i set kvacila odradjen nedavno.!!!PRODAJA SAMO",
                             EnginePower = 110,
                             FeaturedExpiryDate = new DateTime(2025, 1, 20, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             FuelTypeId = 3,
-                            HighlightExpiryDate = new DateTime(2025, 7, 21, 11, 3, 52, 895, DateTimeKind.Local).AddTicks(8460),
+                            HighlightExpiryDate = new DateTime(2025, 7, 23, 14, 36, 47, 914, DateTimeKind.Local).AddTicks(3340),
                             HorsePower = 150,
                             IsHighlighted = true,
                             LastBigService = new DateTime(2024, 11, 11, 0, 0, 0, 0, DateTimeKind.Unspecified),
@@ -1841,7 +1841,7 @@ namespace AutoTrade.Migrations
                             CarModelId = 7,
                             Color = "Siva",
                             CubicCapacity = 2.0,
-                            DateOFadd = new DateTime(2025, 7, 11, 11, 3, 52, 895, DateTimeKind.Local).AddTicks(8470),
+                            DateOFadd = new DateTime(2025, 7, 13, 14, 36, 47, 914, DateTimeKind.Local).AddTicks(3340),
                             Description = "Passat b6 u dobrom stanju, Auto koje puno trosi al se zna za sta se placa, VR 6 motor,dobro održavan nove 4 gume zimske i ljetne, drugi vlasnik.Jako ocuvan sa puno dodatne opreme auto bez packe sjedi i vozi. Najbolje doci i pogledati auto. Vozeno na posao i nazad. Nov akumulator i set kvacila odradjen nedavno.!!!PRODAJA SAMO",
                             EnginePower = 110,
                             FeaturedExpiryDate = new DateTime(2025, 1, 20, 0, 0, 0, 0, DateTimeKind.Unspecified),
@@ -1871,7 +1871,7 @@ namespace AutoTrade.Migrations
                             CarModelId = 7,
                             Color = "Crna",
                             CubicCapacity = 2.0,
-                            DateOFadd = new DateTime(2025, 7, 11, 11, 3, 52, 895, DateTimeKind.Local).AddTicks(8470),
+                            DateOFadd = new DateTime(2025, 7, 13, 14, 36, 47, 914, DateTimeKind.Local).AddTicks(3350),
                             Description = "Passat CC u dobrom stanju, Auto koje puno trosi al se zna za sta se placa, VR 6 motor,dobro održavan nove 4 gume zimske i ljetne, drugi vlasnik.Jako ocuvan sa puno dodatne opreme auto bez packe sjedi i vozi. Najbolje doci i pogledati auto. Vozeno na posao i nazad. Nov akumulator i set kvacila odradjen nedavno.!!!PRODAJA SAMO",
                             EnginePower = 110,
                             FeaturedExpiryDate = new DateTime(2025, 1, 20, 0, 0, 0, 0, DateTimeKind.Unspecified),
@@ -1901,7 +1901,7 @@ namespace AutoTrade.Migrations
                             CarModelId = 7,
                             Color = "Siva",
                             CubicCapacity = 2.0,
-                            DateOFadd = new DateTime(2025, 7, 11, 11, 3, 52, 895, DateTimeKind.Local).AddTicks(8480),
+                            DateOFadd = new DateTime(2025, 7, 13, 14, 36, 47, 914, DateTimeKind.Local).AddTicks(3360),
                             Description = "Peugeot 407 u dobrom stanju, Auto koje puno trosi al se zna za sta se placa, VR 6 motor,dobro održavan nove 4 gume zimske i ljetne, drugi vlasnik.Jako ocuvan sa puno dodatne opreme auto bez packe sjedi i vozi. Najbolje doci i pogledati auto. Vozeno na posao i nazad. Nov akumulator i set kvacila odradjen nedavno.!!!PRODAJA SAMO",
                             EnginePower = 88,
                             FeaturedExpiryDate = new DateTime(2025, 1, 20, 0, 0, 0, 0, DateTimeKind.Unspecified),
@@ -1931,7 +1931,7 @@ namespace AutoTrade.Migrations
                             CarModelId = 7,
                             Color = "Plava",
                             CubicCapacity = 2.0,
-                            DateOFadd = new DateTime(2025, 7, 11, 11, 3, 52, 895, DateTimeKind.Local).AddTicks(8490),
+                            DateOFadd = new DateTime(2025, 7, 13, 14, 36, 47, 914, DateTimeKind.Local).AddTicks(3360),
                             Description = "Polo 2006 u dobrom stanju, Auto koje puno trosi al se zna za sta se placa, VR 6 motor,dobro održavan nove 4 gume zimske i ljetne, drugi vlasnik.Jako ocuvan sa puno dodatne opreme auto bez packe sjedi i vozi. Najbolje doci i pogledati auto. Vozeno na posao i nazad. Nov akumulator i set kvacila odradjen nedavno.!!!PRODAJA SAMO",
                             EnginePower = 88,
                             FeaturedExpiryDate = new DateTime(2025, 1, 20, 0, 0, 0, 0, DateTimeKind.Unspecified),
@@ -1961,7 +1961,7 @@ namespace AutoTrade.Migrations
                             CarModelId = 41,
                             Color = "Crna",
                             CubicCapacity = 2.0,
-                            DateOFadd = new DateTime(2025, 7, 11, 11, 3, 52, 895, DateTimeKind.Local).AddTicks(8490),
+                            DateOFadd = new DateTime(2025, 7, 13, 14, 36, 47, 914, DateTimeKind.Local).AddTicks(3370),
                             Description = "Quad u dobrom stanju, Auto koje puno trosi al se zna za sta se placa, VR 6 motor,dobro održavan nove 4 gume zimske i ljetne, drugi vlasnik.Jako ocuvan sa puno dodatne opreme auto bez packe sjedi i vozi. Najbolje doci i pogledati auto. Vozeno na posao i nazad. Nov akumulator i set kvacila odradjen nedavno.!!!PRODAJA SAMO",
                             EnginePower = 88,
                             FeaturedExpiryDate = new DateTime(2025, 1, 20, 0, 0, 0, 0, DateTimeKind.Unspecified),
@@ -1991,7 +1991,7 @@ namespace AutoTrade.Migrations
                             CarModelId = 2,
                             Color = "Plava",
                             CubicCapacity = 2.0,
-                            DateOFadd = new DateTime(2025, 7, 11, 11, 3, 52, 895, DateTimeKind.Local).AddTicks(8500),
+                            DateOFadd = new DateTime(2025, 7, 13, 14, 36, 47, 914, DateTimeKind.Local).AddTicks(3380),
                             Description = "Renault Megan u dobrom stanju, Auto koje puno trosi al se zna za sta se placa, VR 6 motor,dobro održavan nove 4 gume zimske i ljetne, drugi vlasnik.Jako ocuvan sa puno dodatne opreme auto bez packe sjedi i vozi. Najbolje doci i pogledati auto. Vozeno na posao i nazad. Nov akumulator i set kvacila odradjen nedavno.!!!PRODAJA SAMO",
                             EnginePower = 140,
                             FeaturedExpiryDate = new DateTime(2025, 1, 20, 0, 0, 0, 0, DateTimeKind.Unspecified),
@@ -2021,7 +2021,7 @@ namespace AutoTrade.Migrations
                             CarModelId = 5,
                             Color = "Plava",
                             CubicCapacity = 2.0,
-                            DateOFadd = new DateTime(2025, 7, 11, 11, 3, 52, 895, DateTimeKind.Local).AddTicks(8500),
+                            DateOFadd = new DateTime(2025, 7, 13, 14, 36, 47, 914, DateTimeKind.Local).AddTicks(3380),
                             Description = "Renault Scenic u dobrom stanju, Auto koje puno trosi al se zna za sta se placa, VR 6 motor,dobro održavan nove 4 gume zimske i ljetne, drugi vlasnik.Jako ocuvan sa puno dodatne opreme auto bez packe sjedi i vozi. Najbolje doci i pogledati auto. Vozeno na posao i nazad. Nov akumulator i set kvacila odradjen nedavno.!!!PRODAJA SAMO",
                             EnginePower = 140,
                             FeaturedExpiryDate = new DateTime(2025, 1, 20, 0, 0, 0, 0, DateTimeKind.Unspecified),
@@ -2051,7 +2051,7 @@ namespace AutoTrade.Migrations
                             CarModelId = 2,
                             Color = "Plava",
                             CubicCapacity = 2.0,
-                            DateOFadd = new DateTime(2025, 7, 11, 11, 3, 52, 895, DateTimeKind.Local).AddTicks(8510),
+                            DateOFadd = new DateTime(2025, 7, 13, 14, 36, 47, 914, DateTimeKind.Local).AddTicks(3390),
                             Description = "Skoda fabia HTP u dobrom stanju, Auto koje puno trosi al se zna za sta se placa, VR 6 motor,dobro održavan nove 4 gume zimske i ljetne, drugi vlasnik.Jako ocuvan sa puno dodatne opreme auto bez packe sjedi i vozi. Najbolje doci i pogledati auto. Vozeno na posao i nazad. Nov akumulator i set kvacila odradjen nedavno.!!!PRODAJA SAMO",
                             EnginePower = 140,
                             FeaturedExpiryDate = new DateTime(2025, 1, 20, 0, 0, 0, 0, DateTimeKind.Unspecified),
@@ -2081,7 +2081,7 @@ namespace AutoTrade.Migrations
                             CarModelId = 2,
                             Color = "Bijela",
                             CubicCapacity = 2.0,
-                            DateOFadd = new DateTime(2025, 7, 11, 11, 3, 52, 895, DateTimeKind.Local).AddTicks(8530),
+                            DateOFadd = new DateTime(2025, 7, 13, 14, 36, 47, 914, DateTimeKind.Local).AddTicks(3400),
                             Description = "Skoda Octavia 1.2 u dobrom stanju, Auto koje puno trosi al se zna za sta se placa, VR 6 motor,dobro održavan nove 4 gume zimske i ljetne, drugi vlasnik.Jako ocuvan sa puno dodatne opreme auto bez packe sjedi i vozi. Najbolje doci i pogledati auto. Vozeno na posao i nazad. Nov akumulator i set kvacila odradjen nedavno.!!!PRODAJA SAMO",
                             EnginePower = 140,
                             FeaturedExpiryDate = new DateTime(2025, 1, 20, 0, 0, 0, 0, DateTimeKind.Unspecified),
@@ -2111,7 +2111,7 @@ namespace AutoTrade.Migrations
                             CarModelId = 15,
                             Color = "Bijela",
                             CubicCapacity = 2.0,
-                            DateOFadd = new DateTime(2025, 7, 11, 11, 3, 52, 895, DateTimeKind.Local).AddTicks(8540),
+                            DateOFadd = new DateTime(2025, 7, 13, 14, 36, 47, 914, DateTimeKind.Local).AddTicks(3400),
                             Description = "Bora  u dobrom stanju, Auto koje puno trosi al se zna za sta se placa, VR 6 motor,dobro održavan nove 4 gume zimske i ljetne, drugi vlasnik.Jako ocuvan sa puno dodatne opreme auto bez packe sjedi i vozi. Najbolje doci i pogledati auto. Vozeno na posao i nazad. Nov akumulator i set kvacila odradjen nedavno.!!!PRODAJA SAMO",
                             EnginePower = 140,
                             FeaturedExpiryDate = new DateTime(2025, 1, 20, 0, 0, 0, 0, DateTimeKind.Unspecified),
@@ -2141,12 +2141,12 @@ namespace AutoTrade.Migrations
                             CarModelId = 9,
                             Color = "Bijela",
                             CubicCapacity = 2.0,
-                            DateOFadd = new DateTime(2025, 7, 11, 11, 3, 52, 895, DateTimeKind.Local).AddTicks(8540),
+                            DateOFadd = new DateTime(2025, 7, 13, 14, 36, 47, 914, DateTimeKind.Local).AddTicks(3410),
                             Description = "Tiguran u dobrom stanju, Auto koje puno trosi al se zna za sta se placa, VR 6 motor,dobro održavan nove 4 gume zimske i ljetne, drugi vlasnik.Jako ocuvan sa puno dodatne opreme auto bez packe sjedi i vozi. Najbolje doci i pogledati auto. Vozeno na posao i nazad. Nov akumulator i set kvacila odradjen nedavno.!!!PRODAJA SAMO",
                             EnginePower = 190,
                             FeaturedExpiryDate = new DateTime(2025, 1, 20, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             FuelTypeId = 1,
-                            HighlightExpiryDate = new DateTime(2025, 7, 31, 11, 3, 52, 895, DateTimeKind.Local).AddTicks(8550),
+                            HighlightExpiryDate = new DateTime(2025, 8, 2, 14, 36, 47, 914, DateTimeKind.Local).AddTicks(3410),
                             HorsePower = 103,
                             IsHighlighted = true,
                             LastBigService = new DateTime(2024, 11, 11, 0, 0, 0, 0, DateTimeKind.Unspecified),
@@ -2172,7 +2172,7 @@ namespace AutoTrade.Migrations
                             CarModelId = 9,
                             Color = "Bijela",
                             CubicCapacity = 2.0,
-                            DateOFadd = new DateTime(2025, 7, 11, 11, 3, 52, 895, DateTimeKind.Local).AddTicks(8550),
+                            DateOFadd = new DateTime(2025, 7, 13, 14, 36, 47, 914, DateTimeKind.Local).AddTicks(3420),
                             Description = "Tiguran u dobrom stanju, Auto koje puno trosi al se zna za sta se placa, VR 6 motor,dobro održavan nove 4 gume zimske i ljetne, drugi vlasnik.Jako ocuvan sa puno dodatne opreme auto bez packe sjedi i vozi. Najbolje doci i pogledati auto. Vozeno na posao i nazad. Nov akumulator i set kvacila odradjen nedavno.!!!PRODAJA SAMO",
                             EnginePower = 190,
                             FeaturedExpiryDate = new DateTime(2025, 1, 20, 0, 0, 0, 0, DateTimeKind.Unspecified),
@@ -3368,7 +3368,7 @@ namespace AutoTrade.Migrations
                             Id = 1,
                             AutomobileAdId = 1,
                             Content = "Izgleda odlično! Ima li servisnu knjižicu?",
-                            CreatedAt = new DateTime(2025, 7, 11, 9, 3, 52, 895, DateTimeKind.Utc).AddTicks(8760),
+                            CreatedAt = new DateTime(2025, 7, 13, 12, 36, 47, 914, DateTimeKind.Utc).AddTicks(3660),
                             UserId = 2
                         },
                         new
@@ -3376,7 +3376,7 @@ namespace AutoTrade.Migrations
                             Id = 2,
                             AutomobileAdId = 1,
                             Content = "Može li zamjena za Passat?",
-                            CreatedAt = new DateTime(2025, 7, 11, 9, 3, 52, 895, DateTimeKind.Utc).AddTicks(8760),
+                            CreatedAt = new DateTime(2025, 7, 13, 12, 36, 47, 914, DateTimeKind.Utc).AddTicks(3660),
                             UserId = 3
                         },
                         new
@@ -3384,7 +3384,7 @@ namespace AutoTrade.Migrations
                             Id = 3,
                             AutomobileAdId = 2,
                             Content = "Predivan auto! Kakvo je stanje felgi?",
-                            CreatedAt = new DateTime(2025, 7, 11, 9, 3, 52, 895, DateTimeKind.Utc).AddTicks(8760),
+                            CreatedAt = new DateTime(2025, 7, 13, 12, 36, 47, 914, DateTimeKind.Utc).AddTicks(3670),
                             UserId = 1
                         },
                         new
@@ -3392,7 +3392,7 @@ namespace AutoTrade.Migrations
                             Id = 4,
                             AutomobileAdId = 2,
                             Content = "Da li je moguće probna vožnja?",
-                            CreatedAt = new DateTime(2025, 7, 11, 9, 3, 52, 895, DateTimeKind.Utc).AddTicks(8760),
+                            CreatedAt = new DateTime(2025, 7, 13, 12, 36, 47, 914, DateTimeKind.Utc).AddTicks(3670),
                             UserId = 4
                         },
                         new
@@ -3400,7 +3400,7 @@ namespace AutoTrade.Migrations
                             Id = 5,
                             AutomobileAdId = 3,
                             Content = "Super ponuda! Kada je zadnji put zamijenjen ulje i filteri?",
-                            CreatedAt = new DateTime(2025, 7, 11, 9, 3, 52, 895, DateTimeKind.Utc).AddTicks(8760),
+                            CreatedAt = new DateTime(2025, 7, 13, 12, 36, 47, 914, DateTimeKind.Utc).AddTicks(3670),
                             UserId = 5
                         },
                         new
@@ -3408,7 +3408,7 @@ namespace AutoTrade.Migrations
                             Id = 6,
                             AutomobileAdId = 3,
                             Content = "Je li kilometraža tačna?",
-                            CreatedAt = new DateTime(2025, 7, 11, 9, 3, 52, 895, DateTimeKind.Utc).AddTicks(8770),
+                            CreatedAt = new DateTime(2025, 7, 13, 12, 36, 47, 914, DateTimeKind.Utc).AddTicks(3670),
                             UserId = 6
                         },
                         new
@@ -3416,7 +3416,7 @@ namespace AutoTrade.Migrations
                             Id = 7,
                             AutomobileAdId = 4,
                             Content = "Fantastičan auto! Kakvo je stanje enterijera?",
-                            CreatedAt = new DateTime(2025, 7, 11, 9, 3, 52, 895, DateTimeKind.Utc).AddTicks(8770),
+                            CreatedAt = new DateTime(2025, 7, 13, 12, 36, 47, 914, DateTimeKind.Utc).AddTicks(3670),
                             UserId = 3
                         },
                         new
@@ -3424,7 +3424,7 @@ namespace AutoTrade.Migrations
                             Id = 8,
                             AutomobileAdId = 4,
                             Content = "Mogu li dobiti više slika unutrašnjosti?",
-                            CreatedAt = new DateTime(2025, 7, 11, 9, 3, 52, 895, DateTimeKind.Utc).AddTicks(8770),
+                            CreatedAt = new DateTime(2025, 7, 13, 12, 36, 47, 914, DateTimeKind.Utc).AddTicks(3670),
                             UserId = 7
                         },
                         new
@@ -3432,7 +3432,7 @@ namespace AutoTrade.Migrations
                             Id = 9,
                             AutomobileAdId = 5,
                             Content = "Top model! Da li je registrovan?",
-                            CreatedAt = new DateTime(2025, 7, 11, 9, 3, 52, 895, DateTimeKind.Utc).AddTicks(8770),
+                            CreatedAt = new DateTime(2025, 7, 13, 12, 36, 47, 914, DateTimeKind.Utc).AddTicks(3670),
                             UserId = 8
                         },
                         new
@@ -3440,7 +3440,7 @@ namespace AutoTrade.Migrations
                             Id = 10,
                             AutomobileAdId = 5,
                             Content = "Koliko je star akumulator?",
-                            CreatedAt = new DateTime(2025, 7, 11, 9, 3, 52, 895, DateTimeKind.Utc).AddTicks(8770),
+                            CreatedAt = new DateTime(2025, 7, 13, 12, 36, 47, 914, DateTimeKind.Utc).AddTicks(3670),
                             UserId = 9
                         },
                         new
@@ -3448,7 +3448,7 @@ namespace AutoTrade.Migrations
                             Id = 11,
                             AutomobileAdId = 6,
                             Content = "Odličan BMW! Koliko troši goriva u prosjeku?",
-                            CreatedAt = new DateTime(2025, 7, 11, 9, 3, 52, 895, DateTimeKind.Utc).AddTicks(8770),
+                            CreatedAt = new DateTime(2025, 7, 13, 12, 36, 47, 914, DateTimeKind.Utc).AddTicks(3670),
                             UserId = 10
                         },
                         new
@@ -3456,7 +3456,7 @@ namespace AutoTrade.Migrations
                             Id = 12,
                             AutomobileAdId = 6,
                             Content = "Ima li problema sa motorom?",
-                            CreatedAt = new DateTime(2025, 7, 11, 9, 3, 52, 895, DateTimeKind.Utc).AddTicks(8770),
+                            CreatedAt = new DateTime(2025, 7, 13, 12, 36, 47, 914, DateTimeKind.Utc).AddTicks(3680),
                             UserId = 1
                         },
                         new
@@ -3464,7 +3464,7 @@ namespace AutoTrade.Migrations
                             Id = 13,
                             AutomobileAdId = 7,
                             Content = "Citroen izgleda moćno! Kakvo je stanje guma?",
-                            CreatedAt = new DateTime(2025, 7, 11, 9, 3, 52, 895, DateTimeKind.Utc).AddTicks(8770),
+                            CreatedAt = new DateTime(2025, 7, 13, 12, 36, 47, 914, DateTimeKind.Utc).AddTicks(3680),
                             UserId = 2
                         },
                         new
@@ -3472,7 +3472,7 @@ namespace AutoTrade.Migrations
                             Id = 14,
                             AutomobileAdId = 7,
                             Content = "Je li prva boja na vozilu?",
-                            CreatedAt = new DateTime(2025, 7, 11, 9, 3, 52, 895, DateTimeKind.Utc).AddTicks(8780),
+                            CreatedAt = new DateTime(2025, 7, 13, 12, 36, 47, 914, DateTimeKind.Utc).AddTicks(3680),
                             UserId = 3
                         },
                         new
@@ -3480,7 +3480,7 @@ namespace AutoTrade.Migrations
                             Id = 15,
                             AutomobileAdId = 8,
                             Content = "Punto je odlično gradsko auto! Ima li servisna evidencija?",
-                            CreatedAt = new DateTime(2025, 7, 11, 9, 3, 52, 895, DateTimeKind.Utc).AddTicks(8780),
+                            CreatedAt = new DateTime(2025, 7, 13, 12, 36, 47, 914, DateTimeKind.Utc).AddTicks(3680),
                             UserId = 4
                         },
                         new
@@ -3488,7 +3488,7 @@ namespace AutoTrade.Migrations
                             Id = 16,
                             AutomobileAdId = 8,
                             Content = "Koliko je prešao od zadnje izmjene ulja?",
-                            CreatedAt = new DateTime(2025, 7, 11, 9, 3, 52, 895, DateTimeKind.Utc).AddTicks(8780),
+                            CreatedAt = new DateTime(2025, 7, 13, 12, 36, 47, 914, DateTimeKind.Utc).AddTicks(3680),
                             UserId = 5
                         },
                         new
@@ -3496,7 +3496,7 @@ namespace AutoTrade.Migrations
                             Id = 17,
                             AutomobileAdId = 9,
                             Content = "Ovaj Golf izgleda kao da je očuvan! Kakvo je stanje limarije?",
-                            CreatedAt = new DateTime(2025, 7, 11, 9, 3, 52, 895, DateTimeKind.Utc).AddTicks(8780),
+                            CreatedAt = new DateTime(2025, 7, 13, 12, 36, 47, 914, DateTimeKind.Utc).AddTicks(3680),
                             UserId = 6
                         },
                         new
@@ -3504,7 +3504,7 @@ namespace AutoTrade.Migrations
                             Id = 18,
                             AutomobileAdId = 9,
                             Content = "Ima li klima?",
-                            CreatedAt = new DateTime(2025, 7, 11, 9, 3, 52, 895, DateTimeKind.Utc).AddTicks(8780),
+                            CreatedAt = new DateTime(2025, 7, 13, 12, 36, 47, 914, DateTimeKind.Utc).AddTicks(3680),
                             UserId = 7
                         },
                         new
@@ -3512,7 +3512,7 @@ namespace AutoTrade.Migrations
                             Id = 19,
                             AutomobileAdId = 10,
                             Content = "Perfektan auto! Ima li mogućnost kupovine na rate?",
-                            CreatedAt = new DateTime(2025, 7, 11, 9, 3, 52, 895, DateTimeKind.Utc).AddTicks(8780),
+                            CreatedAt = new DateTime(2025, 7, 13, 12, 36, 47, 914, DateTimeKind.Utc).AddTicks(3680),
                             UserId = 8
                         },
                         new
@@ -3520,7 +3520,7 @@ namespace AutoTrade.Migrations
                             Id = 20,
                             AutomobileAdId = 10,
                             Content = "Koliko je star akumulator?",
-                            CreatedAt = new DateTime(2025, 7, 11, 9, 3, 52, 895, DateTimeKind.Utc).AddTicks(8800),
+                            CreatedAt = new DateTime(2025, 7, 13, 12, 36, 47, 914, DateTimeKind.Utc).AddTicks(3680),
                             UserId = 9
                         },
                         new
@@ -3528,7 +3528,7 @@ namespace AutoTrade.Migrations
                             Id = 21,
                             AutomobileAdId = 11,
                             Content = "Odličan Golf! Da li je uvoz ili kupljen kod nas?",
-                            CreatedAt = new DateTime(2025, 7, 11, 9, 3, 52, 895, DateTimeKind.Utc).AddTicks(8800),
+                            CreatedAt = new DateTime(2025, 7, 13, 12, 36, 47, 914, DateTimeKind.Utc).AddTicks(3690),
                             UserId = 10
                         },
                         new
@@ -3536,7 +3536,7 @@ namespace AutoTrade.Migrations
                             Id = 22,
                             AutomobileAdId = 11,
                             Content = "Jesi li radio veliki servis?",
-                            CreatedAt = new DateTime(2025, 7, 11, 9, 3, 52, 895, DateTimeKind.Utc).AddTicks(8800),
+                            CreatedAt = new DateTime(2025, 7, 13, 12, 36, 47, 914, DateTimeKind.Utc).AddTicks(3690),
                             UserId = 1
                         },
                         new
@@ -3544,7 +3544,7 @@ namespace AutoTrade.Migrations
                             Id = 23,
                             AutomobileAdId = 21,
                             Content = "Odlična cijena za Polo! Kakvo je stanje sjedala?",
-                            CreatedAt = new DateTime(2025, 7, 11, 9, 3, 52, 895, DateTimeKind.Utc).AddTicks(8800),
+                            CreatedAt = new DateTime(2025, 7, 13, 12, 36, 47, 914, DateTimeKind.Utc).AddTicks(3690),
                             UserId = 2
                         },
                         new
@@ -3552,7 +3552,7 @@ namespace AutoTrade.Migrations
                             Id = 24,
                             AutomobileAdId = 21,
                             Content = "Ima li hrđe na rubovima?",
-                            CreatedAt = new DateTime(2025, 7, 11, 9, 3, 52, 895, DateTimeKind.Utc).AddTicks(8800),
+                            CreatedAt = new DateTime(2025, 7, 13, 12, 36, 47, 914, DateTimeKind.Utc).AddTicks(3690),
                             UserId = 3
                         },
                         new
@@ -3560,7 +3560,7 @@ namespace AutoTrade.Migrations
                             Id = 25,
                             AutomobileAdId = 28,
                             Content = "Tiguan izgleda odlično! Je li redovno održavan?",
-                            CreatedAt = new DateTime(2025, 7, 11, 9, 3, 52, 895, DateTimeKind.Utc).AddTicks(8800),
+                            CreatedAt = new DateTime(2025, 7, 13, 12, 36, 47, 914, DateTimeKind.Utc).AddTicks(3690),
                             UserId = 4
                         },
                         new
@@ -3568,7 +3568,7 @@ namespace AutoTrade.Migrations
                             Id = 26,
                             AutomobileAdId = 28,
                             Content = "Koliko troši na otvorenoj cesti?",
-                            CreatedAt = new DateTime(2025, 7, 11, 9, 3, 52, 895, DateTimeKind.Utc).AddTicks(8800),
+                            CreatedAt = new DateTime(2025, 7, 13, 12, 36, 47, 914, DateTimeKind.Utc).AddTicks(3690),
                             UserId = 5
                         },
                         new
@@ -3576,7 +3576,7 @@ namespace AutoTrade.Migrations
                             Id = 27,
                             AutomobileAdId = 24,
                             Content = "Scenic je idealan za porodicu! Kakvo je stanje zadnjih sjedišta?",
-                            CreatedAt = new DateTime(2025, 7, 11, 9, 3, 52, 895, DateTimeKind.Utc).AddTicks(8800),
+                            CreatedAt = new DateTime(2025, 7, 13, 12, 36, 47, 914, DateTimeKind.Utc).AddTicks(3690),
                             UserId = 6
                         },
                         new
@@ -3584,7 +3584,7 @@ namespace AutoTrade.Migrations
                             Id = 28,
                             AutomobileAdId = 24,
                             Content = "Koliko traje registracija?",
-                            CreatedAt = new DateTime(2025, 7, 11, 9, 3, 52, 895, DateTimeKind.Utc).AddTicks(8800),
+                            CreatedAt = new DateTime(2025, 7, 13, 12, 36, 47, 914, DateTimeKind.Utc).AddTicks(3690),
                             UserId = 7
                         },
                         new
@@ -3592,7 +3592,7 @@ namespace AutoTrade.Migrations
                             Id = 29,
                             AutomobileAdId = 26,
                             Content = "Odlična Skoda! Može li se pogledati u Sarajevu?",
-                            CreatedAt = new DateTime(2025, 7, 11, 9, 3, 52, 895, DateTimeKind.Utc).AddTicks(8810),
+                            CreatedAt = new DateTime(2025, 7, 13, 12, 36, 47, 914, DateTimeKind.Utc).AddTicks(3690),
                             UserId = 8
                         },
                         new
@@ -3600,7 +3600,7 @@ namespace AutoTrade.Migrations
                             Id = 30,
                             AutomobileAdId = 26,
                             Content = "Koliko su stare gume?",
-                            CreatedAt = new DateTime(2025, 7, 11, 9, 3, 52, 895, DateTimeKind.Utc).AddTicks(8810),
+                            CreatedAt = new DateTime(2025, 7, 13, 12, 36, 47, 914, DateTimeKind.Utc).AddTicks(3700),
                             UserId = 9
                         },
                         new
@@ -3608,7 +3608,7 @@ namespace AutoTrade.Migrations
                             Id = 31,
                             AutomobileAdId = 27,
                             Content = "Koliko su stare gume?",
-                            CreatedAt = new DateTime(2025, 7, 11, 9, 3, 52, 895, DateTimeKind.Utc).AddTicks(8810),
+                            CreatedAt = new DateTime(2025, 7, 13, 12, 36, 47, 914, DateTimeKind.Utc).AddTicks(3700),
                             UserId = 1
                         },
                         new
@@ -3616,7 +3616,7 @@ namespace AutoTrade.Migrations
                             Id = 33,
                             AutomobileAdId = 28,
                             Content = "Koliko su stare gume, jel ima i zimske?",
-                            CreatedAt = new DateTime(2025, 7, 11, 9, 3, 52, 895, DateTimeKind.Utc).AddTicks(8810),
+                            CreatedAt = new DateTime(2025, 7, 13, 12, 36, 47, 914, DateTimeKind.Utc).AddTicks(3700),
                             UserId = 2
                         });
                 });
@@ -4244,7 +4244,7 @@ namespace AutoTrade.Migrations
                         {
                             Id = 3,
                             AutomobileAdId = 1,
-                            ReservationDate = new DateTime(2025, 7, 14, 9, 3, 52, 895, DateTimeKind.Utc).AddTicks(8840),
+                            ReservationDate = new DateTime(2025, 7, 16, 12, 36, 47, 914, DateTimeKind.Utc).AddTicks(3730),
                             Status = "Pending",
                             UserId = 3
                         },
@@ -4252,7 +4252,7 @@ namespace AutoTrade.Migrations
                         {
                             Id = 4,
                             AutomobileAdId = 1,
-                            ReservationDate = new DateTime(2025, 7, 16, 9, 3, 52, 895, DateTimeKind.Utc).AddTicks(8850),
+                            ReservationDate = new DateTime(2025, 7, 18, 12, 36, 47, 914, DateTimeKind.Utc).AddTicks(3730),
                             Status = "Pending",
                             UserId = 4
                         },
@@ -4260,7 +4260,7 @@ namespace AutoTrade.Migrations
                         {
                             Id = 5,
                             AutomobileAdId = 1,
-                            ReservationDate = new DateTime(2025, 7, 18, 9, 3, 52, 895, DateTimeKind.Utc).AddTicks(8850),
+                            ReservationDate = new DateTime(2025, 7, 20, 12, 36, 47, 914, DateTimeKind.Utc).AddTicks(3730),
                             Status = "Pending",
                             UserId = 5
                         },
@@ -4284,7 +4284,7 @@ namespace AutoTrade.Migrations
                         {
                             Id = 8,
                             AutomobileAdId = 2,
-                            ReservationDate = new DateTime(2025, 7, 14, 9, 3, 52, 895, DateTimeKind.Utc).AddTicks(8850),
+                            ReservationDate = new DateTime(2025, 7, 16, 12, 36, 47, 914, DateTimeKind.Utc).AddTicks(3750),
                             Status = "Pending",
                             UserId = 8
                         },
@@ -4292,7 +4292,7 @@ namespace AutoTrade.Migrations
                         {
                             Id = 9,
                             AutomobileAdId = 2,
-                            ReservationDate = new DateTime(2025, 7, 16, 9, 3, 52, 895, DateTimeKind.Utc).AddTicks(8850),
+                            ReservationDate = new DateTime(2025, 7, 18, 12, 36, 47, 914, DateTimeKind.Utc).AddTicks(3750),
                             Status = "Pending",
                             UserId = 9
                         },
@@ -4300,7 +4300,7 @@ namespace AutoTrade.Migrations
                         {
                             Id = 10,
                             AutomobileAdId = 2,
-                            ReservationDate = new DateTime(2025, 7, 18, 9, 3, 52, 895, DateTimeKind.Utc).AddTicks(8860),
+                            ReservationDate = new DateTime(2025, 7, 20, 12, 36, 47, 914, DateTimeKind.Utc).AddTicks(3750),
                             Status = "Pending",
                             UserId = 10
                         },
@@ -4324,7 +4324,7 @@ namespace AutoTrade.Migrations
                         {
                             Id = 13,
                             AutomobileAdId = 3,
-                            ReservationDate = new DateTime(2025, 7, 14, 9, 3, 52, 895, DateTimeKind.Utc).AddTicks(8860),
+                            ReservationDate = new DateTime(2025, 7, 16, 12, 36, 47, 914, DateTimeKind.Utc).AddTicks(3760),
                             Status = "Pending",
                             UserId = 3
                         },
@@ -4332,7 +4332,7 @@ namespace AutoTrade.Migrations
                         {
                             Id = 14,
                             AutomobileAdId = 3,
-                            ReservationDate = new DateTime(2025, 7, 16, 9, 3, 52, 895, DateTimeKind.Utc).AddTicks(8860),
+                            ReservationDate = new DateTime(2025, 7, 18, 12, 36, 47, 914, DateTimeKind.Utc).AddTicks(3760),
                             Status = "Pending",
                             UserId = 4
                         },
@@ -4340,7 +4340,7 @@ namespace AutoTrade.Migrations
                         {
                             Id = 15,
                             AutomobileAdId = 3,
-                            ReservationDate = new DateTime(2025, 7, 18, 9, 3, 52, 895, DateTimeKind.Utc).AddTicks(8870),
+                            ReservationDate = new DateTime(2025, 7, 20, 12, 36, 47, 914, DateTimeKind.Utc).AddTicks(3760),
                             Status = "Pending",
                             UserId = 5
                         },
@@ -4364,7 +4364,7 @@ namespace AutoTrade.Migrations
                         {
                             Id = 18,
                             AutomobileAdId = 4,
-                            ReservationDate = new DateTime(2025, 7, 14, 9, 3, 52, 895, DateTimeKind.Utc).AddTicks(8870),
+                            ReservationDate = new DateTime(2025, 7, 16, 12, 36, 47, 914, DateTimeKind.Utc).AddTicks(3770),
                             Status = "Pending",
                             UserId = 8
                         },
@@ -4372,7 +4372,7 @@ namespace AutoTrade.Migrations
                         {
                             Id = 19,
                             AutomobileAdId = 4,
-                            ReservationDate = new DateTime(2025, 7, 16, 9, 3, 52, 895, DateTimeKind.Utc).AddTicks(8870),
+                            ReservationDate = new DateTime(2025, 7, 18, 12, 36, 47, 914, DateTimeKind.Utc).AddTicks(3770),
                             Status = "Pending",
                             UserId = 9
                         },
@@ -4380,7 +4380,7 @@ namespace AutoTrade.Migrations
                         {
                             Id = 20,
                             AutomobileAdId = 4,
-                            ReservationDate = new DateTime(2025, 7, 18, 9, 3, 52, 895, DateTimeKind.Utc).AddTicks(8870),
+                            ReservationDate = new DateTime(2025, 7, 20, 12, 36, 47, 914, DateTimeKind.Utc).AddTicks(3770),
                             Status = "Pending",
                             UserId = 10
                         },
@@ -4404,7 +4404,7 @@ namespace AutoTrade.Migrations
                         {
                             Id = 23,
                             AutomobileAdId = 5,
-                            ReservationDate = new DateTime(2025, 7, 14, 9, 3, 52, 895, DateTimeKind.Utc).AddTicks(8880),
+                            ReservationDate = new DateTime(2025, 7, 16, 12, 36, 47, 914, DateTimeKind.Utc).AddTicks(3780),
                             Status = "Pending",
                             UserId = 3
                         },
@@ -4412,7 +4412,7 @@ namespace AutoTrade.Migrations
                         {
                             Id = 24,
                             AutomobileAdId = 5,
-                            ReservationDate = new DateTime(2025, 7, 16, 9, 3, 52, 895, DateTimeKind.Utc).AddTicks(8880),
+                            ReservationDate = new DateTime(2025, 7, 18, 12, 36, 47, 914, DateTimeKind.Utc).AddTicks(3780),
                             Status = "Pending",
                             UserId = 4
                         },
@@ -4420,7 +4420,7 @@ namespace AutoTrade.Migrations
                         {
                             Id = 25,
                             AutomobileAdId = 5,
-                            ReservationDate = new DateTime(2025, 7, 18, 9, 3, 52, 895, DateTimeKind.Utc).AddTicks(8880),
+                            ReservationDate = new DateTime(2025, 7, 20, 12, 36, 47, 914, DateTimeKind.Utc).AddTicks(3780),
                             Status = "Pending",
                             UserId = 5
                         },
@@ -4444,7 +4444,7 @@ namespace AutoTrade.Migrations
                         {
                             Id = 28,
                             AutomobileAdId = 6,
-                            ReservationDate = new DateTime(2025, 7, 14, 9, 3, 52, 895, DateTimeKind.Utc).AddTicks(8890),
+                            ReservationDate = new DateTime(2025, 7, 16, 12, 36, 47, 914, DateTimeKind.Utc).AddTicks(3790),
                             Status = "Pending",
                             UserId = 8
                         },
@@ -4452,7 +4452,7 @@ namespace AutoTrade.Migrations
                         {
                             Id = 29,
                             AutomobileAdId = 6,
-                            ReservationDate = new DateTime(2025, 7, 16, 9, 3, 52, 895, DateTimeKind.Utc).AddTicks(8890),
+                            ReservationDate = new DateTime(2025, 7, 18, 12, 36, 47, 914, DateTimeKind.Utc).AddTicks(3790),
                             Status = "Pending",
                             UserId = 9
                         },
@@ -4460,7 +4460,7 @@ namespace AutoTrade.Migrations
                         {
                             Id = 30,
                             AutomobileAdId = 6,
-                            ReservationDate = new DateTime(2025, 7, 18, 9, 3, 52, 895, DateTimeKind.Utc).AddTicks(8890),
+                            ReservationDate = new DateTime(2025, 7, 20, 12, 36, 47, 914, DateTimeKind.Utc).AddTicks(3790),
                             Status = "Pending",
                             UserId = 10
                         },
@@ -4484,7 +4484,7 @@ namespace AutoTrade.Migrations
                         {
                             Id = 33,
                             AutomobileAdId = 7,
-                            ReservationDate = new DateTime(2025, 7, 14, 9, 3, 52, 895, DateTimeKind.Utc).AddTicks(8890),
+                            ReservationDate = new DateTime(2025, 7, 16, 12, 36, 47, 914, DateTimeKind.Utc).AddTicks(3790),
                             Status = "Pending",
                             UserId = 3
                         },
@@ -4492,7 +4492,7 @@ namespace AutoTrade.Migrations
                         {
                             Id = 34,
                             AutomobileAdId = 7,
-                            ReservationDate = new DateTime(2025, 7, 16, 9, 3, 52, 895, DateTimeKind.Utc).AddTicks(8900),
+                            ReservationDate = new DateTime(2025, 7, 18, 12, 36, 47, 914, DateTimeKind.Utc).AddTicks(3790),
                             Status = "Pending",
                             UserId = 4
                         },
@@ -4500,7 +4500,7 @@ namespace AutoTrade.Migrations
                         {
                             Id = 35,
                             AutomobileAdId = 7,
-                            ReservationDate = new DateTime(2025, 7, 18, 9, 3, 52, 895, DateTimeKind.Utc).AddTicks(8900),
+                            ReservationDate = new DateTime(2025, 7, 20, 12, 36, 47, 914, DateTimeKind.Utc).AddTicks(3800),
                             Status = "Pending",
                             UserId = 5
                         },
@@ -4524,7 +4524,7 @@ namespace AutoTrade.Migrations
                         {
                             Id = 38,
                             AutomobileAdId = 8,
-                            ReservationDate = new DateTime(2025, 7, 14, 9, 3, 52, 895, DateTimeKind.Utc).AddTicks(8900),
+                            ReservationDate = new DateTime(2025, 7, 16, 12, 36, 47, 914, DateTimeKind.Utc).AddTicks(3800),
                             Status = "Pending",
                             UserId = 8
                         },
@@ -4532,7 +4532,7 @@ namespace AutoTrade.Migrations
                         {
                             Id = 39,
                             AutomobileAdId = 8,
-                            ReservationDate = new DateTime(2025, 7, 16, 9, 3, 52, 895, DateTimeKind.Utc).AddTicks(8900),
+                            ReservationDate = new DateTime(2025, 7, 18, 12, 36, 47, 914, DateTimeKind.Utc).AddTicks(3800),
                             Status = "Pending",
                             UserId = 9
                         },
@@ -4540,7 +4540,7 @@ namespace AutoTrade.Migrations
                         {
                             Id = 40,
                             AutomobileAdId = 8,
-                            ReservationDate = new DateTime(2025, 7, 18, 9, 3, 52, 895, DateTimeKind.Utc).AddTicks(8900),
+                            ReservationDate = new DateTime(2025, 7, 20, 12, 36, 47, 914, DateTimeKind.Utc).AddTicks(3800),
                             Status = "Pending",
                             UserId = 10
                         },
@@ -4564,7 +4564,7 @@ namespace AutoTrade.Migrations
                         {
                             Id = 43,
                             AutomobileAdId = 9,
-                            ReservationDate = new DateTime(2025, 7, 14, 9, 3, 52, 895, DateTimeKind.Utc).AddTicks(8910),
+                            ReservationDate = new DateTime(2025, 7, 16, 12, 36, 47, 914, DateTimeKind.Utc).AddTicks(3810),
                             Status = "Pending",
                             UserId = 3
                         },
@@ -4572,7 +4572,7 @@ namespace AutoTrade.Migrations
                         {
                             Id = 44,
                             AutomobileAdId = 9,
-                            ReservationDate = new DateTime(2025, 7, 16, 9, 3, 52, 895, DateTimeKind.Utc).AddTicks(8910),
+                            ReservationDate = new DateTime(2025, 7, 18, 12, 36, 47, 914, DateTimeKind.Utc).AddTicks(3810),
                             Status = "Pending",
                             UserId = 4
                         },
@@ -4580,7 +4580,7 @@ namespace AutoTrade.Migrations
                         {
                             Id = 45,
                             AutomobileAdId = 9,
-                            ReservationDate = new DateTime(2025, 7, 18, 9, 3, 52, 895, DateTimeKind.Utc).AddTicks(8910),
+                            ReservationDate = new DateTime(2025, 7, 20, 12, 36, 47, 914, DateTimeKind.Utc).AddTicks(3820),
                             Status = "Pending",
                             UserId = 5
                         },
@@ -4604,7 +4604,7 @@ namespace AutoTrade.Migrations
                         {
                             Id = 48,
                             AutomobileAdId = 10,
-                            ReservationDate = new DateTime(2025, 7, 14, 9, 3, 52, 895, DateTimeKind.Utc).AddTicks(8920),
+                            ReservationDate = new DateTime(2025, 7, 16, 12, 36, 47, 914, DateTimeKind.Utc).AddTicks(3830),
                             Status = "Pending",
                             UserId = 8
                         },
@@ -4612,7 +4612,7 @@ namespace AutoTrade.Migrations
                         {
                             Id = 49,
                             AutomobileAdId = 10,
-                            ReservationDate = new DateTime(2025, 7, 16, 9, 3, 52, 895, DateTimeKind.Utc).AddTicks(8920),
+                            ReservationDate = new DateTime(2025, 7, 18, 12, 36, 47, 914, DateTimeKind.Utc).AddTicks(3830),
                             Status = "Pending",
                             UserId = 9
                         },
@@ -4620,7 +4620,7 @@ namespace AutoTrade.Migrations
                         {
                             Id = 50,
                             AutomobileAdId = 10,
-                            ReservationDate = new DateTime(2025, 7, 18, 9, 3, 52, 895, DateTimeKind.Utc).AddTicks(8920),
+                            ReservationDate = new DateTime(2025, 7, 20, 12, 36, 47, 914, DateTimeKind.Utc).AddTicks(3830),
                             Status = "Pending",
                             UserId = 10
                         },
@@ -4644,7 +4644,7 @@ namespace AutoTrade.Migrations
                         {
                             Id = 53,
                             AutomobileAdId = 11,
-                            ReservationDate = new DateTime(2025, 7, 14, 9, 3, 52, 895, DateTimeKind.Utc).AddTicks(8930),
+                            ReservationDate = new DateTime(2025, 7, 16, 12, 36, 47, 914, DateTimeKind.Utc).AddTicks(3830),
                             Status = "Pending",
                             UserId = 3
                         },
@@ -4652,7 +4652,7 @@ namespace AutoTrade.Migrations
                         {
                             Id = 54,
                             AutomobileAdId = 11,
-                            ReservationDate = new DateTime(2025, 7, 16, 9, 3, 52, 895, DateTimeKind.Utc).AddTicks(8930),
+                            ReservationDate = new DateTime(2025, 7, 18, 12, 36, 47, 914, DateTimeKind.Utc).AddTicks(3840),
                             Status = "Pending",
                             UserId = 4
                         },
@@ -4660,7 +4660,7 @@ namespace AutoTrade.Migrations
                         {
                             Id = 55,
                             AutomobileAdId = 11,
-                            ReservationDate = new DateTime(2025, 7, 18, 9, 3, 52, 895, DateTimeKind.Utc).AddTicks(8930),
+                            ReservationDate = new DateTime(2025, 7, 20, 12, 36, 47, 914, DateTimeKind.Utc).AddTicks(3840),
                             Status = "Pending",
                             UserId = 5
                         },
@@ -4684,7 +4684,7 @@ namespace AutoTrade.Migrations
                         {
                             Id = 58,
                             AutomobileAdId = 12,
-                            ReservationDate = new DateTime(2025, 7, 14, 9, 3, 52, 895, DateTimeKind.Utc).AddTicks(8930),
+                            ReservationDate = new DateTime(2025, 7, 16, 12, 36, 47, 914, DateTimeKind.Utc).AddTicks(3840),
                             Status = "Pending",
                             UserId = 8
                         },
@@ -4692,7 +4692,7 @@ namespace AutoTrade.Migrations
                         {
                             Id = 59,
                             AutomobileAdId = 12,
-                            ReservationDate = new DateTime(2025, 7, 16, 9, 3, 52, 895, DateTimeKind.Utc).AddTicks(8940),
+                            ReservationDate = new DateTime(2025, 7, 18, 12, 36, 47, 914, DateTimeKind.Utc).AddTicks(3840),
                             Status = "Pending",
                             UserId = 9
                         },
@@ -4700,7 +4700,7 @@ namespace AutoTrade.Migrations
                         {
                             Id = 60,
                             AutomobileAdId = 12,
-                            ReservationDate = new DateTime(2025, 7, 18, 9, 3, 52, 895, DateTimeKind.Utc).AddTicks(8940),
+                            ReservationDate = new DateTime(2025, 7, 20, 12, 36, 47, 914, DateTimeKind.Utc).AddTicks(3840),
                             Status = "Pending",
                             UserId = 10
                         },
@@ -4724,7 +4724,7 @@ namespace AutoTrade.Migrations
                         {
                             Id = 63,
                             AutomobileAdId = 13,
-                            ReservationDate = new DateTime(2025, 7, 14, 9, 3, 52, 895, DateTimeKind.Utc).AddTicks(8940),
+                            ReservationDate = new DateTime(2025, 7, 16, 12, 36, 47, 914, DateTimeKind.Utc).AddTicks(3850),
                             Status = "Pending",
                             UserId = 3
                         },
@@ -4732,7 +4732,7 @@ namespace AutoTrade.Migrations
                         {
                             Id = 64,
                             AutomobileAdId = 13,
-                            ReservationDate = new DateTime(2025, 7, 16, 9, 3, 52, 895, DateTimeKind.Utc).AddTicks(8940),
+                            ReservationDate = new DateTime(2025, 7, 18, 12, 36, 47, 914, DateTimeKind.Utc).AddTicks(3850),
                             Status = "Pending",
                             UserId = 4
                         },
@@ -4740,7 +4740,7 @@ namespace AutoTrade.Migrations
                         {
                             Id = 65,
                             AutomobileAdId = 13,
-                            ReservationDate = new DateTime(2025, 7, 18, 9, 3, 52, 895, DateTimeKind.Utc).AddTicks(8950),
+                            ReservationDate = new DateTime(2025, 7, 20, 12, 36, 47, 914, DateTimeKind.Utc).AddTicks(3850),
                             Status = "Pending",
                             UserId = 5
                         },
@@ -4764,7 +4764,7 @@ namespace AutoTrade.Migrations
                         {
                             Id = 68,
                             AutomobileAdId = 14,
-                            ReservationDate = new DateTime(2025, 7, 14, 9, 3, 52, 895, DateTimeKind.Utc).AddTicks(8950),
+                            ReservationDate = new DateTime(2025, 7, 16, 12, 36, 47, 914, DateTimeKind.Utc).AddTicks(3860),
                             Status = "Pending",
                             UserId = 8
                         },
@@ -4772,7 +4772,7 @@ namespace AutoTrade.Migrations
                         {
                             Id = 69,
                             AutomobileAdId = 14,
-                            ReservationDate = new DateTime(2025, 7, 16, 9, 3, 52, 895, DateTimeKind.Utc).AddTicks(8960),
+                            ReservationDate = new DateTime(2025, 7, 18, 12, 36, 47, 914, DateTimeKind.Utc).AddTicks(3860),
                             Status = "Pending",
                             UserId = 9
                         },
@@ -4780,7 +4780,7 @@ namespace AutoTrade.Migrations
                         {
                             Id = 70,
                             AutomobileAdId = 14,
-                            ReservationDate = new DateTime(2025, 7, 18, 9, 3, 52, 895, DateTimeKind.Utc).AddTicks(8960),
+                            ReservationDate = new DateTime(2025, 7, 20, 12, 36, 47, 914, DateTimeKind.Utc).AddTicks(3860),
                             Status = "Pending",
                             UserId = 10
                         },
@@ -4804,7 +4804,7 @@ namespace AutoTrade.Migrations
                         {
                             Id = 73,
                             AutomobileAdId = 15,
-                            ReservationDate = new DateTime(2025, 7, 14, 9, 3, 52, 895, DateTimeKind.Utc).AddTicks(8960),
+                            ReservationDate = new DateTime(2025, 7, 16, 12, 36, 47, 914, DateTimeKind.Utc).AddTicks(3870),
                             Status = "Pending",
                             UserId = 3
                         },
@@ -4812,7 +4812,7 @@ namespace AutoTrade.Migrations
                         {
                             Id = 74,
                             AutomobileAdId = 15,
-                            ReservationDate = new DateTime(2025, 7, 16, 9, 3, 52, 895, DateTimeKind.Utc).AddTicks(8960),
+                            ReservationDate = new DateTime(2025, 7, 18, 12, 36, 47, 914, DateTimeKind.Utc).AddTicks(3870),
                             Status = "Pending",
                             UserId = 4
                         },
@@ -4820,7 +4820,7 @@ namespace AutoTrade.Migrations
                         {
                             Id = 75,
                             AutomobileAdId = 15,
-                            ReservationDate = new DateTime(2025, 7, 18, 9, 3, 52, 895, DateTimeKind.Utc).AddTicks(8960),
+                            ReservationDate = new DateTime(2025, 7, 20, 12, 36, 47, 914, DateTimeKind.Utc).AddTicks(3870),
                             Status = "Pending",
                             UserId = 5
                         },
@@ -4844,7 +4844,7 @@ namespace AutoTrade.Migrations
                         {
                             Id = 78,
                             AutomobileAdId = 16,
-                            ReservationDate = new DateTime(2025, 7, 14, 9, 3, 52, 895, DateTimeKind.Utc).AddTicks(8970),
+                            ReservationDate = new DateTime(2025, 7, 16, 12, 36, 47, 914, DateTimeKind.Utc).AddTicks(3870),
                             Status = "Pending",
                             UserId = 8
                         },
@@ -4852,7 +4852,7 @@ namespace AutoTrade.Migrations
                         {
                             Id = 79,
                             AutomobileAdId = 16,
-                            ReservationDate = new DateTime(2025, 7, 16, 9, 3, 52, 895, DateTimeKind.Utc).AddTicks(8970),
+                            ReservationDate = new DateTime(2025, 7, 18, 12, 36, 47, 914, DateTimeKind.Utc).AddTicks(3870),
                             Status = "Pending",
                             UserId = 9
                         },
@@ -4860,7 +4860,7 @@ namespace AutoTrade.Migrations
                         {
                             Id = 80,
                             AutomobileAdId = 16,
-                            ReservationDate = new DateTime(2025, 7, 18, 9, 3, 52, 895, DateTimeKind.Utc).AddTicks(8970),
+                            ReservationDate = new DateTime(2025, 7, 20, 12, 36, 47, 914, DateTimeKind.Utc).AddTicks(3880),
                             Status = "Pending",
                             UserId = 10
                         },
@@ -4884,7 +4884,7 @@ namespace AutoTrade.Migrations
                         {
                             Id = 83,
                             AutomobileAdId = 17,
-                            ReservationDate = new DateTime(2025, 7, 14, 9, 3, 52, 895, DateTimeKind.Utc).AddTicks(8980),
+                            ReservationDate = new DateTime(2025, 7, 16, 12, 36, 47, 914, DateTimeKind.Utc).AddTicks(3890),
                             Status = "Pending",
                             UserId = 3
                         },
@@ -4892,7 +4892,7 @@ namespace AutoTrade.Migrations
                         {
                             Id = 84,
                             AutomobileAdId = 17,
-                            ReservationDate = new DateTime(2025, 7, 16, 9, 3, 52, 895, DateTimeKind.Utc).AddTicks(8980),
+                            ReservationDate = new DateTime(2025, 7, 18, 12, 36, 47, 914, DateTimeKind.Utc).AddTicks(3890),
                             Status = "Pending",
                             UserId = 4
                         },
@@ -4900,7 +4900,7 @@ namespace AutoTrade.Migrations
                         {
                             Id = 85,
                             AutomobileAdId = 17,
-                            ReservationDate = new DateTime(2025, 7, 18, 9, 3, 52, 895, DateTimeKind.Utc).AddTicks(8980),
+                            ReservationDate = new DateTime(2025, 7, 20, 12, 36, 47, 914, DateTimeKind.Utc).AddTicks(3890),
                             Status = "Pending",
                             UserId = 5
                         },
@@ -4924,7 +4924,7 @@ namespace AutoTrade.Migrations
                         {
                             Id = 88,
                             AutomobileAdId = 18,
-                            ReservationDate = new DateTime(2025, 7, 14, 9, 3, 52, 895, DateTimeKind.Utc).AddTicks(8990),
+                            ReservationDate = new DateTime(2025, 7, 16, 12, 36, 47, 914, DateTimeKind.Utc).AddTicks(3900),
                             Status = "Pending",
                             UserId = 8
                         },
@@ -4932,7 +4932,7 @@ namespace AutoTrade.Migrations
                         {
                             Id = 89,
                             AutomobileAdId = 18,
-                            ReservationDate = new DateTime(2025, 7, 16, 9, 3, 52, 895, DateTimeKind.Utc).AddTicks(8990),
+                            ReservationDate = new DateTime(2025, 7, 18, 12, 36, 47, 914, DateTimeKind.Utc).AddTicks(3900),
                             Status = "Pending",
                             UserId = 9
                         },
@@ -4940,7 +4940,7 @@ namespace AutoTrade.Migrations
                         {
                             Id = 90,
                             AutomobileAdId = 18,
-                            ReservationDate = new DateTime(2025, 7, 18, 9, 3, 52, 895, DateTimeKind.Utc).AddTicks(8990),
+                            ReservationDate = new DateTime(2025, 7, 20, 12, 36, 47, 914, DateTimeKind.Utc).AddTicks(3900),
                             Status = "Pending",
                             UserId = 10
                         },
@@ -4964,7 +4964,7 @@ namespace AutoTrade.Migrations
                         {
                             Id = 93,
                             AutomobileAdId = 19,
-                            ReservationDate = new DateTime(2025, 7, 14, 9, 3, 52, 895, DateTimeKind.Utc).AddTicks(8990),
+                            ReservationDate = new DateTime(2025, 7, 16, 12, 36, 47, 914, DateTimeKind.Utc).AddTicks(3910),
                             Status = "Pending",
                             UserId = 3
                         },
@@ -4972,7 +4972,7 @@ namespace AutoTrade.Migrations
                         {
                             Id = 94,
                             AutomobileAdId = 19,
-                            ReservationDate = new DateTime(2025, 7, 16, 9, 3, 52, 895, DateTimeKind.Utc).AddTicks(8990),
+                            ReservationDate = new DateTime(2025, 7, 18, 12, 36, 47, 914, DateTimeKind.Utc).AddTicks(3910),
                             Status = "Pending",
                             UserId = 4
                         },
@@ -4980,7 +4980,7 @@ namespace AutoTrade.Migrations
                         {
                             Id = 95,
                             AutomobileAdId = 19,
-                            ReservationDate = new DateTime(2025, 7, 18, 9, 3, 52, 895, DateTimeKind.Utc).AddTicks(9000),
+                            ReservationDate = new DateTime(2025, 7, 20, 12, 36, 47, 914, DateTimeKind.Utc).AddTicks(3910),
                             Status = "Pending",
                             UserId = 5
                         },
@@ -5004,7 +5004,7 @@ namespace AutoTrade.Migrations
                         {
                             Id = 98,
                             AutomobileAdId = 20,
-                            ReservationDate = new DateTime(2025, 7, 14, 9, 3, 52, 895, DateTimeKind.Utc).AddTicks(9000),
+                            ReservationDate = new DateTime(2025, 7, 16, 12, 36, 47, 914, DateTimeKind.Utc).AddTicks(3910),
                             Status = "Pending",
                             UserId = 8
                         },
@@ -5012,7 +5012,7 @@ namespace AutoTrade.Migrations
                         {
                             Id = 99,
                             AutomobileAdId = 20,
-                            ReservationDate = new DateTime(2025, 7, 16, 9, 3, 52, 895, DateTimeKind.Utc).AddTicks(9000),
+                            ReservationDate = new DateTime(2025, 7, 18, 12, 36, 47, 914, DateTimeKind.Utc).AddTicks(3920),
                             Status = "Pending",
                             UserId = 9
                         },
@@ -5020,7 +5020,7 @@ namespace AutoTrade.Migrations
                         {
                             Id = 100,
                             AutomobileAdId = 20,
-                            ReservationDate = new DateTime(2025, 7, 18, 9, 3, 52, 895, DateTimeKind.Utc).AddTicks(9000),
+                            ReservationDate = new DateTime(2025, 7, 20, 12, 36, 47, 914, DateTimeKind.Utc).AddTicks(3920),
                             Status = "Pending",
                             UserId = 10
                         },
@@ -5044,7 +5044,7 @@ namespace AutoTrade.Migrations
                         {
                             Id = 103,
                             AutomobileAdId = 21,
-                            ReservationDate = new DateTime(2025, 7, 14, 9, 3, 52, 895, DateTimeKind.Utc).AddTicks(9010),
+                            ReservationDate = new DateTime(2025, 7, 16, 12, 36, 47, 914, DateTimeKind.Utc).AddTicks(3920),
                             Status = "Pending",
                             UserId = 3
                         },
@@ -5052,7 +5052,7 @@ namespace AutoTrade.Migrations
                         {
                             Id = 104,
                             AutomobileAdId = 21,
-                            ReservationDate = new DateTime(2025, 7, 16, 9, 3, 52, 895, DateTimeKind.Utc).AddTicks(9010),
+                            ReservationDate = new DateTime(2025, 7, 18, 12, 36, 47, 914, DateTimeKind.Utc).AddTicks(3920),
                             Status = "Pending",
                             UserId = 4
                         },
@@ -5060,7 +5060,7 @@ namespace AutoTrade.Migrations
                         {
                             Id = 105,
                             AutomobileAdId = 21,
-                            ReservationDate = new DateTime(2025, 7, 18, 9, 3, 52, 895, DateTimeKind.Utc).AddTicks(9010),
+                            ReservationDate = new DateTime(2025, 7, 20, 12, 36, 47, 914, DateTimeKind.Utc).AddTicks(3920),
                             Status = "Pending",
                             UserId = 5
                         },
@@ -5084,7 +5084,7 @@ namespace AutoTrade.Migrations
                         {
                             Id = 108,
                             AutomobileAdId = 22,
-                            ReservationDate = new DateTime(2025, 7, 14, 9, 3, 52, 895, DateTimeKind.Utc).AddTicks(9020),
+                            ReservationDate = new DateTime(2025, 7, 16, 12, 36, 47, 914, DateTimeKind.Utc).AddTicks(3940),
                             Status = "Pending",
                             UserId = 8
                         },
@@ -5092,7 +5092,7 @@ namespace AutoTrade.Migrations
                         {
                             Id = 109,
                             AutomobileAdId = 22,
-                            ReservationDate = new DateTime(2025, 7, 16, 9, 3, 52, 895, DateTimeKind.Utc).AddTicks(9020),
+                            ReservationDate = new DateTime(2025, 7, 18, 12, 36, 47, 914, DateTimeKind.Utc).AddTicks(3940),
                             Status = "Pending",
                             UserId = 9
                         },
@@ -5100,7 +5100,7 @@ namespace AutoTrade.Migrations
                         {
                             Id = 110,
                             AutomobileAdId = 22,
-                            ReservationDate = new DateTime(2025, 7, 18, 9, 3, 52, 895, DateTimeKind.Utc).AddTicks(9020),
+                            ReservationDate = new DateTime(2025, 7, 20, 12, 36, 47, 914, DateTimeKind.Utc).AddTicks(3940),
                             Status = "Pending",
                             UserId = 10
                         },
@@ -5124,7 +5124,7 @@ namespace AutoTrade.Migrations
                         {
                             Id = 113,
                             AutomobileAdId = 23,
-                            ReservationDate = new DateTime(2025, 7, 14, 9, 3, 52, 895, DateTimeKind.Utc).AddTicks(9020),
+                            ReservationDate = new DateTime(2025, 7, 16, 12, 36, 47, 914, DateTimeKind.Utc).AddTicks(3950),
                             Status = "Pending",
                             UserId = 3
                         },
@@ -5132,7 +5132,7 @@ namespace AutoTrade.Migrations
                         {
                             Id = 114,
                             AutomobileAdId = 23,
-                            ReservationDate = new DateTime(2025, 7, 16, 9, 3, 52, 895, DateTimeKind.Utc).AddTicks(9020),
+                            ReservationDate = new DateTime(2025, 7, 18, 12, 36, 47, 914, DateTimeKind.Utc).AddTicks(3950),
                             Status = "Pending",
                             UserId = 4
                         },
@@ -5140,7 +5140,7 @@ namespace AutoTrade.Migrations
                         {
                             Id = 115,
                             AutomobileAdId = 23,
-                            ReservationDate = new DateTime(2025, 7, 18, 9, 3, 52, 895, DateTimeKind.Utc).AddTicks(9030),
+                            ReservationDate = new DateTime(2025, 7, 20, 12, 36, 47, 914, DateTimeKind.Utc).AddTicks(3950),
                             Status = "Pending",
                             UserId = 5
                         },
@@ -5164,7 +5164,7 @@ namespace AutoTrade.Migrations
                         {
                             Id = 118,
                             AutomobileAdId = 24,
-                            ReservationDate = new DateTime(2025, 7, 14, 9, 3, 52, 895, DateTimeKind.Utc).AddTicks(9030),
+                            ReservationDate = new DateTime(2025, 7, 16, 12, 36, 47, 914, DateTimeKind.Utc).AddTicks(3960),
                             Status = "Pending",
                             UserId = 8
                         },
@@ -5172,7 +5172,7 @@ namespace AutoTrade.Migrations
                         {
                             Id = 119,
                             AutomobileAdId = 24,
-                            ReservationDate = new DateTime(2025, 7, 16, 9, 3, 52, 895, DateTimeKind.Utc).AddTicks(9030),
+                            ReservationDate = new DateTime(2025, 7, 18, 12, 36, 47, 914, DateTimeKind.Utc).AddTicks(3960),
                             Status = "Pending",
                             UserId = 9
                         },
@@ -5180,7 +5180,7 @@ namespace AutoTrade.Migrations
                         {
                             Id = 120,
                             AutomobileAdId = 24,
-                            ReservationDate = new DateTime(2025, 7, 18, 9, 3, 52, 895, DateTimeKind.Utc).AddTicks(9030),
+                            ReservationDate = new DateTime(2025, 7, 20, 12, 36, 47, 914, DateTimeKind.Utc).AddTicks(3960),
                             Status = "Pending",
                             UserId = 10
                         },
@@ -5204,7 +5204,7 @@ namespace AutoTrade.Migrations
                         {
                             Id = 123,
                             AutomobileAdId = 25,
-                            ReservationDate = new DateTime(2025, 7, 14, 9, 3, 52, 895, DateTimeKind.Utc).AddTicks(9040),
+                            ReservationDate = new DateTime(2025, 7, 16, 12, 36, 47, 914, DateTimeKind.Utc).AddTicks(3960),
                             Status = "Pending",
                             UserId = 3
                         },
@@ -5212,7 +5212,7 @@ namespace AutoTrade.Migrations
                         {
                             Id = 124,
                             AutomobileAdId = 25,
-                            ReservationDate = new DateTime(2025, 7, 16, 9, 3, 52, 895, DateTimeKind.Utc).AddTicks(9040),
+                            ReservationDate = new DateTime(2025, 7, 18, 12, 36, 47, 914, DateTimeKind.Utc).AddTicks(3970),
                             Status = "Pending",
                             UserId = 4
                         },
@@ -5220,7 +5220,7 @@ namespace AutoTrade.Migrations
                         {
                             Id = 125,
                             AutomobileAdId = 25,
-                            ReservationDate = new DateTime(2025, 7, 18, 9, 3, 52, 895, DateTimeKind.Utc).AddTicks(9040),
+                            ReservationDate = new DateTime(2025, 7, 20, 12, 36, 47, 914, DateTimeKind.Utc).AddTicks(3970),
                             Status = "Pending",
                             UserId = 5
                         },
@@ -5244,7 +5244,7 @@ namespace AutoTrade.Migrations
                         {
                             Id = 128,
                             AutomobileAdId = 26,
-                            ReservationDate = new DateTime(2025, 7, 14, 9, 3, 52, 895, DateTimeKind.Utc).AddTicks(9050),
+                            ReservationDate = new DateTime(2025, 7, 16, 12, 36, 47, 914, DateTimeKind.Utc).AddTicks(3970),
                             Status = "Pending",
                             UserId = 8
                         },
@@ -5252,7 +5252,7 @@ namespace AutoTrade.Migrations
                         {
                             Id = 129,
                             AutomobileAdId = 26,
-                            ReservationDate = new DateTime(2025, 7, 16, 9, 3, 52, 895, DateTimeKind.Utc).AddTicks(9050),
+                            ReservationDate = new DateTime(2025, 7, 18, 12, 36, 47, 914, DateTimeKind.Utc).AddTicks(3970),
                             Status = "Pending",
                             UserId = 9
                         },
@@ -5260,7 +5260,7 @@ namespace AutoTrade.Migrations
                         {
                             Id = 130,
                             AutomobileAdId = 26,
-                            ReservationDate = new DateTime(2025, 7, 18, 9, 3, 52, 895, DateTimeKind.Utc).AddTicks(9050),
+                            ReservationDate = new DateTime(2025, 7, 20, 12, 36, 47, 914, DateTimeKind.Utc).AddTicks(3970),
                             Status = "Pending",
                             UserId = 10
                         },
@@ -5284,7 +5284,7 @@ namespace AutoTrade.Migrations
                         {
                             Id = 133,
                             AutomobileAdId = 27,
-                            ReservationDate = new DateTime(2025, 7, 14, 9, 3, 52, 895, DateTimeKind.Utc).AddTicks(9060),
+                            ReservationDate = new DateTime(2025, 7, 16, 12, 36, 47, 914, DateTimeKind.Utc).AddTicks(3980),
                             Status = "Pending",
                             UserId = 3
                         },
@@ -5292,7 +5292,7 @@ namespace AutoTrade.Migrations
                         {
                             Id = 134,
                             AutomobileAdId = 27,
-                            ReservationDate = new DateTime(2025, 7, 16, 9, 3, 52, 895, DateTimeKind.Utc).AddTicks(9060),
+                            ReservationDate = new DateTime(2025, 7, 18, 12, 36, 47, 914, DateTimeKind.Utc).AddTicks(3980),
                             Status = "Pending",
                             UserId = 4
                         },
@@ -5300,7 +5300,7 @@ namespace AutoTrade.Migrations
                         {
                             Id = 135,
                             AutomobileAdId = 27,
-                            ReservationDate = new DateTime(2025, 7, 18, 9, 3, 52, 895, DateTimeKind.Utc).AddTicks(9060),
+                            ReservationDate = new DateTime(2025, 7, 20, 12, 36, 47, 914, DateTimeKind.Utc).AddTicks(3980),
                             Status = "Pending",
                             UserId = 5
                         },
@@ -5324,7 +5324,7 @@ namespace AutoTrade.Migrations
                         {
                             Id = 138,
                             AutomobileAdId = 28,
-                            ReservationDate = new DateTime(2025, 7, 14, 9, 3, 52, 895, DateTimeKind.Utc).AddTicks(9060),
+                            ReservationDate = new DateTime(2025, 7, 16, 12, 36, 47, 914, DateTimeKind.Utc).AddTicks(3990),
                             Status = "Pending",
                             UserId = 8
                         },
@@ -5332,7 +5332,7 @@ namespace AutoTrade.Migrations
                         {
                             Id = 139,
                             AutomobileAdId = 28,
-                            ReservationDate = new DateTime(2025, 7, 16, 9, 3, 52, 895, DateTimeKind.Utc).AddTicks(9060),
+                            ReservationDate = new DateTime(2025, 7, 18, 12, 36, 47, 914, DateTimeKind.Utc).AddTicks(3990),
                             Status = "Pending",
                             UserId = 9
                         },
@@ -5340,7 +5340,7 @@ namespace AutoTrade.Migrations
                         {
                             Id = 140,
                             AutomobileAdId = 28,
-                            ReservationDate = new DateTime(2025, 7, 18, 9, 3, 52, 895, DateTimeKind.Utc).AddTicks(9070),
+                            ReservationDate = new DateTime(2025, 7, 20, 12, 36, 47, 914, DateTimeKind.Utc).AddTicks(3990),
                             Status = "Pending",
                             UserId = 10
                         });

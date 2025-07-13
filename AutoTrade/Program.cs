@@ -65,7 +65,7 @@ builder.Services.AddHostedService<ExpiredHighlightsService>();
 builder.Services.AddTransient<ReservationApprovalEmail>();
 builder.Services.AddHostedService<Worker>();
 
-// vjezba1
+// 
 
 //
 
